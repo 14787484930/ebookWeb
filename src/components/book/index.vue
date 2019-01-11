@@ -9,6 +9,7 @@
      </div>
          <DropDown v-for="item in dropCconfig"  :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
                    :onSelect="item.onSelect"></DropDown>
+         <router-link to="/bookAdd"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
      </div>
          <div class="scroll-list-wrap"  >
          <cube-scroll
@@ -95,6 +96,7 @@ export default {
   data () {
     return {
       msg: '图书',
+        bookTypes:[],
         columns:[],
         queryList:{
             title:'钢铁是怎样炼成的',
@@ -122,6 +124,7 @@ export default {
     },
     methods: {
         initDropCconfig(){
+           this.bookTypes= this.$serve.bookTypes;
             this.dropCconfig=[
                 {title: '类型选择',
                     list: [{ text: '青春文学', value: '青春文学'}, { text: '热门小说', value: '热门小说' }],

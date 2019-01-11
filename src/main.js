@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import './cube-ui'
-import  './vant'
-import App from './main/App.vue'
+import  $ from 'jquery'
+import App from './App.vue'
+import  router from './webserver/router/router'
 import 'amfe-flexible'
 import './assets/ionic/css/ionic.min.css'
 import './assets/bootstrap/css/bootstrap.min.css'
-
+import  'weui'
+import  './webserver/serve/serve'
 Vue.config.productionTip = false
-
+Vue.prototype.$=$
 new Vue({
-  render: h => h(App),
+    router,
+    render: h => h(App),
 }).$mount('#app')
