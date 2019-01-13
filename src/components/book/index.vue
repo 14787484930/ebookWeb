@@ -4,7 +4,7 @@
      <div class="bar bar-header item-input-inset">
          <label class="item-input-wrapper">
              <i class="icon ion-ios-search placeholder-icon"></i>
-             <input type="search" placeholder="搜索" v-model="queryList.title">
+             <input type="search" placeholder="搜索" v-model="queryList.bookName">
          </label>
      </div>
          <DropDown v-for="item in dropCconfig"  :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
@@ -18,67 +18,16 @@
          >
              <template>
                  <div class="list">
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/blue-album.jpg">
-                         <h2>Weezer</h2>
-                         <p>Blue Album</p>
+                     <a  v-for="item in tables" class="item item-thumbnail-left" href="#">
+                         <img :src="'http://localhost:8081'+item.bookPic">
+                         <h2>{{item.bookName}}</h2>
+                         <p>{{item.author}}</p>
+                         <p>￥{{item.bookPrice}}</p>
+                         <p>{{item.bookPub}}</p>
+                         <p>{{item.des}}</p>
+                         <p>{{item.phone}}</p>
                      </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/siamese-dream.jpg">
-                         <h2>Smashing Pumpkins</h2>
-                         <p>Siamese Dream</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/nevermind.jpg">
-                         <h2>Nirvana</h2>
-                         <p>Nevermind</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/license-to-ill.jpg">
-                         <h2>Beastie Boys</h2>
-                         <p>License To Ill</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/dookie.jpg">
-                         <h2>Green Day</h2>
-                         <p>Dookie</p>
-                     </a>
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/blue-album.jpg">
-                         <h2>Weezer</h2>
-                         <p>Blue Album</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/siamese-dream.jpg">
-                         <h2>Smashing Pumpkins</h2>
-                         <p>Siamese Dream</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/nevermind.jpg">
-                         <h2>Nirvana</h2>
-                         <p>Nevermind</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/license-to-ill.jpg">
-                         <h2>Beastie Boys</h2>
-                         <p>License To Ill</p>
-                     </a>
-
-                     <a class="item item-thumbnail-left" href="#">
-                         <img src="http://www.runoob.com/try/demo_source/dookie.jpg">
-                         <h2>Green Day</h2>
-                         <p>Dookie</p>
-                     </a>
-
                  </div>
-
              </template>
          </cube-scroll>
      </div>
@@ -99,11 +48,12 @@ export default {
         bookTypes:[],
         columns:[],
         queryList:{
-            title:'钢铁是怎样炼成的',
-            type:'',
-            date:'',
-            level:'',
+            bookName:'',
+            pageNumber:1,//当前页码
+            pageSize:10,//当前容量
+            bookType:'1',
         },
+        tables:[],
         dropCconfig:[],
     }
   },
@@ -118,11 +68,29 @@ export default {
     },
     created(){
       this.initDropCconfig();
+      this.initTables();
     },
     mounted() {
       $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
     },
     methods: {
+        initTables(){
+            let _that=this;
+            let form=new FormData();
+            let config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization':'123'
+                }
+            }
+            $.each(this.queryList,(key,item)=>{
+                form.append(key,item);
+            })
+            this.$http.post('/book/books',form,config).then(function (res) {
+                _that.tables=res.data.page.pageInfo.list;
+                console.log(_that.tables);
+            })
+        },
         initDropCconfig(){
            this.bookTypes= this.$serve.bookTypes;
             this.dropCconfig=[

@@ -38,7 +38,7 @@
                     <input type="text" v-model="book.des">
                 </label>
                <file-com ref="refFiles"></file-com>
-                <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                <button style="width: 100%" class="button button-positive"  @click="saveData">发布</button>
     </div>
             </template>
         </cube-scroll>
@@ -47,6 +47,7 @@
 
 <script>
     import  FileCom from '../common/FileCom'
+    import  $ from  'jquery'
     export default {
         name: "add",
         data(){
@@ -66,7 +67,7 @@
             }
         },
         components: {
-            FileCom,
+            'file-com': FileCom,
         },
         mounted() {
            this.$(".scroll-list-wrap").height(screen.availHeight-this.$(".tabs-icon-top",window.parent.parent.document).height())+80;
@@ -74,7 +75,22 @@
         methods:{
             saveData(){
                 console.log(this.$refs.refFiles.form);
-                this.$myhttp.post('//')
+                let form=new FormData();
+                form=this.$refs.refFiles.form;
+                form.append('book',JSON.stringify(this.book));
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization':'123'
+                    }
+                }
+                $.each(this.book,(key,item)=>{
+                    form.append(key,item);
+                })
+                this.$http.post('/book/save',form,config).then(function (res) {
+                    if (res.status === 200) {
+                        /*这里做处理*/
+                    }})
             }
         }
     }
