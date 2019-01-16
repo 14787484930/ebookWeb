@@ -37,7 +37,7 @@
                     <span>描述：</span>
                     <input type="text" v-model="book.des">
                 </label>
-               <file-com ref="refFiles"></file-com>
+               <file-com ref="refFiles" :urls="urls" ></file-com>
                 <button style="width: 100%" class="button button-positive"  @click="saveData">发布</button>
     </div>
             </template>
@@ -46,51 +46,59 @@
 </template>
 
 <script>
+    import $ from  'jquery'
     import  FileCom from '../common/FileCom'
-    import  $ from  'jquery'
+    var _that;
     export default {
         name: "add",
         data(){
             return{
                 book:{
-                    bookName:'童年三部曲',
+                    id:0,
+                    bookName:'',
                     bookType:'1',
-                    author:'高尔基',
+                    author:'',
                     bookPrice:'20',
                     pubDate:'2013-12-12',
-                    bookPub:'西南林业大学出版社',
+                    bookPub:'',
                     bookPic:'',
-                    weiXin:'15288369144',
-                    phone:'15288369144',
-                    des:'俄罗斯作家世界名著',
-                }
+                    weiXin:'',
+                    phone:'',
+                    des:'',
+                },
+                urls:[],
             }
         },
         components: {
             'file-com': FileCom,
         },
+        created(){
+            _that=this;
+            this.book.id=this.$route.query.id;
+            if(parseInt(this.book.id)!=0)
+                this.initData();
+        },
         mounted() {
            this.$(".scroll-list-wrap").height(screen.availHeight-this.$(".tabs-icon-top",window.parent.parent.document).height())+80;
         },
         methods:{
-            saveData(){
-                console.log(this.$refs.refFiles.form);
-                let form=new FormData();
-                form=this.$refs.refFiles.form;
-                form.append('book',JSON.stringify(this.book));
-                let config = {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization':'123'
-                    }
-                }
-                $.each(this.book,(key,item)=>{
-                    form.append(key,item);
+            initData(){
+                this.$http.post('/book/getById/'+this.book.id).then((res)=>{
+                    _that.book=res.data.page.info;
+                    _that.book.bookType=1;//先不做处理后面要删除
+                    var arr=_that.book.bookPic.split(',');
+                    $.each(arr,(index,item)=>{
+                        _that.urls.push({url:_that.$file(item)});
+                    })
                 })
-                this.$http.post('/book/save',form,config).then(function (res) {
-                    if (res.status === 200) {
-                        /*这里做处理*/
-                    }})
+            },
+            saveData(){
+                let  url='/book/save';
+                if(this.book.id==0)
+                    url='/book/update';
+                this.$save(url,this.book,this.$refs.refFiles.files,(msg)=>{
+                    console.log(msg);
+                })
             }
         }
     }

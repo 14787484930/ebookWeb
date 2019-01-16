@@ -1,7 +1,6 @@
 import  Vue from  'vue'
-import  $http from  './config'
+import  $http from  './http'
 const serve={
-    bookTypes:$http.get('/booktype/booktypes',{},data=>data),
+    bookTypes:(back)=>$http.post('/booktype/booktypes',{},data=>back(data)),
 };
-Vue.prototype.$myhttp=$http;
 Vue.prototype.$serve=serve;

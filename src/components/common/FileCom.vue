@@ -21,7 +21,7 @@
             return{
                 curls:[],
                 ckey:'url',
-                form:new FormData(),
+                files:[],
             }
         },
         created(){
@@ -32,12 +32,13 @@
             initParams(){
                 this.curls=this.urls!=undefined?this.urls:[];
                 this.ckey=this.urlkey!=undefined?this.urlkey:'url';
+                console.log(this.curls)
             },
             showImg: function (e) {
                 this.$.each(e.target.files, (index, item) => _that.readFile(item));
             },
             readFile: function (file) {
-                _that.form.append('files', file);
+                _that.files.push(file);
                 var reader = new FileReader();
                 reader.vue = this;
                 reader.readAsDataURL(file);
