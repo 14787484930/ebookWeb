@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import home from '../../components/main/home'
 import  book from '../../components/book/index'
+import electronics from '../../components/electronics/index'
 import electronicsAdd from '../../components/electronics/add'
-import  electronics from '../../components/electronics/index'
+import electronicsView from '../../components/electronics/view'
 import  teach from '../../components/teach/index'
 import  other from '../../components/other/index'
 import bookAdd from '../../components/book/add'
@@ -19,6 +20,7 @@ const routes = new VueRouter({
                 {path:'/bookView',component:bookView},
                 {path: '/electronics', component: electronics},
                 {path: '/electronicsAdd', component: electronicsAdd},
+                {path: '/electronicsView', component: electronicsView},
                 {path: '/teach', component: teach},
                 {path: '/other', component: other},
             ],

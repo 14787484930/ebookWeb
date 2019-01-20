@@ -5,7 +5,7 @@
                 <div class="list">
                     <label class="form-group item item-input ">
                         <span>电子名称：</span>
-                        <input type="text" v-model="electronics.elecName">
+                        <input type="text" v-model="electronics.electronicsName">
                     </label>
                     <label class="form-group item item-input ">
                         <span>电子类型：</span>
@@ -46,19 +46,19 @@
 <script>
     import FileCom from '../common/FileCom'
     import $ from 'jquery'
-    var _that;
+    let _that;
     export default {
         name: "add",
         data() {
             return {
                 electronics: {
-                    elecName: '笔记本',
+                    electronicsName: '笔记本',
                     electronicsType: '1',
                     originalPrice: '20',
                     presentPrice: '15',
                     buyDate: '2013-12-12',
-                    hasInvoice: '有',
-                    elecPic: '',
+                    hasInvoice: '1',
+                    electronicsPic: '',
                     weiXin: '15288369144',
                     phone: '15288369144',
                     des: '九成新，完美屏幕，撩妹神器，你值得拥有',
@@ -76,14 +76,14 @@
                 this.initData();
         },
         mounted() {
-            this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+            this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods:{
             initData(){
                 this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
                     _that.electronics=res.data.page.info;
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
-                    var arr=_that.electronics.elecPic.split(',');
+                    var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{
                         _that.urls.push({url:_that.$file(item)});
                     })

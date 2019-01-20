@@ -4,7 +4,7 @@
             <div class="bar bar-header item-input-inset">
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios-search placeholder-icon"></i>
-                    <input type="search" placeholder="搜索" v-model="queryList.elecName">
+                    <input type="search" placeholder="搜索" v-model="queryList.electronicsName">
                 </label>
             </div>
             <span>
@@ -26,8 +26,8 @@
                                                      @btn-click="updateElectronics">
                                         <router-link :to="{path:'/electronicsView',query:{id:item.id}}">
                                             <a class="item item-thumbnail-left" href="#">
-                                                <img :src="$file(item.elecPic)">
-                                                <p>{{item.elecName}}({{item.author}})￥{{item.presentPrice}}</p>
+                                                <img :src="$file(item.electronicsPic)">
+                                                <p>{{item.electronicsName}}({{item.author}})￥{{item.presentPrice}}</p>
                                                 <p>{{item.des}}</p>
                                                 <p>{{item.phone}}</p>
                                             </a>
@@ -59,7 +59,7 @@
                     {
                         action: 'edit',
                         text: '编辑',
-                        color: 'cornflowerblue'
+                        color: '#223a32'
                     },
                     {
                         action: 'del',
@@ -70,7 +70,7 @@
                 electronicsTypes: [],
                 columns: [],
                 queryList: {
-                    elecName: '',
+                    electronicsName: '',
                     electronicsType: '1',
                 },
                 tables: [],
@@ -97,7 +97,7 @@
             updateElectronics(btn, index) {
                 let id = this.tables[index].id;
                 //删除数据
-                if (btn.action == 'del') {
+                if (btn.action === 'del') {
                     this.$post('/electronics/delete', this.tables[index], (msg) => {
                         console.log(msg);
                     })
@@ -107,7 +107,7 @@
             },
             initTables() {
                 let _that = this;
-                this.$table('/electronics/electronicses', this.queryList, data => {
+                this.$table('/electronics/electronics', this.queryList, data => {
                     _that.tables = data.list;
                     console.log(data.list);
                 })
