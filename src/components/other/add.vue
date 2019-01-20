@@ -4,36 +4,32 @@
             <template>
                 <div class="list">
                     <label class="form-group item item-input ">
-                        <span>电子名称：</span>
-                        <input type="text" v-model="electronics.electronicsName">
-                    </label>
-                    <label class="form-group item item-input ">
-                        <span>电子类型：</span>
-                        <input type="text" v-model="electronics.electronicsType">
+                        <span>物品名称：</span>
+                        <input type="text" v-model="other.otherName">
                     </label>
                     <label class="form-group item item-input ">
                         <span>官方价格：</span>
-                        <input type="text" v-model="electronics.originalPrice">
+                        <input type="text" v-model="other.originalPrice">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出售价格：</span>
-                        <input type="text" v-model="electronics.presentPrice">
+                        <input type="text" v-model="other.presentPrice">
                     </label>
                     <label class="form-group item item-input ">
                         <span>购买日期：</span>
-                        <input type="text" v-model="electronics.buyDate">
+                        <input type="text" v-model="other.buyDate">
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
-                        <input type="text" v-model="electronics.hasInvoice">
+                        <input type="text" v-model="other.hasInvoice">
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系方式：</span>
-                        <input type="text" v-model="electronics.phone">
+                        <input type="text" v-model="other.phone">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
-                        <input type="text" v-model="electronics.des">
+                        <input type="text" v-model="other.des">
                     </label>
                     <file-com ref="refFiles"></file-com>
                     <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
@@ -51,14 +47,13 @@
         name: "add",
         data() {
             return {
-                electronics: {
-                    electronicsName: '',
-                    electronicsType: '1',
+                other: {
+                    otherName: '',
                     originalPrice: '20',
                     presentPrice: '15',
                     buyDate: '2013-12-12',
                     hasInvoice: '1',
-                    electronicsPic: '',
+                    otherPic: '',
                     weiXin: '',
                     phone: '',
                     des: '',
@@ -71,8 +66,8 @@
         },
         created(){
             _that=this;
-            this.electronics.id=this.$route.query.id;
-            if(parseInt(this.electronics.id)!==0)
+            this.other.id=this.$route.query.id;
+            if(parseInt(this.other.id)!==0)
                 this.initData();
         },
         mounted() {
@@ -80,21 +75,20 @@
         },
         methods:{
             initData(){
-                this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
-                    console.log(res);
-                    _that.electronics=res.data.page.Info;
-                    _that.electronics.electronicsType=1;//先不做处理后面要删除
-                    var arr=_that.electronics.electronicsPic.split(',');
+                this.$http.post('/other/getById/'+this.other.id).then((res)=>{
+                    _that.other=res.data.page.info;
+                    _that.other.otherType=1;//先不做处理后面要删除
+                    var arr=_that.other.otherPic.split(',');
                     $.each(arr,(index,item)=>{
                         _that.urls.push({url:_that.$file(item)});
                     })
                 })
             },
             saveData(){
-                let  url='/electronics/save';
-                if(this.electronics.id!==0)
-                    url='/electronics/update';
-                this.$save(url,this.electronics,this.$refs.refFiles.files,(msg)=>{
+                let  url='/other/save';
+                if(this.other.id!=0)
+                    url='/other/update';
+                this.$save(url,this.other,this.$refs.refFiles.files,(msg)=>{
                     console.log(msg);
                 })
             }
