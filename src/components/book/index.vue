@@ -42,7 +42,7 @@
           </template>
          </cube-swipe>
       </cube-scroll>
-  </div>-->
+  </div>
 </div>
 </template>
 
