@@ -46,7 +46,7 @@
 <script>
     import FileCom from '../common/FileCom'
     import $ from 'jquery'
-
+    var _that;
     export default {
         name: "add",
         data() {
@@ -62,33 +62,39 @@
                     weiXin: '15288369144',
                     phone: '15288369144',
                     des: '九成新，完美屏幕，撩妹神器，你值得拥有',
-                }
+                },
+                urls:[],
             }
         },
         components: {
             'file-com': FileCom,
         },
+        created(){
+            _that=this;
+            this.electronics.id=this.$route.query.id;
+            if(parseInt(this.electronics.id)!==0)
+                this.initData();
+        },
         mounted() {
             this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
-        methods: {
-            saveData() {
-                console.log(this.$refs.refFiles.form);
-                let form = new FormData();
-                form = this.$refs.refFiles.form;
-                let config = {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': '123'
-                    }
-                }
-                $.each(this.electronics, (key, item) => {
-                    form.append(key, item);
+        methods:{
+            initData(){
+                this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
+                    _that.electronics=res.data.page.info;
+                    _that.electronics.electronicsType=1;//先不做处理后面要删除
+                    var arr=_that.electronics.elecPic.split(',');
+                    $.each(arr,(index,item)=>{
+                        _that.urls.push({url:_that.$file(item)});
+                    })
                 })
-                this.$http.post('/electronics/save', form, config).then(function (res) {
-                    if (res.status === 200) {
-                        /*这里做处理*/
-                    }
+            },
+            saveData(){
+                let  url='/electronics/save';
+                if(this.electronics.id!==0)
+                    url='/electronics/update';
+                this.$save(url,this.electronics,this.$refs.refFiles.files,(msg)=>{
+                    console.log(msg);
                 })
             }
         }
