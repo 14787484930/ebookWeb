@@ -81,7 +81,8 @@
         methods:{
             initData(){
                 this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
-                    _that.electronics=res.data.page.info;
+                    console.log(res);
+                    _that.electronics=res.data.page.Info;
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
                     var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{
