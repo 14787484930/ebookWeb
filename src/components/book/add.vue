@@ -94,7 +94,7 @@
             },
             saveData(){
                 let  url='/book/save';
-                if(this.book.id==0)
+                if(this.book.id!=0)
                     url='/book/update';
                 this.$save(url,this.book,this.$refs.refFiles.files,(msg)=>{
                     console.log(msg);
