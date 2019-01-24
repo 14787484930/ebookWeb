@@ -78,6 +78,6 @@ const  $format={
 }
 vue.prototype.$toInt=$format.toInt;
 vue.prototype.$toBool=$format.toBool;
-vue.prototype.$toDatetoInt=$format.toDate;
+vue.prototype.$toDate=$format.toDate;
 vue.prototype.$toFloat=$format.toFloat;
 export default  $format
