@@ -31,7 +31,7 @@
                         <span>描述：</span>
                         <input type="text" v-model="other.des">
                     </label>
-                    <file-com ref="refFiles"></file-com>
+                    <file-com ref="refFiles" :urls="urls" ></file-com>
                     <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
                 </div>
             </template>
