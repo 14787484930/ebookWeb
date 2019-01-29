@@ -15,7 +15,7 @@
                 </label>
                 <label class="form-group item item-input ">
                     <span>出售价格：</span>
-                    <input type="text" v-model="book.bookPrice">
+                    <input type="number" v-model="book.bookPrice">
                 </label>
                 <label class="form-group item item-input ">
                     <span>出版日期：</span>

@@ -4,12 +4,21 @@
      <div class="bar bar-header item-input-inset">
          <label class="item-input-wrapper">
              <i class="icon ion-ios-search placeholder-icon"></i>
-             <input type="search" placeholder="搜索" v-model="queryList.bookName">
+             <input type="search" placeholder="搜索" v-model="queryList.bookName" @change="initTables">
          </label>
      </div>
          <span>
-         <DropDown v-for="item in dropCconfig" :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
-                   :onSelect="item.onSelect"></DropDown>
+        <!--<DropDown v-for="item in dropCconfig" :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
+                   :onSelect="item.onSelect"></DropDown>-->
+               <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                   图书类型
+               </button>
+              <button  @click="$picker.showDate()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                   日期
+               </button>
+              <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                   价格
+               </button>
              </span>
          <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
      </div>
@@ -48,12 +57,9 @@
 
 <script>
  import  $ from 'jquery'
- import  DropDown from  '../common/dropDown'
+ let  that;
 export default {
 name: 'Book',
- components: {
-     DropDown,
- },
 data () {
  return {
    msg: '图书',
@@ -69,7 +75,7 @@ data () {
              color: '#ff3a32'
          }
      ],
-   bookTypes:[],
+   bookTypes:{},
    columns:[],
    queryList:{
        bookName:'',
@@ -79,18 +85,10 @@ data () {
    dropCconfig:[],
  }
 },
-
- computed: {
-     /*options() {
-         return {
-             scrollbar:{ fade: true } ,//或false
-             startY: 0
-         }
-     },*/
- },
  created(){
-   this.initDropCconfig();
+     that=this;
    this.initTables();
+   this.initType();
  },
  mounted() {
    $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
@@ -108,35 +106,22 @@ data () {
              this.$router.push({path: '/bookAdd', query: {id: id}})
      },
      initTables(){
-         let  _that=this;
-         this.$table('/book/books',this.queryList,data=>{
-             _that.tables=data.list;
-             console.log(data.list);
-         })
+         this.$table('/book/books',this.queryList,data=>that.tables=data.list);
      },
-     initDropCconfig(){
-        //this.bookTypes= this.$serve.bookTypes;
-         this.dropCconfig=[
-             {title: '类型选择',
-                 list: [{ text: '青春文学', value: '青春文学'}, { text: '热门小说', value: '热门小说' }],
-                 onSelect:(val,index,text)=>{
-                    console.log(val);
-                     console.log(index);
-                     console.log(text);
-                 }
-             },
-             {title:'日期',dateDrop:true,onSelect:(date,val,text)=>{
-                     console.log(date);
-                     console.log(val);
-                     console.log(text);
-                 }},
-             {title:'价格',list:[{ text: '剧毒1', value: '剧毒1'}, { text: '蚂蚁1', value: '蚂蚁1' }],
-                 onSelect:(val,index,text)=>{
-                     console.log(val);
-                     console.log(index);
-                     console.log(text);
-                 }}
-         ];
+     initType(){
+         this.$picker.bookTypes((val, index,text)=>{
+             that.queryList.bookType=val;
+             that.initTables();
+         });
+         this.$picker.datePicker((val, index,text)=>{
+             console.log(val)
+             console.log(index)
+             console.log(text)
+         });
+         this.$picker.dialogPicker((low,up)=>{
+             console.log(low)
+             console.log(up)
+         })
      },
  }
 }

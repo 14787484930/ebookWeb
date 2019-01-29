@@ -3,26 +3,17 @@
 </template>
 
 <script>
-    let  that;
     export default {
-        name: "DropDown",
-        props: ['url','title', 'onSelect','dateDrop'],
+        name: "dateDown",
+        props: ['title', 'list','onSelect','dateDrop'],
         data () {
             return {
-                list:[],
+                //list:[],
             }
-        },
-        created() {
-            that=this;
-            this.initData();
+            },
+        mounted() {
         },
         methods: {
-            initData(){
-              this.$post(this.url,[],res=>{
-                  console.log(res);
-                  that.list=res;
-              })
-            },
             showDrop() {
                 if(this.dateDrop){
                     this.datePicker = this.$createDatePicker({
