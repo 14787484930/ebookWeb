@@ -3,7 +3,6 @@ import  $http from  './http'
 import  $ from  'jquery'
 const serve={
     bookTypes:(back)=>{
-        console.log(Vue.prototype)
         $http.post('/booktype/booktypes',{},res=>{
             let list=[];
             $.each(res.data.page.booktypes,(index,item)=>{

@@ -8,6 +8,7 @@ import './assets/ionic/css/ionic.min.css'
 import './assets/bootstrap/css/bootstrap.min.css'
 import  'weui'
 import  './webserver/serve/serve'
+import  './webserver/serve/picker'
 Vue.config.productionTip = false
 Vue.prototype.$=$
 new Vue({

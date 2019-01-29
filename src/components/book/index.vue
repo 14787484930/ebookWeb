@@ -6,8 +6,9 @@
              <i class="icon ion-ios-search placeholder-icon"></i>
              <input type="search" placeholder="搜索" v-model="queryList.bookName" @change="initTables">
          </label>
+         <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
      </div>
-         <span>
+         <div style="text-align: center">
         <!--<DropDown v-for="item in dropCconfig" :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
                    :onSelect="item.onSelect"></DropDown>-->
                <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
@@ -19,8 +20,8 @@
               <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
                    价格
                </button>
-             </span>
-         <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
+             </div>
+
      </div>
      <div class="scroll-list-wrap"  >
      <cube-scroll ref="scroll">
