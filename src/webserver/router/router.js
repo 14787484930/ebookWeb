@@ -14,6 +14,9 @@ import otherAdd from '../../components/other/add'
 import otherView from '../../components/other/view'
 import bookAdd from '../../components/book/add'
 import bookView from '../../components/book/view'
+import center from '../../components/about/mycenter'
+import advice from '../../components/about/advice'
+import version from '../../components/about/version'
 
 const routes = new VueRouter({
     routes: [
@@ -32,6 +35,9 @@ const routes = new VueRouter({
                 {path: '/other', component: other},
                 {path: '/otherAdd', component: otherAdd},
                 {path: '/otherView', component: otherView},
+                {path: '/about', component: center},
+                {path: '/advice', component: advice},
+                {path: '/version', component: version},
             ],
         }
     ]
