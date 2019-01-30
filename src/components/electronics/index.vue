@@ -6,14 +6,21 @@
                     <i class="icon ion-ios-search placeholder-icon"></i>
                     <input type="search" placeholder="搜索" v-model="queryList.electronicsName">
                 </label>
+                <router-link :to="{path:'/electronicsAdd',query:{id:0}}" class="button button-small button-positive">
+                    <i class="icon ion-plus"></i>
+                </router-link>
             </div>
-            <span>
-                <DropDown v-for="item in dropCconfig" :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
-                          :onSelect="item.onSelect"></DropDown>
-            </span>
-            <router-link :to="{path:'/electronicsAdd',query:{id:0}}" class="button button-small button-positive">
-                <i class="icon ion-plus"></i>
-            </router-link>
+            <div style="text-align: center">
+                <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                    图书类型
+                </button>
+                <button  @click="$picker.showDate()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                    日期
+                </button>
+                <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                    价格
+                </button>
+            </div>
         </div>
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
@@ -27,9 +34,9 @@
                                         <router-link :to="{path:'/electronicsView',query:{id:item.id}}">
                                             <a class="item item-thumbnail-left" href="#">
                                                 <img :src="$file(item.electronicsPic)">
-                                                <p>{{item.electronicsName}}({{item.author}})￥{{item.presentPrice}}</p>
-                                                <p>{{item.des}}</p>
-                                                <p>{{item.phone}}</p>
+                                                <p>名称：{{item.electronicsName}}</p>
+                                                <p>型号：</p>
+                                                <p>价格：￥{{item.presentPrice}}</p>
                                             </a>
                                         </router-link>
                                     </cube-swipe-item>
