@@ -9,7 +9,13 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>电子类型：</span>
-                        <input type="text" v-model="electronics.electronicsType">
+                        <!--<p>下拉列表来显示</p>-->
+                        <!--<input type="text" v-model="electronics.electronicsType">-->
+                        <!--在这里可否用键值对？？？-->
+                        <cube-select
+                                v-model="electronics.electronicsType"
+                                :options="options">
+                        </cube-select>
                     </label>
                     <label class="form-group item item-input ">
                         <span>官方价格：</span>
@@ -24,8 +30,12 @@
                         <input type="text" v-model="electronics.buyDate">
                     </label>
                     <label class="form-group item item-input ">
+                        <!--<span>是否有发票：</span>-->
+                        <!--<input type="text" v-model="electronics.hasInvoice">-->
                         <span>是否有发票：</span>
-                        <input type="text" v-model="electronics.hasInvoice">
+                        <cube-switch v-model="isInvoice" v-on:change="hasInvoice">
+
+                        </cube-switch>
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系方式：</span>
@@ -49,8 +59,12 @@
     let _that;
     export default {
         name: "add",
-        data() {
+        data: function () {
             return {
+                isInvoice: true,
+                options: ['手机/配件', '电脑/配件', '移动存储', '网络设备','游戏设备', '音响/耳机', '摄影摄像','吹风/风扇','其他'],
+                // options:[1,2,3,4,5,6,7,8,9,10],
+                value: '',
                 electronics: {
                     electronicsName: '',
                     electronicsType: '1',
@@ -63,7 +77,7 @@
                     phone: '',
                     des: '',
                 },
-                urls:[],
+                urls: [],
             }
         },
         components: {
@@ -97,7 +111,14 @@
                 this.$save(url,this.electronics,this.$refs.refFiles.files,(msg)=>{
                     console.log(msg);
                 })
-            }
+            },
+            hasInvoice(){
+                if (this.value){
+                    this.other.hasInvoice='1';
+                } else{
+                    this.other.hasInvoice='0';
+                }
+            },
         }
     }
 </script>

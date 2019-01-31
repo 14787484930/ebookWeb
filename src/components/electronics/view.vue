@@ -32,7 +32,7 @@
                         </label>
                         <label class="form-group item item-input ">
                             <span>是否有发票：</span>
-                            <span>{{electronics.hasInvoice}}</span>
+                            <span v-if="electronics.hasInvoice" >有发票</span>
                         </label>
                         <label class="form-group item item-input ">
                             <span>联系方式：</span>

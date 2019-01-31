@@ -15,12 +15,29 @@
 <script>
     export default {
         name: "mycenter",
+        data(){
+            return {
+                advice:{
+                    des:"",
+                    createUser:"",
+                    createTime:"2018-12-01 15:52:46",
+                },
+                version:{
+                    title:"关于我们的标题",
+                    msg:"关于我们的信息显示,开发版本1.01",
+                }
+
+            }
+        },
+        created(){
+            this.getMsg();
+        },
         methods:{
             showAlert() {
                 this.$createDialog({
                     type: 'alert',
                     title: '关于我们',
-                    content: "版本号是1.01",
+                    content: "版本号是1.0.0",
                     icon: 'cubeic-alert'
                 }).show()
             },
@@ -30,7 +47,7 @@
                     title: '反馈',
                     prompt: {
                         value: "",
-                        placeholder: '请输入'
+                        placeholder: '请输入你的建议'
                     },
                     onConfirm: (e, promptValue) => {
                         this.$createToast({
@@ -41,6 +58,19 @@
                     }
                 }).show()
             },
+            submitAdvice(){
+                this.$post('/useradvice/save',
+                    [this.advice.des,this.advice.createUser,this.advice.createTime] ,
+                    (msg) => {
+                    console.log(msg);
+                })
+            },
+            getMsg(){
+                this.$post('/aboutus/us', (msg) => {
+                    console.log(msg);
+                    this.version.msg=msg;
+                })
+            }
         },
 
     }
