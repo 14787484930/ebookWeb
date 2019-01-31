@@ -23,7 +23,8 @@
                     {url: '/book',text:"图书",iClass:"ion-ios-bookmarks",iOutClass:"ion-ios-bookmarks-outline"},
                     {url: '/electronics', text:"电子",iClass:"ion-ios-monitor",iOutClass:"ion-ios-monitor-outline"},
                     {url: '/teach', text:"辅导",iClass:"ion-ios-people",iOutClass:"ion-ios-people-outline"},
-                    {url: '/other', text:"其他",iClass:"ion-ios-gear",iOutClass:"ion-ios-gear-outline"}
+                    {url: '/other', text:"其他",iClass:"ion-ios-gear",iOutClass:"ion-ios-gear-outline"},
+                    {url: '/about', text:"我",iClass:"ion-ios-person",iOutClass:"ion-ios-person"}
                 ]
             }
         },

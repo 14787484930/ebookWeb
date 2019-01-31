@@ -21,7 +21,10 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
-                        <input type="text" v-model="other.hasInvoice">
+                        <!--<input type="text" v-model="other.hasInvoice">-->
+                        <cube-switch v-model="value" v-on:change="hasInvoice">
+                            <!--是否有发票-->
+                        </cube-switch>
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系方式：</span>
@@ -47,6 +50,7 @@
         name: "add",
         data() {
             return {
+                value: true,
                 other: {
                     otherName: '',
                     originalPrice: '20',
@@ -91,7 +95,14 @@
                 this.$save(url,this.other,this.$refs.refFiles.files,(msg)=>{
                     console.log(msg);
                 })
-            }
+            },
+            hasInvoice(){
+                if (this.value){
+                    this.other.hasInvoice='1';
+                } else{
+                    this.other.hasInvoice='0';
+                }
+            },
         }
     }
 </script>
