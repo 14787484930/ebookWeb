@@ -52,13 +52,9 @@
 
 <script>
     import $ from 'jquery'
-    import DropDown from '../common/dropDown'
 
     export default {
         name: 'Electronics',
-        components: {
-            DropDown,
-        },
         data() {
             return {
                 msg: '电子',
@@ -81,7 +77,6 @@
                     electronicsType: '1',
                 },
                 tables: [],
-                dropCconfig: [],
             }
         },
 
@@ -94,7 +89,7 @@
             },*/
         },
         created() {
-            this.initDropCconfig();
+            this.initType();
             this.initTables();
         },
         mounted() {
@@ -119,34 +114,20 @@
                     console.log(data.list);
                 })
             },
-            initDropCconfig() {
-                //this.bookTypes= this.$serve.bookTypes;
-                this.dropCconfig = [
-                    {
-                        title: '类型选择',
-                        list: [{text: '青春文学', value: '青春文学'}, {text: '热门小说', value: '热门小说'}],
-                        onSelect: (val, index, text) => {
-                            console.log(val);
-                            console.log(index);
-                            console.log(text);
-                        }
-                    },
-                    {
-                        title: '日期', dateDrop: true, onSelect: (date, val, text) => {
-                            console.log(date);
-                            console.log(val);
-                            console.log(text);
-                        }
-                    },
-                    {
-                        title: '价格', list: [{text: '剧毒1', value: '剧毒1'}, {text: '蚂蚁1', value: '蚂蚁1'}],
-                        onSelect: (val, index, text) => {
-                            console.log(val);
-                            console.log(index);
-                            console.log(text);
-                        }
-                    }
-                ];
+            initType() {
+                this.$picker.electronicType((val, index, text)=>{
+                    that.queryList.electronicsType=val;
+                    that.initTables();
+                });
+                this.$picker.datePicker((val, index,text)=>{
+                    console.log(val);
+                    console.log(index);
+                    console.log(text);
+                });
+                this.$picker.dialogPicker((low,up)=>{
+                    console.log(low);
+                    console.log(up);
+                })
             },
         }
     }

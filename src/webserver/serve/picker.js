@@ -13,6 +13,19 @@ const picker={
     show:()=> picker.state.picker.show(),
     showDate:()=>picker.state.datePicker.show(),
     showDialog:()=>picker.state.dialog.show(),
+    electronicType:(back)=>{
+        $http.post('/electronicstype/electronicsTypes', {}, res=>{
+            let list=[];
+            $.each(res.data.page.electronicsType, (index, item) => {
+                list.push({text: item.name, value: item.id})
+            });
+            picker.state.picker = Picker.$create({
+                title: "电子类型",
+                data: [list],
+                onSelect: (val, index, text) => back(val, index, text),
+            })
+        })
+    },
     bookTypes:(back)=>{
         $http.post('/booktype/booktypes',{},res=>{
             let list=[];

@@ -57,7 +57,7 @@
         data() {
             return {
                 options: ['辅导', '讲座'],
-                value:'辅导',
+                value:'',
                 teach: {
                     id: '',
                     name: '',
@@ -101,9 +101,8 @@
                 })
             },
             //类型选择
-            change(value, index, text) {
+            change(value, index) {
                 this.teach.type = index;
-                console.log('change', value, index, text)
             }
         },
     }

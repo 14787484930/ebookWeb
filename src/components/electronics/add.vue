@@ -13,8 +13,9 @@
                         <!--<input type="text" v-model="electronics.electronicsType">-->
                         <!--在这里可否用键值对？？？-->
                         <cube-select
-                                v-model="electronics.electronicsType"
-                                :options="options">
+                                v-model="value"
+                                :options="options"
+                                @change="change">
                         </cube-select>
                     </label>
                     <label class="form-group item item-input ">
@@ -74,7 +75,7 @@
                     hasInvoice: '1',
                     electronicsPic: '',
                     weiXin: '',
-                    phone: '',
+                    phone: '14787461136',
                     des: '',
                 },
                 urls: [],
@@ -126,6 +127,10 @@
                     this.electronics.hasInvoice='0';
                 }
             },
+            //类型选择
+            change(value, index) {
+                this.electronics.electronicsType = index + 1;
+            }
         }
     }
 </script>
