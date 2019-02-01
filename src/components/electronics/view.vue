@@ -1,6 +1,6 @@
 <template>
     <div>
-        <cube-slide ref="slide" :data="urls" >
+        <cube-slide ref="slide" :data="urls" align="center">
             <cube-slide-item v-for="(item, index) in urls" :key="index">
                 <img :src="item.image" height="200px">
             </cube-slide-item>
@@ -88,7 +88,7 @@
         },
 
         mounted() {
-            this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+           // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
 
         methods: {

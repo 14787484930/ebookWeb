@@ -90,13 +90,16 @@
                 this.initData();
         },
         mounted() {
-            this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+            //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods:{
             initData(){
                 this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
-                    console.log(res);
-                    _that.electronics=res.data.page.Info;
+                    //_that.electronics=res.data.page.Info;
+                    for(let i in this.electronics){
+                        _that.electronics[i] = res.data.page.info[i];
+                    }
+
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
                     var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{
@@ -107,16 +110,20 @@
             saveData(){
                 let  url='/electronics/save';
                 if(this.electronics.id!==0)
+                {
+                    _that.electronics["electronicsPic"] = "";
                     url='/electronics/update';
+                }
+
                 this.$save(url,this.electronics,this.$refs.refFiles.files,(msg)=>{
                     console.log(msg);
                 })
             },
             hasInvoice(){
                 if (this.value){
-                    this.other.hasInvoice='1';
+                    this.electronics.hasInvoice='1';
                 } else{
-                    this.other.hasInvoice='0';
+                    this.electronics.hasInvoice='0';
                 }
             },
         }

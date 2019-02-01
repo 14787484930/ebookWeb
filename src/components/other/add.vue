@@ -75,12 +75,16 @@
                 this.initData();
         },
         mounted() {
-            this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+            //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods:{
             initData(){
                 this.$http.post('/other/getById/'+this.other.id).then((res)=>{
-                    _that.other=res.data.page.info;
+                    //_that.other=res.data.page.info;
+                    for(let i in this.other){
+                        _that.other[i] = res.data.page.info[i];
+                    }
+
                     _that.other.otherType=1;//先不做处理后面要删除
                     var arr=_that.other.otherPic.split(',');
                     $.each(arr,(index,item)=>{
@@ -91,7 +95,10 @@
             saveData(){
                 let  url='/other/save';
                 if(this.other.id!=0)
+                {
+                    _that.other["otherPic"] = "";
                     url='/other/update';
+                }
                 this.$save(url,this.other,this.$refs.refFiles.files,(msg)=>{
                     console.log(msg);
                 })

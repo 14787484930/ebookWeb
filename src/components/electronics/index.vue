@@ -12,7 +12,7 @@
             </div>
             <div style="text-align: center">
                 <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                    图书类型
+                    电子类型
                 </button>
                 <button  @click="$picker.showDate()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
                     日期

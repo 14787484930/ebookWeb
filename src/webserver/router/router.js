@@ -17,6 +17,7 @@ import bookView from '../../components/book/view'
 import center from '../../components/about/mycenter'
 // import advice from '../../components/about/advice'
 // import version from '../../components/about/version'
+import verify from '../../components/common/verify'
 
 const routes = new VueRouter({
     routes: [
@@ -38,6 +39,7 @@ const routes = new VueRouter({
                 {path: '/about', component: center},
                 // {path: '/advice', component: advice},
                 // {path: '/version', component: version},
+                {path: '/verify', component: verify},
             ],
         }
     ]

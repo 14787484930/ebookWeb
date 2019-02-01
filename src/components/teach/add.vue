@@ -65,7 +65,6 @@
                     price: '10',
                     startTime: '2019-01-30 15:52:46',
                     endTime: '2019-12-30 15:52:51',
-                    endDate: '2019-12-30',//暂时没有用
                     place: 'A栋', //讲座地点
                     weiXin: 'weiXin',
                     phone: '14787461136',
@@ -81,12 +80,15 @@
                 this.initData();
         },
         mounted() {
-            this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+            //this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods: {
             initData() {
                 this.$http.post('/tutoring/getById/' + this.teach.id).then((res) => {
-                    _that.teach = res.data.page.info;
+                    //_that.teach = res.data.page.info;
+                    for(let i in this.teach){
+                        _that.teach[i] = res.data.page.info[i];
+                    }
                     _that.teach.type = 1;//先不做处理后面要删除
                 })
             },
