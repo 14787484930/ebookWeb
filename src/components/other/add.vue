@@ -15,9 +15,9 @@
                         <span>出售价格：</span>
                         <input type="text" v-model="other.presentPrice">
                     </label>
-                    <label class="form-group item item-input ">
+                    <label class="form-group item ">
                         <span>购买日期：</span>
-                        <input type="text" v-model="other.buyDate">
+                        <date v-model="other.buyDate"></date>
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
@@ -45,6 +45,7 @@
 <script>
     import FileCom from '../common/FileCom'
     import $ from 'jquery'
+    import Date from  '../common/date'
     let _that;
     export default {
         name: "add",
@@ -67,6 +68,7 @@
         },
         components: {
             'file-com': FileCom,
+            Date,
         },
         created(){
             _that=this;

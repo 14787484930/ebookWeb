@@ -14,13 +14,13 @@
                         <span>名称：</span>
                         <input type="text" v-model="teach.name">
                     </label>
-                    <label class="form-group item item-input ">
+                    <label class="form-group item ">
                         <span>开始时间：</span>
-                        <input type="text" v-model="teach.startTime">
+                        <Date v-model="teach.startTime"></Date>
                     </label>
-                    <label class="form-group item item-input ">
+                    <label class="form-group item ">
                         <span>结束时间：</span>
-                        <input type="text" v-model="teach.endTime">
+                        <Date v-model="teach.endTime"></Date>
                     </label>
                     <label class="form-group item item-input ">
                         <span>辅导地点：</span>
@@ -52,6 +52,8 @@
 
 <script>
     let _that;
+    import Date from "../common/date";
+
     export default {
         name: "addTeach",
         data() {
@@ -72,7 +74,9 @@
                 },
             }
         },
-        components: {},
+        components: {
+            Date,
+        },
         created() {
             _that = this;
             this.teach.id = this.$route.query.id;
