@@ -2,7 +2,7 @@
     <div>
         <cube-slide ref="slide" :data="urls" align="center">
             <cube-slide-item v-for="(item, index) in urls" :key="index">
-                <img :src="item.image" height="200px">
+                <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
             </cube-slide-item>
         </cube-slide>
 
@@ -102,6 +102,11 @@
                     })
                 });
             },
+             showImagePreview(src) {
+                this.$createImagePreview({
+                    imgs:[src],
+                }).show()
+             }
         },
     }
 
