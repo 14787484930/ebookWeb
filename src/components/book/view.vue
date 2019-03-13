@@ -1,11 +1,11 @@
 <template>
     <div>
+        <home-header headName="详情页"></home-header>
         <cube-slide ref="slide" :data="urls" >
             <cube-slide-item v-for="(item, index) in urls" :key="index">
-                <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
+                <img :src="item.image" @click="showImagePreview(item.image)" class="book-imgs" >
             </cube-slide-item>
         </cube-slide>
-
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <template>
@@ -51,10 +51,13 @@
 
 <script>
     import $ from 'jquery';
-    let _that;
-
+    let _that;  
+    import HomeHeader from '../../components/common/header';
     export default {
         //name: "view",
+        components: {
+            HomeHeader
+        },
         data() {
             return {
                 //获取详细信息
@@ -112,5 +115,6 @@
 </script>
 
 <style scoped>
-
+.cube-slide-item{ text-align: center;}
+.book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
 </style>
