@@ -1,13 +1,13 @@
 <template>
     <div>
         <home-header headName="详情页"></home-header>
-        <cube-slide ref="slide" :data="urls" >
-            <cube-slide-item v-for="(item, index) in urls" :key="index">
-                <img :src="item.image" @click="showImagePreview(item.image)" class="book-imgs" >
-            </cube-slide-item>
-        </cube-slide>
-        <div class="scroll-list-wrap">
+        <div class="scroll-list-wrap" he>
             <cube-scroll ref="scroll">
+                <cube-slide ref="slide" :data="urls" >
+                    <cube-slide-item v-for="(item, index) in urls" :key="index">
+                        <img :src="item.image" @click="showImagePreview(item.image)" class="book-imgs" >
+                    </cube-slide-item>
+                </cube-slide>
                 <template>
                     <div class="list">
                         <label class="form-group item item-input ">
@@ -87,7 +87,6 @@
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-
         mounted() {
             this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
@@ -113,8 +112,8 @@
     }
 
 </script>
-
 <style scoped>
+.scroll-list-wrap{ height: 15.3rem;}
 .cube-slide-item{ text-align: center;}
 .book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
 </style>
