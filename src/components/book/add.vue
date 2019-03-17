@@ -88,6 +88,7 @@
                 this.$http.post('/book/getById/'+this.book.id).then((res)=>{
                     _that.book=res.data.page.info;
                     _that.book.bookType=1;//先不做处理后面要删除
+                    _that.book.pubDate=_that.$toDate(_that.book.pubDate);
                     var arr=_that.book.bookPic.split(',');
                     $.each(arr,(index,item)=>{
                         _that.urls.push({url:_that.$file(item)});

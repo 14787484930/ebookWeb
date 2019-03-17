@@ -13,6 +13,18 @@ const  $format={
         }
         return parseFloat(val);
     },
+    toStr(val,defaultValue=''){
+        if(val==null||val==undefined){
+            return defaultValue;
+        }
+        return val.toString();
+    },
+    toArray(val,defaultValue={}){
+        if(val==null||val==undefined){
+            return defaultValue;
+        }
+        return val;
+    },
     toBool(val){
         if(val==null||val==undefined||parseInt(val)==0||val.toString().toLowerCase()=='false'){
             return false;
@@ -35,9 +47,9 @@ const  $format={
 
         if (formatString == undefined || formatString == null || formatString.length == 0)
             formatString = "yyyy-MM-dd";
-
+        value=value.toString();
         var ret = '', d = "";
-        if (value.indexOf("/Date(") > -1 || value.indexOf(")/") > -1) {  // 时间戳格式
+        if (value.indexOf("/Date(") > -1 || value.indexOf(")/") > -1||parseInt(value)>0) {  // 时间戳格式
             value = value.replace("/Date(", "").replace(")/", "");
             d = new Date(parseInt(value, 10));
         } else { // 普通字符串格式
@@ -80,4 +92,7 @@ vue.prototype.$toInt=$format.toInt;
 vue.prototype.$toBool=$format.toBool;
 vue.prototype.$toDate=$format.toDate;
 vue.prototype.$toFloat=$format.toFloat;
+vue.prototype.$toStr=$format.toStr;
+vue.prototype.$toArray=$format.toArray;
+
 export default  $format

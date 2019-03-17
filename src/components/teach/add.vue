@@ -16,11 +16,11 @@
                     </label>
                     <label class="form-group item ">
                         <span>开始时间：</span>
-                        <Date v-model="teach.startTime"></Date>
+                        <Date v-model="teach.startTime" type="time"></Date>
                     </label>
                     <label class="form-group item ">
                         <span>结束时间：</span>
-                        <Date v-model="teach.endTime"></Date>
+                        <Date v-model="teach.endTime" type="time"></Date>
                     </label>
                     <label class="form-group item item-input ">
                         <span>辅导地点：</span>
@@ -93,6 +93,8 @@
                     for(let i in this.teach){
                         _that.teach[i] = res.data.page.info[i];
                     }
+                    _that.teach.startTime=_that.$toDate(_that.teach.startTime,'yyyy-MM-dd HH:mm');
+                    _that.teach.endTime=_that.$toDate(_that.teach.endTime,'yyyy-MM-dd HH:mm');
                     _that.teach.type = 1;//先不做处理后面要删除
                 })
             },

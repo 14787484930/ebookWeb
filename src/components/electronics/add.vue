@@ -98,7 +98,7 @@
                     for(let i in this.electronics){
                         _that.electronics[i] = res.data.page.info[i];
                     }
-
+                    _that.electronics.buyDate=_that.$toDate(_that.electronics.buyDate);
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
                     var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{

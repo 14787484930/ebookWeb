@@ -9,6 +9,11 @@
 <script>
 export default {
   name: 'app',
+    watch:{
+        $route(){
+            window.location.reload();
+        },
+    },
 }
 </script>
 

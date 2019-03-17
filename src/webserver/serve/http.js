@@ -46,7 +46,7 @@ const $myHttp = {
     getTable(url,queryList,callback){
         let form=new FormData();
         queryList.pageSize= $config.pageSize;
-        queryList.pageNumber=$format.toInt(queryList.pageNumber)+1;
+        queryList.pageNumber=$format.toInt(queryList.pageNumber);
         $.each(queryList,(key,item)=>{
             form.append(key,item);
         })

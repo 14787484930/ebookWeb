@@ -36,6 +36,8 @@
         methods:{
             fShowDel(e){
                 this.showDel=true;
+                console.log(e)
+                e.target.stopPropagation();
             },
             initParams(){
                 this.curls=this.urls!=undefined?this.urls:[];

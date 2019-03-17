@@ -86,7 +86,7 @@
                     for(let i in this.other){
                         _that.other[i] = res.data.page.info[i];
                     }
-
+                    _that.other.buyDate=_that.$toDate(_that.other.buyDate);
                     _that.other.otherType=1;//先不做处理后面要删除
                     var arr=_that.other.otherPic.split(',');
                     $.each(arr,(index,item)=>{

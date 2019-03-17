@@ -1,0 +1,158 @@
+<template>
+    <div class="scroll-list-wrap"  >
+        <cube-scroll ref="scroll"    :options="options"    @pulling-up="refresh">
+            <cube-swipe>
+                <template>
+                    <div class="list">
+                        <transition-group name="swipe" tag="ul">
+                  <span  v-for="(item,index) in tables" :key="item.id">
+                  <cube-swipe-item
+                          ref="reftables"
+                          v-bind:btns="btns"
+                          :index="index"
+                          @btn-click="updateBook"
+                  >
+                      <div @click="config.view(item)" >
+
+                  <a  class="item item-thumbnail-left" href="#">
+                       <img :src="$file(item[config.img])">
+                      <p v-for="(row,key) in config.columns " :key="key">{{row.title}}{{item|filter(item,row)}}</p>
+                  </a>
+                      </div>
+                  </cube-swipe-item>
+                  </span>
+                        </transition-group>
+                    </div>
+                </template>
+            </cube-swipe>
+
+        </cube-scroll>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "gridView",
+        props: ['url','rows','grid',"load"],
+        filters:{
+            filter(sourc,item,row){
+                if(row.format!=undefined){
+                    return row.format(item);
+                }
+                else{
+                    const key=row.key;
+                    return item[key];
+                }
+            }
+        },
+        computed: {
+            options() {
+                return {
+                    pullDownRefresh: {  threshold: 60,
+                        stop: 40,
+                        txt: '更新成功'},
+                    pullUpLoad: {  threshold: 60,
+                        stop: 40,
+                        txt: '更新成功'},
+                    scrollbar: true
+                }
+            },
+        },
+        watch:{
+            load(){
+                this.initTables()
+            },
+        },
+        mounted(){
+            $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
+        },
+        data() {
+            return {
+                tables:[],
+                isLastPage:false,
+                btns: [
+                    {
+                        action:'edit',
+                        text: '编辑',
+                        color: 'cornflowerblue'
+                    },
+                    {
+                        action:'del',
+                        text: '删除',
+                        color: '#ff3a32'
+                    }
+                ],
+                config:{},
+            }},
+        created()
+        {
+            this.initParam();
+        },
+        methods:{
+
+            refresh(){
+               this.config.query.pageNumber++;
+                this.initTables();
+            },
+            initParam(){
+                if(this.grid==undefined){
+                    return;
+                    console.error("配置错误，请检查");
+                }
+                this.url=this.$toStr(this.url);
+                this.initConfig();
+                if(this.rows==undefined){
+                    this.initTables();
+                }
+                else{
+                    this.tables=this.rows;
+                }
+            },
+            initTables(){
+                var that=this;
+                if(that.isLastPage){
+                    return;
+                }
+                this.$table(this.url,this.config.query,function(data){
+                    that.isLastPage=data.isLastPage;
+                    $.each(data.list,function(i,val){
+                        const  arr=that.tables.filter(function (cval,ci) {
+                            return cval.id==val.id;
+                        })
+                        if(arr.length==0){
+                            that.tables.push(val);
+                        }
+                    })
+                    that.$refs.scroll.forceUpdate()
+                    $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
+                    that.triggerSurprise = true
+                });
+            },
+            initConfig(){
+                this.config=this.grid;
+                if(this.grid.btns==undefined){
+                    this.grid.btns=this.btns;
+                }
+                this.config.query=this.$toArray(this.grid.query);
+            },
+            updateBook(btn,index){
+                //删除数据
+                const  row=this.tables[index];
+                if(btn.action=='del'){
+                    this.config.del(row);
+                }
+                else
+                    this.config.edit(row);
+            },
+        }
+    }
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+    .scroll-list-wrap {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        transform: rotate(0deg); // fix 子元素超出边框圆角部分不隐藏的问题
+        overflow: hidden;
+    }
+</style>
