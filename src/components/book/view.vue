@@ -51,7 +51,7 @@
 
 <script>
     import $ from 'jquery';
-    let _that;  
+    import { Dialog } from 'cube-ui'
     import HomeHeader from '../../components/common/header';
     export default {
         //name: "view",
@@ -80,7 +80,6 @@
             }
         },
         created(){
-            _that=this;
             this.book.id=this.$route.query.id;
             if(parseInt(this.book.id)!=0)
                 this.initData();
@@ -88,12 +87,20 @@
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
         mounted() {
-            this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+            console.log(123);
+           // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
 
         methods: {
             initData(){
+                var _that=this;
+                const toast = this.$createToast({
+                    time: 0,
+                    txt: '加载中...'
+                });
+                toast.show();
                 this.$http.post('/book/getById/'+this.book.id).then((res)=>{
+                    toast.hide();
                     _that.book=res.data.page.info;
                     _that.book.bookType=1;//先不做处理后面要删除
                     var arr=_that.book.bookPic.split(',');

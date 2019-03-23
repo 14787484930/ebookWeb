@@ -4,7 +4,7 @@
             <div class="bar bar-header item-input-inset">
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios-search placeholder-icon"></i>
-                    <input type="search" placeholder="搜索" v-model="queryList.electronicsName">
+                    <input type="search" placeholder="搜索" v-model="queryList.electronicsName" @keypress="searchSub">
                 </label>
                 <router-link :to="{path:'/electronicsAdd',query:{id:0}}" class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
@@ -15,7 +15,7 @@
                     电子类型
                 </button>
                 <button  @click="$picker.showDate()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                    日期
+                    购买日期
                 </button>
                 <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
                     价格
@@ -28,6 +28,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+=======
+    import $ from 'jquery'
+    import $config from "../../webserver/serve/config";
+>>>>>>> 1c8720c07d3dcbc85d2fae861f9eebf519bfed3f
 
     export default {
         name: 'Electronics',
@@ -79,6 +84,15 @@
                 this.$picker.electronicType();
                 this.$picker.datePicker();
                 this.$picker.dialogPicker()
+            },
+            searchSub() {
+                let query = {};
+                query['electronicsName'] = this.queryList.electronicsName;
+                query['pageSize'] = Number($config.pageSize);
+                query['pageNumber'] = 5;
+                this.$post('/electronics/electronics', query, (msg) => {
+                    this.tables = msg.data.page.pageInfo.list;
+                });
             },
         }
     }
