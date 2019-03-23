@@ -5,15 +5,15 @@
                 <div class="list">
                     <label class="form-group item item-input ">
                         <span>物品名称：</span>
-                        <input type="text" v-model="other.otherName">
+                        <input type="text" class="isnull" v-model="other.otherName">
                     </label>
                     <label class="form-group item item-input ">
                         <span>官方价格：</span>
-                        <input type="text" v-model="other.originalPrice">
+                        <input type="text"  v-model="other.originalPrice">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出售价格：</span>
-                        <input type="text" v-model="other.presentPrice">
+                        <input type="text"  class="isnull" v-model="other.presentPrice">
                     </label>
                     <label class="form-group item ">
                         <span>购买日期：</span>
@@ -28,7 +28,7 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系方式：</span>
-                        <input type="text" v-model="other.phone">
+                        <input type="text"  class="isnull tel" v-model="other.phone">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>

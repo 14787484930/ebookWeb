@@ -5,6 +5,7 @@ import  $ from 'jquery'
 import  $config from './config'
 import  $format from  './format'
 import  dialog from '../../components/common/dialog'
+import  $valid from './valid'
 axios.defaults.baseURL = $config.baseUrl;
 axios.defaults.timeout = 30000
 const config = {
@@ -32,6 +33,8 @@ const $myHttp = {
     },
     save(url,params={},files,callback)
         {
+            if(!$valid.submit())  return;//验证
+
             let form = new FormData();
             dialog.loading.open();
             $.each(files, (key, item) => {

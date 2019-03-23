@@ -28,12 +28,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
-    import $ from 'jquery'
     import $config from "../../webserver/serve/config";
->>>>>>> 1c8720c07d3dcbc85d2fae861f9eebf519bfed3f
-
     export default {
         name: 'Electronics',
         data() {

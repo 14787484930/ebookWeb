@@ -7,15 +7,15 @@
        <div  class="list">
                 <label class="form-group item item-input ">
                     <span>图书名称：</span>
-                    <input type="text" v-model="book.bookName">
+                    <input type="text" class="isnull"  v-model="book.bookName">
                 </label>
                 <label class="form-group item item-input ">
                     <span>作者：</span>
-                    <input type="text" v-model="book.author">
+                    <input type="text" class="isnull" v-model="book.author">
                 </label>
                 <label class="form-group item item-input ">
                     <span>出售价格：</span>
-                    <input type="number" v-model="book.bookPrice">
+                    <input type="number" class="isnull" v-model="book.bookPrice">
                 </label>
                 <label class="form-group item item-input ">
                     <span>出版日期：</span>
@@ -27,8 +27,7 @@
                 </label>
                 <label class="form-group item item-input ">
                     <span>联系方式：</span>
-                    <input type="text" v-model="book.phone">
-                    <div style="color: red;font-size: 10px">12313</div>
+                    <input type="text" class="tel isnull" v-model="book.phone">
                 </label>
            <label class="form-group item item-input " style="padding-left: 0px">
                <quill-editor class="quill-editor"
@@ -97,8 +96,6 @@
             },
             saveData(){
                 let  url='/book/save';
-                console.log(this.result);
-                return;
                 if(this.book.id!=0)
                     url='/book/update';
                 this.$save(url,this.book,this.$refs.refFiles.files,(msg)=>{

@@ -12,11 +12,11 @@
                 <div class="list">
                     <label class="form-group item item-input ">
                         <span>名称：</span>
-                        <input type="text" v-model="teach.name">
+                        <input type="text"  class="isnull" v-model="teach.name">
                     </label>
                     <label class="form-group item ">
                         <span>开始时间：</span>
-                        <Date v-model="teach.startTime" type="time"></Date>
+                        <Date v-model="teach.startTime"  type="time"></Date>
                     </label>
                     <label class="form-group item ">
                         <span>结束时间：</span>
@@ -24,15 +24,15 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>辅导地点：</span>
-                        <input type="text" v-model="teach.place">
+                        <input type="text"  class="isnull" v-model="teach.place">
                     </label>
                     <label class="form-group item item-input ">
                         <span>定价：</span>
-                        <input type="text" v-model="teach.price">
+                        <input type="text"  class="isnull" v-model="teach.price">
                     </label>
                     <label class="form-group item item-input ">
                         <span>电话：</span>
-                        <input type="text" v-model="teach.phone">
+                        <input type="text"  class="isnull tel" v-model="teach.phone">
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
