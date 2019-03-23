@@ -9,8 +9,6 @@
          <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
      </div>
          <div style="text-align: center">
-        <!--<DropDown v-for="item in dropCconfig" :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
-                   :onSelect="item.onSelect"></DropDown>-->
                <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
                    图书类型
                </button>
@@ -29,27 +27,18 @@
 </template>
 
 <script>
- import  $ from 'jquery'
- import gridView from '../common/gridView'
  let  that;
 export default {
 name: 'Book',
-    components: {
-        'grid-view': gridView,
-    },
 data () {
  return {
    msg: '图书',
      grid:{},
      load:0,
-   bookTypes:{},
-   columns:[],
-   queryList:{
+     queryList:{
        bookName:'',
        bookType:'1',
    },
-     tables:[],
-   dropCconfig:[],
  }
 },
  created(){
@@ -79,8 +68,6 @@ data () {
          return "￥"+ row.bookPrice;
      },
      view(row){
-         console.log(row)
-         return;
          this.$router.push({path: '/bookView', query: {id: row.id}});
      },
      del(row){

@@ -1,6 +1,11 @@
 <template>
-    <div class="scroll-list-wrap"  >
-        <cube-scroll ref="scroll"    :options="options"    @pulling-up="refresh">
+    <div class="scroll-list-wrap">
+    <cube-scroll
+            ref="scroll"
+            :scroll-events="['scroll']"
+            :options="options"
+            @scroll="onScrollHandle"
+            @pulling-up="refresh">
             <cube-swipe>
                 <template>
                     <div class="list">
@@ -15,8 +20,9 @@
                       <div @click="config.view(item)" >
 
                   <a  class="item item-thumbnail-left" href="#">
-                       <img :src="$file(item[config.img])">
-                      <p v-for="(row,key) in config.columns " :key="key">{{row.title}}{{item|filter(item,row)}}</p>
+                       <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
+
+                      <p :class="'grid-showimg-'+showImg" v-for="(row,key) in config.columns " :key="key">{{row.title}}：{{item|filter(item,row)}}</p>
                   </a>
                       </div>
                   </cube-swipe-item>
@@ -26,7 +32,7 @@
                 </template>
             </cube-swipe>
 
-        </cube-scroll>
+        </cube-scroll>>
     </div>
 </template>
 
@@ -45,19 +51,6 @@
                 }
             }
         },
-        computed: {
-            options() {
-                return {
-                    pullDownRefresh: {  threshold: 60,
-                        stop: 40,
-                        txt: '更新成功'},
-                    pullUpLoad: {  threshold: 60,
-                        stop: 40,
-                        txt: '更新成功'},
-                    scrollbar: true
-                }
-            },
-        },
         watch:{
             load(){
                 this.initTables()
@@ -65,6 +58,7 @@
         },
         mounted(){
             $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
+
         },
         data() {
             return {
@@ -83,14 +77,27 @@
                     }
                 ],
                 config:{},
+                showImg:true,
+
+                options: {
+                    pullUpLoad: {
+                        threshold: 60,
+                        stop: 40,
+                        txt: '更新成功'
+                    }
+                },
             }},
         created()
         {
             this.initParam();
         },
         methods:{
+            onScrollHandle(pos){
 
-            refresh(){
+            },
+            refresh(e){
+                if(this.$toInt(this.config.query.pageNumber) <1)
+                    this.config.query.pageNumber=1;
                this.config.query.pageNumber++;
                 this.initTables();
             },
@@ -111,6 +118,7 @@
             initTables(){
                 var that=this;
                 if(that.isLastPage){
+                    this.options.pullUpLoad=false;
                     return;
                 }
                 this.$table(this.url,this.config.query,function(data){
@@ -123,9 +131,14 @@
                             that.tables.push(val);
                         }
                     })
-                    that.$refs.scroll.forceUpdate()
-                    $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
-                    that.triggerSurprise = true
+                    that.$nextTick(function () {
+                        that.$refs.scroll.refresh()
+                        that.$refs.scroll.forceUpdate()
+                    })
+                   setTimeout(function () {
+                       that.$refs.scroll.refresh()
+                       that.$refs.scroll.forceUpdate()
+                   });
                 });
             },
             initConfig(){
@@ -134,7 +147,11 @@
                     this.grid.btns=this.btns;
                 }
                 this.config.query=this.$toArray(this.grid.query);
+                if(this.config.img==undefined){
+                    this.showImg=false;
+                }
             },
+
             updateBook(btn,index){
                 //删除数据
                 const  row=this.tables[index];
@@ -143,6 +160,19 @@
                 }
                 else
                     this.config.edit(row);
+            },
+            onImgLoad() {
+                var that=this;
+                alert("a")
+                that.$nextTick(function () {
+                    that.$refs.scroll.refresh()
+                    that.$refs.scroll.forceUpdate()
+                })
+                setTimeout(function () {
+                    that.$refs.scroll.refresh()
+                    that.$refs.scroll.forceUpdate()
+                });
+                this.$refs.scroll.refresh()
             },
         }
     }
@@ -154,5 +184,8 @@
         border-radius: 5px;
         transform: rotate(0deg); // fix 子元素超出边框圆角部分不隐藏的问题
         overflow: hidden;
+    }
+    .grid-showimg-false{
+        margin-left :-50px;
     }
 </style>

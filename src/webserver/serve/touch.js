@@ -36,6 +36,25 @@ const press = Vue.directive("press",{
         new vueTouch(el,"press",binding);
     }
 });
-
+const swipedown = Vue.directive("swipedown",{
+    bind:function(el,binding){
+        new vueTouch(el,"swipedown",binding);
+    }
+});
+const pandown = Vue.directive("pandown",{
+    bind:function(el,binding){
+        new vueTouch(el,"pandown",binding);
+    }
+});
+const swipeup = Vue.directive("swipeup",{
+    bind:function(el,binding){
+        new vueTouch(el,"swipeup",binding);
+    }
+});
+const panup = Vue.directive("panup",{
+    bind:function(el,binding){
+        new vueTouch(el,"panup",binding);
+    }
+})
 //导出需要的指令
-export{tap,swipeleft,swiperight,press}
+export{tap,swipeleft,swiperight,press,swipedown,pandown,swipeup,panup}

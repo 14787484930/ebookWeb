@@ -10,12 +10,20 @@ import './assets/bootstrap/css/bootstrap.min.css'
 import  'weui'
 import  './webserver/serve/serve'
 import  './webserver/serve/picker'
-import  {tap,swipeleft,swiperight,press}  from './webserver/serve/touch'
+import  {tap,swipeleft,swiperight,press,swipedown,pandown,swipeup,panup}  from './webserver/serve/touch'
+//全局注册gridView
+import gridViewCom from './components/common/gridView'
+const gridView={
+    install:function (myVue) {
+        myVue.component('grid-view',gridViewCom)
+    }
+}
+Vue.use(gridView)
 Vue.config.productionTip = false
 new Vue({
     router,
     render: h => h(App),
-    create(){
-        console.log("a")
-    },
+    created(){
+        window.document.title="西林易市"
+    }
 }).$mount('#app')
