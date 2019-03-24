@@ -60,9 +60,9 @@ const $myHttp = {
         $.each(queryList,(key,item)=>{
             form.append(key,item);
         })
-        dialog.loading.open();
+       // dialog.loading.open();
         axios.post(url,form,config).then(function (res) {
-            dialog.loading.close();
+         //   dialog.loading.close();
             callback(res.data.page.pageInfo);
         })
     },
