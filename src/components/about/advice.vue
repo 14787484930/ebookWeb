@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="padding">
-            <button  onclick="alert('123')" class="button button-block button-positive">提交</button>
+            <button  @click="subAdvice" class="button button-block button-positive">提交</button>
         </div>
 
     </div>
@@ -26,15 +26,21 @@
             return {
                 advice:{
                     des:"",
-                    createUser:"vxiao",
-                    createTime:"2019-01-02 22:52:46",
-                    dataStatus:1,
                 }
             };
         },
         methods:{
-
+            subAdvice(){
+                this.$http.post("/useradvice/save?des="+
+                    this.advice.des).then(
+                    (res)=>{
+                        let ms = res.data;
+                        //根据返回的值做后续的判断
+                        console.log(ms);
+                    }
+                );
             }
+        }
 
     }
 </script>

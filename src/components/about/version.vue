@@ -17,12 +17,27 @@
 <script>
     export default {
         name: "version",
-        data(){
-            return{
-                version:{
-                    title:"关于我们",
-                    des:"二手贸易平台，版本号是1.0.0"
+        data() {
+            return {
+                version: {
+                    title: "",
+                    des: "",
                 }
+            }
+        },
+        created() {
+            console.log("created on version");
+            this.about();
+        },
+        methods: {
+            about() {
+                this.$http.post('/aboutus/getById/' + 3).then((res) => {
+                    // console.log("about");
+                    let va = res.data;
+                    this.version.des = va.page.info.des;
+                    this.version.title = va.page.info.title;
+                    // console.log(va.page.info.des);
+                })
             }
         }
     }

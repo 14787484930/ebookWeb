@@ -26,7 +26,6 @@
                             <div class="weui-cell__ft">
                             </div>
                         </span>
-
                     </div>
                 </div>
             </div>
