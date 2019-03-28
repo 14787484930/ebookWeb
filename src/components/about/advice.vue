@@ -40,9 +40,6 @@
                     }
                 );
             },
-            tst(){
-                console.log(this.advice.des);
-            }
         }
 
     }
