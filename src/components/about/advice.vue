@@ -32,6 +32,10 @@
         methods:{
             subAdvice(){
                 console.log(this.advice.des);
+                if(this.advice.des==''){
+                    alert('123');
+                    return;
+                }
                 this.$http.post("/useradvice/save?des="+
                     this.advice.des).then(
                     (res)=>{
