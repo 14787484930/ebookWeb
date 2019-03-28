@@ -45,25 +45,9 @@
             }
         },
         created(){
-            this.getMsg();
         },
         methods:{
-
-           submitAdvice(){
-                this.$post('/useradvice/save',
-                    [this.advice.des,this.advice.createUser,this.advice.createTime] ,
-                    (msg) => {
-                    console.log(msg);
-                })
-            },
-            getMsg(){
-                this.$post('/aboutus/us', (msg) => {
-                    console.log(msg);
-                    this.version.msg=msg;
-                })
-            }
         },
-
     }
 </script>
 
