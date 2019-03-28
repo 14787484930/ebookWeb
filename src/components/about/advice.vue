@@ -4,7 +4,7 @@
     <!--<p>    输入框</p>-->
         <div class="textarea-wrapper">
             <div class="cube-textarea-wrapper" width="274px" height="100px">
-		<textarea  placeholder="建议和反馈" maxlength="60" indicator="[object Object]" class="cube-textarea">
+		<textarea v-model="advice.des" placeholder="建议和反馈" maxlength="60" indicator="[object Object]" class="cube-textarea">
 
 		</textarea>
                 <span class="cube-textarea-indicator" style="display: none;">
@@ -39,6 +39,9 @@
                         console.log(ms);
                     }
                 );
+            },
+            tst(){
+                console.log(this.advice.des);
             }
         }
 
