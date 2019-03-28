@@ -31,7 +31,8 @@
         },
         methods:{
             subAdvice(){
-                this.$http.post("/useradvice/save"+
+                console.log(this.advice.des);
+                this.$http.post("/useradvice/save?des="+
                     this.advice.des).then(
                     (res)=>{
                         let ms = res.data;
