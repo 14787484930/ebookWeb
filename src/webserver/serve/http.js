@@ -61,10 +61,16 @@ const $myHttp = {
         $.each(queryList,(key,item)=>{
             form.append(key,item);
         })
+<<<<<<< HEAD
         //dialog.loading.open();
         axios.post(url,form,config).then(function (res) {
             console.log(res)
             store.commit('setUser',res.data.page.userInfo);
+=======
+       // dialog.loading.open();
+        axios.post(url,form,config).then(function (res) {
+         //   dialog.loading.close();
+>>>>>>> c9867764fd540aba7cedb74acdc811e243cfb38e
             callback(res.data.page.pageInfo);
         })
     },

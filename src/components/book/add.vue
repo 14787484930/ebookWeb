@@ -14,7 +14,7 @@
                     <input type="text" class="isnull" v-model="book.author">
                 </label>
                 <label class="form-group item item-input ">
-                    <span>出售价格：</span>
+                    <span>出售价格(元)：</span>
                     <input type="number" class="isnull" v-model="book.bookPrice">
                 </label>
                 <label class="form-group item item-input ">

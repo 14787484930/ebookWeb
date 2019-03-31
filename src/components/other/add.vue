@@ -8,11 +8,11 @@
                         <input type="text" class="isnull" v-model="other.otherName">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>官方价格：</span>
+                        <span>官方价格(元)：</span>
                         <input type="text"  v-model="other.originalPrice">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>出售价格：</span>
+                        <span>出售价格(元)：</span>
                         <input type="text"  class="isnull" v-model="other.presentPrice">
                     </label>
                     <label class="form-group item ">

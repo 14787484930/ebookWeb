@@ -1,13 +1,34 @@
 <template>
-    <div>
-        <p>我的中心</p>
-        <div>
+    <div >
+        <div class="content has-header">
 
-            <!--<router-link :to="{path:'/advice'}"> <p>反馈</p> </router-link>-->
-            <cube-button @click="showPrompt" >用户建议</cube-button>
+            <div class="list card">
 
-            <!--<router-link :to="{path:'/version'}"><p>关于我们</p></router-link>-->
-            <cube-button @click="showAlert">关于我们</cube-button>
+                <div class="item item-avatar">
+                    <img src="../../assets/images/timg.jpg">
+                    <h2 style="margin-top: 10%">昵称：{{ userinfo.nickName }}</h2>
+                    <p></p>
+                </div>
+
+                <div class="item item-body" >
+                    <div class="weui-cells">
+                        <span class="weui-cell weui-cell_access" >
+                             <div class="weui-cell__bd">
+                                <router-link :to="{path:'/advice' }" >用户建议</router-link>
+                             </div>
+                            <div class="weui-cell__ft">
+                            </div>
+                        </span>
+                        <span class="weui-cell weui-cell_access" >
+                            <div class="weui-cell__bd">
+                                  <router-link :to="{path:'/version'}" >关于我们</router-link>
+                            </div>
+                            <div class="weui-cell__ft">
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -17,65 +38,25 @@
         name: "mycenter",
         data(){
             return {
-                advice:{
-                    des:"",
-                    createUser:"",
-                    createTime:"2018-12-01 15:52:46",
-                },
-                version:{
-                    title:"关于我们的标题",
-                    msg:"关于我们的信息显示,开发版本1.01",
-                }
+                userinfo:{
+                    nickName:"vxiao",
 
+                },
             }
         },
         created(){
-            this.getMsg();
         },
         methods:{
-            showAlert() {
-                this.$createDialog({
-                    type: 'alert',
-                    title: '关于我们',
-                    content: "版本号是1.0.0",
-                    icon: 'cubeic-alert'
-                }).show()
-            },
-            showPrompt() {
-                this.dialog = this.$createDialog({
-                    type: 'prompt',
-                    title: '反馈',
-                    prompt: {
-                        value: "",
-                        placeholder: '请输入你的建议'
-                    },
-                    onConfirm: (e, promptValue) => {
-                        this.$createToast({
-                            type: 'warn',
-                            time: 1000,
-                            txt: `提示: ${promptValue || ''}`
-                        }).show()
-                    }
-                }).show()
-            },
-            submitAdvice(){
-                this.$post('/useradvice/save',
-                    [this.advice.des,this.advice.createUser,this.advice.createTime] ,
-                    (msg) => {
-                    console.log(msg);
-                })
-            },
-            getMsg(){
-                this.$post('/aboutus/us', (msg) => {
-                    console.log(msg);
-                    this.version.msg=msg;
-                })
-            }
         },
-
     }
 </script>
 
 <style scoped>
+    .add_border{
+        border: saddlebrown 1px solid;
+    }
+    .router-link-active {
+        text-decoration: none;
+    }
 
 </style>

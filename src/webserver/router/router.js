@@ -15,13 +15,16 @@ import otherView from '../../components/other/view'
 import bookAdd from '../../components/book/add'
 import bookView from '../../components/book/view'
 import center from '../../components/about/mycenter'
-// import advice from '../../components/about/advice'
-// import version from '../../components/about/version'
+import advice from '../../components/about/advice'
+import version from '../../components/about/version'
+// import test from '../../components/about/test'
 import verify from '../../components/common/verify'
 
 const routes = new VueRouter({
+    linkActiveClass: 'active',
     routes: [
         // 动态路径参数 以冒号开头
+
         { path: '/', component: home,
             children: [
                 {path: '/book', component: book},
@@ -37,8 +40,9 @@ const routes = new VueRouter({
                 {path: '/otherAdd', component: otherAdd},
                 {path: '/otherView', component: otherView},
                 {path: '/about', component: center},
-                // {path: '/advice', component: advice},
-                // {path: '/version', component: version},
+                {path: '/advice', component: advice},
+                // {path: '/test', component: test},
+                {path: '/version', component: version},
                 {path: '/verify', component: verify},
             ],
         }

@@ -19,7 +19,7 @@
                             <span>{{book.author}}</span>
                         </label>
                         <label class="form-group item item-input ">
-                            <span>出售价格：</span>
+                            <span>出售价格(元)：</span>
                             <span>{{book.bookPrice}}</span>
                         </label>
                         <label class="form-group item item-input ">
