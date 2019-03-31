@@ -163,7 +163,6 @@
             },
             onImgLoad() {
                 var that=this;
-               // alert("a")
                 that.$nextTick(function () {
                     that.$refs.scroll.refresh()
                     that.$refs.scroll.forceUpdate()
