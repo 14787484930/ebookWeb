@@ -11,7 +11,7 @@
                     <div class="list">
                         <transition-group name="swipe" tag="ul">
                   <span  v-for="(item,index) in tables" :key="item.id">
-                  <cube-swipe-item
+                  <cube-swipe-item v-if="power"
                           ref="reftables"
                           v-bind:btns="btns"
                           :index="index"
@@ -26,6 +26,14 @@
                   </a>
                       </div>
                   </cube-swipe-item>
+                            <div @click="config.view(item)" v-else>
+
+                  <a  class="item item-thumbnail-left" href="#">
+                       <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
+
+                      <p :class="'grid-showimg-'+showImg" v-for="(row,key) in config.columns " :key="key">{{row.title}}：{{item|filter(item,row)}}</p>
+                  </a>
+                      </div>
                   </span>
                         </transition-group>
                     </div>
@@ -49,6 +57,11 @@
                     const key=row.key;
                     return item[key];
                 }
+            }
+        },
+        computed:{
+            power(){
+                return this.$store.getters.power;
             }
         },
         watch:{

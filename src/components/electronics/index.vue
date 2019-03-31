@@ -6,7 +6,7 @@
                     <i class="icon ion-ios-search placeholder-icon"></i>
                     <input type="search" placeholder="搜索" v-model="queryList.electronicsName" @keypress="searchSub">
                 </label>
-                <router-link :to="{path:'/electronicsAdd',query:{id:0}}" class="button button-small button-positive">
+                <router-link v-if="power" :to="{path:'/electronicsAdd',query:{id:0}}" class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
                 </router-link>
             </div>
@@ -41,6 +41,11 @@
                     electronicsName: '',
                     electronicsType: '1',
                 },
+            }
+        },
+        computed:{
+            power(){
+                return this.$store.getters.power;
             }
         },
         created() {

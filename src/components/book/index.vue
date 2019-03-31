@@ -4,9 +4,9 @@
      <div class="bar bar-header item-input-inset">
          <label class="item-input-wrapper">
              <i class="icon ion-ios-search placeholder-icon"></i>
-             <input type="search" placeholder="搜索" v-model="queryList.bookName" @change="search">
+             <input type="search"  placeholder="搜索" v-model="queryList.bookName" @change="search">
          </label>
-         <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
+         <router-link v-if="power" :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
      </div>
          <div style="text-align: center">
                <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
@@ -43,9 +43,15 @@ data () {
 },
  created(){
      that=this;
-   this.initType();
-   this.initGrid();
+     this.queryList.flag=this.$toInt(this.$route.query.flag);
+     this.initType();
+     this.initGrid();
  },
+    computed:{
+        power(){
+            return this.$store.getters.power;
+        }
+    },
  methods: {
      search(){
          this.load++;

@@ -34,7 +34,7 @@
                             <span>是否有发票：</span>
                             <span v-if="electronics.hasInvoice" >有发票</span>
                         </label>
-                        <label class="form-group item item-input ">
+                        <label class="form-group item item-input " v-if="power">
                             <span>联系方式：</span>
                             <span>{{electronics.phone}}</span>
                         </label>
@@ -86,7 +86,11 @@
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-
+        computed:{
+            power(){
+                return this.$store.getters.power;
+            }
+        },
         mounted() {
            // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
@@ -95,6 +99,7 @@
             initData(){
                 this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
                     _that.electronics=res.data.page.info;
+                    _that.electronics.buyDate=_that.$toDate(_that.electronics.buyDate);
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
                     var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{

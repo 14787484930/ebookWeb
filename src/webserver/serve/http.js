@@ -1,5 +1,6 @@
 import  Vue from  'vue'
 import  axios from  'axios'
+import  store from  './store'
 import VueAxios from 'vue-axios'
 import  $ from 'jquery'
 import  $config from './config'
@@ -60,9 +61,10 @@ const $myHttp = {
         $.each(queryList,(key,item)=>{
             form.append(key,item);
         })
-        dialog.loading.open();
+        //dialog.loading.open();
         axios.post(url,form,config).then(function (res) {
-            dialog.loading.close();
+            console.log(res)
+            store.commit('setUser',res.data.page.userInfo);
             callback(res.data.page.pageInfo);
         })
     },
