@@ -16,7 +16,7 @@
                    日期
                </button>
               <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                   价格
+                   价格(元)
                </button>
              </div>
 

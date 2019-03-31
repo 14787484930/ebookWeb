@@ -15,11 +15,11 @@
                             <span>{{other.otherName}}</span>
                         </label>
                         <label class="form-group item item-input ">
-                            <span>官方价格：</span>
+                            <span>官方价格(元)：</span>
                             <span>{{other.originalPrice}}</span>
                         </label>
                         <label class="form-group item item-input ">
-                            <span>出售价格：</span>
+                            <span>出售价格(元)：</span>
                             <span>{{other.presentPrice}}</span>
                         </label>
                         <label class="form-group item item-input ">

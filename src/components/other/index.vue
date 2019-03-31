@@ -18,7 +18,7 @@
                     日期
                 </button>
                 <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                    价格
+                    价格(元)
                 </button>
                 <router-link :to="{path:'/verify'}" class="button button-small button-positive">
                     <i class="icon ion-log-in"></i>

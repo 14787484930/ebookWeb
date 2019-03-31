@@ -6,7 +6,7 @@
             </table>
         </div>
         <div class="l_logo" align="center">
-            <img src="http://192.168.0.106:8081/pictures/other/3a8d4fb40340451faa50a426ac26a0ca.png">
+            <img src="http://202.203.132.204:8019/(xpmg2b554npxrt55w0d2af31)/logo/logo_school.png">
         </div>
 
         <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">

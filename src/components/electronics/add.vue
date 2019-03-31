@@ -23,7 +23,7 @@
                         <input type="text" class="isnull"  v-model="electronics.originalPrice">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>出售价格：</span>
+                        <span>出售价格(元)：</span>
                         <input type="text" class="isnull"  v-model="electronics.presentPrice">
                     </label>
                     <label class="form-group item">
