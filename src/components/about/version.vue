@@ -32,7 +32,7 @@
         methods: {
             about() {
                 this.$http.post('/aboutus/us/').then((res) => {
-                    
+
                     let va = res.data;
                     this.version.des = va.page.pageinfo[0].des;
                     this.version.title = va.page.pageinfo[0].title;
