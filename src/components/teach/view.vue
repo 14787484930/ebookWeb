@@ -16,11 +16,11 @@
                             <span>结束时间：</span>
                             <input type="text" v-model="teach.endTime">
                         </label>
-                        <label class="form-group item item-input ">
+                        <label class="form-group item item-input " v-if="power">
                             <span>电话：</span>
                             <input type="text" v-model="teach.phone">
                         </label>
-                        <label class="form-group item item-input ">
+                        <label class="form-group item item-input " v-if="power">
                             <span>微信号：</span>
                             <input type="text" v-model="teach.weiXin">
                         </label>
@@ -29,7 +29,7 @@
                             <input type="text" v-model="teach.place">
                         </label>
                         <label class="form-group item item-input ">
-                            <span>定价：</span>
+                            <span>定价(元)：</span>
                             <input type="text" v-model="teach.price">
                         </label>
                         <label class="form-group item item-input ">
@@ -74,7 +74,11 @@
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-
+        computed:{
+            power(){
+                return this.$store.getters.power;
+            }
+        },
         mounted() {
             //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
@@ -83,6 +87,8 @@
             initData() {
                 this.$http.post('/tutoring/getById/' + this.teach.id).then((res) => {
                     _that.teach = res.data.page.info;
+                    _that.teach.startTime=_that.$toDate(_that.teach.startTime,'yyyy-MM-dd HH:mm');
+                    _that.teach.endTime=_that.$toDate(_that.teach.endTime,'yyyy-MM-dd HH:mm');
                     _that.teach.teachType = 1;//先不做处理后面要删除
                 });
                 console.log(_that.teach);

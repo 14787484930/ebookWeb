@@ -15,11 +15,11 @@
                             <span>{{other.otherName}}</span>
                         </label>
                         <label class="form-group item item-input ">
-                            <span>官方价格：</span>
+                            <span>官方价格(元)：</span>
                             <span>{{other.originalPrice}}</span>
                         </label>
                         <label class="form-group item item-input ">
-                            <span>出售价格：</span>
+                            <span>出售价格(元)：</span>
                             <span>{{other.presentPrice}}</span>
                         </label>
                         <label class="form-group item item-input ">
@@ -30,7 +30,7 @@
                             <span>是否有发票：</span>
                             <span>{{other.hasInvoice}}</span>
                         </label>
-                        <label class="form-group item item-input ">
+                        <label class="form-group item item-input " v-if="power">
                             <span>联系方式：</span>
                             <span>{{other.phone}}</span>
                         </label>
@@ -80,6 +80,11 @@
             //else
                // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
+        computed:{
+            power(){
+                return this.$store.getters.power;
+            }
+        },
 
         mounted() {
             //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
@@ -89,6 +94,7 @@
             initData(){
                 this.$http.post('/other/getById/'+this.other.id).then((res)=>{
                     _that.other=res.data.page.info;
+                    _that.other.buyDate=_that.$toDate(_that.other.buyDate);
                     _that.other.otherType=1;//先不做处理后面要删除
                     var arr=_that.other.otherPic.split(',');
                     $.each(arr,(index,item)=>{
