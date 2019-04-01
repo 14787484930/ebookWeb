@@ -18,7 +18,7 @@
                             <span>{{book.author}}</span>
                         </label>
                         <label class="form-group item item-input ">
-                            <span>出售价格(元)：</span>
+                            <span>出售价格：</span>
                             <span>{{book.bookPrice}}</span>
                         </label>
                         <label class="form-group item item-input ">
@@ -29,7 +29,7 @@
                             <span>出版社：</span>
                             <span>{{book.bookPub}}</span>
                         </label>
-                        <label class="form-group item item-input " v-if="power">
+                        <label class="form-group item item-input ">
                             <span>联系方式：</span>
                             <span>{{book.phone}}</span>
                         </label>
@@ -74,11 +74,6 @@
                 urls: [],
             }
         },
-        computed:{
-            power(){
-                return this.$store.getters.power;
-            }
-        },
         created(){
             this.book.id=this.$route.query.id;
             if(parseInt(this.book.id)!=0)
@@ -102,7 +97,6 @@
                 this.$http.post('/book/getById/'+this.book.id).then((res)=>{
                     toast.hide();
                     _that.book=res.data.page.info;
-                    _that.book.pubDate=_that.$toDate(_that.book.pubDate);
                     _that.book.bookType=1;//先不做处理后面要删除
                     var arr=_that.book.bookPic.split(',');
                     $.each(arr,(index,item)=>{
