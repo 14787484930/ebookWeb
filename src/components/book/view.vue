@@ -1,6 +1,5 @@
 <template>
     <div>
-        <home-header headName="详情页"></home-header>
         <div class="scroll-list-wrap" he>
             <cube-scroll ref="scroll">
                 <cube-slide ref="slide" :data="urls" >
@@ -52,12 +51,8 @@
 <script>
     import $ from 'jquery';
     import { Dialog } from 'cube-ui'
-    import HomeHeader from '../../components/common/header';
     export default {
         //name: "view",
-        components: {
-            HomeHeader
-        },
         data() {
             return {
                 //获取详细信息
