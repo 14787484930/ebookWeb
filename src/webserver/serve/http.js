@@ -9,6 +9,7 @@ import  dialog from '../../components/common/dialog'
 import  $valid from './valid'
 axios.defaults.baseURL = $config.baseUrl;
 axios.defaults.timeout = 30000
+axios.defaults.withCredentials = true
 const config = {
     headers: {
         'Content-Type': 'multipart/form-data',
