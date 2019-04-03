@@ -19,27 +19,28 @@
                     <div class="weui-cell weui-cell_access"   @click="$picker.show()">
                              <div class="weui-cell__bd">
                               图书类型:
+                                 <span class="book-name">{{bookTypeName}}</span>
                              </div>
                             <div class="weui-cell__ft" >
                             </div>
                         </div>
                 </li>
                 <li class="cube-index-list-item">
-                   <div class="weui-cell weui-cell_access" >
+                   <div class="weui-cell weui-cell_access"  @click="$picker.showDate('type')" >
                             <div class="weui-cell__bd">
                                  日期:
                             </div>
-                            <input type="text" name='stime' value=""  class="time-input" placeholder="请选择开始日期" v-model="queryList.startTime"  @click="$picker.showDate()">
-                            -
-                            <input type="text" name='etime' class="time-input" placeholder="请选择结束日期" v-model="queryList.endTime"  @click="$picker.showDate()">
+                            <input type="text"  v-model="queryList.startTime"  class="time-input" placeholder="请选择开始日期" >
+                            <span class="line-span"></span>
+                            <input type="text"  v-model="queryList.endTime"  class="time-input" placeholder="请选择结束日期" >
                    </div>
                 </li>
                 <li class="cube-index-list-item">
                    <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
                             <div class="weui-cell__bd">
                                   价格:
+                                <span class="book-name">￥{{queryList.startPrice}}至￥{{queryList.endPrice}}</span>
                             </div>
-                            <input type="text" value="12" v-model="queryList.startPrice" >
                             <div class="weui-cell__ft"  >
                             </div>
                         </div>
@@ -49,7 +50,6 @@
                 </li>
             </ul>
         </div>
-
      </div>
 <grid-view :grid="grid" url="/book/books" :load="load"></grid-view>
 
@@ -62,17 +62,18 @@ export default {
 name: 'Book',
 data () {
  return {
-   msg: '图书',
+    msg: '图书',
      grid:{},
      load:0,
      queryList:{
        bookName:'',
        bookType:'1',
-       startPrice:0,
+       startPrice:'',
        endPrice:'',
        startTime:'',
        endTime:''
    },
+   bookTypeName:'',
    isShow:false
 
  }
@@ -84,9 +85,10 @@ data () {
  },
  methods: {
      search(){
-        console.log(2222);
         this.load++;
+        console.log(this.load);
         let query =this.queryList;
+        console.log(query);
         this.isShow =false;//搜索下拉隐藏
         this.initGrid();
      },
@@ -118,16 +120,15 @@ data () {
      },
      initType(){
          this.$picker.bookTypes((val, index,text)=>{
-             that.queryList.bookType=val;
-              console.log(val);
-              console.log(index);
-              console.log(text);
+             that.queryList.bookType=val['0'];
+             that.bookTypeName=text['0'];
          });
          this.$picker.datePicker((val, index,text)=>{
-               that.queryList.startTime=index.join('-');
-               that.queryList.endTime=index.join('-');
+             console.log( index.join('-'));
+               //that.queryList.startTime=index.join('-');
+              // that.queryList.endTime=index.join('-');
          });
-         this.$picker.dialogPicker((val, index,text)=>{
+         this.$picker.dialogPicker((val, index)=>{
                that.queryList.startPrice=val;
                that.queryList.endPrice=index;
          })
@@ -138,10 +139,13 @@ data () {
  }
 }
 </script>
+
 <style>
-.placeholder-icon:last-child {
-    padding-left: 0.26rem !important;
-}
-.time-input{width: 3.5rem;}
+.placeholder-icon:last-child {padding-left: 0.26rem !important;}
+.time-input{width: 3.0rem;}
+.book-name{text-align: center;width: 4rem;
+    display: inline-flex;
+    padding-left: 1rem;}
+.line-span{border-bottom:.03rem solid #828282;width:1rem;;}
 </style>
 
