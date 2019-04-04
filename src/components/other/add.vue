@@ -31,6 +31,10 @@
                         <input type="text"  class="isnull tel" v-model="other.phone">
                     </label>
                     <label class="form-group item item-input ">
+                        <span>微信：</span>
+                        <input type="text" v-model="other.weiXin">
+                    </label>
+                    <label class="form-group item item-input ">
                         <span>描述：</span>
                         <input type="text" v-model="other.des">
                     </label>
@@ -59,8 +63,8 @@
                     buyDate: '2013-12-12',
                     hasInvoice: '1',
                     otherPic: '',
-                    weiXin: '',
-                    phone: '',
+                    phone:this.$store.getters.getUser.phone,
+                    weiXin:this.$store.getters.getUser.weiXin,
                     des: '',
                 },
                 urls:[],

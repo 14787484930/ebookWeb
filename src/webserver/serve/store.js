@@ -15,7 +15,11 @@ const store = new Vuex.Store({
                 return format.toStr(state.user.id).length>1
             }
 
+        },
+        getUser(state) {
+            return state.user;
         }
+
     },
     mutations: {
         setUser (state,info) {

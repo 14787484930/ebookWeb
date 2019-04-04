@@ -8,40 +8,47 @@
                     </cube-slide-item>
                 </cube-slide>
                 <template>
-                    <div class="list">
-                        <label class="form-group item item-input ">
+                    <div class="listHead">
+                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{book.bookPrice}}</strong></div>
+                    </div>
+                    <ul class="list">
+                        <li class="item item-input ">
                             <span>图书名称：</span>
                             <span>{{book.bookName}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>作者：</span>
                             <span>{{book.author}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <!--<li class="form-group item item-input ">
                             <span>出售价格：</span>
                             <span>{{book.bookPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>-->
+                        <li class="item item-input ">
                             <span>出版日期：</span>
                             <span>{{book.pubDate}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>出版社：</span>
                             <span>{{book.bookPub}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>联系方式：</span>
+                        </li>
+                        <li class="item item-input" v-if="power">
+                            <span>联系电话：</span>
                             <span>{{book.phone}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input" v-if="power">
+                            <span>微信：</span>
+                            <span>{{book.weiXin}}</span>
+                        </li>
+                        <li class="item item-input ">
                             <span>发布日期：</span>
                             <span>{{book.pubDate}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>描述：</span>
                             {{book.des}}
-                        </label>
-                    </div>
+                        </li>
+                    </ul>
                 </template>
             </cube-scroll>
         </div>

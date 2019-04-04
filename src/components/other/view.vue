@@ -9,36 +9,44 @@
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <template>
-                    <div class="list">
-                        <label class="form-group item item-input ">
+                    <div class="listHead">
+                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{other.presentPrice}}</strong></div>
+                        <div class="defaultPrice">原价：<span>￥{{other.originalPrice}}</span></div>
+                    </div>
+                    <ul class="list">
+                        <li class="item item-input ">
                             <span>物品名称：</span>
                             <span>{{other.otherName}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>官方价格(元)：</span>
                             <span>{{other.originalPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>出售价格(元)：</span>
                             <span>{{other.presentPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>购买日期：</span>
                             <span>{{other.buyDate}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>是否有发票：</span>
                             <span>{{other.hasInvoice}}</span>
-                        </label>
-                        <label class="form-group item item-input " v-if="power">
-                            <span>联系方式：</span>
+                        </li>
+                        <li class="item item-input " v-if="power">
+                            <span>联系电话：</span>
                             <span>{{other.phone}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input " v-if="power">
+                            <span>微信：</span>
+                            <span>{{other.weiXin}}</span>
+                        </li>
+                        <li class="item item-input ">
                             <span>描述：</span>
                             {{other.des}}
-                        </label>
-                    </div>
+                        </li>
+                    </ul>
                 </template>
             </cube-scroll>
         </div>

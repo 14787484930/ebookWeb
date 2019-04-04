@@ -11,7 +11,7 @@
                 <template>
                     <div class="listHead">
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong></div>
-                        <div class="defaultPrice">官方价：<span>￥{{electronics.originalPrice}}</span></div>
+                        <div class="defaultPrice">原价：<span>￥{{electronics.originalPrice}}</span></div>
                     </div>
                     <ul class="list">
                         <li class="item item-input">
@@ -33,8 +33,12 @@
                             <span v-if="electronics.hasInvoice" >有发票</span>
                         </li>
                         <li class="item item-input" v-if="power">
-                            <span>联系方式：</span>
+                            <span>联系电话：</span>
                             <span>{{electronics.phone}}</span>
+                        </li>
+                        <li class="item item-input" v-if="power">
+                            <span>微信：</span>
+                            <span>{{electronics.weiXin}}</span>
                         </li>
                         <li class="item desWrap">
                             <span>描述：</span>

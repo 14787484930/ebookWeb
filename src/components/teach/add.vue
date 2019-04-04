@@ -68,8 +68,8 @@
                     startTime: '2019-01-30 15:52:46',
                     endTime: '2019-12-30 15:52:51',
                     place: 'A栋', //讲座地点
-                    weiXin: 'weiXin',
-                    phone: '14787461136',
+                    phone:this.$store.getters.getUser.phone,
+                    weiXin:this.$store.getters.getUser.weiXin,
                     des: '帅气男学渣求女学霸辅导，男女搭配学习不累',
                 },
             }

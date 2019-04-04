@@ -35,8 +35,12 @@
                         <cube-switch v-model="isInvoice"  v-on:change="hasInvoice"></cube-switch>
                     </label>
                     <label class="form-group item item-input ">
-                        <span>联系方式：</span>
+                        <span>联系电话：</span>
                         <input type="text" class="isnull tel"  v-model="electronics.phone">
+                    </label>
+                    <label class="form-group item item-input ">
+                        <span>微信：</span>
+                        <input type="text" v-model="electronics.weiXin">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
@@ -71,8 +75,8 @@
                     buyDate: '2013-12-12',
                     hasInvoice: '1',
                     electronicsPic: '',
-                    weiXin: '',
-                    phone: '14787461136',
+                    phone:this.$store.getters.getUser.phone,
+                    weiXin:this.$store.getters.getUser.weiXin,
                     des: '',
                 },
                 urls: [],

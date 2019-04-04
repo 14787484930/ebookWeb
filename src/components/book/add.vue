@@ -26,9 +26,13 @@
                     <input type="text" v-model="book.bookPub">
                 </label>
                 <label class="form-group item item-input ">
-                    <span>联系方式：</span>
+                    <span>联系电话：</span>
                     <input type="text" class="tel isnull" v-model="book.phone">
                 </label>
+               <label class="form-group item item-input ">
+                   <span>微信：</span>
+                   <input type="text" v-model="book.weiXin">
+               </label>
            <label class="form-group item item-input " style="padding-left: 0px">
                <quill-editor class="quill-editor"
                     v-model="book.des">
@@ -60,8 +64,8 @@
                     pubDate:'2013-12-12',
                     bookPub:'',
                     bookPic:'',
-                    weiXin:'',
-                    phone:'',
+                    phone:this.$store.getters.getUser.phone,
+                    weiXin:this.$store.getters.getUser.weiXin,
                     des:'',
                 },
                 urls:[],
