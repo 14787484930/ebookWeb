@@ -9,40 +9,38 @@
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <template>
-                    <div class="list">
-                        <label class="form-group item item-input ">
-                            <span>电子名称：</span>
-                            <span>{{electronics.electronicsName}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                    <div class="listHead">
+                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong></div>
+                        <div class="defaultPrice">官方价：<span>￥{{electronics.originalPrice}}</span></div>
+                    </div>
+                    <ul class="list">
+                        <li class="item item-input">
+                            <span>品名：</span>
+                            <strong>{{electronics.electronicsName}}</strong>
+                        </li>   
+
+                        <li class="item item-input">
                             <span>电子类型：</span>
                             <span>{{electronics.electronicsType}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>官方价格(元)：</span>
-                            <span>{{electronics.originalPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>出售价格(元)：</span>
-                            <span>{{electronics.presentPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+
+                        <li class="item item-input">
                             <span>购买日期：</span>
                             <span>{{electronics.buyDate}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input">
                             <span>是否有发票：</span>
                             <span v-if="electronics.hasInvoice" >有发票</span>
-                        </label>
-                        <label class="form-group item item-input " v-if="power">
+                        </li>
+                        <li class="item item-input" v-if="power">
                             <span>联系方式：</span>
                             <span>{{electronics.phone}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item desWrap">
                             <span>描述：</span>
-                            {{electronics.des}}
-                        </label>
-                    </div>
+                            <span>{{electronics.des}}</span>
+                        </li>
+                    </ul>
                 </template>
             </cube-scroll>
         </div>

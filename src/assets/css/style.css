@@ -15,3 +15,12 @@
 .toptip_success{ background: #4ad561;}
 .toptip_cancel{ background: #f22e39;}
 .toptip_ban{ background: #fc5b1e;}
+
+/*详情页公用样式*/
+.cube-slide{background-color:#333;}
+.listHead{padding:15px;}
+.relPrice{line-height: 1;}
+.defaultPrice{font-size:12px;color:#aaa;text-decoration: line-through;}
+.relPrice strong{font-size:24px;color:#f00;}
+.priceTip{display:inline-block;margin-right:10px;font-size:12px;background-color:#f1f1f1;border:1px solid #aaa;color:#aaa;vertical-align: middle;padding: 0 2px;line-height: 1.4;}
+.desWrap{word-break: break-all;white-space: normal;overflow: scroll;}
