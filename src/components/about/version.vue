@@ -26,17 +26,13 @@
             }
         },
         created() {
-            console.log("created on version");
             this.about();
         },
         methods: {
             about() {
                 this.$http.post('/aboutus/us/').then((res) => {
-
-                    let va = res.data;
-                    this.version.des = va.page.pageinfo[0].des;
-                    this.version.title = va.page.pageinfo[0].title;
-
+                    this.version.des = res.data.page.pageinfo.des;
+                    this.version.title = res.data.page.pageinfo.title;
                 })
             }
         }

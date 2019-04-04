@@ -3,17 +3,10 @@
         <!--用户建议（跳转）-->
     <!--<p>    输入框</p>-->
         <div class="textarea-wrapper">
-            <div class="cube-textarea-wrapper" width="274px" height="100px">
-		<textarea v-model="advice.des" placeholder="建议和反馈" maxlength="60" indicator="[object Object]" class="cube-textarea">
-
-		</textarea>
-                <span class="cube-textarea-indicator" style="display: none;">
-		        60
-	            </span>
-            </div>
+            <cube-textarea v-model="userAdvice.des"></cube-textarea>
         </div>
         <div class="padding">
-            <button  @click="subAdvice" class="button button-block button-positive">提交</button>
+            <cube-button icon="cubeic-right" :disabled=false @click="subAdvice()">提交</cube-button>
         </div>
 
     </div>
@@ -21,29 +14,20 @@
 
 <script>
     export default {
-        name: "advice",
+        name: "userAdvice",
         data(){
             return {
-                advice:{
-                    des:"",
+                userAdvice:{
+                    des:""
                 }
             };
         },
         methods:{
             subAdvice(){
-                console.log(this.advice.des);
-                if(this.advice.des==''){
-                    alert('123');
-                    return;
-                }
-                this.$http.post("/useradvice/save?des="+
-                    this.advice.des).then(
-                    (res)=>{
-                        let ms = res.data;
-                        //根据返回的值做后续的判断
-                        console.log(ms);
-                    }
-                );
+
+                this.$save("/useradvice/save",this.userAdvice,(msg)=>{
+                    console.log(msg);
+                })
             },
         }
 
