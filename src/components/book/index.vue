@@ -80,9 +80,15 @@ data () {
 },
  created(){
      that=this;
+     this.queryList.flag=this.$toInt(this.$route.query.flag);
    this.initType();
    this.initGrid();
  },
+    computed:{
+        power(){
+            return this.$store.getters.power;
+        }
+    },
  methods: {
      search(){
         this.load++;
