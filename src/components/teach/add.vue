@@ -27,7 +27,7 @@
                         <input type="text"  class="isnull" v-model="teach.place">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>定价(元)：</span>
+                        <span>报酬(元)：</span>
                         <input type="text"  class="isnull" v-model="teach.price">
                     </label>
                     <label class="form-group item item-input ">
