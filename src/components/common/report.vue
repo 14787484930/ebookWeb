@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-        <cube-button @click="showAlert">Dialog - alert</cube-button>
     </div>
 </template>
 
