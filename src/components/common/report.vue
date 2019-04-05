@@ -59,6 +59,7 @@
 
                 this.$http.post('/reporttype/reporttypeinfo').then((res) => {
                     if (Number(res.data.code) === 100) {
+                        this.selected = res.data.page.pageinfo.length;
                         for (let i = 0; i < res.data.page.pageinfo.length; i++) {
                             this.options.push({
                                 label: res.data.page.pageinfo[i].name,
