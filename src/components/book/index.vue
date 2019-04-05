@@ -26,13 +26,13 @@
                         </div>
                 </li>
                 <li class="cube-index-list-item">
-                   <div class="weui-cell weui-cell_access"  @click="$picker.showDate('type')" >
+                   <div class="weui-cell weui-cell_access"  >
                             <div class="weui-cell__bd">
                                  日期:
                             </div>
-                            <input type="text"  v-model="queryList.startTime"  class="time-input" placeholder="请选择开始日期" >
+                            <input type="text"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
                             <span class="line-span"></span>
-                            <input type="text"  v-model="queryList.endTime"  class="time-input" placeholder="请选择结束日期" >
+                            <input type="text"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
                    </div>
                 </li>
                 <li class="cube-index-list-item">
@@ -46,6 +46,7 @@
                         </div>
                 </li>
                 <li class="cube-index-list-item">
+                     <cube-button :light="true" @click="searchClear">重置</cube-button>
                      <cube-button :light="true" @click="search">搜索</cube-button>
                 </li>
             </ul>
@@ -63,24 +64,23 @@ name: 'Book',
 data () {
  return {
     msg: '图书',
-     grid:{},
-     load:0,
-     queryList:{
+    grid:{},
+    load:0,
+    queryList:{
        bookName:'',
-       bookType:'1',
+       bookType:'',
        startPrice:'',
        endPrice:'',
        startTime:'',
        endTime:''
-   },
-   bookTypeName:'',
-   isShow:false
-
+    },
+    bookTypeName:'',
+    isShow:false
  }
 },
  created(){
-     that=this;
-     this.queryList.flag=this.$toInt(this.$route.query.flag);
+   that=this;
+   this.queryList.flag=this.$toInt(this.$route.query.flag);
    this.initType();
    this.initGrid();
  },
@@ -97,6 +97,17 @@ data () {
         console.log(query);
         this.isShow =false;//搜索下拉隐藏
         this.initGrid();
+     },
+     searchClear(){
+         that.queryList={
+                     bookName:'',
+                         bookType:'',
+                         startPrice:'',
+                         endPrice:'',
+                         startTime:'',
+                         endTime:''
+                 }
+         that.bookTypeName=''
      },
      initGrid(){
          this.grid={
@@ -124,15 +135,28 @@ data () {
      update(row){
          this.$router.push({path: '/bookAdd', query: {id: row.id}})
      },
+     endTime() {
+         if (!this.datePicker) {
+             this.datePicker = this.$createDatePicker({
+                 title: 'Date Picker',
+                 min: new Date(1980, 1, 1),
+                 max: new Date(new Date().getFullYear(), 12, 12),
+                 value: new Date(),
+                 onSelect: this.selectHandle,
+             })
+         }
+         this.datePicker.show()
+     },
+     selectHandle(val, index,text) {
+         that.queryList.endTime=index.join('-');
+     },
      initType(){
          this.$picker.bookTypes((val, index,text)=>{
              that.queryList.bookType=val['0'];
              that.bookTypeName=text['0'];
          });
          this.$picker.datePicker((val, index,text)=>{
-             console.log( index.join('-'));
-               //that.queryList.startTime=index.join('-');
-              // that.queryList.endTime=index.join('-');
+               that.queryList.startTime=index.join('-');
          });
          this.$picker.dialogPicker((val, index)=>{
                that.queryList.startPrice=val;
@@ -153,5 +177,6 @@ data () {
     display: inline-flex;
     padding-left: 1rem;}
 .line-span{border-bottom:.03rem solid #828282;width:1rem;;}
+.cube-btn-light{ width: 50%;float: left;}
 </style>
 
