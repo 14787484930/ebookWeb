@@ -5,7 +5,6 @@
                 <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
             </cube-slide-item>
         </cube-slide>
-
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <template>
@@ -17,7 +16,7 @@
                         <li class="item item-input">
                             <span>品名：</span>
                             <strong>{{electronics.electronicsName}}</strong>
-                        </li>   
+                        </li>
 
                         <li class="item item-input">
                             <span>电子类型：</span>
@@ -48,17 +47,24 @@
                 </template>
             </cube-scroll>
         </div>
-
+        <report-button :product="{productId: electronics.id ,
+         productName: electronics.electronicsName,
+         productType: electronics.electronicsType}">
+        </report-button>
     </div>
 
 
 </template>
 
 <script>
+    import reportButton from '../common/report'
     import $ from 'jquery';
     let _that;
 
     export default {
+        components: {
+          reportButton,
+        },
         //name: "view",
         data() {
             return {

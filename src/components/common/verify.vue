@@ -38,8 +38,8 @@ export default {
             validity: {},
             valid: undefined,
             model: {
-                schoolNo: "请选择学校",
-                studNo: "20131157060",
+                schoolNo: "西南林业大学",
+                studNo: "",
                 studPassword: "",
                 validCode: "",
                 email:"",
@@ -132,8 +132,6 @@ export default {
                     this.checkCode = "http://202.203.132.204:8019/" + this.sessionString + "/CheckCode.aspx";
                 }
             });
-
-
         },
         //点击刷新验证码
         reimg() {
