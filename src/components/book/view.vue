@@ -52,14 +52,22 @@
                 </template>
             </cube-scroll>
         </div>
+        <report-button :product="{productId: book.id ,
+         productName: book.bookName,
+         productType: book.bookType}">
+        </report-button>
     </div>
 </template>
 
 <script>
+    import reportButton from '../common/report'
     import $ from 'jquery';
     import { Dialog } from 'cube-ui'
     export default {
         //name: "view",
+        components: {
+            reportButton
+        },
         data() {
             return {
                 //获取详细信息

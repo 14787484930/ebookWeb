@@ -50,17 +50,24 @@
                 </template>
             </cube-scroll>
         </div>
-
+        <report-button :product="{productId: other.id ,
+         productName: other.otherName,
+         productType: other.otherType}">
+        </report-button>
     </div>
 
 
 </template>
 
 <script>
+    import reportButton from '../common/report'
     import $ from 'jquery';
     let _that;
 
     export default {
+        components: {
+            reportButton
+        },
         data() {
             return {
                 //获取详细信息
