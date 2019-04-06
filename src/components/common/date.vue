@@ -19,8 +19,8 @@
                 var that=this;
                 this.$createDatePicker({
                     title: '选择时间',
-                    min: new Date(2008, 7, 8, 8, 0, 0),
-                    max: new Date(2020, 9, 20, 20, 59, 59),
+                    min: new Date(2008, 1, 8, 8, 0),
+                    max: new Date(2020, 12, 20, 20, 59),
                     value: new Date(),
                     format: {
                         year: 'YY年',
@@ -29,7 +29,7 @@
                         hour:"hh时",
                         minute:"mm分",
                     },
-                    columnCount: 6,
+                    columnCount: 5,
                     onSelect: function (date, selectedVal, selectedText) {
                          const val=that.$toDate(date,"yyyy-MM-dd HH:mm")
                         that.$emit('input', val)
