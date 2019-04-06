@@ -45,11 +45,11 @@
         },
         computed: {},
         methods: {
-            showAlert() {
+            showAlert(title, content) {
                 this.$createDialog({
                     type: 'alert',
-                    title: '举报成功',
-                    content: '感谢您的举报，我们会尽快处理',
+                    title: title,
+                    content: content,
                     icon: 'cubeic-alert'
                 }).show()
             },
@@ -89,7 +89,7 @@
                     if (Number(msg.data.code) === 200) {
                         alert("失败")
                     } else {
-                        this.showAlert('myPopup');
+                        this.showAlert('举报成功','感谢您的举报，我们会尽快处理');
                     }
                 });
 

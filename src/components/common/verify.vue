@@ -13,7 +13,7 @@
                 <cube-form-item :field="fields[1]"></cube-form-item>
                 <div>
                     <cube-form-item :field="fields[2]"></cube-form-item>
-                    <img class="verify-img" @click="reimg()" :src="checkCode">
+                    <img class="verify-img" @click="freshCode()" :src="checkCode">
                 </div>
                 <cube-form-item :field="fields[3]"></cube-form-item>
                 <cube-form-item :field="fields[4]"></cube-form-item>
@@ -112,11 +112,11 @@ export default {
         this.getSessionString();
     },
     methods: {
-        showAlert() {
+        showAlert(title, content) {
             this.$createDialog({
                 type: 'alert',
-                title: 'error',
-                content: '输入有误，请重新输入',
+                title: title,
+                content: content,
                 icon: 'cubeic-alert'
             }).show()
         },
@@ -134,7 +134,7 @@ export default {
             });
         },
         //点击刷新验证码
-        reimg() {
+        freshCode() {
             this.checkCode ="http://202.203.132.204:8019/" + this.sessionString + "/CheckCode.aspx?" + Math.random();
         },
         //提交数据
@@ -149,10 +149,10 @@ export default {
 
             this.$post('user/authentication', query, (msg) => {
                 if(Number(msg.data.code) === 200 ){
-                    this.showAlert();
-                    //alert(msg.data.page.errors);
-                    this.reimg();
+                    this.showAlert('登陆验证', '验证失败');
+                    this.freshCode();
                 }else{
+                    this.showAlert('登陆验证', '验证成功');
                     this.$router.push('/book')
                 }
             });
