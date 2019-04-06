@@ -27,6 +27,7 @@ const routes = new VueRouter({
 
         { path: '/', component: home,
             children: [
+                {path: '/', component: book},
                 {path: '/book', component: book},
                 {path: '/bookAdd', component: bookAdd},
                 {path:'/bookView',component:bookView},

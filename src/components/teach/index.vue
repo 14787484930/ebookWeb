@@ -97,7 +97,7 @@
                     edit:(row)=>that.$router.push({path: '/teachAdd', query: {id: row.id}}),
                     columns:[
                         {title:"名称",key:'name'},
-                        {title:"价格",key:'price',format:(row)=>"￥"+ row.price},
+                        {title:"报酬",key:'price',format:(row)=>"￥"+ row.price},
                         {title:"日期",key:'Time',format:(row)=>that.$toDate(row.startTime)+'--'+that.$toDate(row.endTime)},
                     ],
                 };
