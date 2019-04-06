@@ -65,8 +65,8 @@
                     name: '',
                     type: '0',    //0：辅导  1：讲座
                     price: '10',
-                    startTime: '2019-01-30 15:52:46',
-                    endTime: '2019-12-30 15:52:51',
+                    startTime: '2019-01-30 15:52',
+                    endTime: '2019-12-30 15:52',
                     place: 'A栋', //讲座地点
                     phone:this.$store.getters.getUser.phone,
                     weiXin:this.$store.getters.getUser.weiXin,
