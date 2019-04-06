@@ -1,0 +1,26 @@
+/*toast*/
+.weui-mask_transparent {position: fixed;z-index: 1000;top: 0;right: 0;left: 0;bottom: 0;}
+.weui-toast {position: fixed;z-index: 5000;width:5rem;top:35%;left: 50%;margin-left: -2.5rem;background: rgba(17, 17, 17, 0.7);text-align: center;border-radius: 5px;color: #FFFFFF;}
+.toast_waiting {position: fixed;z-index: 5000;width: 7.5rem;color: #fff;font-size: .4rem;text-align:
+     center;padding-top: 65px;height: 100px;top:35%;left: 50%;margin-left: -3.8rem;font-size: .4rem;
+     background: url("../images/Loading.gif") center top no-repeat;}
+.weui-icon_toast {margin: 20px 0 5px;display: block; height:40px;}
+.toast_success{ background: url("../images/success.png") center no-repeat; background-size:contain;}
+.toast_cancel{ background: url("../images/cancel.png") center no-repeat; background-size:contain;}
+.toast_ban{ background: url("../images/ban.png") center no-repeat; background-size:contain;}
+.weui-toast__content {margin: 0 0 15px;}
+.weui-mask_transparent {background: rgb(15,15,18,.5);}
+/*toptip*/
+.weui-toptip{ height: 32px; line-height: 32px; text-align: center; background: #4ad561; color: #fff; position: fixed; left: 0; right: 0; top: 0.9rem;z-index: 19;}
+.toptip_success{ background: #4ad561;}
+.toptip_cancel{ background: #f22e39;}
+.toptip_ban{ background: #fc5b1e;}
+
+/*详情页公用样式*/
+.cube-slide{background-color:#333;}
+.listHead{padding:15px;}
+.relPrice{line-height: 1;}
+.defaultPrice{font-size:12px;color:#aaa;text-decoration: line-through;}
+.relPrice strong{font-size:24px;color:#f00;}
+.priceTip{display:inline-block;margin-right:10px;font-size:12px;background-color:#f1f1f1;border:1px solid #aaa;color:#aaa;vertical-align: middle;padding: 0 2px;line-height: 1.4;}
+.desWrap{word-break: break-all;white-space: normal;overflow: scroll;}

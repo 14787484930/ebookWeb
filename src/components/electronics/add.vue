@@ -5,7 +5,7 @@
                 <div class="list">
                     <label class="form-group item item-input ">
                         <span>电子名称：</span>
-                        <input type="text" v-model="electronics.electronicsName">
+                        <input type="text" class="isnull" v-model="electronics.electronicsName">
                     </label>
                     <label class="form-group item item-input ">
                         <span>电子类型：</span>
@@ -13,18 +13,18 @@
                         <!--<input type="text" v-model="electronics.electronicsType">-->
                         <!--在这里可否用键值对？？？-->
                         <cube-select
-                                v-model="value"
+                                     v-model="value"
                                 :options="options"
                                 @change="change">
                         </cube-select>
                     </label>
                     <label class="form-group item item-input ">
                         <span>官方价格：</span>
-                        <input type="text" v-model="electronics.originalPrice">
+                        <input type="text" class="isnull"  v-model="electronics.originalPrice">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>出售价格：</span>
-                        <input type="text" v-model="electronics.presentPrice">
+                        <span>出售价格(元)：</span>
+                        <input type="text" class="isnull"  v-model="electronics.presentPrice">
                     </label>
                     <label class="form-group item">
                         <span>购买日期：</span>
@@ -32,11 +32,15 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
-                        <cube-switch v-model="isInvoice" v-on:change="hasInvoice"></cube-switch>
+                        <cube-switch v-model="isInvoice"  v-on:change="hasInvoice"></cube-switch>
                     </label>
                     <label class="form-group item item-input ">
-                        <span>联系方式：</span>
-                        <input type="text" v-model="electronics.phone">
+                        <span>联系电话：</span>
+                        <input type="text" class="isnull tel"  v-model="electronics.phone">
+                    </label>
+                    <label class="form-group item item-input ">
+                        <span>微信：</span>
+                        <input type="text" v-model="electronics.weiXin">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
@@ -71,8 +75,8 @@
                     buyDate: '2013-12-12',
                     hasInvoice: '1',
                     electronicsPic: '',
-                    weiXin: '',
-                    phone: '14787461136',
+                    phone:this.$store.getters.getUser.phone,
+                    weiXin:this.$store.getters.getUser.weiXin,
                     des: '',
                 },
                 urls: [],
@@ -98,7 +102,7 @@
                     for(let i in this.electronics){
                         _that.electronics[i] = res.data.page.info[i];
                     }
-
+                    _that.electronics.buyDate=_that.$toDate(_that.electronics.buyDate);
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
                     var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{

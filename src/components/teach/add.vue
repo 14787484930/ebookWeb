@@ -12,27 +12,27 @@
                 <div class="list">
                     <label class="form-group item item-input ">
                         <span>名称：</span>
-                        <input type="text" v-model="teach.name">
+                        <input type="text"  class="isnull" v-model="teach.name">
                     </label>
                     <label class="form-group item ">
                         <span>开始时间：</span>
-                        <Date v-model="teach.startTime"></Date>
+                        <Date v-model="teach.startTime"  type="time"></Date>
                     </label>
                     <label class="form-group item ">
                         <span>结束时间：</span>
-                        <Date v-model="teach.endTime"></Date>
+                        <Date v-model="teach.endTime" type="time"></Date>
                     </label>
                     <label class="form-group item item-input ">
                         <span>辅导地点：</span>
-                        <input type="text" v-model="teach.place">
+                        <input type="text"  class="isnull" v-model="teach.place">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>定价：</span>
-                        <input type="text" v-model="teach.price">
+                        <span>报酬(元)：</span>
+                        <input type="text"  class="isnull" v-model="teach.price">
                     </label>
                     <label class="form-group item item-input ">
                         <span>电话：</span>
-                        <input type="text" v-model="teach.phone">
+                        <input type="text"  class="isnull tel" v-model="teach.phone">
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
@@ -68,8 +68,8 @@
                     startTime: '2019-01-30 15:52:46',
                     endTime: '2019-12-30 15:52:51',
                     place: 'A栋', //讲座地点
-                    weiXin: 'weiXin',
-                    phone: '14787461136',
+                    phone:this.$store.getters.getUser.phone,
+                    weiXin:this.$store.getters.getUser.weiXin,
                     des: '帅气男学渣求女学霸辅导，男女搭配学习不累',
                 },
             }
@@ -93,6 +93,8 @@
                     for(let i in this.teach){
                         _that.teach[i] = res.data.page.info[i];
                     }
+                    _that.teach.startTime=_that.$toDate(_that.teach.startTime,'yyyy-MM-dd HH:mm');
+                    _that.teach.endTime=_that.$toDate(_that.teach.endTime,'yyyy-MM-dd HH:mm');
                     _that.teach.type = 1;//先不做处理后面要删除
                 })
             },

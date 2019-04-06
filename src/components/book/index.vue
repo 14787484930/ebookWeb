@@ -1,137 +1,157 @@
 <template>
  <div>
      <div id="head">
-     <div class="bar bar-header item-input-inset">
-         <label class="item-input-wrapper">
-             <i class="icon ion-ios-search placeholder-icon"></i>
-             <input type="search" placeholder="搜索" v-model="queryList.bookName" @change="initTables">
-         </label>
-         <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
+        <div class="bar bar-header item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="search" placeholder="搜索" v-model="queryList.bookName"  @change="search">
+                <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
+            </label>
+            <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
+        </div>
+        <div style="text-align: center">
+                <button  @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                                筛选
+                </button>
+        </div>
+        <div title="搜索"  v-show="isShow" class="weui-cells"> 
+            <ul>
+                <li class="cube-index-list-item">
+                    <div class="weui-cell weui-cell_access"   @click="$picker.show()">
+                             <div class="weui-cell__bd">
+                              图书类型:
+                                 <span class="book-name">{{bookTypeName}}</span>
+                             </div>
+                            <div class="weui-cell__ft" >
+                            </div>
+                        </div>
+                </li>
+                <li class="cube-index-list-item">
+                   <div class="weui-cell weui-cell_access"  @click="$picker.showDate('type')" >
+                            <div class="weui-cell__bd">
+                                 日期:
+                            </div>
+                            <input type="text"  v-model="queryList.startTime"  class="time-input" placeholder="请选择开始日期" >
+                            <span class="line-span"></span>
+                            <input type="text"  v-model="queryList.endTime"  class="time-input" placeholder="请选择结束日期" >
+                   </div>
+                </li>
+                <li class="cube-index-list-item">
+                   <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
+                            <div class="weui-cell__bd">
+                                  价格:
+                                <span class="book-name">￥{{queryList.startPrice}}至￥{{queryList.endPrice}}</span>
+                            </div>
+                            <div class="weui-cell__ft"  >
+                            </div>
+                        </div>
+                </li>
+                <li class="cube-index-list-item">
+                     <cube-button :light="true" @click="search">搜索</cube-button>
+                </li>
+            </ul>
+        </div>
      </div>
-         <div style="text-align: center">
-        <!--<DropDown v-for="item in dropCconfig" :dateDrop="item.dateDrop" :title="item.title" :list="item.list"
-                   :onSelect="item.onSelect"></DropDown>-->
-               <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                   图书类型
-               </button>
-              <button  @click="$picker.showDate()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                   日期
-               </button>
-              <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                   价格
-               </button>
-             </div>
+<grid-view :grid="grid" url="/book/books" :load="load"></grid-view>
 
-     </div>
-     <div class="scroll-list-wrap"  >
-     <cube-scroll ref="scroll">
-         <cube-swipe>
-          <template>
-              <div class="list">
-                  <transition-group name="swipe" tag="ul">
-                  <span  v-for="(item,index) in tables" :key="item.id">
-                  <cube-swipe-item
-                          ref="reftables"
-                          v-bind:btns="btns"
-                          :index="index"
-                          @btn-click="updateBook"
-                          >
-                      <router-link :to="{path:'/bookView',query:{id:item.id}}" >
-                  <a  class="item item-thumbnail-left" href="#">
-                      <img :src="$file(item.bookPic)">
-                      <p>{{item.bookName}}({{item.author}})￥{{item.bookPrice}}</p>
-                      <p>{{item.bookPub}}</p>
-                      <p>{{item.des}}</p>
-                      <p>{{item.phone}}</p>
-                  </a>
-                      </router-link>
-                  </cube-swipe-item>
-                  </span>
-                  </transition-group>
-              </div>
-          </template>
-         </cube-swipe>
-      </cube-scroll>
-  </div>
 </div>
 </template>
 
 <script>
- import  $ from 'jquery'
  let  that;
 export default {
 name: 'Book',
 data () {
  return {
-   msg: '图书',
-     btns: [
-         {
-             action:'edit',
-             text: '编辑',
-             color: 'cornflowerblue'
-         },
-         {
-             action:'del',
-             text: '删除',
-             color: '#ff3a32'
-         }
-     ],
-   bookTypes:{},
-   columns:[],
-   queryList:{
+    msg: '图书',
+     grid:{},
+     load:0,
+     queryList:{
        bookName:'',
        bookType:'1',
+       startPrice:'',
+       endPrice:'',
+       startTime:'',
+       endTime:''
    },
-     tables:[],
-   dropCconfig:[],
+   bookTypeName:'',
+   isShow:false
+
  }
 },
  created(){
      that=this;
-   this.initTables();
+     this.queryList.flag=this.$toInt(this.$route.query.flag);
    this.initType();
+   this.initGrid();
  },
- mounted() {
-   $(".scroll-list-wrap").height(screen.availHeight-$("#head").height()-$(".tabs-icon-top",window.parent.parent.document).height());
- },
+    computed:{
+        power(){
+            return this.$store.getters.power;
+        }
+    },
  methods: {
-     updateBook(btn,index){
-         let id=this.tables[index].id;
-         //删除数据
-         if(btn.action=='del'){
-             this.$post('/book/delete',this.tables[index],(msg)=>{
-                 console.log(msg);
-             })
-         }
-         else
-             this.$router.push({path: '/bookAdd', query: {id: id}})
+     search(){
+        this.load++;
+        console.log(this.load);
+        let query =this.queryList;
+        console.log(query);
+        this.isShow =false;//搜索下拉隐藏
+        this.initGrid();
      },
-     initTables(){
-         this.$table('/book/books',this.queryList,data=>that.tables=data.list);
+     initGrid(){
+         this.grid={
+             img:'bookPic',
+             query:this.queryList,
+             view:this.view,
+             del:this.del,
+             edit:this.update,
+             columns:[
+                 {title:"名称",key:'bookName'},
+                 {title:"出版社",key:'bookPub'},
+                 {title:"价格",key:'bookPrice',format:this.setPrice},
+             ],
+         };
+     },
+     setPrice(row){
+         return "￥"+ row.bookPrice;
+     },
+     view(row){
+         this.$router.push({path: '/bookView', query: {id: row.id}});
+     },
+     del(row){
+         this.$post('/book/delete',row);
+     },
+     update(row){
+         this.$router.push({path: '/bookAdd', query: {id: row.id}})
      },
      initType(){
          this.$picker.bookTypes((val, index,text)=>{
-             that.queryList.bookType=val;
-             that.initTables();
+             that.queryList.bookType=val['0'];
+             that.bookTypeName=text['0'];
          });
          this.$picker.datePicker((val, index,text)=>{
-             console.log(val)
-             console.log(index)
-             console.log(text)
+             console.log( index.join('-'));
+               //that.queryList.startTime=index.join('-');
+              // that.queryList.endTime=index.join('-');
          });
-         this.$picker.dialogPicker((low,up)=>{
-             console.log(low)
-             console.log(up)
+         this.$picker.dialogPicker((val, index)=>{
+               that.queryList.startPrice=val;
+               that.queryList.endPrice=index;
          })
      },
+     intelSearch(){
+            this.isShow = !this.isShow
+     }
  }
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
- .scroll-list-wrap {
-     border: 1px solid rgba(0, 0, 0, 0.1);
-     border-radius: 5px;
-     transform: rotate(0deg); // fix 子元素超出边框圆角部分不隐藏的问题
-     overflow: hidden;
- }
+
+<style>
+.placeholder-icon:last-child {padding-left: 0.26rem !important;}
+.time-input{width: 3.0rem;}
+.book-name{text-align: center;width: 4rem;
+    display: inline-flex;
+    padding-left: 1rem;}
+.line-span{border-bottom:.03rem solid #828282;width:1rem;;}
 </style>
+

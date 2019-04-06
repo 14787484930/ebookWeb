@@ -9,50 +9,65 @@
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <template>
-                    <div class="list">
-                        <label class="form-group item item-input ">
+                    <div class="listHead">
+                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{other.presentPrice}}</strong></div>
+                        <div class="defaultPrice">原价：<span>￥{{other.originalPrice}}</span></div>
+                    </div>
+                    <ul class="list">
+                        <li class="item item-input ">
                             <span>物品名称：</span>
                             <span>{{other.otherName}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>官方价格：</span>
+                        </li>
+                        <li class="item item-input ">
+                            <span>官方价格(元)：</span>
                             <span>{{other.originalPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>出售价格：</span>
+                        </li>
+                        <li class="item item-input ">
+                            <span>出售价格(元)：</span>
                             <span>{{other.presentPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>购买日期：</span>
                             <span>{{other.buyDate}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input ">
                             <span>是否有发票：</span>
                             <span>{{other.hasInvoice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>联系方式：</span>
+                        </li>
+                        <li class="item item-input " v-if="power">
+                            <span>联系电话：</span>
                             <span>{{other.phone}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input " v-if="power">
+                            <span>微信：</span>
+                            <span>{{other.weiXin}}</span>
+                        </li>
+                        <li class="item item-input ">
                             <span>描述：</span>
                             {{other.des}}
-                        </label>
-                    </div>
+                        </li>
+                    </ul>
                 </template>
             </cube-scroll>
         </div>
-
+        <report-button :product="{productId: other.id ,
+         productName: other.otherName,
+         productType: other.otherType}">
+        </report-button>
     </div>
 
 
 </template>
 
 <script>
+    import reportButton from '../common/report'
     import $ from 'jquery';
     let _that;
 
     export default {
+        components: {
+            reportButton
+        },
         data() {
             return {
                 //获取详细信息
@@ -80,6 +95,11 @@
             //else
                // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
+        computed:{
+            power(){
+                return this.$store.getters.power;
+            }
+        },
 
         mounted() {
             //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
@@ -89,6 +109,7 @@
             initData(){
                 this.$http.post('/other/getById/'+this.other.id).then((res)=>{
                     _that.other=res.data.page.info;
+                    _that.other.buyDate=_that.$toDate(_that.other.buyDate);
                     _that.other.otherType=1;//先不做处理后面要删除
                     var arr=_that.other.otherPic.split(',');
                     $.each(arr,(index,item)=>{

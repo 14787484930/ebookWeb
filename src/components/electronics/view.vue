@@ -5,58 +5,66 @@
                 <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
             </cube-slide-item>
         </cube-slide>
-
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <template>
-                    <div class="list">
-                        <label class="form-group item item-input ">
-                            <span>电子名称：</span>
-                            <span>{{electronics.electronicsName}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                    <div class="listHead">
+                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong></div>
+                        <div class="defaultPrice">原价：<span>￥{{electronics.originalPrice}}</span></div>
+                    </div>
+                    <ul class="list">
+                        <li class="item item-input">
+                            <span>品名：</span>
+                            <strong>{{electronics.electronicsName}}</strong>
+                        </li>
+
+                        <li class="item item-input">
                             <span>电子类型：</span>
                             <span>{{electronics.electronicsType}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>官方价格：</span>
-                            <span>{{electronics.originalPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>出售价格：</span>
-                            <span>{{electronics.presentPrice}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+
+                        <li class="item item-input">
                             <span>购买日期：</span>
                             <span>{{electronics.buyDate}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input">
                             <span>是否有发票：</span>
                             <span v-if="electronics.hasInvoice" >有发票</span>
-                        </label>
-                        <label class="form-group item item-input ">
-                            <span>联系方式：</span>
+                        </li>
+                        <li class="item item-input" v-if="power">
+                            <span>联系电话：</span>
                             <span>{{electronics.phone}}</span>
-                        </label>
-                        <label class="form-group item item-input ">
+                        </li>
+                        <li class="item item-input" v-if="power">
+                            <span>微信：</span>
+                            <span>{{electronics.weiXin}}</span>
+                        </li>
+                        <li class="item desWrap">
                             <span>描述：</span>
-                            {{electronics.des}}
-                        </label>
-                    </div>
+                            <span>{{electronics.des}}</span>
+                        </li>
+                    </ul>
                 </template>
             </cube-scroll>
         </div>
-
+        <report-button :product="{productId: electronics.id ,
+         productName: electronics.electronicsName,
+         productType: electronics.electronicsType}">
+        </report-button>
     </div>
 
 
 </template>
 
 <script>
+    import reportButton from '../common/report'
     import $ from 'jquery';
     let _that;
 
     export default {
+        components: {
+          reportButton,
+        },
         //name: "view",
         data() {
             return {
@@ -86,7 +94,11 @@
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-
+        computed:{
+            power(){
+                return this.$store.getters.power;
+            }
+        },
         mounted() {
            // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
@@ -95,6 +107,7 @@
             initData(){
                 this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
                     _that.electronics=res.data.page.info;
+                    _that.electronics.buyDate=_that.$toDate(_that.electronics.buyDate);
                     _that.electronics.electronicsType=1;//先不做处理后面要删除
                     var arr=_that.electronics.electronicsPic.split(',');
                     $.each(arr,(index,item)=>{
@@ -106,7 +119,7 @@
                 this.$createImagePreview({
                     imgs:[src],
                 }).show()
-             },
+             }
         },
     }
 

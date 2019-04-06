@@ -1,8 +1,8 @@
 <template>
     <div>
-    <div class="tabs tabs-icon-top">
-        <router-link class="tab-item"    v-for="(item) in config" :key="item.url" tag="li"  :to="item.url">
-            <i v-if="$route.fullPath==item.url"  :class="['icon',item.iClass]" style="color:#379be9"></i>
+    <div class="tabs tabs-icon-top fixed-bottom">
+        <router-link class="tab-item"     v-for="(item) in config" :key="item.url" tag="li"  :to="item.url">
+            <i v-if="item.list.indexOf($route.path)!=-1"  :class="['icon',item.iClass]" style="color:#379be9"></i>
             <i v-else  :class="['icon',item.iOutClass]"  ></i>
             {{item.text}}
         </router-link>
@@ -20,15 +20,17 @@
             return {
                 seleted:'Book',
                 config:[
-                    {url: '/book',text:"图书",iClass:"ion-ios-bookmarks",iOutClass:"ion-ios-bookmarks-outline"},
-                    {url: '/electronics', text:"电子",iClass:"ion-ios-monitor",iOutClass:"ion-ios-monitor-outline"},
-                    {url: '/teach', text:"辅导",iClass:"ion-ios-people",iOutClass:"ion-ios-people-outline"},
-                    {url: '/other', text:"其他",iClass:"ion-ios-gear",iOutClass:"ion-ios-gear-outline"},
-                    {url: '/about', text:"我",iClass:"ion-ios-person",iOutClass:"ion-ios-person"}
+                    {url: '/book',text:"图书",iClass:"ion-ios-bookmarks",iOutClass:"ion-ios-bookmarks-outline",list:['/book','/bookView','/bookAdd']},
+                    {url: '/electronics', text:"电子",iClass:"ion-ios-monitor",iOutClass:"ion-ios-monitor-outline",list:['/electronics','/electronicsView','/electronicsAdd']},
+                    {url: '/teach', text:"辅导",iClass:"ion-ios-people",iOutClass:"ion-ios-people-outline",list:['/teach','/teachView','/teachAdd']},
+                    {url: '/other', text:"其他",iClass:"ion-ios-gear",iOutClass:"ion-ios-gear-outline",list:['/other','/otherView','/otherAdd']},
+                    {url: '/about', text:"我",iClass:"ion-ios-person",iOutClass:"ion-ios-person",list:['/about','/aboutView','/aboutAdd']}
                 ]
             }
         },
     }
 </script>
-<style>
+
+<style scoped>
+    .fixed-bottom {position: fixed;bottom: 0;width:100%;}
 </style>

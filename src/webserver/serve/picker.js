@@ -51,7 +51,6 @@ const picker={
     },
     dialogPicker(back){
         let low=0,up=0;
-        console.log(priceInput)
         picker.state.dialog=Dialog.$create({
             title: '填写价格区间',
             onConfirm:()=>{
