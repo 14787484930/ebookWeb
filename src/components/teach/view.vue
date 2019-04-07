@@ -6,35 +6,35 @@
                     <div class="list">
                         <label class="form-group item item-input ">
                             <span>名称：</span>
-                            <input type="text" v-model="teach.name">
+                            <input type="text" v-model="teach.name" readonly="true">
                         </label>
                         <label class="form-group item item-input ">
-                            <span>开始时间：</span>
-                            <input type="text" v-model="teach.startTime">
+                            <span>{{ type?"开始时间：":"辅导截止时间：" }}</span>
+                            <input type="text" v-model="teach.startTime" readonly="true">
                         </label>
-                        <label class="form-group item item-input ">
+                        <label class="form-group item item-input " v-if="type">
                             <span>结束时间：</span>
-                            <input type="text" v-model="teach.endTime">
+                            <input type="text" v-model="teach.endTime" readonly="true">
                         </label>
                         <label class="form-group item item-input " v-if="power">
                             <span>电话：</span>
-                            <input type="text" v-model="teach.phone">
+                            <input type="text" v-model="teach.phone" readonly="true">
                         </label>
                         <label class="form-group item item-input " v-if="power">
                             <span>微信号：</span>
-                            <input type="text" v-model="teach.weiXin">
+                            <input type="text" v-model="teach.weiXin" readonly="true">
                         </label>
                         <label class="form-group item item-input ">
-                            <span>辅导地点：</span>
-                            <input type="text" v-model="teach.place">
+                            <span>{{ type?"讲座地点：":"辅导地点：" }}</span>
+                            <input type="text" v-model="teach.place" readonly="true">
                         </label>
                         <label class="form-group item item-input ">
-                            <span>报酬(元)：</span>
-                            <input type="text" v-model="teach.price">
+                            <span>{{ type?"报酬(元)：":"辅导价格：" }}</span>
+                            <input type="text" v-model="teach.price" readonly="true">
                         </label>
                         <label class="form-group item item-input ">
                             <span>描述：</span>
-                            <input type="text" v-model="teach.des">
+                            <input type="text" v-model="teach.des" readonly="true">
                         </label>
                     </div>
                 </template>
@@ -77,6 +77,9 @@
         computed:{
             power(){
                 return this.$store.getters.power;
+            },
+            type() {
+                return parseInt(this.teach.type);
             }
         },
         mounted() {

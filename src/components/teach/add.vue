@@ -2,20 +2,23 @@
   <div class="scroll-list-wrap">
     <cube-scroll ref="scroll">
       <template>
-        <label class="form-group item item-input">
+        <label class="form-group item item-input teach-tabs">
           <!-- <cube-select style="width: inherit" v-model="value" :options="options" @change="change"></cube-select> -->
-          <li class="teach-tab" v-for="(item, index) in options" :key="item.id" @click="changeTab(index)">
-              {{ item }}
-          </li>
+          <li
+            class="teach-tab"
+            v-for="(item, index) in options"
+            :key="item.index"
+            @click="changeTab(index)"
+          >{{ item }}</li>
         </label>
         <div>
           <div class="list" v-if="!flag">
             <label class="form-group item item-input">
-              <span>名称：</span>
+              <span>辅导名称：</span>
               <input type="text" class="isnull" v-model="teach.name">
             </label>
             <label class="form-group item">
-              <span>开始时间：</span>
+              <span>辅导截止时间：</span>
               <Date v-model="teach.startTime" type="time"></Date>
             </label>
             <label class="form-group item item-input">
@@ -94,6 +97,7 @@ export default {
       options: ["辅导", "讲座"],
       value: "",
       flag: false,
+      current: 1,
       teach: {
         id: "",
         name: "",
@@ -118,6 +122,7 @@ export default {
   },
   mounted() {
     //this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+    this.changeTab(0);
   },
   methods: {
     initData() {
@@ -141,24 +146,36 @@ export default {
       let url = "/tutoring/save";
       if (this.teach.id != 0) url = "/tutoring/update";
       this.$save(url, this.teach, msg => {
-        console.log(msg);
+        // console.log(msg);
       });
     },
     //类型选择
-    change(value, index) {
-      this.teach.type = index;
-    },
+    // change(value, index) {
+    //   this.teach.type = index;
+    // },
     changeTab(index) {
-        this.flag = index;
+      var teachTab = document.getElementsByClassName("teach-tab");
+      this.flag = index;
+      if (index != this.current) {
+        teachTab[index].classList.add("active");
+        teachTab[this.current].classList.remove("active");
+        this.current = index;
+      }
     }
   }
 };
 </script>
 <style>
+.teach-tabs.item-input {
+display: flex;
+height: 70px;
+padding: 0 2rem;
+justify-content: space-between;
+}
 .teach-tab {
-    margin-right: 10px;
+font-size: 19px;
 }
 .active {
-    
+color: #387ef5;
 }
 </style>
