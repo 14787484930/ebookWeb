@@ -146,13 +146,10 @@ export default {
       let url = "/tutoring/save";
       if (this.teach.id != 0) url = "/tutoring/update";
       this.$save(url, this.teach, msg => {
-        // console.log(msg);
+        console.log(msg);
       });
     },
     //类型选择
-    // change(value, index) {
-    //   this.teach.type = index;
-    // },
     changeTab(index) {
       var teachTab = document.getElementsByClassName("teach-tab");
       this.flag = index;
@@ -160,22 +157,23 @@ export default {
         teachTab[index].classList.add("active");
         teachTab[this.current].classList.remove("active");
         this.current = index;
+        this.teach.type = index;
       }
     }
   }
 };
 </script>
-<style>
+<style scoped>
 .teach-tabs.item-input {
-display: flex;
-height: 70px;
-padding: 0 2rem;
-justify-content: space-between;
+  display: flex;
+  height: 70px;
+  padding: 0 2rem;
+  justify-content: space-between;
 }
 .teach-tab {
-font-size: 19px;
+  font-size: 19px;
 }
 .active {
-color: #387ef5;
+  color: #387ef5;
 }
 </style>
