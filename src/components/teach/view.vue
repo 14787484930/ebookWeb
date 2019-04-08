@@ -10,7 +10,7 @@
           <ul class="list">
             <li class="item item-input ">
               <span>名称：</span>
-              <span>{{teach.name}}</span>>
+              <span>{{teach.name}}</span>
             </li>
             <li class="item item-input ">
               <span>{{ type?"开始时间：":"辅导截止时间：" }}</span>

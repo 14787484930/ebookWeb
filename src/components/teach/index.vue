@@ -98,7 +98,8 @@
                     columns:[
                         {title:"名称",key:'name'},
                         {title:"报酬",key:'price',format:(row)=>"￥"+ row.price},
-                        {title:"日期",key:'Time',format:(row)=>that.$toDate(row.startTime)+'--'+that.$toDate(row.endTime)},
+                        {title:"类型",key:'type',format:(row)=>row.type == 0 ? '辅导' : '讲座' },
+                        {title:"日期",key:'Time',format:(row)=>that.$toDate(row.startTime)},
                     ],
                 };
             },
