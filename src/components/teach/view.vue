@@ -36,6 +36,12 @@
               <span>{{ type?"报酬(元)：":"辅导价格：" }}</span>
               <span>{{teach.price}}</span>
             </li>
+            <li class="item item-input " v-if="isOrder">
+              <span><button>接单</button></span>
+            </li>
+            <li class="item item-input " v-if="power">
+              <span><button>评分</button></span>
+            </li>
             <li class="item item-input ">
               <span>描述：</span>
               <span>{{teach.des}}</span>
@@ -68,7 +74,9 @@
                     place: "A栋",
                     phone: "14787484930",
                     weiXin: "",
-                    des: "123"
+                    des: "123",
+                    isScore:'',
+                    orderUser:''
                 }
             };
         },
@@ -87,6 +95,21 @@
             },
             flagC() {
                 return this.flag
+            },
+            isOrder:function(){  /*添加人：zxl ，描述：判断是否显示接单按钮*/
+
+                if(!this.$store.getters.power && this.teach.orderUser == null){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            isOrderScore:function () { /*添加人：zxl ，描述：判断是否显示评价按钮*/
+                if(this.$store.getters.power && this.teach.orderUser == null && this.teach.isScore == 0){
+                    return true;
+                }else{
+                    return false;
+                }
             }
         },
         mounted() {
