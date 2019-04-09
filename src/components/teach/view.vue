@@ -39,7 +39,12 @@
             <li class="item item-input " v-if="isOrder">
               <span><button>接单</button></span>
             </li>
-            <li class="item item-input " v-if="power">
+            <li class="item item-input " v-if="isOrderSelf">
+              <span>接单人：</span>
+              <span><button>接单人</button></span>
+              <span><button>撤销</button></span>
+            </li>
+            <li class="item item-input " v-if="isOrderScore">
               <span><button>评分</button></span>
             </li>
             <li class="item item-input ">
@@ -104,8 +109,16 @@
                     return false;
                 }
             },
+            isOrderSelf:function(){  /*添加人：zxl ，描述：判断是否显示接单按钮*/
+
+                if(this.$store.getters.power && this.teach.orderUser != null){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
             isOrderScore:function () { /*添加人：zxl ，描述：判断是否显示评价按钮*/
-                if(this.$store.getters.power && this.teach.orderUser == null && this.teach.isScore == 0){
+                if(this.$store.getters.power && this.teach.orderUser != null && this.teach.isScore == 0){
                     return true;
                 }else{
                     return false;
