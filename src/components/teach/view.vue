@@ -36,13 +36,17 @@
               <span>{{ type?"报酬(元)：":"辅导价格：" }}</span>
               <span>{{teach.price}}</span>
             </li>
+            <li class="item item-input " v-if="this.$store.getters.power">
+              <span>接单码：</span>
+              <span>{{teach.checkCode}}</span>
+            </li>
             <li class="item item-input " v-if="isOrder">
               <span><button>接单</button></span>
             </li>
             <li class="item item-input " v-if="isOrderSelf">
               <span>接单人：</span>
               <span><button>接单人</button></span>
-              <span><button>撤销</button></span>
+              <span v-if="isRevoke"><button>撤销</button></span>
             </li>
             <li class="item item-input " v-if="isOrderScore">
               <span><button>评分</button></span>
@@ -81,7 +85,8 @@
                     weiXin: "",
                     des: "123",
                     isScore:'',
-                    orderUser:''
+                    orderUser:'',
+                    checkCode:''
                 }
             };
         },
@@ -109,9 +114,16 @@
                     return false;
                 }
             },
-            isOrderSelf:function(){  /*添加人：zxl ，描述：判断是否显示接单按钮*/
+            isOrderSelf:function(){  /*添加人：zxl ，描述：判断是否显示接单人按钮*/
 
                 if(this.$store.getters.power && this.teach.orderUser != null){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            isRevoke:function(){ /*添加人：zxl ，描述：判断是否显示撤销按钮*/
+                if(this.$store.getters.power && this.teach.orderUser != null && this.teach.isScore == 0){
                     return true;
                 }else{
                     return false;
