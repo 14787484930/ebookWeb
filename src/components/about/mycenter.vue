@@ -6,7 +6,7 @@
 
                 <div class="item item-avatar">
                     <img src="../../assets/images/timg.jpg">
-                    <h2 style="margin-top: 10%">昵称：{{ userinfo.nickName }}</h2>
+                    <h2 style="margin-top:11px;">昵称：{{ userinfo.nickName }}</h2>
                     <p></p>
                 </div>
 
