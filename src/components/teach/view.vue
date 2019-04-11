@@ -41,16 +41,14 @@
               <span>{{teach.checkCode}}</span>
             </li>
             <li class="item item-input " v-if="isOrder">
-              <span><button>接单</button></span>
+                <order-taking :btnNumber = 1 :id ="teach.id"></order-taking>
             </li>
-            <li class="item item-input " v-if="isOrderSelf">
-              <span>接单人：</span>
-              <span><button>接单人</button></span>
-              <span v-if="isRevoke"><button>撤销</button></span>
-            </li>
-            <li class="item item-input " v-if="isOrderScore">
-              <span><button>评分</button></span>
-            </li>
+              <li class="item item-input " v-if="isOrderSelf">
+                  <span>接单人：</span>
+                  <order-taking :btnNumber = 3 :orderUserId="teach.orderUser"></order-taking>
+                  <order-taking :btnNumber = 2 :id = "teach.id"></order-taking>
+                  <order-taking v-if="isOrderScore" :btnNumber = 4 :id = "teach.id" :orderUserId="teach.orderUser"></order-taking>
+              </li>
             <li class="item item-input ">
               <span>描述：</span>
               <span>{{teach.des}}</span>
@@ -63,11 +61,15 @@
 </template>
 
 <script>
+    import orderTaking from '../common/orderTaking'
     import $ from "jquery";
     import { parse } from 'path';
     let _that;
 
     export default {
+        components:{
+            orderTaking,
+        },
         //name: "view",
         data() {
             return {
