@@ -39,10 +39,10 @@ export default {
             valid: undefined,
             model: {
                 schoolNo: "西南林业大学",
-                studNo: "",
-                studPassword: "",
+                studNo: "20131157060",
+                studPassword: "916420",
                 validCode: "",
-                email:"",
+                email:"123@qq.com",
             },
             fields: [
                 {
@@ -62,8 +62,10 @@ export default {
                     label: "学号",
                     props: {
                         placeholder: "请输入学号"
+
                     },
                     rules: {
+                        pattern:/^[1-9]\d*$/,
                         required: true
                     }
                 },
@@ -91,6 +93,7 @@ export default {
                         placeholder: "请输入验证码",
                     },
                     rules: {
+                        pattern:/^[1-9]\d*$/,
                         required: true,
                     },
                 },
@@ -102,6 +105,7 @@ export default {
                         placeholder: "请输入邮箱地址",
                     },
                     rules: {
+                        pattern:/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
                         required: true,
                     },
                 },
@@ -153,7 +157,7 @@ export default {
                     this.freshCode();
                 }else{
                     this.showAlert('登陆验证', '验证成功');
-                    this.$router.push('/book')
+                    this.$router.push('/book?flag=1')
                 }
             });
             e.preventDefault();
