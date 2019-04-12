@@ -96,7 +96,7 @@
 <script>
     export default {
         props: {
-            btnNumber: 0,              //{1:接单，2：撤销接单，3：查询接单人信息, 4：评分}
+            btnNumber: Number,              //{1:接单，2：撤销接单，3：查询接单人信息, 4：评分}
             id: String,                //产品id
             orderUserId: String,       //接单人id
         },
@@ -163,11 +163,10 @@
                 this.panelShow = false;
                 let props = {id: this.id, checkCode: this.orderQuery.text};
                 this.$post('/tutoring/getOrder', props, (msg) => {
-                    console.log(msg);
                     if (Number(msg.data.code) === 200) {
-                        alert("失败")
+                        this.showAlert('接单', msg.data.msgs.msg);
                     } else {
-                        this.showAlert('举报成功', '感谢您的举报，我们会尽快处理');
+                        this.showAlert('接单', msg.data.msgs.msg);
                     }
                 });
             },
@@ -185,7 +184,6 @@
                 this.panelShow = false;
                 let props = {id: this.id};
                 this.$post('/tutoring/delOrder', props, (msg) => {
-                    console.log(msg);
                     if (Number(msg.data.code) === 200) {
                         this.showAlert("撤销接单", msg.data.msgs.msg);
                     } else {
@@ -201,7 +199,6 @@
 
                 this.panelShow = false;
                 this.$post('/tutoring/delOrder', props, (msg) => {
-                    console.log(msg);
                     if (Number(msg.data.code) === 200) {
                         this.showAlert("评分", msg.data.msgs.msg);
                     } else {
