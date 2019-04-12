@@ -50,7 +50,10 @@
             <div v-if=panelShow class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <article class="confirm-msg">
-                        <h4 v-for="(item, index) in orderUser" v-if="item"><span>{{index}}:</span>{{item}}</h4>
+                        <h4><span>昵称:</span>{{orderUser.nickname}}</h4>
+                        <h4><span>评分:</span>{{orderUser.score}}</h4>
+                        <h4><span>微信:</span>{{orderUser.weiXin}}</h4>
+                        <h4><span>邮箱:</span>{{orderUser.email}}</h4>
                     </article>
                     <footer class="dialog-btn-wrap">
                         <button class="cancel" @click="close">取消</button>
