@@ -32,7 +32,7 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input type="text" v-model="other.weiXin">
+                        <input type="text" class="isnull" v-model="other.weiXin">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
@@ -106,7 +106,15 @@
                     url='/other/update';
                 }
                 this.$save(url,this.other,this.$refs.refFiles.files,(msg)=>{
-                    console.log(msg);
+                    this.$createDialog({
+                        type: 'alert',
+                        title: '信息',
+                        content: '保存成功 ',
+                        icon: 'cubeic-right',
+                        onConfirm:()=>{
+                            this.$router.push({path: '/other'})
+                        }
+                    }).show()
                 })
             },
             hasInvoice(){

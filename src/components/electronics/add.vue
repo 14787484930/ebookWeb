@@ -40,7 +40,7 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input type="text" v-model="electronics.weiXin">
+                        <input type="text" class="isnull" v-model="electronics.weiXin">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
@@ -119,7 +119,15 @@
                 }
 
                 this.$save(url,this.electronics,this.$refs.refFiles.files,(msg)=>{
-                    console.log(msg);
+                    this.$createDialog({
+                        type: 'alert',
+                        title: '信息',
+                        content: '保存成功 ',
+                        icon: 'cubeic-right',
+                        onConfirm:()=>{
+                            this.$router.push({path: '/electronics'})
+                        }
+                    }).show()
                 })
             },
             hasInvoice(){

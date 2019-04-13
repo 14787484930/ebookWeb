@@ -43,7 +43,9 @@ const $myHttp = {
                 form.append('files', item);
             })
             $.each(params, (key, item) => {
-                form.append(key, item);
+                if($config.saveFilter.indexOf(key)==-1) {
+                    form.append(key, item);
+                }
             })
             axios.post(url, form, config)
                 .then(function (data) {

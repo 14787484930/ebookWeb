@@ -13,13 +13,10 @@
     "cube-ui": "~1.12.1",
     "hammerjs": "^2.0.8",
     "lrz": "^4.9.40",
-    "quill": "^1.3.6",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
-    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.2",
-    "vuex": "^3.1.0",
-    "weui": "^1.1.3"
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",

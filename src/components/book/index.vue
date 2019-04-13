@@ -13,7 +13,7 @@
                                 筛选
                 </button>
         </div>
-        <div title="搜索"  v-show="isShow" class="weui-cells"> 
+        <div title="搜索"  v-show="isShow" class="weui-cells">
             <ul>
                 <li class="cube-index-list-item">
                     <div class="weui-cell weui-cell_access"   @click="$picker.show()">
@@ -67,7 +67,7 @@ data () {
      load:0,
      queryList:{
        bookName:'',
-       bookType:'1',
+       bookType:1,
        startPrice:'',
        endPrice:'',
        startTime:'',
@@ -92,9 +92,7 @@ data () {
  methods: {
      search(){
         this.load++;
-        console.log(this.load);
         let query =this.queryList;
-        console.log(query);
         this.isShow =false;//搜索下拉隐藏
         this.initGrid();
      },

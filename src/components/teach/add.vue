@@ -36,7 +36,7 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input type="text" v-model="teach.weiXin">
+                        <input type="text" class="isnull" v-model="teach.weiXin">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
@@ -103,7 +103,15 @@
                 if (this.teach.id != 0)
                     url = '/tutoring/update';
                 this.$save(url, this.teach, (msg) => {
-                    console.log(msg);
+                    this.$createDialog({
+                        type: 'alert',
+                        title: '信息',
+                        content: '保存成功 ',
+                        icon: 'cubeic-right',
+                        onConfirm:()=>{
+                            this.$router.push({path: '/teach'})
+                        }
+                    }).show()
                 })
             },
             //类型选择

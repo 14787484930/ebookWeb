@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import home from '../../components/main/home'
+import  main from  '../../components/main/main'
 import  book from '../../components/book/index'
 import electronics from '../../components/electronics/index'
 import electronicsAdd from '../../components/electronics/add'
@@ -21,13 +22,14 @@ import version from '../../components/about/version'
 import verify from '../../components/common/verify'
 
 const routes = new VueRouter({
+    mode: 'history',
     linkActiveClass: 'active',
     routes: [
         // 动态路径参数 以冒号开头
 
         { path: '/', component: home,
             children: [
-                {path: '/', component: book},
+                {path: '/', component: main},
                 {path: '/book', component: book},
                 {path: '/bookAdd', component: bookAdd},
                 {path:'/bookView',component:bookView},
