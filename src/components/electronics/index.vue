@@ -3,23 +3,55 @@
         <div id="head">
             <div class="bar bar-header item-input-inset">
                 <label class="item-input-wrapper">
-                    <i class="icon ion-ios-search placeholder-icon"></i>
-                    <input type="search" placeholder="搜索" v-model="queryList.electronicsName" @keypress="searchSub">
+                    <input type="search" placeholder="搜索" v-model="queryList.electronicsName" @change="searchSub">
+                    <i class="icon ion-ios-search placeholder-icon" @click="searchSub"></i>
                 </label>
                 <router-link v-if="power" :to="{path:'/electronicsAdd',query:{id:0}}" class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
                 </router-link>
             </div>
             <div style="text-align: center">
-                <button  @click="$picker.show()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                    电子类型
+                <button  @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                    筛选
                 </button>
-                <button  @click="$picker.showDate()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                    购买日期
-                </button>
-                <button  @click="$picker.showDialog()" class="button  button-light icon-right  ion-android-arrow-dropdown" >
-                    价格(元)
-                </button>
+            </div>
+            <div title="搜索"  v-show="isShow" class="weui-cells">
+                <ul>
+                    <li class="cube-index-list-item">
+                        <div class="weui-cell weui-cell_access"  @click="$picker.show()">
+                            <div class="weui-cell__bd">
+                                电子类型:
+                                <span class="book-name">{{typeName}}</span>
+                            </div>
+                            <div class="weui-cell__ft" >
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cube-index-list-item">
+                        <div class="weui-cell weui-cell_access"  >
+                            <div class="weui-cell__bd">
+                                日期:
+                            </div>
+                            <input type="text"  v-model="queryList.startTime" @click="$picker.showDate()"  class="time-input" placeholder="请选择开始日期" >
+                            <span class="line-span"></span>
+                            <input type="text"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
+                        </div>
+                    </li>
+                    <li class="cube-index-list-item">
+                        <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
+                            <div class="weui-cell__bd">
+                                价格:
+                                <span class="book-name">￥{{queryList.startPrice}}至￥{{queryList.endPrice}}</span>
+                            </div>
+                            <div class="weui-cell__ft"  >
+                            </div>
+                        </div>
+                    </li>
+                    <li class="cube-index-list-item">
+                        <cube-button :light="true" @click="searchClear">重置</cube-button>
+                        <cube-button :light="true" @click="searchSub">搜索</cube-button>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -29,6 +61,7 @@
 
 <script>
     import $config from "../../webserver/serve/config";
+    let  that;
     export default {
         name: 'Electronics',
         data() {
@@ -40,7 +73,13 @@
                 queryList: {
                     electronicsName: '',
                     electronicsType: '1',
+                    startTime:'',
+                    endTime:'',
+                    startPrice:'',
+                    endPrice:'',
                 },
+                isShow:false,
+                typeName:''
             }
         },
         computed:{
@@ -49,6 +88,7 @@
             }
         },
         created() {
+           that=this;
             this.initType();
             this.initGrid();
         },
@@ -79,13 +119,40 @@
             update(row){
                 this.$router.push({path: '/electronicsAdd', query: {id: row.id}})
             },
-
+            endTime() {
+                if (!this.datePicker) {
+                    this.datePicker = this.$createDatePicker({
+                        title: 'Date Picker',
+                        min: new Date(1980, 1, 1),
+                        max: new Date(new Date().getFullYear(), 12, 12),
+                        value: new Date(),
+                        onSelect: this.selectHandle,
+                    })
+                }
+                this.datePicker.show()
+            },
+            selectHandle(val, index,text) {
+                that.queryList.endTime=index.join('-');
+            },
             initType() {
-                this.$picker.electronicType();
-                this.$picker.datePicker();
-                this.$picker.dialogPicker()
+                this.$picker.electronicType((val, index,text)=>{
+                    that.queryList.electronicsType=val['0'];
+                    that.typeName=text['0'];
+                });
+                this.$picker.datePicker((val, index,text)=>{
+                    that.queryList.bookType=val['0'];
+                    that.bookTypeName=text['0'];
+                });
+                this.$picker.datePicker((val, index,text)=>{
+                    that.queryList.startTime=index.join('-');
+                });
+                this.$picker.dialogPicker((val, index)=>{
+                    that.queryList.startPrice=val;
+                    that.queryList.endPrice=index;
+                })
             },
             searchSub() {
+                this.isShow =false;//搜索下拉隐藏
                 let query = {};
                 query['electronicsName'] = this.queryList.electronicsName;
                 query['pageSize'] = Number($config.pageSize);
@@ -94,6 +161,20 @@
                     this.tables = msg.data.page.pageInfo.list;
                 });
             },
+            searchClear(){
+                that.queryList={
+                    electronicsName: '',
+                        electronicsType: '1',
+                        startTime:'',
+                        endTime:'',
+                        startPrice:'',
+                        endPrice:'',
+                },
+                that.typeName=''
+            },
+            intelSearch(){
+                this.isShow = !this.isShow
+            }
         }
     }
 </script>

@@ -40,6 +40,20 @@ const picker={
 
         })
     },
+    teachTypes:(back)=>{
+            let list=[{
+                'text':'辅导',
+                value:0
+            },{
+                'text':'讲座',
+                    value:1
+            }];
+            picker.state.picker= Picker.$create({
+                title: "类型",
+                data:[list] ,
+                onSelect:(val, index,text)=>back(val, index,text),
+            });
+    },
     datePicker(back){
         picker.state.datePicker = DatePicker.$create({
             title: '请选择日期',

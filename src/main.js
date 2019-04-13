@@ -20,6 +20,8 @@ const gridView={
     }
 }
 Vue.use(gridView)
+import iView from 'iview';
+Vue.use(iView);
 Vue.config.productionTip = false
 new Vue({
     router,

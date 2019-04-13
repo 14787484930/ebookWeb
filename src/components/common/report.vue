@@ -2,24 +2,23 @@
 <template>
     <div>
         <button @click="show" class="report-btn">举报</button>
-        <div v-if=panelShow>
-            <div class="module-dialog" style="display: block; opacity: 1">
-                <div class="dialog-panel">
-                    <header class="dialog-tit">
-                        <h4>举报</h4>
-                        <span @click="close"></span>
-                    </header>
 
-                    <article class="confirm-msg">
-                        <cube-radio-group v-model="selected" :options="options" position="left" :hollow-style="true"/>
-                        <cube-textarea v-model="value" v-if=selectOther></cube-textarea>
-                    </article>
+        <div v-if=panelShow class="module-dialog" style="display: block">
+            <div class="dialog-panel">
+                <header class="dialog-tit">
+                    <h4>举报</h4>
+                    <span @click="close" class="cubeic-close"></span>
+                </header>
 
-                    <footer class="dialog-btn-wrap">
-                        <button class="cancel" @click="close">取消</button>
-                        <button class="confirm" @click="reportMsg">确定</button>
-                    </footer>
-                </div>
+                <article class="confirm-msg">
+                    <cube-radio-group v-model="selected" :options="options" position="left" :hollow-style="true"/>
+                    <cube-textarea v-model="value" v-if=selectOther></cube-textarea>
+                </article>
+
+                <footer class="dialog-btn-wrap">
+                    <button class="cancel" @click="close">取消</button>
+                    <button class="confirm" @click="reportMsg">确定</button>
+                </footer>
             </div>
         </div>
     </div>
@@ -89,7 +88,7 @@
                     if (Number(msg.data.code) === 200) {
                         alert("失败")
                     } else {
-                        this.showAlert('举报成功','感谢您的举报，我们会尽快处理');
+                        this.showAlert('举报成功', '感谢您的举报，我们会尽快处理');
                     }
                 });
 
@@ -109,12 +108,13 @@
         float: right;
         background-color: #5bc0de;
         color: #0f0f0f;
-        display: inline-block;
         font-size: 15px;
         border-radius: 5px;
-        padding: 10px 20px;
-        margin: 10px;
+        padding: 5px 10px;
+        margin: 15px;
+        border: 0;
     }
+
     .module-dialog {
         position: fixed;
         top: 0;
@@ -156,16 +156,19 @@
         border-radius: 8px 8px 0 0;
         border-bottom: 1px solid #d4d4d4;
         box-shadow: rgba(0, 0, 0, .06) 0 1px 7px;
-        background: linear-gradient(#fbfbfb, #ececec);
         line-height: 40px;
     }
 
     .module-dialog .dialog-tit h4 {
         float: left;
-        padding-left: 15px;
-        font-size: 18px;
-        font-weight: 400;
+        padding-left: 5px;
+        font-size: 19px;
+        font-weight: 600;
         color: #333;
+    }
+
+    .module-dialog .dialog-tit span {
+        float: right;
     }
 
     .module-dialog .confirm-msg {
@@ -180,20 +183,22 @@
     .dialog-btn-wrap {
         overflow: auto;
     }
+
     .dialog-btn-wrap button {
         color: #0f0f0f;
         font-size: 15px;
-        padding: 10px 20px;
+        padding: 5px 20px;
         margin: 10px;
-        border-radius: 15px;
-        display: inline-block;
+        border-radius: 5px;
+        border: 0;
     }
-    .dialog-btn-wrap .cancel{
+
+    .dialog-btn-wrap .cancel {
         background-color: #6c6c6c;
         float: left;
     }
 
-    .dialog-btn-wrap .confirm{
+    .dialog-btn-wrap .confirm {
         background-color: #5bc0de;
         float: right;
     }

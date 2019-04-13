@@ -1,16 +1,20 @@
 <template>
+    <div  class="aboutWrap">
+       <div class="logoWrap">
+        <div class="logo"><img src="../../assets/logo.png"></div>
+        <h1 class="logoTitle">{{version.title}}</h1>
+       </div> 
 
-    <div align="center" style="margin-top: 50%">
-        <div style="margin-top: 30%" class="bar bar-header">
-            <div class="h1 title">{{version.title}}</div>
+        <div class="aboutTxt">
+            <p>{{version.des}}</p>
+            <p class="telWrap">
+                <small>服务电话：14787484930</small><br>
+                <small>服务QQ：690345407</small>
+            </p>
         </div>
-            <div class="card">
-                <div class="item item-text-wrap">
-                    {{version.des}}
-                </div>
-            </div>
-
-
+        <div class="areaWrap">
+            <img src="../../assets/images/areaImg.png" alt="">
+        </div>
     </div>
 </template>
 
@@ -40,5 +44,15 @@
 </script>
 
 <style scoped>
-
+   .logoTitle,.areaWrap,.logo>img{margin:10px auto;}
+   .logoTitle{text-align: center;font-size:22px;position:relative;}
+   .aboutWrap{margin:15% 30px;}
+   .logo{}
+   .logo>img{display:block;width:64px;height:64px;}
+   .logoWrap{margin-bottom:30px;}
+   .aboutTxt{text-align: justify;font-size:14px;border-bottom: 1px dashed #ccc;border-top: 1px dashed #ccc;padding: 10px 0;}
+   .aboutTxt>p:nth-of-type(1){text-indent: 2em;}
+   .areaWrap{}
+   .areaWrap>img{display:block;max-width:100%;}
+   .telWrap{margin-bottom:0;margin-top:10px;}
 </style>
