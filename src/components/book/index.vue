@@ -68,11 +68,7 @@ data () {
     load:0,
     queryList:{
        bookName:'',
-<<<<<<< HEAD
-       bookType:1,
-=======
        bookType:'',
->>>>>>> e5507c079daff5244d9bc47cd16eaed9fe715a4d
        startPrice:'',
        endPrice:'',
        startTime:'',
