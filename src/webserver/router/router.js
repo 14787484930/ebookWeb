@@ -20,6 +20,7 @@ import advice from '../../components/about/advice'
 import version from '../../components/about/version'
 // import test from '../../components/about/test'
 import verify from '../../components/common/verify'
+import orderTaking from '../../components/common/orderTaking'
 
 const routes = new VueRouter({
     mode: 'history',
@@ -47,6 +48,7 @@ const routes = new VueRouter({
                 // {path: '/test', component: test},
                 {path: '/version', component: version},
                 {path: '/verify', component: verify},
+                {path: '/orderTaking', component: orderTaking},
             ],
         }
     ]
