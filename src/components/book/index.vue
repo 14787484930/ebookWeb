@@ -6,7 +6,7 @@
                 <input type="search" placeholder="搜索" v-model="queryList.bookName"  @change="search">
                 <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
             </label>
-            <router-link :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
+            <router-link v-if="power"  :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
         </div>
         <div style="text-align: center">
                 <button  @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown" >
