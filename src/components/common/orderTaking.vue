@@ -108,7 +108,7 @@
                     valid: undefined,
                     rules: {
                         required: true,
-                        pattern: /^[A-Za-z0-9]$/,
+                        pattern: /^[A-Za-z0-9]{1,6}$/,
                     },
                     messages: {
                         pattern: '验证码格式有误',

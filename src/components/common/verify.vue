@@ -153,7 +153,7 @@ export default {
 
             this.$post('user/authentication', query, (msg) => {
                 if(Number(msg.data.code) === 200 ){
-                    this.showAlert('登陆验证', msg.data.code.page);
+                    this.showAlert('登陆验证', msg.data.page.errors);
                     this.freshCode();
                 }else{
                     this.showAlert('登陆验证', '验证成功');
