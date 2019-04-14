@@ -72,6 +72,7 @@
         },
         watch: {
             load() {
+                this.tables=[];
                 this.isLastPage = false;
                 this.initTables();
             }
