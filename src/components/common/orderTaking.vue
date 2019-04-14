@@ -108,7 +108,7 @@
                     valid: undefined,
                     rules: {
                         required: true,
-                        pattern: /^[A-Za-z0-9]{4}$/,
+                        pattern: /^[A-Za-z0-9]$/,
                     },
                     messages: {
                         pattern: '验证码格式有误',
@@ -164,7 +164,11 @@
                 let props = {id: this.id, checkCode: this.orderQuery.text};
                 this.$post('/tutoring/getOrder', props, (msg) => {
                     if (Number(msg.data.code) === 200) {
-                        this.showAlert('接单', msg.data.msgs.msg);
+                        if(Number(msg.data.page.code) === 101) {
+                            this.$router.push('/verify')
+                        }else{
+                            this.showAlert('接单', msg.data.page.errors);
+                        }
                     } else {
                         this.showAlert('接单', msg.data.msgs.msg);
                     }

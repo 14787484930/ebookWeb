@@ -39,8 +39,8 @@ export default {
             valid: undefined,
             model: {
                 schoolNo: "西南林业大学",
-                studNo: "20131157060",
-                studPassword: "916420",
+                studNo: "",
+                studPassword: "",
                 validCode: "",
                 email:"123@qq.com",
             },
@@ -153,11 +153,12 @@ export default {
 
             this.$post('user/authentication', query, (msg) => {
                 if(Number(msg.data.code) === 200 ){
-                    this.showAlert('登陆验证', '验证失败');
+                    this.showAlert('登陆验证', msg.data.code.page);
                     this.freshCode();
                 }else{
                     this.showAlert('登陆验证', '验证成功');
-                    this.$router.push('/book?flag=1')
+                    this.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+                    //this.$router.push('/book')
                 }
             });
             e.preventDefault();
