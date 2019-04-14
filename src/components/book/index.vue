@@ -81,6 +81,7 @@ data () {
  created(){
    that=this;
    this.queryList.flag=this.$toInt(this.$route.query.flag);
+     this.$store.commit('setFlag',this.$toInt(this.$route.query.flag));
    this.initType();
    this.initGrid();
  },

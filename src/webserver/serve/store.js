@@ -4,6 +4,7 @@ import  format from './format'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
+        flag:0,
         user: {id:''}
     },
     getters:{
@@ -16,12 +17,19 @@ const store = new Vuex.Store({
             }
 
         },
+        getFlag(state){
+          return  state.flag;
+        },
+
         getUser(state) {
             return state.user;
         }
 
     },
     mutations: {
+        setFlag(state,val){
+            state.flag=val;
+        },
         setUser (state,info) {
             state.user=info;
         }

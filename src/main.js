@@ -10,6 +10,8 @@ import './assets/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
 import  './webserver/serve/serve'
 import  './webserver/serve/picker'
+import weui from 'weui'
+Vue.prototype.$weui = weui
 import store from './webserver/serve/store'//引入store
 import  {tap,swipeleft,swiperight,press,swipedown,pandown,swipeup,panup}  from './webserver/serve/touch'
 //全局注册gridView

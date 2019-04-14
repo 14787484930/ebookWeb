@@ -1,7 +1,8 @@
 <template>
     <div>
     <div class="tabs tabs-icon-top fixed-bottom">
-        <router-link class="tab-item"     v-for="(item) in config" :key="item.url" tag="li"  :to="item.url">
+        <router-link class="tab-item"     v-for="(item) in config" :key="item.url" tag="li"   :to="{path:item.url,query: {flag: flag}}"
+                     >
             <i v-if="item.list.indexOf($route.path)!=-1"  :class="['icon',item.iClass]" style="color:#379be9"></i>
             <i v-else  :class="['icon',item.iOutClass]"  ></i>
             {{item.text}}
@@ -28,6 +29,11 @@
                 ]
             }
         },
+        computed:{
+            flag(){
+                return this.$store.getters.getFlag;
+            }
+        }
     }
 </script>
 
