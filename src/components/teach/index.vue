@@ -6,7 +6,7 @@
                     <input type="search" placeholder="搜索" v-model="queryList.teachName" @change="search">
                     <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
                 </label>
-                <router-link v-if="power" :to="{path:'/teachAdd', query:{id:0}}" class="button button-small button-positive">
+                <router-link v-if="power_flag" :to="{path:'/teachAdd', query:{id:0}}" class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
                 </router-link>
             </div>
@@ -81,6 +81,9 @@
         computed:{
             power(){
                 return this.$store.getters.power;
+            },
+            power_flag(){
+                return this.$store.getters.power_flag;
             }
         },
         created() {

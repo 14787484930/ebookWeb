@@ -17,6 +17,16 @@ const store = new Vuex.Store({
             }
 
         },
+        /*zxl 2019-04-15 新增权限的判断*/
+        power_flag(state){
+            if(state.user==undefined||state.user==null || state.user.flag==0){
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        },
         getFlag(state){
           return  state.flag;
         },
