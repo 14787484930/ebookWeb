@@ -5,7 +5,6 @@ import VueAxios from 'vue-axios'
 import  $ from 'jquery'
 import  $config from './config'
 import  $format from  './format'
-import  dialog from '../../components/common/dialog'
 import  $valid from './valid'
 axios.defaults.baseURL = $config.baseUrl;
 axios.defaults.timeout = 30000
@@ -19,17 +18,14 @@ const config = {
 const $myHttp = {
     post(url,params={},callback) {
         let form = new FormData();
-        dialog.loading.open();
         $.each(params, (key, item) => {
             form.append(key, item);
         })
         axios.post(url, form, config)
             .then(function (data) {
-                dialog.loading.close();
                 callback(data);
             })
             .catch(function (error) {
-                dialog.loading.close();
                 return {msg: error};
             });
     },
@@ -38,7 +34,6 @@ const $myHttp = {
             if(!$valid.submit())  return;//验证
 
             let form = new FormData();
-            dialog.loading.open();
             $.each(files, (key, item) => {
                 form.append('files', item);
             })
@@ -49,11 +44,9 @@ const $myHttp = {
             })
             axios.post(url, form, config)
                 .then(function (data) {
-                    dialog.loading.close();
                     callback(data);
                 })
                 .catch(function (error) {
-                    dialog.loading.close();
                     return {msg: error};
                 });
     },
