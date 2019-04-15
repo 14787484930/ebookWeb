@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="scroll-list-wrap" he>
+        <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <cube-slide ref="slide" :data="urls" >
                     <cube-slide-item v-for="(item, index) in urls" :key="index">
@@ -100,7 +100,11 @@
             console.log(123);
            // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
-
+        computed:{
+            power(){
+                return this.$store.getters.power;
+            }
+        },
         methods: {
             initData(){
                 var _that=this;
