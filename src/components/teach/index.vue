@@ -32,9 +32,9 @@
                             <div class="weui-cell__bd">
                                 日期:
                             </div>
-                            <input type="text"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
+                            <input type="text" readonly="readonly"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
                             <span class="line-span"></span>
-                            <input type="text"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
+                            <input type="text" readonly="readonly"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
                         </div>
                     </li>
                     <li class="cube-index-list-item">
