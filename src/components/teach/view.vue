@@ -36,7 +36,7 @@
               <span>{{ type?"报酬(元)：":"辅导价格：" }}</span>
               <span>{{teach.price}}</span>
             </li>
-            <li class="item item-input " v-if="this.$store.getters.power">
+            <li class="item item-input " v-if="this.$store.getters.power_flag">
               <span>接单码：</span>
               <span>{{teach.checkCode}}</span>
             </li>
@@ -110,7 +110,7 @@
             },
             isOrder:function(){  /*添加人：zxl ，描述：判断是否显示接单按钮*/
 
-                if(!this.$store.getters.power && this.teach.orderUser == null){
+                if(!this.$store.getters.power_flag && this.teach.orderUser == null){
                     return true;
                 }else{
                     return false;
@@ -118,7 +118,7 @@
             },
             isOrderSelf:function(){  /*添加人：zxl ，描述：判断是否显示接单人按钮*/
 
-                if(this.$store.getters.power && this.teach.orderUser != null){
+                if(this.$store.getters.power_flag && this.teach.orderUser != null){
                     return true;
                 }else{
                     return false;

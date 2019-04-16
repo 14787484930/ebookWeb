@@ -12,7 +12,7 @@
                         <transition-group name="swipe" tag="ul">
               <span v-for="(item,index) in tables" :key="item.id">
                 <cube-swipe-item
-                        v-if="power"
+                        v-if="power_flag"
                         ref="reftables"
                         v-bind:btns="btns"
                         :index="index"
@@ -66,8 +66,8 @@
             }
         },
         computed: {
-            power() {
-                return this.$store.getters.power;
+            power_flag() {
+                return this.$store.getters.power_flag;
             }
         },
         watch: {
