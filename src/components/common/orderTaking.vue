@@ -46,7 +46,8 @@
         </section>
 
         <section v-if="btnNumber===3">
-            <button v-if="orderUser.btnFlag" @click="getOrderPersonMsg" class="report-btn">{{orderUser.nickname}}</button>
+            <button v-if="orderUser.btnFlag" @click="getOrderPersonMsg" class="report-btn">{{orderUser.nickname}}
+            </button>
             <div v-if=panelShow class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <article class="confirm-msg">
@@ -149,7 +150,7 @@
         watch: {
             'checked': function () {
                 this.options.disabled = this.checked;
-                if(this.checked === false){
+                if (this.checked === false) {
                     this.value = "";
                 }
             }
@@ -168,23 +169,23 @@
                 let props = {id: this.id, checkCode: this.orderQuery.text};
                 this.$post('/tutoring/getOrder', props, (msg) => {
                     switch (Number(msg.data.code)) {
-                        case 200:{
+                        case 200: {
                             //失败
-                            if(Number(msg.data.page.code) === 101)
-                                //没有学生认证，跳转到学生认证
+                            if (Number(msg.data.page.code) === 101)
+                            //没有学生认证，跳转到学生认证
                                 this.$router.push('/verify');
                             else
-                                //其他原因
+                            //其他原因
                                 this.showAlert('接单', msg.data.page.msg);
                             break;
                         }
-                        case 100:{
+                        case 100: {
                             //成功
                             this.showAlert('接单', msg.data.page.msg);
                             this.orderQuery.btnFlag = false; //隐藏接单按钮
                             break
                         }
-                        default :{
+                        default : {
                             this.showAlert('接单', msg.data.page.msg);
                             break
                         }
@@ -196,10 +197,11 @@
                     if (Number(msg.data.code) === 200) {
                         this.showAlert('获取信息失败', '******');
                     } else {
-                        this.orderQuery.valid =msg.data.page.info.valid;
-                        this.orderQuery.text =msg.data.page.info.text;
-                        this.orderQuery.rules =msg.data.page.info.rules;
-                        this.orderQuery.messages =msg.data.page.info.messages;
+                        this.orderUser.nickname = msg.data.page.info.nickname;
+                        this.orderUser.weiXin = msg.data.page.info.weiXin;
+                        this.orderUser.studNo = msg.data.page.info.studNo;
+                        this.orderUser.score = msg.data.page.info.score;
+                        this.orderUser.email = msg.data.page.info.email;
                     }
                 });
                 this.panelShow = true;
@@ -208,22 +210,25 @@
                 this.panelShow = false;
                 let props = {id: this.id};
                 this.$post('/tutoring/delOrder', props, (msg) => {
-                    if (Number(msg.data.code) === 200) {
-                        //失败
-                        this.showAlert("撤销接单", msg.data.msgs.msg);
-                    } else {
-                        //成功
-                        this.showAlert("撤销接单", msg.data.msgs.msg);
-                        //隐藏接单人和撤销接单按钮
-                        this.giveMark.btnFlag = false;
-                        this.orderCancel.btnFlag = false;
-                        this.giveMark.btnFlag = false;
+                    switch (Number(msg.data.code)) {
+                        case 100: {
+                            //成功
+                            this.showAlert("撤销接单", msg.data.msgs.msg);
+                            //隐藏接单人和撤销接单按钮
+                            break;
+                        }
+                        default : {
+                            this.showAlert("撤销接单", msg.data.msgs.msg);
+                        }
+
                     }
                 });
             },
             reportUser() {//举报接单人
-                let props = {orderUser: this.orderUserId, id: this.id, score: this.giveMark.value,
-                    flag: Number(this.checked), des: this.value};
+                let props = {
+                    orderUser: this.orderUserId, id: this.id, score: this.giveMark.value,
+                    flag: Number(this.checked), des: this.value
+                };
                 if (props.flag === 1 && props.des === "")
                     return;
 
