@@ -196,7 +196,10 @@
                     if (Number(msg.data.code) === 200) {
                         this.showAlert('获取信息失败', '******');
                     } else {
-                        this.orderUser = msg.data.page.info;
+                        this.orderQuery.valid =msg.data.page.info.valid;
+                        this.orderQuery.text =msg.data.page.info.text;
+                        this.orderQuery.rules =msg.data.page.info.rules;
+                        this.orderQuery.messages =msg.data.page.info.messages;
                     }
                 });
                 this.panelShow = true;
