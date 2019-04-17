@@ -2,7 +2,7 @@
 <template>
     <div>
         <section v-if="btnNumber===1">
-            <button @click="show" class="report-btn">{{orderQuery.orderQueryName}}</button>
+            <button v-if="orderQuery.btnFlag" @click="show" class="report-btn">{{orderQuery.orderQueryName}}</button>
             <div v-if=panelShow class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <header class="dialog-tit">
@@ -27,7 +27,7 @@
         </section>
 
         <section v-if="btnNumber===2">
-            <button @click="show" class="report-btn">{{orderCancel.orderCancelName}}</button>
+            <button v-if="orderCancel.btnFlag" @click="show" class="report-btn">{{orderCancel.orderCancelName}}</button>
             <div v-if=panelShow class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <header class="dialog-tit">
@@ -46,7 +46,7 @@
         </section>
 
         <section v-if="btnNumber===3">
-            <button @click="getOrderPersonMsg" class="report-btn">{{orderUser.nickname}}</button>
+            <button v-if="orderUser.btnFlag" @click="getOrderPersonMsg" class="report-btn">{{orderUser.nickname}}</button>
             <div v-if=panelShow class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <article class="confirm-msg">
@@ -64,7 +64,7 @@
         </section>
 
         <section v-if="btnNumber===4">
-            <button @click="show" class="report-btn">{{giveMark.giveMarkName}}</button>
+            <button v-if="giveMark.btnFlag" @click="show" class="report-btn">{{giveMark.giveMarkName}}</button>
             <div v-if=panelShow class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <header class="dialog-tit">
@@ -96,7 +96,7 @@
 <script>
     export default {
         props: {
-            btnNumber: Number,              //{1:接单，2：撤销接单，3：查询接单人信息, 4：评分}
+            btnNumber: Number,         //{1:接单，2：撤销接单，3：查询接单人信息, 4：评分}
             id: String,                //产品id
             orderUserId: String,       //接单人id
         },
@@ -113,10 +113,12 @@
                     messages: {
                         pattern: '验证码格式有误',
                     },
+                    btnFlag: true,   //是否显示按钮
                 },
                 orderCancel: {
                     orderCancelName: "撤销接单",
-                    reconfirm: "是否撤销接单？"
+                    reconfirm: "是否撤销接单？",
+                    btnFlag: true,   //是否显示按钮
                 },
                 orderUser: {
                     nickname: "接单人",
@@ -124,13 +126,15 @@
                     score: 0,
                     studNo: "",
                     email: "",
+                    btnFlag: true,   //是否显示按钮
                 },
                 giveMark: {
                     giveMarkName: "评分",
                     disabled: false,
                     max: 10,
                     value: 0,
-                    justify: false
+                    justify: false,
+                    btnFlag: true,   //是否显示按钮
                 },
                 panelShow: false,       //是否显示弹框
                 checked: false,
@@ -163,14 +167,27 @@
                 this.panelShow = false;
                 let props = {id: this.id, checkCode: this.orderQuery.text};
                 this.$post('/tutoring/getOrder', props, (msg) => {
-                    if (Number(msg.data.code) === 200) {
-                        if(Number(msg.data.page.code) === 101) {
-                            this.$router.push('/verify')
-                        }else{
-                            this.showAlert('接单', msg.data.page.errors);
+                    switch (Number(msg.data.code)) {
+                        case 200:{
+                            //失败
+                            if(Number(msg.data.page.code) === 101)
+                                //没有学生认证，跳转到学生认证
+                                this.$router.push('/verify');
+                            else
+                                //其他原因
+                                this.showAlert('接单', msg.data.page.msg);
+                            break;
                         }
-                    } else {
-                        this.showAlert('接单', msg.data.msgs.msg);
+                        case 100:{
+                            //成功
+                            this.showAlert('接单', msg.data.page.msg);
+                            this.orderQuery.btnFlag = false; //隐藏接单按钮
+                            break
+                        }
+                        default :{
+                            this.showAlert('接单', msg.data.page.msg);
+                            break
+                        }
                     }
                 });
             },
@@ -189,9 +206,15 @@
                 let props = {id: this.id};
                 this.$post('/tutoring/delOrder', props, (msg) => {
                     if (Number(msg.data.code) === 200) {
+                        //失败
                         this.showAlert("撤销接单", msg.data.msgs.msg);
                     } else {
+                        //成功
                         this.showAlert("撤销接单", msg.data.msgs.msg);
+                        //隐藏接单人和撤销接单按钮
+                        this.giveMark.btnFlag = false;
+                        this.orderCancel.btnFlag = false;
+                        this.giveMark.btnFlag = false;
                     }
                 });
             },
@@ -202,11 +225,13 @@
                     return;
 
                 this.panelShow = false;
-                this.$post('/tutoring/delOrder', props, (msg) => {
+                this.$post('/tutoring/updateScore', props, (msg) => {
                     if (Number(msg.data.code) === 200) {
                         this.showAlert("评分", msg.data.msgs.msg);
                     } else {
                         this.showAlert("评分", msg.data.msgs.msg);
+                        this.orderCancel.btnFlag = false;
+                        this.giveMark.btnFlag = false;
                     }
                 });
             },
