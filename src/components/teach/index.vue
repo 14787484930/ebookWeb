@@ -3,7 +3,7 @@
         <div id="head">
             <div class="bar bar-header item-input-inset">
                 <label class="item-input-wrapper">
-                    <input type="search" placeholder="搜索" v-model="queryList.teachName" @change="search">
+                    <input type="search" placeholder="搜索" v-model="queryList.name" @change="search">
                     <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
                 </label>
                 <router-link v-if="power_flag" :to="{path:'/teachAdd', query:{id:0}}" class="button button-small button-positive">
@@ -65,8 +65,8 @@
         data() {
             return {
                 queryList: {
-                    teachType: 0,
-                    teachName: '',
+                    type: '',
+                    name: '',
                     startPrice:'',
                     endPrice:'',
                     startTime:'',
@@ -116,14 +116,14 @@
             },
             searchClear(){
                 that.queryList={
-                    bookName:'',
-                    bookType:'',
+                    name:'',
+                    type:'',
                     startPrice:'',
                     endPrice:'',
                     startTime:'',
                     endTime:''
                 }
-                that.bookTypeName=''
+                that.teachShowName=''
             },
             endTime() {
                 if (!this.datePicker) {
@@ -142,7 +142,7 @@
             },
             initType(){
                 this.$picker.teachTypes((val, index,text)=>{
-                    that.queryList.teachType=val['0'];
+                    that.queryList.type=val['0'];
                     that.teachShowName=text['0'];
                 });
                 this.$picker.datePicker((val, index,text)=>{

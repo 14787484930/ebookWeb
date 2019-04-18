@@ -96,22 +96,22 @@ data () {
  methods: {
      search(){
         this.load++;
-        let query =this.queryList;
         this.isShow =false;//搜索下拉隐藏
         this.initGrid();
      },
      searchClear(){
          that.queryList={
                      bookName:'',
-                         bookType:'',
-                         startPrice:'',
-                         endPrice:'',
-                         startTime:'',
-                         endTime:''
+                     bookType:'',
+                     startPrice:'',
+                     endPrice:'',
+                     startTime:'',
+                     endTime:''
                  }
          that.bookTypeName=''
      },
      initGrid(){
+         console.log();
          this.grid={
              img:'bookPic',
              query:this.queryList,

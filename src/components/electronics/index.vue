@@ -27,6 +27,16 @@
                             </div>
                         </div>
                     </li>
+                    <!--<li class="cube-index-list-item">-->
+                        <!--<div class="weui-cell weui-cell_access"  @click="$picker.selectTypes()">-->
+                            <!--<div class="weui-cell__bd">-->
+                                <!--发票:-->
+                                <!--<span class="book-name">{{otherInvoiceName}}</span>-->
+                            <!--</div>-->
+                            <!--<div class="weui-cell__ft" >-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
                     <li class="cube-index-list-item">
                         <div class="weui-cell weui-cell_access"  >
                             <div class="weui-cell__bd">
@@ -72,14 +82,16 @@
                 electronicsTypes: [],
                 queryList: {
                     electronicsName: '',
-                    electronicsType: '1',
+                    electronicsType: '',
+                    hasInvoice:'',
                     startTime:'',
                     endTime:'',
                     startPrice:'',
                     endPrice:'',
                 },
                 isShow:false,
-                typeName:''
+                typeName:'',
+                otherInvoiceName:''
             }
         },
         computed:{
@@ -97,6 +109,7 @@
         },
         methods: {
             initGrid(){
+                console.log(this.queryList);
                 this.grid={
                     img:'electronicsPic',
                     query:this.queryList,
@@ -139,6 +152,17 @@
                 that.queryList.endTime=index.join('-');
             },
             initType() {
+                let list=[{
+                    'text':'有',
+                    value:0
+                },{
+                    'text':'没有',
+                    value:1
+                }];
+                this.$picker.selectTypes(list,(val, index,text)=>{
+                    that.queryList.hasInvoice=val['0'];
+                    that.otherInvoiceName=text['0'];
+                });
                 this.$picker.electronicType((val, index,text)=>{
                     that.queryList.electronicsType=val['0'];
                     that.typeName=text['0'];
@@ -156,25 +180,23 @@
                 })
             },
             searchSub() {
+                this.load++;
+                console.log(this.queryList);
                 this.isShow =false;//搜索下拉隐藏
-                let query = {};
-                query['electronicsName'] = this.queryList.electronicsName;
-                query['pageSize'] = Number($config.pageSize);
-                query['pageNumber'] = 5;
-                this.$post('/electronics/electronics', query, (msg) => {
-                    this.tables = msg.data.page.pageInfo.list;
-                });
+                //this.initGrid();
             },
             searchClear(){
-                that.queryList={
+                this.queryList={
                     electronicsName: '',
-                        electronicsType: '1',
-                        startTime:'',
-                        endTime:'',
-                        startPrice:'',
-                        endPrice:'',
+                    electronicsType: '',
+                    hasInvoice:'',
+                    startTime:'',
+                    endTime:'',
+                    startPrice:'',
+                    endPrice:'',
                 },
-                that.typeName=''
+                this.typeName=''
+                this.otherInvoiceName=''
             },
             intelSearch(){
                 this.isShow = !this.isShow

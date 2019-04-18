@@ -20,7 +20,7 @@
                     <li class="cube-index-list-item">
                         <div class="weui-cell weui-cell_access"   @click="$picker.show()">
                             <div class="weui-cell__bd">
-                                类型:
+                                发票:
                                 <span class="book-name">{{otherShowName}}</span>
                             </div>
                             <div class="weui-cell__ft" >
@@ -67,7 +67,7 @@
                 msg: '其他',
                 queryList: {
                     otherName: '',
-                    otherType: '1',
+                    hasInvoice:'',
                     startPrice:'',
                     endPrice:'',
                     startTime:'',
@@ -116,14 +116,14 @@
             },
             searchClear(){
                 that.queryList={
-                    bookName:'',
-                    bookType:'',
+                    otherName:'',
+                    hasInvoice:'',
                     startPrice:'',
                     endPrice:'',
                     startTime:'',
                     endTime:''
                 }
-                that.bookTypeName=''
+                that.otherName=''
             },
             endTime() {
                 if (!this.datePicker) {
@@ -141,8 +141,15 @@
                 that.queryList.endTime=index.join('-');
             },
             initType(){
-                this.$picker.teachTypes((val, index,text)=>{
-                    that.queryList.teachType=val['0'];
+                let list=[{
+                    'text':'有',
+                    value:0
+                },{
+                    'text':'没有',
+                    value:1
+                }];
+                this.$picker.selectTypes(list,(val, index,text)=>{
+                    that.queryList.hasInvoice=val['0'];
                     that.otherShowName=text['0'];
                 });
                 this.$picker.datePicker((val, index,text)=>{
