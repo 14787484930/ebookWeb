@@ -98,7 +98,7 @@
                     img:'otherPic',
                     query:this.queryList,
                     view:(row)=>that.$router.push({path: '/otherView', query: {id: row.id}}),
-                    del:(row)=> that.$post('/book/delete',row),
+                    del:(row)=> {let para = {id: row.id}; that.$post('/book/delete',para)},
                     edit:(row)=>that.$router.push({path: '/otherAdd', query: {id: row.id}}),
                     columns:[
                         {title:"名称",key:'otherName'},

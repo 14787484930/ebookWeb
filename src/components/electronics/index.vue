@@ -117,7 +117,8 @@
                 this.$router.push({path: '/electronicsView', query: {id: row.id}});
             },
             del(row){
-                this.$post('/electronics/delete',row);
+                let para = {id: row.id};
+                this.$post('/electronics/delete',para);
             },
             update(row){
                 this.$router.push({path: '/electronicsAdd', query: {id: row.id}})

@@ -96,7 +96,7 @@
                 this.grid={
                     query:this.queryList,
                     view:(row)=>that.$router.push({path: '/teachView', query: {id: row.id}}),
-                    del:(row)=> that.$post('/tutoring/delete',row),
+                    del:(row)=> {let para = {id: row.id}; that.$post('/tutoring/delete',para)},
                     edit:(row)=>that.$router.push({path: '/teachAdd', query: {id: row.id}}),
                     columns:[
                         {title:"名称",key:'name'},

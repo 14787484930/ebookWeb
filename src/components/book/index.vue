@@ -132,7 +132,8 @@ data () {
          this.$router.push({path: '/bookView', query: {id: row.id}});
      },
      del(row){
-         this.$post('/book/delete',row);
+         let para = {id: row.id};
+         this.$post('/book/delete',para);
      },
      update(row){
          this.$router.push({path: '/bookAdd', query: {id: row.id}})
