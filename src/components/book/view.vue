@@ -134,7 +134,6 @@
 
 </script>
 <style scoped>
-.scroll-list-wrap{ height: 16.4rem;}
 .cube-slide-item{ text-align: center;}
 .item-desc{
     white-space: normal;

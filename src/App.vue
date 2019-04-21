@@ -23,5 +23,5 @@ export default {
 }
 </script>
 <style >
-  .scroll-list-wrap{ height: 16.4rem;}
+  .scroll-list-wrap{ height: 15rem;}
 </style>
