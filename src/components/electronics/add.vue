@@ -1,11 +1,12 @@
 <template>
-    <div class="scroll-list-wrap">
+    <div class="scroll-list-wrap addWrap">
         <cube-scroll ref="scroll">
             <template>
                 <div class="list">
+                    <h1>填写清单</h1>
                     <label class="form-group item item-input ">
                         <span>电子名称：</span>
-                        <input type="text" class="isnull" v-model="electronics.electronicsName">
+                        <input type="text" class="isnull" v-model="electronics.electronicsName" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>电子类型：</span>
@@ -20,11 +21,11 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>官方价格：</span>
-                        <input type="text" class="isnull"  v-model="electronics.originalPrice">
+                        <input placeholder="点此填写" type="text" class="isnull"  v-model="electronics.originalPrice">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出售价格(元)：</span>
-                        <input type="text" class="isnull"  v-model="electronics.presentPrice">
+                        <input placeholder="点此填写" type="text" class="isnull"  v-model="electronics.presentPrice">
                     </label>
                     <label class="form-group item">
                         <span>购买日期：</span>
@@ -36,15 +37,15 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系电话：</span>
-                        <input type="text" class="isnull tel"  v-model="electronics.phone">
+                        <input placeholder="点此填写" type="text" class="isnull tel"  v-model="electronics.phone">
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input type="text" class="isnull" v-model="electronics.weiXin">
+                        <input placeholder="点此填写" type="text" class="isnull" v-model="electronics.weiXin">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
-                        <input type="text" v-model="electronics.des">
+                        <input placeholder="点此填写" type="text" v-model="electronics.des">
                     </label>
                     <file-com ref="refFiles" :urls="urls" ></file-com>
                     <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>

@@ -3,15 +3,14 @@
     <div>
         <section v-if="btnNumber===1">
             <button v-if="orderQuery.btnFlag" @click="show" class="report-btn">{{orderQuery.orderQueryName}}</button>
-            <div v-if=panelShow class="module-dialog" style="display: block">
+            <div v-if="panelShow" class="module-dialog" style="display: block">
                 <div class="dialog-panel">
                     <header class="dialog-tit">
                         <h4>{{orderQuery.orderQueryName}}</h4>
                         <span @click="close" class="cubeic-close"></span>
                     </header>
                     <article class="confirm-msg">
-                        <span>请输入订单码</span>
-                        <cube-input v-model="orderQuery.text"></cube-input>
+                        <cube-input v-model="orderQuery.text" placeholder="请输入订单码"></cube-input>
                         <cube-validator v-model="orderQuery.valid" ref="validator0"
                                         :model="orderQuery.text"
                                         :rules="orderQuery.rules"
@@ -254,112 +253,7 @@
 </script>
 
 <style>
-    .report-btn {
-        float: right;
-        background-color: #5bc0de;
-        color: #0f0f0f;
-        font-size: 15px;
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin: 15px;
-        border: 0;
-    }
 
-    .module-dialog {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 1001;
-        text-align: center;
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .module-dialog:after {
-        content: '';
-        height: 100%;
-        margin-left: -.25em;
-        background-color: #2aabd2;
-    }
-
-    .module-dialog .dialog-panel,
-    .module-dialog:after {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    .module-dialog .dialog-panel {
-        position: relative;
-        width: 250px;
-        min-width: 100px;
-        background: #fff;
-        border-radius: 4px;
-        border: 1px solid rgba(0, 0, 0, .14);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 1);
-        text-align: left;
-    }
-
-    .module-dialog .dialog-panel .confirm-msg {
-        margin: 10px;
-    }
-
-    .module-dialog .dialog-panel .confirm-msg span {
-        font-weight: 800;
-        float: left;
-    }
-
-    .module-dialog .dialog-tit {
-        height: 40px;
-        padding: 0 15px;
-        border-radius: 8px 8px 0 0;
-        border-bottom: 1px solid #d4d4d4;
-        box-shadow: rgba(0, 0, 0, .06) 0 1px 7px;
-        line-height: 40px;
-    }
-
-    .module-dialog .dialog-tit h4 {
-        float: left;
-        padding-left: 5px;
-        font-size: 19px;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .module-dialog .dialog-tit span {
-        float: right;
-    }
-
-    .module-dialog .confirm-msg {
-        margin: 10px auto;
-        min-height: 150px;
-        max-height: 350px;
-        text-align: center;
-        font-size: 16px;
-        overflow-y: scroll;
-    }
-
-    .dialog-btn-wrap {
-        overflow: auto;
-    }
-
-    .dialog-btn-wrap button {
-        color: #0f0f0f;
-        font-size: 15px;
-        padding: 5px 20px;
-        margin: 10px;
-        border-radius: 5px;
-        border: 0;
-    }
-
-    .dialog-btn-wrap .cancel {
-        background-color: #6c6c6c;
-        float: left;
-    }
-
-    .dialog-btn-wrap .confirm {
-        background-color: #5bc0de;
-        float: right;
-    }
-
+.cube-input-field{padding:0 0.266667rem;border:1px solid #ccc!important;margin: 15px;}
+    
 </style>

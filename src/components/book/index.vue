@@ -2,8 +2,8 @@
  <div>
      <div id="head">
         <div class="bar bar-header item-input-inset">
-            <label class="item-input-wrapper">
-                <input type="search" placeholder="搜索" v-model="queryList.bookName"  @change="search">
+            <label class="item-input-wrapper searchBox">
+                <input class="search-btn" type="search" placeholder="搜索"  v-model="queryList.bookName"  @change="search">
                 <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
             </label>
             <router-link v-if="power_flag"  :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
@@ -16,10 +16,22 @@
         <div title="搜索"  v-show="isShow" class="weui-cells">
             <ul>
                 <li class="cube-index-list-item">
+                   <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
+                            <div class="weui-cell__bd">
+                                  价格:
+                                <span class="book-name">
+                                    <span class="green">￥{{queryList.startPrice}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span class="green">￥{{queryList.endPrice}}</span>
+                                </span>
+                            </div>
+                            <div class="weui-cell__ft"  >
+                            </div>
+                        </div>
+                </li>
+                <li class="cube-index-list-item">
                     <div class="weui-cell weui-cell_access"   @click="$picker.show()">
                              <div class="weui-cell__bd">
                               图书类型:
-                                 <span class="book-name">{{bookTypeName}}</span>
+                                 <span class="book-name green">{{bookTypeName}}</span>
                              </div>
                             <div class="weui-cell__ft" >
                             </div>
@@ -31,20 +43,11 @@
                                  日期:
                             </div>
                             <input type="text" readonly="readonly"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
-                            <span class="line-span"></span>
+                            <span class="line-span">——</span>
                             <input type="text" readonly="readonly"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
                    </div>
                 </li>
-                <li class="cube-index-list-item">
-                   <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
-                            <div class="weui-cell__bd">
-                                  价格:
-                                <span class="book-name">￥{{queryList.startPrice}}至￥{{queryList.endPrice}}</span>
-                            </div>
-                            <div class="weui-cell__ft"  >
-                            </div>
-                        </div>
-                </li>
+                
                 <li class="cube-index-list-item">
                      <cube-button :light="true" @click="searchClear">重置</cube-button>
                      <cube-button :light="true" @click="search">搜索</cube-button>
@@ -174,12 +177,6 @@ data () {
 </script>
 
 <style>
-.placeholder-icon:last-child {padding-left: 0.26rem !important;}
-.time-input{width: 3.0rem;}
-.book-name{text-align: center;width: 4rem;
-    display: inline-flex;
-    padding-left: 1rem;}
-.line-span{border-bottom:.03rem solid #828282;width:1rem;;}
-.cube-btn-light{ width: 50%;float: left;}
+
 </style>
 
