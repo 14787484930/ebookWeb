@@ -50,12 +50,12 @@
                         </li>
                     </ul>
                 </template>
-            </cube-scroll>
-        </div>
-        <report-button :product="{productId: book.id ,
+                <report-button :product="{productId: book.id ,
          productName: book.bookName,
          productType: book.bookType}">
-        </report-button>
+                </report-button>
+            </cube-scroll>
+        </div>
     </div>
 </template>
 
@@ -134,7 +134,7 @@
 
 </script>
 <style scoped>
-.scroll-list-wrap{ height: 15.3rem;}
+.scroll-list-wrap{ height: 16.4rem;}
 .cube-slide-item{ text-align: center;}
 .book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
 </style>
