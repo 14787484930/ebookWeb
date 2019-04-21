@@ -1,12 +1,12 @@
 <template>
     <div>
-        <cube-slide ref="slide" :data="urls" align="center">
-            <cube-slide-item v-for="(item, index) in urls" :key="index">
-                <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
-            </cube-slide-item>
-        </cube-slide>
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
+                <cube-slide ref="slide" :data="urls" align="center">
+                    <cube-slide-item v-for="(item, index) in urls" :key="index">
+                        <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
+                    </cube-slide-item>
+                </cube-slide>
                 <template>
                     <div class="listHead">
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong></div>
@@ -45,15 +45,13 @@
                         </li>
                     </ul>
                 </template>
-            </cube-scroll>
-        </div>
-        <report-button :product="{productId: electronics.id ,
+                <report-button :product="{productId: electronics.id ,
          productName: electronics.electronicsName,
          productType: electronics.electronicsType}">
-        </report-button>
+                </report-button>
+            </cube-scroll>
+        </div>
     </div>
-
-
 </template>
 
 <script>
