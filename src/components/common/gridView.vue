@@ -78,11 +78,11 @@
             }
         },
         mounted() {
-            $(".scroll-list-wrap").height(
+            /*$(".scroll-list-wrap").height(
                 screen.availHeight -
                 $("#head").height() -
                 $(".tabs-icon-top", window.parent.parent.document).height()
-            );
+            );*/
         },
         data() {
             return {
@@ -199,6 +199,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
     .scroll-list-wrap {
+        height: 80.5vh;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         transform: rotate(0deg); // fix 子元素超出边框圆角部分不隐藏的问题

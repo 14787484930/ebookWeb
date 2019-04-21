@@ -95,7 +95,7 @@
         created() {
             _that = this;
             this.teach.id = this.$route.query.id;
-            if (parseInt(this.teach.id) != 0) this.initData();
+            if ((this.teach.id).length !== 0) this.initData();
             else console.log("[error]选择的物品id为0，请检查物品id是否正确!");
         },
         computed: {
@@ -164,6 +164,7 @@
 </script>
 
 <style scoped>
+  .scroll-list-wrap{height: 93vh;}
   .teach-tabs.item-input {
     display: flex;
     height: 70px;

@@ -91,7 +91,7 @@
         },
         created(){
             this.book.id=this.$route.query.id;
-            if(parseInt(this.book.id)!=0)
+            if((this.book.id).length!==0)
                 this.initData();
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
@@ -134,6 +134,7 @@
 
 </script>
 <style scoped>
+.scroll-list-wrap{height: 93vh;}
 .cube-slide-item{ text-align: center;}
 .item-desc{
     white-space: normal;

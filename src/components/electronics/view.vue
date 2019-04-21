@@ -87,7 +87,7 @@
         created(){
             _that=this;
             this.electronics.id=this.$route.query.id;
-            if(parseInt(this.electronics.id)!=0)
+            if((this.electronics.id).length!==0)
                 this.initData();
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
@@ -124,5 +124,5 @@
 </script>
 
 <style scoped>
-
+    .scroll-list-wrap{height: 93vh;}
 </style>
