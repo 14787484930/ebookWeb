@@ -8,48 +8,48 @@
             <li class="teach-tab" :class="{active: type}">讲座</li>
           </label>
           <ul class="list">
-            <li class="item item-input ">
+            <li class="item">
               <span>名称：</span>
               <span>{{teach.name}}</span>
             </li>
-            <li class="item item-input ">
+            <li class="item">
               <span>{{ type?"开始时间：":"辅导截止时间：" }}</span>
               <span>{{teach.startTime}}</span>
             </li>
-            <li class="item item-input ">
+            <li class="item">
               <span>结束时间：</span>
               <span>{{teach.endTime}}</span>
             </li>
-            <li class="item item-input " v-if="power">
+            <li class="item" v-if="power">
               <span>电话：</span>
               <span>{{teach.phone}}</span>
             </li>
-            <li class="item item-input " v-if="power">
+            <li class="item" v-if="power">
               <span>微信号：</span>
               <span>{{teach.weiXin}}</span>
             </li>
-            <li class="item item-input ">
+            <li class="item">
               <span>{{ type?"讲座地点：":"辅导地点：" }}</span>
               <span>{{teach.place}}</span>
             </li>
-            <li class="item item-input ">
+            <li class="item">
               <span>{{ type?"报酬(元)：":"辅导价格：" }}</span>
               <span>{{teach.price}}</span>
             </li>
-            <li class="item item-input " v-if="this.$store.getters.power_flag">
+            <li class="item" v-if="this.$store.getters.power_flag">
               <span>接单码：</span>
               <span>{{teach.checkCode}}</span>
             </li>
-            <li class="item item-input " v-if="isOrder">
+            <li class="item" v-if="isOrder">
                 <order-taking :btnNumber = 1 :id ="teach.id"></order-taking>
             </li>
-              <li class="item item-input " v-if="isOrderSelf">
+              <li class="item" v-if="isOrderSelf">
                   <span>接单人：</span>
                   <order-taking :btnNumber = 3 :orderUserId="teach.orderUser"></order-taking>
                   <order-taking :btnNumber = 2 :id = "teach.id"></order-taking>
                   <order-taking v-if="isOrderScore" :btnNumber = 4 :id = "teach.id" :orderUserId="teach.orderUser"></order-taking>
               </li>
-            <li class="item item-input ">
+            <li class="item item-desc">
               <span>描述：</span>
               <span>{{teach.des}}</span>
             </li>
@@ -109,7 +109,7 @@
                 return this.flag
             },
             isOrder:function(){  /*添加人：zxl ，描述：判断是否显示接单按钮*/
-
+                console.log(this);
                 if(!this.$store.getters.power_flag && this.teach.orderUser == null){
                     return true;
                 }else{

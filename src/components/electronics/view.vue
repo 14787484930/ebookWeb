@@ -13,33 +13,33 @@
                         <div class="defaultPrice">原价：<span>￥{{electronics.originalPrice}}</span></div>
                     </div>
                     <ul class="list">
-                        <li class="item item-input">
+                        <li class="item">
                             <span>品名：</span>
                             <strong>{{electronics.electronicsName}}</strong>
                         </li>
 
-                        <li class="item item-input">
+                        <li class="item">
                             <span>电子类型：</span>
                             <span>{{electronics.electronicsType}}</span>
                         </li>
 
-                        <li class="item item-input">
+                        <li class="item">
                             <span>购买日期：</span>
                             <span>{{electronics.buyDate}}</span>
                         </li>
-                        <li class="item item-input">
+                        <li class="item">
                             <span>是否有发票：</span>
                             <span v-if="electronics.hasInvoice" >有发票</span>
                         </li>
-                        <li class="item item-input" v-if="power">
+                        <li class="item" v-if="power">
                             <span>联系电话：</span>
                             <span>{{electronics.phone}}</span>
                         </li>
-                        <li class="item item-input" v-if="power">
+                        <li class="item" v-if="power">
                             <span>微信：</span>
                             <span>{{electronics.weiXin}}</span>
                         </li>
-                        <li class="item desWrap">
+                        <li class="item item-desc">
                             <span>描述：</span>
                             <span>{{electronics.des}}</span>
                         </li>

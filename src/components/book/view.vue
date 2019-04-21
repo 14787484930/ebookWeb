@@ -12,23 +12,23 @@
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{book.bookPrice}}</strong></div>
                     </div>
                     <ul class="list">
-                        <li class="item item-input ">
+                        <li class="item">
                             <span>图书名称：</span>
                             <span>{{book.bookName}}</span>
                         </li>
-                        <li class="item item-input ">
+                        <li class="item">
                             <span>作者：</span>
                             <span>{{book.author}}</span>
                         </li>
-                        <!--<li class="form-group item item-input ">
+                        <!--<li class="form-group item">
                             <span>出售价格：</span>
                             <span>{{book.bookPrice}}</span>
                         </li>-->
-                        <li class="item item-input ">
+                        <li class="item">
                             <span>出版日期：</span>
                             <span>{{book.pubDate}}</span>
                         </li>
-                        <li class="item item-input ">
+                        <li class="item">
                             <span>出版社：</span>
                             <span>{{book.bookPub}}</span>
                         </li>
@@ -40,11 +40,11 @@
                             <span>微信：</span>
                             <span>{{book.weiXin}}</span>
                         </li>
-                        <li class="item item-input ">
+                        <li class="item">
                             <span>发布日期：</span>
                             <span>{{book.pubDate}}</span>
                         </li>
-                        <li class="item item-input item-desc">
+                        <li class="item item-desc">
                             <span>描述：</span>
                             <div>{{book.des}}</div>
                         </li>
