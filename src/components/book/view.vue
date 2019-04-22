@@ -134,7 +134,8 @@
 
 </script>
 <style scoped>
-.scroll-list-wrap{height: 93vh;}
+.scroll-list-wrap{height: 94vh;}
 .cube-slide-item{ text-align: center;}
+.item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
 .book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
 </style>

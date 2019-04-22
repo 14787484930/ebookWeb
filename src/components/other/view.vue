@@ -125,5 +125,6 @@
 </script>
 
 <style scoped>
-    .scroll-list-wrap{height: 93vh;}
+.scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
+.item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
 </style>

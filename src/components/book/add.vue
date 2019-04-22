@@ -128,3 +128,6 @@
         }
     }
 </script>
+<style scoped>
+.scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
+</style>
