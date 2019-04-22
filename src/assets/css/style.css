@@ -134,7 +134,7 @@
  .placeholder-icon:last-child {padding-left: 0.26rem !important;}
 .weui-cells .time-input{width: 3.0rem;padding: 0 4px;}
 .green,.weui-cells .time-input{color:#00bb15;}
-.book-name{text-align: center;width: 4rem;display: inline-flex;padding-left: 1rem;font-size:12px;}
+.book-name{text-align: center;width: 4rem;display: inline-flex;padding-left: 1rem;font-size:14px;}
 .line-span{margin: 0 4px;color:#ccc;}
 .cube-btn-light{ width: 50%;float: left;}
 .search-btn{font-size:16px!important;font-weight: normal;}

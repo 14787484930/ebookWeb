@@ -1,23 +1,24 @@
 <template>
     <div>
 
-    <div class="scroll-list-wrap">
+    <div class="scroll-list-wrap addWrap">
         <cube-scroll
                 ref="scroll"
         >
             <template>
                 <div class="list">
+                    <h1>填写清单</h1>
                     <label class="form-group item item-input ">
                         <span>图书名称：</span>
-                        <input type="text" class="isnull" v-model="book.bookName">
+                        <input type="text" class="isnull" v-model="book.bookName" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>作者：</span>
-                        <input type="text" class="isnull" v-model="book.author">
+                        <input type="text" class="isnull" v-model="book.author" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出售价格(元)：</span>
-                        <input type="number" class="isnull" v-model="book.bookPrice">
+                        <input type="number" class="isnull" v-model="book.bookPrice" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出版日期：</span>
@@ -25,19 +26,19 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>出版社：</span>
-                        <input type="text" v-model="book.bookPub">
+                        <input type="text" v-model="book.bookPub" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系电话：</span>
-                        <input type="text" class="tel isnull" v-model="book.phone">
+                        <input type="text" class="tel isnull" v-model="book.phone" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input type="text" class="isnull" v-model="book.weiXin">
+                        <input type="text" class="isnull" v-model="book.weiXin" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>备注：</span>
-                        <input type="text" v-model="book.des">
+                        <input type="text" v-model="book.des" placeholder="点此填写">
                     </label>
 
                      <file-com ref="refFiles" :urls="urls"></file-com>

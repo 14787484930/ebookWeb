@@ -1,19 +1,20 @@
 <template>
-    <div class="scroll-list-wrap">
+    <div class="scroll-list-wrap addWrap">
         <cube-scroll ref="scroll">
             <template>
                 <div class="list">
+                    <h1>填写清单</h1>
                     <label class="form-group item item-input ">
                         <span>物品名称：</span>
-                        <input type="text" class="isnull" v-model="other.otherName">
+                        <input type="text" class="isnull" v-model="other.otherName" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>官方价格(元)：</span>
-                        <input type="text"  v-model="other.originalPrice">
+                        <input type="text"  v-model="other.originalPrice" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出售价格(元)：</span>
-                        <input type="text"  class="isnull" v-model="other.presentPrice">
+                        <input type="text"  class="isnull" v-model="other.presentPrice" placeholder="点此填写">
                     </label>
                     <label class="form-group item ">
                         <span>购买日期：</span>
@@ -28,11 +29,11 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>联系方式：</span>
-                        <input type="text"  class="isnull tel" v-model="other.phone">
+                        <input type="text"  class="isnull tel" v-model="other.phone" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input type="text" class="isnull" v-model="other.weiXin">
+                        <input type="text" class="isnull" v-model="other.weiXin" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>

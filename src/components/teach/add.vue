@@ -1,5 +1,5 @@
 <template>
-    <div class="scroll-list-wrap">
+    <div class="scroll-list-wrap addWrap">
         <cube-scroll ref="scroll">
             <template>
                 <label class="form-group item item-input teach-tabs">
@@ -15,7 +15,7 @@
                     <div class="list" v-if="!flag">
                         <label class="form-group item item-input">
                             <span>辅导名称：</span>
-                            <input type="text" class="isnull" v-model="teach.name">
+                            <input type="text" class="isnull" v-model="teach.name" placeholder="点此填写">
                         </label>
                         <label class="form-group item">
                             <span>辅导截止时间：</span>
@@ -23,23 +23,23 @@
                         </label>
                         <label class="form-group item item-input">
                             <span>辅导地点：</span>
-                            <input type="text" class="isnull" v-model="teach.place">
+                            <input type="text" class="isnull" v-model="teach.place" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>辅导价格：</span>
-                            <input type="text" class="isnull" v-model="teach.price">
+                            <input type="text" class="isnull" v-model="teach.price" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>电话：</span>
-                            <input type="text" class="isnull tel" v-model="teach.phone">
+                            <input type="text" class="isnull tel" v-model="teach.phone" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>微信：</span>
-                            <input type="text" v-model="teach.weiXin">
+                            <input type="text" v-model="teach.weiXin" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>描述：</span>
-                            <input type="text" v-model="teach.des">
+                            <input type="text" v-model="teach.des" placeholder="点此填写">
                         </label>
 
                         <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
@@ -47,7 +47,7 @@
                     <div class="list" v-else>
                         <label class="form-group item item-input">
                             <span>名称：</span>
-                            <input type="text" class="isnull" v-model="teach.name">
+                            <input type="text" class="isnull" v-model="teach.name" placeholder="点此填写">
                         </label>
                         <label class="form-group item">
                             <span>开始时间：</span>
@@ -59,23 +59,23 @@
                         </label>
                         <label class="form-group item item-input">
                             <span>讲座地点：</span>
-                            <input type="text" class="isnull" v-model="teach.place">
+                            <input type="text" class="isnull" v-model="teach.place" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>报酬(元)：</span>
-                            <input type="text" class="isnull" v-model="teach.price">
+                            <input type="text" class="isnull" v-model="teach.price" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>电话：</span>
-                            <input type="text" class="isnull tel" v-model="teach.phone">
+                            <input type="text" class="isnull tel" v-model="teach.phone" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>微信：</span>
-                            <input type="text" v-model="teach.weiXin">
+                            <input type="text" v-model="teach.weiXin" placeholder="点此填写">
                         </label>
                         <label class="form-group item item-input">
                             <span>描述：</span>
-                            <input type="text" v-model="teach.des">
+                            <input type="text" v-model="teach.des" placeholder="点此填写">
                         </label>
 
                         <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
