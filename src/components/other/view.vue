@@ -13,31 +13,31 @@
                         <div class="defaultPrice">原价：<span>￥{{other.originalPrice}}</span></div>
                     </div>
                     <ul class="list">
-                        <li class="item">
+                        <li class="item item-input">
                             <span>物品名称：</span>
                             <span>{{other.otherName}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>官方价格(元)：</span>
                             <span>{{other.originalPrice}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>出售价格(元)：</span>
                             <span>{{other.presentPrice}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>购买日期：</span>
                             <span>{{other.buyDate}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>是否有发票：</span>
                             <span>{{other.hasInvoice}}</span>
                         </li>
-                        <li class="item" v-if="power">
+                        <li class="item item-input" v-if="power">
                             <span>联系电话：</span>
                             <span>{{other.phone}}</span>
                         </li>
-                        <li class="item" v-if="power">
+                        <li class="item item-input" v-if="power">
                             <span>微信：</span>
                             <span>{{other.weiXin}}</span>
                         </li>

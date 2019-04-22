@@ -12,11 +12,11 @@
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{book.bookPrice}}</strong></div>
                     </div>
                     <ul class="list">
-                        <li class="item">
+                        <li class="item item-input">
                             <span>图书名称：</span>
                             <span>{{book.bookName}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>作者：</span>
                             <span>{{book.author}}</span>
                         </li>
@@ -24,11 +24,11 @@
                             <span>出售价格：</span>
                             <span>{{book.bookPrice}}</span>
                         </li>-->
-                        <li class="item">
+                        <li class="item item-input">
                             <span>出版日期：</span>
                             <span>{{book.pubDate}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>出版社：</span>
                             <span>{{book.bookPub}}</span>
                         </li>
@@ -40,7 +40,7 @@
                             <span>微信：</span>
                             <span>{{book.weiXin}}</span>
                         </li>
-                        <li class="item">
+                        <li class="item item-input">
                             <span>发布日期：</span>
                             <span>{{book.pubDate}}</span>
                         </li>
@@ -136,9 +136,5 @@
 <style scoped>
 .scroll-list-wrap{height: 93vh;}
 .cube-slide-item{ text-align: center;}
-.item-desc{
-    white-space: normal;
-    word-break: break-all;
-    word-wrap: break-word;}
 .book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
 </style>

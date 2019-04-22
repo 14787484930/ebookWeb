@@ -8,42 +8,42 @@
             <li class="teach-tab" :class="{active: type}">讲座</li>
           </label>
           <ul class="list">
-            <li class="item">
+            <li class="item item-input">
               <span>名称：</span>
               <span>{{teach.name}}</span>
             </li>
-            <li class="item">
+            <li class="item item-input">
               <span>{{ type?"开始时间：":"辅导截止时间：" }}</span>
               <span>{{teach.startTime}}</span>
             </li>
-            <li class="item">
+            <li class="item item-input">
               <span>结束时间：</span>
               <span>{{teach.endTime}}</span>
             </li>
-            <li class="item" v-if="power">
+            <li class="item item-input" v-if="power">
               <span>电话：</span>
               <span>{{teach.phone}}</span>
             </li>
-            <li class="item" v-if="power">
+            <li class="item item-input" v-if="power">
               <span>微信号：</span>
               <span>{{teach.weiXin}}</span>
             </li>
-            <li class="item">
+            <li class="item item-input">
               <span>{{ type?"讲座地点：":"辅导地点：" }}</span>
               <span>{{teach.place}}</span>
             </li>
-            <li class="item">
+            <li class="item item-input">
               <span>{{ type?"报酬(元)：":"辅导价格：" }}</span>
               <span>{{teach.price}}</span>
             </li>
-            <li class="item" v-if="this.$store.getters.power_flag">
+            <li class="item item-input" v-show="false||this.$store.getters.power_flag">
               <span>接单码：</span>
               <span>{{teach.checkCode}}</span>
             </li>
-            <li class="item" v-if="isOrder">
+            <li class="item item-input" v-if="isOrder">
                 <order-taking :btnNumber = 1 :id ="teach.id"></order-taking>
             </li>
-              <li class="item" v-if="isOrderSelf">
+              <li class="item item-input" v-if="isOrderSelf">
                   <span>接单人：</span>
                   <order-taking :btnNumber = 3 :orderUserId="teach.orderUser"></order-taking>
                   <order-taking :btnNumber = 2 :id = "teach.id"></order-taking>
