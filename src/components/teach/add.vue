@@ -152,7 +152,7 @@
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm:()=>{
-                            this.$router.push({path: '/teach'})
+                            this.$router.push({path: '/teach',query: {flag: 1}})
                         }
                     }).show()
                 });

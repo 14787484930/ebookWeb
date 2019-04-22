@@ -120,7 +120,7 @@
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm:()=>{
-                            this.$router.push({path: '/book'})
+                            this.$router.push({path: '/book',query: {flag: 1}})
                         }
                     }).show()
                 })

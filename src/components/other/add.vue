@@ -113,7 +113,7 @@
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm:()=>{
-                            this.$router.push({path: '/other'})
+                            this.$router.push({path: '/other',query: {flag: 1}})
                         }
                     }).show()
                 })

@@ -126,7 +126,7 @@
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm:()=>{
-                            this.$router.push({path: '/electronics'})
+                            this.$router.push({path: '/electronics',query: {flag: 1}})
                         }
                     }).show()
                 })
