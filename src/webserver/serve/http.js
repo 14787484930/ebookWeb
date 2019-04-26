@@ -67,7 +67,7 @@ const $myHttp = {
         let length=url.indexOf(',');
         if(length!=-1)
             url=url.substr(0,length);
-        return $config.baseUrl+url
+        return $config.picUrl+url
     }
 }
 Vue.prototype.$file=$myHttp.getFile;
