@@ -101,7 +101,7 @@
             },
             saveData(){
                 let  url='/other/save';
-                if(this.other.id!=0)
+                if((this.other.id).length > 1)
                 {
                     _that.other["otherPic"] = "";
                     url='/other/update';

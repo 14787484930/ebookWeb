@@ -118,7 +118,7 @@
         created() {
             _that = this;
             this.teach.id = this.$route.query.id;
-            if ((this.teach.id).length !== 0) this.initData();
+            if ((this.teach.id).length > 1) this.initData();
         },
         mounted() {
             //this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;

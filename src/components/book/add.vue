@@ -88,7 +88,7 @@
         created() {
             _that = this;
             this.book.id = this.$route.query.id;
-            if (parseInt(this.book.id) != 0)
+            if ((this.book.id).length > 1)
                 this.initData();
         },
         mounted() {

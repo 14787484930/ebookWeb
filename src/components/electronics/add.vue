@@ -90,7 +90,7 @@
         created(){
             _that=this;
             this.electronics.id=this.$route.query.id;
-            if(parseInt(this.electronics.id)!==0)
+            if((this.electronics.id).length > 1)
                 this.initData();
         },
         mounted() {
