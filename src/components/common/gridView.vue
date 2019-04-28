@@ -1,57 +1,38 @@
 <template>
     <div class="scroll-list-wrap">
-        <cube-scroll
-                ref="scroll"
-                :scroll-events="['scroll']"
-                :options="options"
-                @scroll="onScrollHandle"
-                @pulling-up="refresh">
+        <cube-scroll ref="scroll" :scroll-events="['scroll']" :options="options" @scroll="onScrollHandle" @pulling-up="refresh">
             <cube-swipe>
                 <template>
                     <div class="list">
                         <transition-group name="swipe" tag="ul">
-              <span v-for="(item,index) in tables" :key="item.id">
-                <cube-swipe-item
-                        v-if="power_flag"
-                        ref="reftables"
-                        v-bind:btns="btns"
-                        :index="index"
-                        @btn-click="updateBook"
-                >
-                  <div @click="config.view(item)">
-                    <a class="item item-thumbnail-left" href="#">
-                      <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
-
-                      <p
-                              :class="'grid-showimg-'+showImg"
-                              v-for="(row,key) in config.columns "
-                              :key="key"
-                      >{{row.title}}：{{item|filter(item,row)}}</p>
-                    </a>
-                  </div>
-                </cube-swipe-item>
-                <div @click="config.view(item)" v-else>
-                  <a class="item item-thumbnail-left" href="#">
-                    <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
-
-                    <p
-                            :class="'grid-showimg-'+showImg"
-                            v-for="(row,key) in config.columns "
-                            :key="key"
-                    >{{row.title}}：{{item|filter(item,row)}}</p>
-                  </a>
-                </div>
-              </span>
+                            <div v-for="(item,index) in tables" :key="item.id">
+                                <cube-swipe-item v-if="power_flag" ref="reftables" v-bind:btns="btns" :index="index" @btn-click="updateBook">
+                                    <div @click="config.view(item)">
+                                        <div class="item item-thumbnail-left" href="#">
+                                            <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
+                                            <p :class="'grid-showimg-'+showImg" v-for="(row,key) in config.columns " :key="key">{{row.title}}：{{item|filter(item,row)}}</p>
+                                        </div>
+                                    </div>
+                                </cube-swipe-item>
+                                <div @click="config.view(item)" v-else>
+                                    <div class="item item-thumbnail-left" href="#">
+                                        <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
+                                        <p :class="'grid-showimg-'+showImg" v-for="(row,key) in config.columns"
+                                           :key="key">{{row.title}}：{{item|filter(item,row)}}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </transition-group>
                     </div>
                 </template>
             </cube-swipe>
         </cube-scroll>
-        >
     </div>
 </template>
 
 <script>
+    import storage from '../../assets/storage/index'
+
     export default {
         name: "gridView",
         props: ["url", "rows", "grid", "load"],
@@ -72,7 +53,7 @@
         },
         watch: {
             load() {
-                this.tables=[];
+                this.tables = [];
                 this.isLastPage = false;
                 this.initTables();
             }
@@ -138,7 +119,7 @@
                 }
             },
             initTables() {
-                var that = this;
+                let that = this;
                 if (that.isLastPage) {
                     this.options.pullUpLoad = false;
                     return;
@@ -149,7 +130,7 @@
                         const arr = that.tables.filter(function (cval, ci) {
                             return cval.id == val.id;
                         });
-                        if (arr.length == 0) {
+                        if (arr.length === 0) {
                             that.tables.push(val);
                         }
                     });
