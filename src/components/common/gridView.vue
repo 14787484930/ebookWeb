@@ -10,7 +10,8 @@
                                     <div @click="config.view(item)">
                                         <div class="item item-thumbnail-left" href="#">
                                             <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
-                                            <p :class="'grid-showimg-'+showImg" v-for="(row,key) in config.columns " :key="key">{{row.title}}：{{item|filter(item,row)}}</p>
+                                            <p :class="'grid-showimg-'+showImg" v-for="(row,key) in config.columns "
+                                               :key="key">{{row.title}}：{{item|filter(item,row)}}</p>
                                         </div>
                                     </div>
                                 </cube-swipe-item>
@@ -125,6 +126,9 @@
                     return;
                 }
                 this.$table(this.url, this.config.query, function (data) {
+                    //将类型由数字改为字符串
+                    that.productTypeNumToString(that.url, data.list);
+
                     that.isLastPage = data.isLastPage;
                     $.each(data.list, function (i, val) {
                         const arr = that.tables.filter(function (cval, ci) {
@@ -173,6 +177,40 @@
                     that.$refs.scroll.forceUpdate();
                 });
                 this.$refs.scroll.refresh();
+            },
+            /**
+             * 产品类型由数字转变为字符串
+             * @param url
+             * @param list
+             * @constructor
+             * by gpj 2019年4月28日
+             */
+            productTypeNumToString(url, list){
+                let item;
+                let key;  //缓存的键，具体是什么要看存储的时候存的是什么
+                switch (url) {
+                    case "/book/books":{
+                        break;
+                    }
+                    case "/electronics/electronics":{
+                        key = "electronicType";
+                        let aValue = storage.getSession(key);
+                        for(item of list){
+                            let num = item.electronicsType;
+                            item.electronicsType = aValue[num - 1].text;
+                        }
+                        break;
+                    }
+                    case "/tutoring/tutorings":{
+                        break;
+                    }
+                    case "/other/others": {
+                        break;
+                    }
+                    default :{
+                        break;
+                    }
+                }
             }
         }
     };

@@ -14,11 +14,11 @@
                     <ul class="list">
                         <li class="item item-input">
                             <span>图书名称：</span>
-                            <span>{{book.bookName}}</span>
+                            <p>{{book.bookName}}</p>
                         </li>
                         <li class="item item-input">
                             <span>作者：</span>
-                            <span>{{book.author}}</span>
+                            <p>{{book.author}}</p>
                         </li>
                         <!--<li class="form-group item">
                             <span>出售价格：</span>
@@ -26,29 +26,29 @@
                         </li>-->
                         <li class="item item-input">
                             <span>出版日期：</span>
-                            <span>{{book.pubDate}}</span>
+                            <p>{{book.pubDate}}</p>
                         </li>
                         <li class="item item-input">
                             <span>出版社：</span>
-                            <span>{{book.bookPub}}</span>
+                            <p>{{book.bookPub}}</p>
                         </li>
                         <li class="item item-input" v-if="power">
                             <span>联系电话：</span>
-                            <span>{{book.phone}}</span>
+                            <p>{{book.phone}}</p>
                         </li>
                         <li class="item item-input" v-if="power">
                             <span>微信：</span>
-                            <span>{{book.weiXin}}</span>
+                            <p>{{book.weiXin}}</p>
                         </li>
                         <li class="item item-input">
                             <span>发布日期：</span>
-                            <span>{{book.pubDate}}</span>
-                        </li>
-                        <li class="item item-desc">
-                            <span>描述：</span>
-                            <div>{{book.des}}</div>
+                            <p>{{book.pubDate}}</p>
                         </li>
                     </ul>
+                    <div class="item item-desc">
+                        <span>描述：</span>
+                        <div>{{book.des}}</div>
+                    </div>
                 </template>
                 <report-button :product="{productId: book.id ,
          productName: book.bookName,
@@ -91,7 +91,7 @@
         },
         created(){
             this.book.id=this.$route.query.id;
-            if((this.book.id).length!==0)
+            if((this.book.id).length > 1)
                 this.initData();
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
@@ -138,4 +138,14 @@
 .cube-slide-item{ text-align: center;}
 .item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
 .book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
+
+ul li{
+    font-size: 15px;
+    border: 0;
+    line-height: 20px;
+}
+
+div{
+    border: 0;
+}
 </style>

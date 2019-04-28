@@ -13,6 +13,10 @@
                         <input type="text" class="isnull" v-model="book.bookName" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
+                        <span>图书类型：</span>
+                        <input type="text" class="isnull" v-model="book.bookType" placeholder="点此填写">
+                    </label>
+                    <label class="form-group item item-input ">
                         <span>作者：</span>
                         <input type="text" class="isnull" v-model="book.author" placeholder="点此填写">
                     </label>
@@ -41,6 +45,7 @@
                         <input type="text" v-model="book.des" placeholder="点此填写">
                     </label>
 
+                     <!--<file-com ref="refFiles" :urls="urls"></file-com>-->
                      <file-com ref="refFiles" :urls="urls"></file-com>
 
                     <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>

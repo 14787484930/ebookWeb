@@ -43,7 +43,7 @@
                         </li>
                         <li class="item item-desc">
                             <span>描述：</span>
-                            {{other.des}}
+                            <span>{{other.des}}</span>
                         </li>
                     </ul>
                 </template>
@@ -87,7 +87,7 @@
         created(){
             _that=this;
             this.other.id=this.$route.query.id;
-            if((this.other.id).length!==0)
+            if((this.other.id).length > 0)
                 this.initData();
             //else
                // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
@@ -127,4 +127,14 @@
 <style scoped>
 .scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
 .item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
+
+ul li {
+    font-size: 15px;
+    border: 0;
+    line-height: 20px;
+}
+
+div {
+    border: 0;
+}
 </style>

@@ -47,7 +47,7 @@
                             <input type="text" readonly="readonly"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
                    </div>
                 </li>
-                
+
                 <li class="cube-index-list-item">
                      <cube-button :light="true" @click="searchClear">重置</cube-button>
                      <cube-button :light="true" @click="search">搜索</cube-button>
@@ -136,7 +136,17 @@ data () {
      },
      del(row){
          let para = {id: row.id};
-         this.$post('/book/delete',para);
+         this.$post('/book/delete',para,(msg) => {
+             this.$createDialog({
+                 type: 'alert',
+                 title: '信息',
+                 content: '删除成功 ',
+                 icon: 'cubeic-right',
+                 onConfirm: () => {
+                     this.$table
+                 }
+             }).show()
+         });
      },
      update(row){
          this.$router.push({path: '/bookAdd', query: {id: row.id}})

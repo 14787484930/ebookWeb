@@ -111,7 +111,7 @@
         },
         methods: {
             initGrid(){
-                console.log(this.queryList);
+                console.log("electronic Index:",this.queryList);
                 this.grid={
                     img:'electronicsPic',
                     query:this.queryList,

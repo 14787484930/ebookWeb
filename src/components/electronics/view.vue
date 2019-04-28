@@ -9,7 +9,8 @@
                 </cube-slide>
                 <template>
                     <div class="listHead">
-                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong></div>
+                        <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong>
+                        </div>
                         <div class="defaultPrice">原价：<span>￥{{electronics.originalPrice}}</span></div>
                     </div>
                     <ul class="list">
@@ -29,7 +30,7 @@
                         </li>
                         <li class="item item-input">
                             <span>是否有发票：</span>
-                            <span v-if="electronics.hasInvoice" >有发票</span>
+                            <span v-if="electronics.hasInvoice">有发票</span>
                         </li>
                         <li class="item item-input" v-if="power">
                             <span>联系电话：</span>
@@ -46,8 +47,8 @@
                     </ul>
                 </template>
                 <report-button :product="{productId: electronics.id ,
-         productName: electronics.electronicsName,
-         productType: electronics.electronicsType}">
+                     productName: electronics.electronicsName,
+                     productType: electronics.electronicsType}">
                 </report-button>
             </cube-scroll>
         </div>
@@ -56,12 +57,14 @@
 
 <script>
     import reportButton from '../common/report'
+    import storage from '../../assets/storage/index'
     import $ from 'jquery';
+
     let _that;
 
     export default {
         components: {
-          reportButton,
+            reportButton,
         },
         //name: "view",
         data() {
@@ -69,7 +72,7 @@
                 //获取详细信息
                 electronics: {
                     electronicsName: '',
-                    electronicsType: '1',
+                    electronicsType: '',
                     originalPrice: '20',
                     presentPrice: '15',
                     buyDate: '2013-12-12',
@@ -84,46 +87,75 @@
                 urls: [],
             }
         },
-        created(){
-            _that=this;
-            this.electronics.id=this.$route.query.id;
-            if((this.electronics.id).length!==0)
+        created() {
+            _that = this;
+            this.electronics.id = this.$route.query.id;
+            if ((this.electronics.id).length > 1)
                 this.initData();
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-        computed:{
-            power(){
+        computed: {
+            power() {
                 return this.$store.getters.power;
             }
         },
-        mounted() {
-           // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
-        },
-
         methods: {
-            initData(){
-                this.$http.post('/electronics/getById/'+this.electronics.id).then((res)=>{
-                    _that.electronics=res.data.page.info;
-                    _that.electronics.buyDate=_that.$toDate(_that.electronics.buyDate);
-                    _that.electronics.electronicsType=1;//先不做处理后面要删除
-                    var arr=_that.electronics.electronicsPic.split(',');
-                    $.each(arr,(index,item)=>{
-                        _that.urls.push({image:_that.$file(item)});
+            initData() {
+                this.$http.post('/electronics/getById/' + this.electronics.id).then((res) => {
+                    _that.electronics = res.data.page.info;
+                    _that.electronics.buyDate = _that.$toDate(_that.electronics.buyDate);
+                    _that.electronics.electronicsType = _that.getElectronicTypeName(_that.electronics.electronicsType);
+                    let arr = _that.electronics.electronicsPic.split(',');
+                    $.each(arr, (index, item) => {
+                        _that.urls.push({image: _that.$file(item)});
                     })
                 });
             },
-             showImagePreview(src) {
+            showImagePreview(src) {
                 this.$createImagePreview({
-                    imgs:[src],
+                    imgs: [src],
                 }).show()
-             }
+            },
+            /**
+             * 将类型由数字改为字符串
+             * @param typeNum
+             * @returns {*}
+             */
+            getElectronicTypeName(typeNum) {
+                let key = "electronicType";
+                let aValue = storage.getSession(key);
+                let value = aValue[typeNum - 1].text;
+                if(typeof value === undefined){
+                    value = "未知";
+                    console.error('ElectronicView getElectronicTypeName: value error')
+                }
+                return value;
+            }
         },
     }
 
 </script>
 
 <style scoped>
-.scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
-.item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
+    .scroll-list-wrap {
+        height: 94vh;
+    }
+
+    /*滚动的页面的高度 -by gpj*/
+    .item-desc {
+        white-space: normal;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+    ul li {
+        font-size: 15px;
+        border: 0;
+        line-height: 20px;
+    }
+
+    div {
+        border: 0;
+    }
 </style>

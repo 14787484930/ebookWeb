@@ -4,6 +4,8 @@ import  {Picker,DatePicker,Dialog,Input } from 'cube-ui'
 import  Vue from 'vue'
 import $format from './format'
 import priceInput from  '../../components/common/priceInput'
+//引入缓存
+import storage from '../../assets/storage/index'
 const picker={
     state:{
         picker:{},
@@ -23,7 +25,9 @@ const picker={
                 title: "电子类型",
                 data: [list],
                 onSelect: (val, index, text) => back(val, index, text),
-            })
+            });
+            //将类型存入缓存
+            storage.setSession('electronicType', list);
         })
     },
     bookTypes:(back)=>{
