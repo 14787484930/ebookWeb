@@ -78,7 +78,7 @@
                             <input type="text" v-model="teach.des" placeholder="点此填写">
                         </label>
 
-                        <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                        <button id="submit" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
                     </div>
                 </div>
             </template>
@@ -173,6 +173,9 @@
 </script>
 <style scoped>
     .scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
+    .scroll-list-wrap #submit{
+        margin-bottom: 20px;
+    }
     .teach-tabs.item-input {
         display: flex;
         height: 70px;
