@@ -49,7 +49,7 @@
                             <input type="text" readonly="readonly"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
                         </div>
                     </li>
-                    
+
                     <li class="cube-index-list-item">
                         <cube-button :light="true" @click="searchClear">重置</cube-button>
                         <cube-button :light="true" @click="search">搜索</cube-button>
@@ -98,8 +98,8 @@
             initGrid(){
                 this.grid={
                     query:this.queryList,
+                    del:this.del,
                     view:(row)=>that.$router.push({path: '/teachView', query: {id: row.id}}),
-                    del:(row)=> {let para = {id: row.id}; that.$post('/tutoring/delete',para)},
                     edit:(row)=>that.$router.push({path: '/teachAdd', query: {id: row.id}}),
                     columns:[
                         {title:"名称",key:'name'},
@@ -108,6 +108,19 @@
                         {title:"日期",key:'Time',format:(row)=>that.$toDate(row.startTime)},
                     ],
                 };
+            },
+            del(row, callback){
+                let para = {id: row.id}; that.$post('/tutoring/delete',para, (msg) =>{
+                    this.$createDialog({
+                        type: 'alert',
+                        title: '信息',
+                        content: '删除成功 ',
+                        icon: 'cubeic-right',
+                        onConfirm: () => {
+                            callback(msg.data.code);
+                        }
+                    }).show()
+                });
             },
             search(){
                 this.load++;

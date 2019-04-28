@@ -72,7 +72,6 @@
 </template>
 
 <script>
-    import $config from "../../webserver/serve/config";
     let  that;
     export default {
         name: 'Electronics',
@@ -131,9 +130,19 @@
             view(row){
                 this.$router.push({path: '/electronicsView', query: {id: row.id}});
             },
-            del(row){
+            del(row, callback){
                 let para = {id: row.id};
-                this.$post('/electronics/delete',para);
+                this.$post('/electronics/delete',para, (msg) =>{
+                    this.$createDialog({
+                        type: 'alert',
+                        title: '信息',
+                        content: '删除成功 ',
+                        icon: 'cubeic-right',
+                        onConfirm: () => {
+                            callback(msg.data.code);
+                        }
+                    }).show()
+                });
             },
             update(row){
                 this.$router.push({path: '/electronicsAdd', query: {id: row.id}})

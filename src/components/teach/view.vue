@@ -178,4 +178,14 @@
   .active {
     color: #387ef5;
   }
+
+  ul li {
+      font-size: 15px;
+      border: 0;
+      line-height: 20px;
+  }
+
+  div {
+      border: 0;
+  }
 </style>

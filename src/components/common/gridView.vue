@@ -1,12 +1,14 @@
 <template>
     <div class="scroll-list-wrap">
-        <cube-scroll ref="scroll" :scroll-events="['scroll']" :options="options" @scroll="onScrollHandle" @pulling-up="refresh">
+        <cube-scroll ref="scroll" :scroll-events="['scroll']" :options="options" @scroll="onScrollHandle"
+                     @pulling-up="refresh">
             <cube-swipe>
                 <template>
                     <div class="list">
                         <transition-group name="swipe" tag="ul">
                             <div v-for="(item,index) in tables" :key="item.id">
-                                <cube-swipe-item v-if="power_flag" ref="reftables" v-bind:btns="btns" :index="index" @btn-click="updateBook">
+                                <cube-swipe-item v-if="power_flag" ref="reftables" v-bind:btns="btns" :index="index"
+                                                 @btn-click="updateOrDeleteItem">
                                     <div @click="config.view(item)">
                                         <div class="item item-thumbnail-left" href="#">
                                             <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
@@ -158,16 +160,21 @@
                     this.showImg = false;
                 }
             },
-
-            updateBook(btn, index) {
-                //删除数据
+            updateOrDeleteItem(btn, index) {
+                //删除或更新数据
+                let that = this;
                 const row = this.tables[index];
-                if (btn.action == "del") {
-                    this.config.del(row);
+                if (btn.action === "del") {
+                    //执行父组件的del方法
+                    this.config.del(row, (code) => {
+                        //移除删除的元素
+                        if (Number(code) === 100)
+                            that.tables.splice(index, 1);
+                    });
                 } else this.config.edit(row);
             },
             onImgLoad() {
-                var that = this;
+                let that = this;
                 that.$nextTick(function () {
                     that.$refs.scroll.refresh();
                     that.$refs.scroll.forceUpdate();
@@ -185,29 +192,29 @@
              * @constructor
              * by gpj 2019年4月28日
              */
-            productTypeNumToString(url, list){
+            productTypeNumToString(url, list) {
                 let item;
                 let key;  //缓存的键，具体是什么要看存储的时候存的是什么
                 switch (url) {
-                    case "/book/books":{
+                    case "/book/books": {
                         break;
                     }
-                    case "/electronics/electronics":{
+                    case "/electronics/electronics": {
                         key = "electronicType";
                         let aValue = storage.getSession(key);
-                        for(item of list){
+                        for (item of list) {
                             let num = item.electronicsType;
                             item.electronicsType = aValue[num - 1].text;
                         }
                         break;
                     }
-                    case "/tutoring/tutorings":{
+                    case "/tutoring/tutorings": {
                         break;
                     }
                     case "/other/others": {
                         break;
                     }
-                    default :{
+                    default : {
                         break;
                     }
                 }

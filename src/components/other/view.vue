@@ -4,7 +4,7 @@
             <cube-scroll ref="scroll">
                 <cube-slide ref="slide" :data="urls" align="center">
                     <cube-slide-item v-for="(item, index) in urls" :key="index">
-                        <img border="0" :src="item.image"  @click="showImagePreview(item.image)" height="200px">
+                        <img border="0" :src="item.image" @click="showImagePreview(item.image)" height="200px">
                     </cube-slide-item>
                 </cube-slide>
                 <template>
@@ -47,9 +47,8 @@
                         </li>
                     </ul>
                 </template>
-                <report-button :product="{productId: other.id ,
-         productName: other.otherName,
-         productType: other.otherType}">
+                <report-button
+                        :product="{productId: other.id ,productName: other.otherName, productType: other.otherType}">
                 </report-button>
             </cube-scroll>
         </div>
@@ -59,6 +58,7 @@
 <script>
     import reportButton from '../common/report'
     import $ from 'jquery';
+
     let _that;
 
     export default {
@@ -84,16 +84,16 @@
                 urls: [],
             }
         },
-        created(){
-            _that=this;
-            this.other.id=this.$route.query.id;
-            if((this.other.id).length > 0)
+        created() {
+            _that = this;
+            this.other.id = this.$route.query.id;
+            if ((this.other.id).length > 0)
                 this.initData();
             //else
-               // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
+            // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-        computed:{
-            power(){
+        computed: {
+            power() {
                 return this.$store.getters.power;
             }
         },
@@ -103,20 +103,20 @@
         },
 
         methods: {
-            initData(){
-                this.$http.post('/other/getById/'+this.other.id).then((res)=>{
-                    _that.other=res.data.page.info;
-                    _that.other.buyDate=_that.$toDate(_that.other.buyDate);
-                    _that.other.otherType=1;//先不做处理后面要删除
-                    var arr=_that.other.otherPic.split(',');
-                    $.each(arr,(index,item)=>{
-                        _that.urls.push({image:_that.$file(item)});
+            initData() {
+                this.$http.post('/other/getById/' + this.other.id).then((res) => {
+                    _that.other = res.data.page.info;
+                    _that.other.buyDate = _that.$toDate(_that.other.buyDate);
+                    _that.other.otherType = 1;//先不做处理后面要删除
+                    var arr = _that.other.otherPic.split(',');
+                    $.each(arr, (index, item) => {
+                        _that.urls.push({image: _that.$file(item)});
                     })
                 });
             },
             showImagePreview(src) {
                 this.$createImagePreview({
-                    imgs:[src],
+                    imgs: [src],
                 }).show()
             }
         },
@@ -125,16 +125,24 @@
 </script>
 
 <style scoped>
-.scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
-.item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
+    .scroll-list-wrap {
+        height: 94vh;
+    }
 
-ul li {
-    font-size: 15px;
-    border: 0;
-    line-height: 20px;
-}
+    /*滚动的页面的高度 -by gpj*/
+    .item-desc {
+        white-space: normal;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
 
-div {
-    border: 0;
-}
+    ul li {
+        font-size: 15px;
+        border: 0;
+        line-height: 20px;
+    }
+
+    div {
+        border: 0;
+    }
 </style>

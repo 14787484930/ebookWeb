@@ -134,7 +134,7 @@ data () {
      view(row){
          this.$router.push({path: '/bookView', query: {id: row.id}});
      },
-     del(row){
+     del(row, callback){
          let para = {id: row.id};
          this.$post('/book/delete',para,(msg) => {
              this.$createDialog({
@@ -143,7 +143,7 @@ data () {
                  content: '删除成功 ',
                  icon: 'cubeic-right',
                  onConfirm: () => {
-                     this.$table
+                     callback(msg.data.code);
                  }
              }).show()
          });
