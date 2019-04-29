@@ -43,7 +43,7 @@
             <li class="item item-input" v-if="isOrder">
                 <order-taking :btnNumber = 1 :id ="teach.id"></order-taking>
             </li>
-              <li class="item item-input" v-if="isOrderSelf">
+              <li class="item item-input" v-if="!isOrderSelf">
                   <span>接单人：</span>
                   <order-taking :btnNumber = 3 :orderUserId="teach.orderUser"></order-taking>
                   <order-taking :btnNumber = 2 :id = "teach.id"></order-taking>
