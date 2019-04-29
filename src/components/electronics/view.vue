@@ -7,6 +7,10 @@
                         <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
                     </cube-slide-item>
                 </cube-slide>
+                <report-button :product="{productId: electronics.id ,
+                     productName: electronics.electronicsName,
+                     productType: electronics.electronicsType}">
+                </report-button>
                 <template>
                     <div class="listHead">
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong>
@@ -46,10 +50,6 @@
                         </li>
                     </ul>
                 </template>
-                <report-button :product="{productId: electronics.id ,
-                     productName: electronics.electronicsName,
-                     productType: electronics.electronicsType}">
-                </report-button>
             </cube-scroll>
         </div>
     </div>
