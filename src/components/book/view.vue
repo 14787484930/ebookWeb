@@ -97,7 +97,7 @@
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
         mounted() {
-            console.log(123);
+           // console.log(123);
            // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         computed:{
@@ -122,7 +122,6 @@
                         _that.urls.push({image:_that.$file(item)});
                     })
                 });
-                console.log(_that.book);
             },
              showImagePreview(src) {
                 this.$createImagePreview({

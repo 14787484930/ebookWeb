@@ -123,7 +123,7 @@
              * @returns {*}
              */
             getElectronicTypeName(typeNum) {
-                let key = "electronicType";
+                let key = "electronicsType";
                 let aValue = storage.getSession(key);
                 let value = aValue[typeNum - 1].text;
                 if(typeof value === undefined){

@@ -109,7 +109,6 @@
                 return this.flag
             },
             isOrder:function(){  /*添加人：zxl ，描述：判断是否显示接单按钮*/
-                console.log(this);
                 if(!this.$store.getters.power_flag && this.teach.orderUser == null){
                     return true;
                 }else{

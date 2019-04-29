@@ -10,9 +10,6 @@
                     </label>
                     <label class="form-group item item-input ">
                         <span>电子类型：</span>
-                        <!--<p>下拉列表来显示</p>-->
-                        <!--<input type="text" v-model="electronics.electronicsType">-->
-                        <!--在这里可否用键值对？？？-->
                         <cube-select
                                 v-model="value"
                                 :options="options"
@@ -57,6 +54,7 @@
 
 <script>
     import FileCom from '../common/FileCom'
+    import storage from '../../assets/storage/index'
     import $ from 'jquery'
     import Date from "../common/date";
 
@@ -66,8 +64,7 @@
         data: function () {
             return {
                 isInvoice: true,
-                options: ['手机/配件', '电脑/配件', '移动存储', '网络设备', '游戏设备', '音响/耳机', '摄影摄像', '吹风/风扇', '其他'],
-                // options:[1,2,3,4,5,6,7,8,9,10],
+                options: [],    //下拉选择框
                 value: '',
                 electronics: {
                     electronicsName: '',
@@ -90,6 +87,12 @@
         },
         created() {
             _that = this;
+            //初始化下拉框
+            let value = storage.getSession("electronicsType");
+            this.options = value.map((item)=>{
+                return item.text;
+            });
+
             this.electronics.id = this.$route.query.id;
             if ((this.electronics.id).length > 1)
                 this.initData();
@@ -110,7 +113,7 @@
                     $.each(arr, (index, item) => {
                         _that.urls.push({url: _that.$file(item)});
                     })
-                })
+                });
             },
             saveData() {
                 let url = '/electronics/save';

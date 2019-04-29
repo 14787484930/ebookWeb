@@ -27,7 +27,7 @@ const picker={
                 onSelect: (val, index, text) => back(val, index, text),
             });
             //将类型存入缓存
-            storage.setSession('electronicType', list);
+            storage.setSession('electronicsType', list);
         })
     },
     bookTypes:(back)=>{
@@ -41,7 +41,8 @@ const picker={
                 data:[list] ,
                 onSelect:(val, index,text)=>back(val, index,text),
             });
-
+            //将类型存入缓存
+            storage.setSession('bookType', list);
         })
     },
     teachTypes:(back)=>{

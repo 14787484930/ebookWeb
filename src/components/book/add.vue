@@ -11,7 +11,11 @@
                         </label>
                         <label class="form-group item item-input ">
                             <span>图书类型：</span>
-                            <input type="text" class="isnull" v-model="book.bookType" placeholder="点此填写">
+                            <cube-select
+                                    v-model="value"
+                                    :options="options"
+                                    @change="change">
+                            </cube-select>
                         </label>
                         <label class="form-group item item-input ">
                             <span>作者：</span>
@@ -56,6 +60,7 @@
 
 <script>
     import FileCom from '../common/FileCom'
+    import storage from '../../assets/storage/index'
     import date from '../common/date'
     import inputEditor from '../common/inputEditor'
 
@@ -66,10 +71,12 @@
             return {
                 content: '<p></p>',
                 result: '',
+                options: [],  //下拉选择框
+                value: '',
                 book: {
                     id: 0,
                     bookName: '',
-                    bookType: '1',
+                    bookType: '',
                     author: '',
                     bookPrice: '20',
                     pubDate: '2013-12-12',
@@ -89,6 +96,12 @@
         },
         created() {
             _that = this;
+            //初始化下拉框
+            let value = storage.getSession("bookType");
+            this.options = value.map((item)=>{
+                return item.text;
+            });
+
             this.book.id = this.$route.query.id;
             if ((this.book.id).length > 1)
                 this.initData();
@@ -126,6 +139,10 @@
                         }
                     }).show()
                 })
+            },
+            //类型选择
+            change(value, index) {
+                this.book.bookType = index + 1;
             }
         }
     }

@@ -124,9 +124,9 @@
             },
             search(){
                 this.load++;
-                console.log(this.load);
+               // console.log(this.load);
                 let query =this.queryList;
-                console.log(query);
+               // console.log(query);
                 this.isShow =false;//搜索下拉隐藏
                 this.initGrid();
             },

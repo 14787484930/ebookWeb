@@ -197,10 +197,16 @@
                 let key;  //缓存的键，具体是什么要看存储的时候存的是什么
                 switch (url) {
                     case "/book/books": {
+                        key = "bookType";
+                        let aValue = storage.getSession(key);
+                        for (item of list) {
+                            let num = item.bookType;
+                            item.bookType = aValue[num - 1].text;
+                        }
                         break;
                     }
                     case "/electronics/electronics": {
-                        key = "electronicType";
+                        key = "electronicsType";
                         let aValue = storage.getSession(key);
                         for (item of list) {
                             let num = item.electronicsType;
