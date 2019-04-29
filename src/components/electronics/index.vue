@@ -196,15 +196,9 @@
                 //this.initGrid();
             },
             searchClear(){
-                this.queryList={
-                    electronicsName: '',
-                    electronicsType: '',
-                    hasInvoice:'',
-                    startTime:'',
-                    endTime:'',
-                    startPrice:'',
-                    endPrice:'',
-                },
+                Object.keys(that.queryList).forEach((key)=>{
+                    that.queryList[key] = '';
+                });
                 this.typeName=''
                 this.otherInvoiceName=''
             },

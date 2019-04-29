@@ -131,14 +131,9 @@
                 this.initGrid();
             },
             searchClear(){
-                that.queryList={
-                    name:'',
-                    type:'',
-                    startPrice:'',
-                    endPrice:'',
-                    startTime:'',
-                    endTime:''
-                }
+                Object.keys(that.queryList).forEach((key)=>{
+                    that.queryList[key] = '';
+                });
                 that.teachShowName=''
             },
             endTime() {

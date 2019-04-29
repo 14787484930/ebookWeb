@@ -6,7 +6,9 @@
                 <input class="search-btn" type="search" placeholder="搜索"  v-model="queryList.bookName"  @change="search">
                 <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
             </label>
-            <router-link v-if="power_flag"  :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive"><i class="icon ion-plus"></i></router-link>
+            <router-link v-if="power_flag"  :to="{path:'/bookAdd',query:{id:0}}"  class="button button-small button-positive">
+                <i class="icon ion-plus"></i>
+            </router-link>
         </div>
         <div style="text-align: center">
                 <button  @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown" >
@@ -18,7 +20,7 @@
                 <li class="cube-index-list-item">
                    <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
                             <div class="weui-cell__bd">
-                                  价格:
+                                <span>价格:</span>
                                 <span class="book-name">
                                     <span class="green">￥{{queryList.startPrice}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span class="green">￥{{queryList.endPrice}}</span>
                                 </span>
@@ -30,7 +32,7 @@
                 <li class="cube-index-list-item">
                     <div class="weui-cell weui-cell_access"   @click="$picker.show()">
                              <div class="weui-cell__bd">
-                              图书类型:
+                                 <span>图书类型:</span>
                                  <span class="book-name green">{{bookTypeName}}</span>
                              </div>
                             <div class="weui-cell__ft" >
@@ -40,7 +42,7 @@
                 <li class="cube-index-list-item">
                    <div class="weui-cell weui-cell_access"  >
                             <div class="weui-cell__bd">
-                                 日期:
+                                 <span>日期:</span>
                             </div>
                             <input type="text" readonly="readonly"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
                             <span class="line-span">——</span>
@@ -103,18 +105,13 @@ data () {
         this.initGrid();
      },
      searchClear(){
-         that.queryList={
-                     bookName:'',
-                     bookType:'',
-                     startPrice:'',
-                     endPrice:'',
-                     startTime:'',
-                     endTime:''
-                 }
+         Object.keys(that.queryList).forEach((key)=>{
+             that.queryList[key] = '';
+         })
          that.bookTypeName=''
      },
      initGrid(){
-         console.log();
+         console.log("this.grid",this.queryList)
          this.grid={
              img:'bookPic',
              query:this.queryList,

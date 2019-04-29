@@ -131,14 +131,9 @@
                 this.initGrid();
             },
             searchClear(){
-                that.queryList={
-                    otherName:'',
-                    hasInvoice:'',
-                    startPrice:'',
-                    endPrice:'',
-                    startTime:'',
-                    endTime:''
-                }
+                Object.keys(that.queryList).forEach((key)=>{
+                    that.queryList[key] = '';
+                });
                 that.otherName=''
             },
             endTime() {
