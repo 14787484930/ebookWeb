@@ -51,11 +51,11 @@
                         </label>
                         <label class="form-group item">
                             <span>开始时间：</span>
-                            <Date v-model="teach.startTime" type="time"></Date>
+                            <Date v-model="teach.startTime" type="time" readonly="readonly"></Date>
                         </label>
                         <label class="form-group item">
                             <span>结束时间：</span>
-                            <Date v-model="teach.endTime" type="time"></Date>
+                            <Date v-model="teach.endTime" :type="time" readonly="readonly"></Date>
                         </label>
                         <label class="form-group item item-input">
                             <span>讲座地点：</span>

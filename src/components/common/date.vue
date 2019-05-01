@@ -1,5 +1,5 @@
 <template>
-    <input v-if="tpe='time'" :value="value"  @click="showTime"/>
+    <input v-if="type='time'" :value="value"  @click="showTime"/>
     <input v-else :value="value"  @click="$picker.showDate()"/>
 </template>
 
@@ -8,15 +8,15 @@
         props: ["value",'type'],
         name: "date",
         created(){
-            var that=this;
-            if(this.type!="time"){
+            let that=this;
+            if(this.type.toString() !== "time"){
                 this.$picker.datePicker(val => that.$emit('input', that.$toDate(val)));
             }
         },
 
         methods:{
             showTime(){
-                var that=this;
+                let that=this;
                 this.$createDatePicker({
                     title: '选择时间',
                     min: new Date(2008, 1, 8, 8, 0),

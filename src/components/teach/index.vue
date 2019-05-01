@@ -6,47 +6,52 @@
                     <input class="search-btn" type="search" placeholder="搜索" v-model="queryList.name" @change="search">
                     <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
                 </label>
-                <router-link v-if="power_flag" :to="{path:'/teachAdd', query:{id:0}}" class="button button-small button-positive">
+                <router-link v-if="power_flag" :to="{path:'/teachAdd', query:{id:0}}"
+                             class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
                 </router-link>
             </div>
             <div style="text-align: center">
-                <button  @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown" >
+                <button @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown">
                     筛选
                 </button>
             </div>
-            <div title="搜索"  v-show="isShow" class="weui-cells">
+            <div title="搜索" v-show="isShow" class="weui-cells">
                 <ul>
                     <li class="cube-index-list-item">
-                        <div class="weui-cell weui-cell_access" @click="$picker.showDialog()" >
+                        <div class="weui-cell weui-cell_access" @click="$picker.showDialog()">
                             <div class="weui-cell__bd">
                                 价格:
                                 <span class="book-name">
-                                    <span class="green">￥{{queryList.startPrice}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span class="green">￥{{queryList.endPrice}}</span>
+                                    <span class="green">￥{{queryList.startPrice}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span
+                                        class="green">￥{{queryList.endPrice}}</span>
                                 </span>
                             </div>
-                            <div class="weui-cell__ft"  >
+                            <div class="weui-cell__ft">
                             </div>
                         </div>
                     </li>
                     <li class="cube-index-list-item">
-                        <div class="weui-cell weui-cell_access"   @click="$picker.show()">
+                        <div class="weui-cell weui-cell_access" @click="$picker.show()">
                             <div class="weui-cell__bd">
                                 类型:
                                 <span class="book-name green">{{teachShowName}}</span>
                             </div>
-                            <div class="weui-cell__ft" >
+                            <div class="weui-cell__ft">
                             </div>
                         </div>
                     </li>
                     <li class="cube-index-list-item">
-                        <div class="weui-cell weui-cell_access"  >
+                        <div class="weui-cell weui-cell_access">
                             <div class="weui-cell__bd">
                                 日期:
                             </div>
-                            <input type="text" readonly="readonly"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
+                            <input type="text" readonly="readonly" v-model="queryList.startTime"
+                                   @click="$picker.showTime('type')" class="time-input" placeholder="请选择开始时间">
                             <span class="line-span">——</span>
-                            <input type="text" readonly="readonly"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
+                            <input type="text" readonly="readonly" v-model="queryList.endTime"
+                                   @click="$picker.showEndTime()"
+                                   class="time-input" placeholder="请选择结束时间">
                         </div>
                     </li>
 
@@ -62,7 +67,7 @@
 </template>
 
 <script>
-    let  that;
+    let that;
     export default {
         name: 'Teach',
         data() {
@@ -70,47 +75,48 @@
                 queryList: {
                     type: '',
                     name: '',
-                    startPrice:'',
-                    endPrice:'',
-                    startTime:'',
-                    endTime:''
+                    startPrice: '',
+                    endPrice: '',
+                    startTime: '',
+                    endTime: ''
                 },
-                teachShowName:'',
-                isShow:false,
-                grid:{},
-                load:0,
+                teachShowName: '',
+                isShow: false,
+                grid: {},
+                load: 0,
             }
         },
-        computed:{
-            power(){
+        computed: {
+            power() {
                 return this.$store.getters.power;
             },
-            power_flag(){
+            power_flag() {
                 return this.$store.getters.power_flag;
             }
         },
         created() {
-            that=this;
+            that = this;
             this.initGrid();
             this.initType();
         },
         methods: {
-            initGrid(){
-                this.grid={
-                    query:this.queryList,
-                    del:this.del,
-                    view:(row)=>that.$router.push({path: '/teachView', query: {id: row.id}}),
-                    edit:(row)=>that.$router.push({path: '/teachAdd', query: {id: row.id}}),
-                    columns:[
-                        {title:"名称",key:'name'},
-                        {title:"报酬",key:'price',format:(row)=>"￥"+ row.price},
-                        {title:"类型",key:'type',format:(row)=>row.type == 0 ? '辅导' : '讲座' },
-                        {title:"日期",key:'Time',format:(row)=>that.$toDate(row.startTime)},
+            initGrid() {
+                this.grid = {
+                    query: this.queryList,
+                    del: this.del,
+                    view: (row) => that.$router.push({path: '/teachView', query: {id: row.id}}),
+                    edit: (row) => that.$router.push({path: '/teachAdd', query: {id: row.id}}),
+                    columns: [
+                        {title: "名称", key: 'name'},
+                        {title: "报酬", key: 'price', format: (row) => "￥" + row.price},
+                        {title: "类型", key: 'type', format: (row) => row.type == 0 ? '辅导' : '讲座'},
+                        {title: "日期", key: 'Time', format: (row) => that.$toDate(row.startTime)},
                     ],
                 };
             },
-            del(row, callback){
-                let para = {id: row.id}; that.$post('/tutoring/delete',para, (msg) =>{
+            del(row, callback) {
+                let para = {id: row.id};
+                that.$post('/tutoring/delete', para, (msg) => {
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',
@@ -122,49 +128,39 @@
                     }).show()
                 });
             },
-            search(){
+            search() {
                 this.load++;
-               // console.log(this.load);
-                let query =this.queryList;
-               // console.log(query);
-                this.isShow =false;//搜索下拉隐藏
+                // console.log(this.load);
+                let query = this.queryList;
+                // console.log(query);
+                this.isShow = false;//搜索下拉隐藏
                 this.initGrid();
             },
-            searchClear(){
-                Object.keys(that.queryList).forEach((key)=>{
+            searchClear() {
+                Object.keys(that.queryList).forEach((key) => {
                     that.queryList[key] = '';
                 });
-                that.teachShowName=''
+                that.teachShowName = ''
             },
-            endTime() {
-                if (!this.datePicker) {
-                    this.datePicker = this.$createDatePicker({
-                        title: 'Date Picker',
-                        min: new Date(1980, 1, 1),
-                        max: new Date(new Date().getFullYear(), 12, 12),
-                        value: new Date(),
-                        onSelect: this.selectHandle,
-                    })
-                }
-                this.datePicker.show()
-            },
-            selectHandle(val, index,text) {
-                that.queryList.endTime=index.join('-');
-            },
-            initType(){
-                this.$picker.teachTypes((val, index,text)=>{
-                    that.queryList.type=val['0'];
-                    that.teachShowName=text['0'];
+            initType() {
+                this.$picker.teachTypes((val, index, text) => {
+                    that.queryList.type = val['0'];
+                    that.teachShowName = text['0'];
                 });
-                this.$picker.datePicker((val, index,text)=>{
-                    that.queryList.startTime=index.join('-');
+                this.$picker.timePicker((val, index, text) => {
+                    let value = that.$toDate(val, "yyyy-MM-dd HH:mm")
+                    that.queryList.startTime = value;
                 });
-                this.$picker.dialogPicker((val, index)=>{
-                    that.queryList.startPrice=val;
-                    that.queryList.endPrice=index;
+                this.$picker.timeEndPicker((val, index, text) => {
+                    let value = that.$toDate(val, "yyyy-MM-dd HH:mm")
+                    that.queryList.endTime = value;
+                });
+                this.$picker.dialogPicker((val, index) => {
+                    that.queryList.startPrice = val;
+                    that.queryList.endPrice = index;
                 })
             },
-            intelSearch(){
+            intelSearch() {
                 this.isShow = !this.isShow
             }
         }

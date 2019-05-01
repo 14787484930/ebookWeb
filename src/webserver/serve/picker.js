@@ -10,10 +10,16 @@ const picker={
     state:{
         picker:{},
         dialog:{},
-        datePicker:{}
+        datePicker:{},
+        dateEndPicker:{},
+        timePicker:{},
+        timeEndPicker:{},
     },
     show:()=> picker.state.picker.show(),
     showDate:()=>picker.state.datePicker.show(),
+    showDateEnd:()=>picker.state.dateEndPicker.show(),
+    showTime:()=>picker.state.timePicker.show(),
+    showEndTime:()=>picker.state.timeEndPicker.show(),
     showDialog:()=>picker.state.dialog.show(),
     electronicType:(back)=>{
         $http.post('/electronicstype/electronicsTypes', {}, res=>{
@@ -77,11 +83,57 @@ const picker={
     },
     datePicker(back){
         picker.state.datePicker = DatePicker.$create({
-            title: '请选择日期',
+            title: '请选择开始日期',
             min: new Date(1980, 1, 1),
             max: new Date(new Date().getFullYear(), 12, 12),
             value: new Date(),
             onSelect:(val, index,text)=>back(val, index,text),
+        })
+    },
+    //结束日期选择，只有年月日 -by gpj
+    dateEndPicker(back){
+        picker.state.dateEndPicker = DatePicker.$create({
+            title: '请选择结束日期',
+            min: new Date(1980, 1, 1),
+            max: new Date(new Date().getFullYear(), 12, 12),
+            value: new Date(),
+            onSelect:(val, index,text)=>back(val, index,text),
+        })
+    },
+    //开始日期时间选择，年月日时分 -by gpj
+    timePicker(back){
+        picker.state.timePicker = DatePicker.$create({
+            title: '选择开始时间',
+            min: new Date(2008, 1, 8, 8, 0),
+            max: new Date(2020, 12, 20, 20, 59),
+            value: new Date(),
+            format: {
+                year: 'YY年',
+                month: 'MM月',
+                date: 'D日',
+                hour:"hh时",
+                minute:"mm分",
+            },
+            columnCount: 5,
+            onSelect:(val, index, text)=>back(val, index, text),
+        })
+    },
+    //结束日期时间选择，年月日时分 -by gpj
+    timeEndPicker(back){
+        picker.state.timeEndPicker = DatePicker.$create({
+            title: '选择结束时间',
+            min: new Date(2008, 1, 8, 8, 0),
+            max: new Date(2020, 12, 20, 20, 59),
+            value: new Date(),
+            format: {
+                year: 'YY年',
+                month: 'MM月',
+                date: 'D日',
+                hour:"hh时",
+                minute:"mm分",
+            },
+            columnCount: 5,
+            onSelect:(val, index, text)=>back(val, index, text),
         })
     },
     dialogPicker(back){

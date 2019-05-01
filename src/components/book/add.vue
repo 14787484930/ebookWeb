@@ -27,7 +27,7 @@
                         </label>
                         <label class="form-group item item-input ">
                             <span>出版日期：</span>
-                            <date v-model="book.pubDate"></date>
+                            <date v-model="book.pubDate" :type="date" readonly="readonly"></date>
                         </label>
                         <label class="form-group item item-input ">
                             <span>出版社：</span>

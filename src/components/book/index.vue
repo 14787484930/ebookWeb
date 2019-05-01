@@ -41,12 +41,18 @@
                 </li>
                 <li class="cube-index-list-item">
                    <div class="weui-cell weui-cell_access"  >
-                            <div class="weui-cell__bd">
-                                 <span>日期:</span>
-                            </div>
-                            <input type="text" readonly="readonly"  v-model="queryList.startTime" @click="$picker.showDate('type')"  class="time-input" placeholder="请选择开始日期" >
-                            <span class="line-span">——</span>
-                            <input type="text" readonly="readonly"  v-model="queryList.endTime" @click="endTime()"  class="time-input" placeholder="请选择结束日期" >
+                        <div class="weui-cell__bd">
+                             <span>日期:</span>
+                        </div>
+                        <input type="text" readonly="readonly"
+                               v-model="queryList.startTime"
+                               @click="$picker.showDate('type')"
+                               class="time-input" placeholder="请选择开始日期" >
+                        <span class="line-span">——</span>
+                        <input type="text" readonly="readonly"
+                               v-model="queryList.endTime"
+                               @click="$picker.showDateEnd('type')"
+                               class="time-input" placeholder="请选择结束日期" >
                    </div>
                 </li>
 
@@ -148,28 +154,16 @@ data () {
      update(row){
          this.$router.push({path: '/bookAdd', query: {id: row.id}})
      },
-     endTime() {
-         if (!this.datePicker) {
-             this.datePicker = this.$createDatePicker({
-                 title: 'Date Picker',
-                 min: new Date(1980, 1, 1),
-                 max: new Date(new Date().getFullYear(), 12, 12),
-                 value: new Date(),
-                 onSelect: this.selectHandle,
-             })
-         }
-         this.datePicker.show()
-     },
-     selectHandle(val, index,text) {
-         that.queryList.endTime=index.join('-');
-     },
      initType(){
          this.$picker.bookTypes((val, index,text)=>{
              that.queryList.bookType=val['0'];
              that.bookTypeName=text['0'];
          });
-         this.$picker.datePicker((val, index,text)=>{
+         this.$picker.datePicker((val, index, text)=>{
                that.queryList.startTime=index.join('-');
+         });
+         this.$picker.dateEndPicker((val, index, text)=>{
+             that.queryList.endTime=index.join('-');
          });
          this.$picker.dialogPicker((val, index)=>{
                that.queryList.startPrice=val;
