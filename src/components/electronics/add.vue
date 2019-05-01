@@ -24,9 +24,12 @@
                         <span>出售价格(元)：</span>
                         <input placeholder="点此填写" type="text" class="isnull" v-model="electronics.presentPrice">
                     </label>
-                    <label class="form-group item">
+                    <label class="form-group item item-input ">
                         <span>购买日期：</span>
-                        <Date v-model="electronics.buyDate"></Date>
+                        <input type="text" readonly="readonly"
+                               v-model="electronics.buyDate"
+                               @click="$picker.showDate('type')"
+                               placeholder="购买日期">
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
@@ -87,12 +90,8 @@
         },
         created() {
             _that = this;
-            //初始化下拉框
-            let value = storage.getSession("electronicsType");
-            this.options = value.map((item)=>{
-                return item.text;
-            });
-
+            this.initDateType();
+            this.initBookTypeSelect();
             this.electronics.id = this.$route.query.id;
             if ((this.electronics.id).length > 1)
                 this.initData();
@@ -101,6 +100,19 @@
             //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods: {
+            //初始化出版日期选择
+            initDateType() {
+                this.$picker.datePicker((val, index, text) => {
+                    _that.electronics.buyDate = index.join('-');
+                });
+            },
+            //初始化电子类型下拉框
+            initBookTypeSelect() {
+                let value = storage.getSession("electronicsType");
+                this.options = value.map((item) => {
+                    return item.text;
+                });
+            },
             initData() {
                 this.$http.post('/electronics/getById/' + this.electronics.id).then((res) => {
                     //_that.electronics=res.data.page.Info;
@@ -153,8 +165,9 @@
         height: 94vh;
     }
 
-    .scroll-list-wrap #submit{
+    .scroll-list-wrap #submit {
         margin-bottom: 20px;
     }
+
     /*滚动的页面的高度 -by gpj*/
 </style>

@@ -27,7 +27,10 @@
                         </label>
                         <label class="form-group item item-input ">
                             <span>出版日期：</span>
-                            <date v-model="book.pubDate" :type="date" readonly="readonly"></date>
+                            <input type="text" readonly="readonly"
+                                   v-model="book.pubDate"
+                                   @click="$picker.showDate('type')"
+                                   placeholder="请选择出版日期">
                         </label>
                         <label class="form-group item item-input ">
                             <span>出版社：</span>
@@ -48,7 +51,8 @@
 
                         <file-com ref="refFiles" :urls="urls"></file-com>
 
-                        <button id = 'submit' style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                        <button id='submit' style="width: 100%" class="button button-positive" @click="saveData">发布
+                        </button>
                     </div>
 
                 </template>
@@ -64,7 +68,7 @@
     import date from '../common/date'
     import inputEditor from '../common/inputEditor'
 
-    var _that;
+    let _that;
     export default {
         name: "add",
         data() {
@@ -96,29 +100,38 @@
         },
         created() {
             _that = this;
-            //初始化下拉框
-            let value = storage.getSession("bookType");
-            this.options = value.map((item)=>{
-                return item.text;
-            });
-
+            this.initBookTypeSelect();
+            this.initDateType();
             this.book.id = this.$route.query.id;
             if ((this.book.id).length > 1)
                 this.initData();
         },
         mounted() {
-           /* $(".scroll-list-wrap").height(screen.availHeight - $(".tabs-icon-top", window.parent.parent.document).height()) + 180;
-            $(".ql-blank").attr("data-placeholder", "备注")*/
+            /* $(".scroll-list-wrap").height(screen.availHeight - $(".tabs-icon-top", window.parent.parent.document).height()) + 180;
+             $(".ql-blank").attr("data-placeholder", "备注")*/
         },
         methods: {
             updateData() {
+            },
+            //初始化出版日期选择
+            initDateType(){
+                this.$picker.datePicker((val, index, text)=>{
+                    _that.book.pubDate=index.join('-');
+                });
+            },
+            //初始化图书类型下拉框
+            initBookTypeSelect() {
+                let value = storage.getSession("bookType");
+                this.options = value.map((item) => {
+                    return item.text;
+                });
             },
             initData() {
                 this.$http.post('/book/getById/' + this.book.id).then((res) => {
                     _that.book = res.data.page.info;
                     _that.book.bookType = 1;//先不做处理后面要删除
                     _that.book.pubDate = _that.$toDate(_that.book.pubDate);
-                    var arr = _that.book.bookPic.split(',');
+                    let arr = _that.book.bookPic.split(',');
                     $.each(arr, (index, item) => {
                         _that.urls.push({url: _that.$file(item)});
                     })
@@ -126,7 +139,7 @@
             },
             saveData() {
                 let url = '/book/save';
-                if (this.book.id != 0)
+                if (parseInt(this.book.id) !== 0)
                     url = '/book/update';
                 this.$save(url, this.book, this.$refs.refFiles.files, (msg) => {
                     this.$createDialog({
@@ -152,8 +165,9 @@
         height: 94vh;
     }
 
-    .scroll-list-wrap #submit{
+    .scroll-list-wrap #submit {
         margin-bottom: 20px;
     }
+
     /*滚动的页面的高度 -by gpj*/
 </style>

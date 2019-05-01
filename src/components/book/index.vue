@@ -117,7 +117,7 @@ data () {
          that.bookTypeName=''
      },
      initGrid(){
-         console.log("this.grid",this.queryList)
+         //console.log("this.grid",this.queryList)
          this.grid={
              img:'bookPic',
              query:this.queryList,

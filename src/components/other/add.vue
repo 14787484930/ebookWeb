@@ -16,9 +16,12 @@
                         <span>出售价格(元)：</span>
                         <input type="text" class="isnull" v-model="other.presentPrice" placeholder="点此填写">
                     </label>
-                    <label class="form-group item ">
+                    <label class="form-group item item-input ">
                         <span>购买日期：</span>
-                        <date v-model="other.buyDate"></date>
+                        <input type="text" readonly="readonly"
+                               v-model="other.buyDate"
+                               @click="$picker.showDate('type')"
+                               placeholder="购买日期">
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
@@ -78,6 +81,7 @@
         },
         created() {
             _that = this;
+            this.initDateType();
             this.other.id = this.$route.query.id;
             if (parseInt(this.other.id) !== 0)
                 this.initData();
@@ -86,6 +90,12 @@
             //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods: {
+            //初始化出版日期选择
+            initDateType() {
+                this.$picker.datePicker((val, index, text) => {
+                    _that.other.buyDate = index.join('-');
+                });
+            },
             initData() {
                 this.$http.post('/other/getById/' + this.other.id).then((res) => {
                     //_that.other=res.data.page.info;
