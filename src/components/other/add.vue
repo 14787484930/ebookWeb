@@ -53,7 +53,6 @@
 <script>
     import FileCom from '../common/FileCom'
     import $ from 'jquery'
-    import Date from '../common/date'
 
     let _that;
     export default {
@@ -77,7 +76,6 @@
         },
         components: {
             'file-com': FileCom,
-            Date,
         },
         created() {
             _that = this;

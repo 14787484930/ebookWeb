@@ -65,7 +65,6 @@
 <script>
     import FileCom from '../common/FileCom'
     import storage from '../../assets/storage/index'
-    import date from '../common/date'
     import inputEditor from '../common/inputEditor'
 
     let _that;
@@ -95,7 +94,6 @@
         },
         components: {
             FileCom,
-            date,
             inputEditor,
         },
         created() {

@@ -59,7 +59,6 @@
     import FileCom from '../common/FileCom'
     import storage from '../../assets/storage/index'
     import $ from 'jquery'
-    import Date from "../common/date";
 
     let _that;
     export default {
@@ -85,7 +84,6 @@
             }
         },
         components: {
-            Date,
             'file-com': FileCom,
         },
         created() {

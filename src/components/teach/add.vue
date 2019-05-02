@@ -100,7 +100,6 @@
 
 <script>
     let _that;
-    import Date from "../common/date";
 
     export default {
         name: "addTeach",
@@ -124,9 +123,6 @@
                 }
             };
         },
-        components: {
-            Date
-        },
         created() {
             _that = this;
             this.initDateType();
@@ -141,12 +137,12 @@
             //初始化时间选择
             initDateType() {
                 this.$picker.timePicker((val, index, text) => {
-                    let value = that.$toDate(val, "yyyy-MM-dd HH:mm")
-                    _that.teach.startTime = value.join('-');
+                    let value = _that.$toDate(val, "yyyy-MM-dd HH:mm");
+                    _that.teach.startTime = value;
                 });
                 this.$picker.timeEndPicker((val, index, text) => {
-                    let value = that.$toDate(val, "yyyy-MM-dd HH:mm")
-                    _that.teach.endTime = value.join('-');
+                    let value = _that.$toDate(val, "yyyy-MM-dd HH:mm");
+                    _that.teach.endTime = value;
                 });
             },
             initData() {
