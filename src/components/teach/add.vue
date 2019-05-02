@@ -17,9 +17,13 @@
                             <span>辅导名称：</span>
                             <input type="text" class="isnull" v-model="teach.name" placeholder="点此填写">
                         </label>
-                        <label class="form-group item">
+                        <label class="form-group item item-input">
                             <span>辅导截止时间：</span>
-                            <Date v-model="teach.startTime" type="time"></Date>
+                            <input type="text" readonly="readonly"
+                                   v-model="teach.startTime"
+                                   @click="$picker.showTime('type')"
+                                   placeholder="点此选择日期">
+                          <!--  <Date v-model="teach.startTime" type="time"></Date>-->
                         </label>
                         <label class="form-group item item-input">
                             <span>辅导地点：</span>
@@ -49,13 +53,21 @@
                             <span>名称：</span>
                             <input type="text" class="isnull" v-model="teach.name" placeholder="点此填写">
                         </label>
-                        <label class="form-group item">
+                        <label class="form-group item item-input">
                             <span>开始时间：</span>
-                            <Date v-model="teach.startTime" type="time" readonly="readonly"></Date>
+                            <input type="text" readonly="readonly"
+                                   v-model="teach.startTime"
+                                   @click="$picker.showTime('type')"
+                                   placeholder="点此选择日期">
+                            <!--<Date v-model="teach.startTime" type="time" readonly="readonly"></Date>-->
                         </label>
-                        <label class="form-group item">
+                        <label class="form-group item item-input">
                             <span>结束时间：</span>
-                            <Date v-model="teach.endTime" :type="time" readonly="readonly"></Date>
+                            <input type="text" readonly="readonly"
+                                   v-model="teach.endTime"
+                                   @click="$picker.showEndTime('type')"
+                                   placeholder="点此选择日期">
+                            <!--<Date v-model="teach.endTime" :type="time" readonly="readonly"></Date>-->
                         </label>
                         <label class="form-group item item-input">
                             <span>讲座地点：</span>
@@ -117,6 +129,7 @@
         },
         created() {
             _that = this;
+            this.initDateType();
             this.teach.id = this.$route.query.id;
             if ((this.teach.id).length > 1) this.initData();
         },
@@ -125,6 +138,17 @@
             this.changeTab(0);
         },
         methods: {
+            //初始化时间选择
+            initDateType() {
+                this.$picker.timePicker((val, index, text) => {
+                    let value = that.$toDate(val, "yyyy-MM-dd HH:mm")
+                    _that.teach.startTime = value.join('-');
+                });
+                this.$picker.timeEndPicker((val, index, text) => {
+                    let value = that.$toDate(val, "yyyy-MM-dd HH:mm")
+                    _that.teach.endTime = value.join('-');
+                });
+            },
             initData() {
                 this.$http.post("/tutoring/getById/" + this.teach.id).then(res => {
                     //_that.teach = res.data.page.info;
@@ -152,16 +176,16 @@
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm:()=>{
-                            this.$router.push({path: '/teach',query: {flag: 1}})
+                            this.$router.push({path: '/teach'})
                         }
                     }).show()
                 });
             },
             //类型选择
             changeTab(index) {
-                var teachTab = document.getElementsByClassName("teach-tab");
+                let teachTab = document.getElementsByClassName("teach-tab");
                 this.flag = index;
-                if (index != this.current) {
+                if (Number(index) !== Number(this.current)) {
                     teachTab[index].classList.add("active");
                     teachTab[this.current].classList.remove("active");
                     this.current = index;
