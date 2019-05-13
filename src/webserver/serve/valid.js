@@ -3,6 +3,7 @@
  * tel：电话号码验证
  * */
 import  {Toast} from 'cube-ui'
+import $ from 'jquery'
 const $valid={
     state:true,
     msg:'',

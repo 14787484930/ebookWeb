@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 Vue.use(VueRouter)
 import home from '../../components/main/home'
-import  main from  '../../components/main/main'
-import  book from '../../components/book/index'
+import main from '../../components/main/main'
+import book from '../../components/book/index'
 import electronics from '../../components/electronics/index'
 import electronicsAdd from '../../components/electronics/add'
 import electronicsView from '../../components/electronics/view'
@@ -18,21 +19,23 @@ import bookView from '../../components/book/view'
 import center from '../../components/about/mycenter'
 import advice from '../../components/about/advice'
 import version from '../../components/about/version'
-// import test from '../../components/about/test'
+//测试模块
+import shop from '../../components/shop/index'
 import verify from '../../components/common/verify'
 
 const routes = new VueRouter({
     mode: 'history',
     linkActiveClass: 'active',
-    base:'/',
+    base: '/',
     routes: [
         // 动态路径参数 以冒号开头
-        { path: '/', component: home,
+        {
+            path: '/', component: home,
             children: [
                 {path: '/', component: main},
                 {path: '/book', component: book},
                 {path: '/bookAdd', component: bookAdd},
-                {path:'/bookView',component:bookView},
+                {path: '/bookView', component: bookView},
                 {path: '/electronics', component: electronics},
                 {path: '/electronicsAdd', component: electronicsAdd},
                 {path: '/electronicsView', component: electronicsView},
@@ -47,8 +50,9 @@ const routes = new VueRouter({
                 // {path: '/test', component: test},
                 {path: '/version', component: version},
                 {path: '/verify', component: verify},
+                {path: '/shop', component: shop}
             ],
         }
     ]
 })
-export  default  routes;
+export default routes;
