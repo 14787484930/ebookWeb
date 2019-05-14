@@ -2,11 +2,7 @@
     <div>
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
-                <cube-slide ref="slide" :data="urls" align="center">
-                    <cube-slide-item v-for="(item, index) in urls" :key="index">
-                        <img :src="item.image" @click="showImagePreview(item.image)" height="200px">
-                    </cube-slide-item>
-                </cube-slide>
+                <slider :pic-urls="urls"></slider>
                 <report-button :product="{productId: electronics.id ,
                      productName: electronics.electronicsName,
                      productType: electronics.electronicsType}">
@@ -58,6 +54,7 @@
 <script>
     import reportButton from '../../components/report'
     import storage from '../../assets/storage/index'
+    import slider from '../../components/slider'
     import $ from 'jquery';
 
     let _that;
@@ -65,6 +62,7 @@
     export default {
         components: {
             reportButton,
+            slider
         },
         //name: "view",
         data() {
@@ -111,11 +109,6 @@
                         _that.urls.push({image: _that.$file(item)});
                     })
                 });
-            },
-            showImagePreview(src) {
-                this.$createImagePreview({
-                    imgs: [src],
-                }).show()
             },
             /**
              * 将类型由数字改为字符串

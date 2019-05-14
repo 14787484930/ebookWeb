@@ -2,11 +2,7 @@
     <div>
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
-                <cube-slide ref="slide" :data="urls" >
-                    <cube-slide-item v-for="(item, index) in urls" :key="index">
-                        <img :src="item.image" @click="showImagePreview(item.image)" class="book-imgs" >
-                    </cube-slide-item>
-                </cube-slide>
+                <slider :pic-urls="urls"></slider>
                 <report-button :product="{productId: book.id ,
                      productName: book.bookName,
                      productType: book.bookType}">
@@ -61,91 +57,97 @@
 
 <script>
     import reportButton from '../../components/report'
+    import slider from '../../components/slider'
     import $ from 'jquery';
-    import { Dialog } from 'cube-ui'
+
     export default {
         //name: "view",
         components: {
-            reportButton
+            reportButton,
+            slider
         },
         data() {
             return {
                 //获取详细信息
-                book:{
-                    id:0,
-                    bookName:'',
-                    bookType:'1',
-                    author:'',
-                    bookPrice:'20',
-                    pubDate:'2013-12-12',
-                    bookPub:'',
-                    bookPic:'',
-                    weiXin:'',
-                    phone:'',
-                    des:'',
+                book: {
+                    id: 0,
+                    bookName: '',
+                    bookType: '1',
+                    author: '',
+                    bookPrice: '20',
+                    pubDate: '2013-12-12',
+                    bookPub: '',
+                    bookPic: '',
+                    weiXin: '',
+                    phone: '',
+                    des: '',
                 },
 
                 //图片地址轮播
                 urls: [],
             }
         },
-        created(){
-            this.book.id=this.$route.query.id;
-            if((this.book.id).length > 1)
+        created() {
+            this.book.id = this.$route.query.id;
+            if ((this.book.id).length > 1)
                 this.initData();
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
         mounted() {
-           // console.log(123);
-           // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
+            // console.log(123);
+            // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
-        computed:{
-            power(){
+        computed: {
+            power() {
                 return this.$store.getters.power;
             }
         },
         methods: {
-            initData(){
-                var _that=this;
+            initData() {
+                var _that = this;
                 const toast = this.$createToast({
                     time: 0,
                     txt: '加载中...'
                 });
                 toast.show();
-                this.$http.post('/book/getById/'+this.book.id).then((res)=>{
+                this.$http.post('/book/getById/' + this.book.id).then((res) => {
                     toast.hide();
-                    _that.book=res.data.page.info;
-                    _that.book.bookType=1;//先不做处理后面要删除
-                    var arr=_that.book.bookPic.split(',');
-                    $.each(arr,(index,item)=>{
-                        _that.urls.push({image:_that.$file(item)});
+                    _that.book = res.data.page.info;
+                    _that.book.bookType = 1;//先不做处理后面要删除
+                    var arr = _that.book.bookPic.split(',');
+                    $.each(arr, (index, item) => {
+                        _that.urls.push({image: _that.$file(item)});
                     })
                 });
             },
-             showImagePreview(src) {
-                this.$createImagePreview({
-                    imgs:[src],
-                }).show()
-             }
         },
     }
 
 </script>
 <style scoped>
-.scroll-list-wrap{height: 94vh;}
-.cube-slide-item{ text-align: center;}
-.item-desc{white-space: normal;word-break: break-all;word-wrap: break-word;}
-.book-imgs{padding: 0 .05rem 0 .04rem; height: 5.34rem;max-width: 100%;}
+    .scroll-list-wrap {
+        height: 94vh;
+    }
 
-ul li{
-    font-size: 15px;
-    border: 0;
-    line-height: 20px;
-}
+    .cube-slide-item {
+        text-align: center;
+    }
 
-div{
-    border: 0;
-}
+    .item-desc {
+        white-space: normal;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+    ul li {
+        font-size: 15px;
+        border: 0;
+        line-height: 20px;
+    }
+
+    div {
+        border: 0;
+    }
 
 </style>
