@@ -6,10 +6,10 @@
             <img class="img-responsive" @click="bindEven" src="./common/css/img/upload.png"/>
             <i @click="delAll()" v-if="showDel" class="icon ion-close-circled" style="color:lightcoral "></i>
             <img class="img-responsive" v-if="curls.length===0" src="./common/css/img/noImg.png"/>
-            <template v-for="item in curls">
+            <div v-for="(item, index) in curls" :key="index">
                 <img v-press="fShowDel" class="img-responsive" @click="showImagePreview(item[ckey])" :src="item[ckey]"/>
                 <i @click="delImg(item)" v-if="showDel" class="icon ion-close-circled"></i>
-            </template>
+            </div>
         </div>
     </div>
 </template>
@@ -27,6 +27,7 @@
                 curls: [],
                 ckey: 'url',
                 files: [],
+                pressFlag: false  //判断是否为按压屏幕
             }
         },
         created() {
@@ -40,10 +41,11 @@
 
         },
         methods: {
-            fShowDel(e) {
-                this.showDel = true;
+            fShowDel() {
+                this.showDel = !this.showDel;
+                this.pressFlag = true;
                 //console.log(e)
-                e.target.stopPropagation();
+                //e.target.stopPropagation;
             },
             initParams() {
                 //this.curls = this.urls != undefined ? this.urls : [];
@@ -56,6 +58,7 @@
                 });
             },
             delAll() {
+                this.showDel = false;
                 this.files = [];
                 this.curls = [];
             },
@@ -84,6 +87,10 @@
 
             },
             showImagePreview: function (url) {
+                if(this.pressFlag === true){
+                    this.pressFlag = false
+                    return
+                }
                 this.$createImagePreview({
                     imgs: [url]
                 }).show()
