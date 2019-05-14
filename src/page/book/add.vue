@@ -63,9 +63,9 @@
 </template>
 
 <script>
-    import FileCom from '../common/FileCom'
+    import FileCom from '../../components/FileCom'
     import storage from '../../assets/storage/index'
-    import inputEditor from '../common/inputEditor'
+    import inputEditor from '../../components/common/inputEditor'
 
     let _that;
     export default {

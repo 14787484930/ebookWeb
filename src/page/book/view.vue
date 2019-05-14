@@ -60,7 +60,7 @@
 </template>
 
 <script>
-    import reportButton from '../common/report'
+    import reportButton from '../../components/report'
     import $ from 'jquery';
     import { Dialog } from 'cube-ui'
     export default {

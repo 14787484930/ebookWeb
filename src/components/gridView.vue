@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import storage from '../../assets/storage/index'
+    import storage from '../assets/storage/index'
 
     export default {
         name: "gridView",

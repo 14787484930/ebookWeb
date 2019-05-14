@@ -3,11 +3,11 @@
         <div id="head">
             <div class="bar bar-header item-input-inset">
                 <label class="item-input-wrapper searchBox">
-                    <input class="search-btn" type="search" placeholder="搜索" v-model="queryList.electronicsName"
-                           @change="searchSub">
-                    <i class="search-btn icon ion-ios-search placeholder-icon" @click="searchSub"></i>
+                    <input class="search-btn" type="search" placeholder="搜索" v-model="queryList.bookName"
+                           @change="search">
+                    <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
                 </label>
-                <router-link v-if="power_flag" :to="{path:'/electronicsAdd',query:{id:0}}"
+                <router-link v-if="power_flag" :to="{path:'/bookAdd',query:{id:0}}"
                              class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
                 </router-link>
@@ -22,7 +22,7 @@
                     <li class="cube-index-list-item">
                         <div class="weui-cell weui-cell_access" @click="$picker.showDialog()">
                             <div class="weui-cell__bd">
-                                价格:
+                                <span>价格:</span>
                                 <span class="book-name">
                                     <span class="green">￥{{queryList.startPrice}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span
                                         class="green">￥{{queryList.endPrice}}</span>
@@ -35,75 +35,74 @@
                     <li class="cube-index-list-item">
                         <div class="weui-cell weui-cell_access" @click="$picker.show()">
                             <div class="weui-cell__bd">
-                                电子类型:
-                                <span class="book-name green">{{typeName}}</span>
+                                <span>图书类型:</span>
+                                <span class="book-name green">{{bookTypeName}}</span>
                             </div>
                             <div class="weui-cell__ft">
                             </div>
                         </div>
                     </li>
-                    <!--<li class="cube-index-list-item">-->
-                    <!--<div class="weui-cell weui-cell_access"  @click="$picker.selectTypes()">-->
-                    <!--<div class="weui-cell__bd">-->
-                    <!--发票:-->
-                    <!--<span class="book-name">{{otherInvoiceName}}</span>-->
-                    <!--</div>-->
-                    <!--<div class="weui-cell__ft" >-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</li>-->
                     <li class="cube-index-list-item">
                         <div class="weui-cell weui-cell_access">
                             <div class="weui-cell__bd">
-                                日期:
+                                <span>日期:</span>
                             </div>
-                            <input type="text" readonly="readonly" v-model="queryList.startTime"
-                                   @click="$picker.showDate()" class="time-input" placeholder="发布日期">
+                            <input type="text" readonly="readonly"
+                                   v-model="queryList.startTime"
+                                   @click="$picker.showDate('type')"
+                                   class="time-input" placeholder="请选择开始日期">
                             <span class="line-span">——</span>
-                            <input type="text" readonly="readonly" v-model="queryList.endTime"
-                                   @click="$picker.showDateEnd()"
-                                   class="time-input" placeholder="发布日期">
+                            <input type="text" readonly="readonly"
+                                   v-model="queryList.endTime"
+                                   @click="$picker.showDateEnd('type')"
+                                   class="time-input" placeholder="请选择结束日期">
                         </div>
                     </li>
+
                     <li class="cube-index-list-item">
                         <cube-button :light="true" @click="searchClear">重置</cube-button>
-                        <cube-button :light="true" @click="searchSub">搜索</cube-button>
+                        <cube-button :light="true" @click="search">搜索</cube-button>
                     </li>
                 </ul>
             </div>
         </div>
+        <grid-view :grid="grid" url="/book/books" :load="load"></grid-view>
 
-        <grid-view :grid="grid" url="/electronics/electronics" :load="load"></grid-view>
     </div>
 </template>
 
 <script>
     let that;
-    import gridView from '../common/gridView'
+    import gridView from '../../components/gridView'
+
     export default {
-        name: 'Electronics',
+        name: 'Book',
         components: {
             gridView,
         },
         data() {
             return {
-                msg: '电子',
+                msg: '图书',
                 grid: {},
                 load: 0,
-                electronicsTypes: [],
                 queryList: {
-                    electronicsName: '',
-                    electronicsType: '',
-                    hasInvoice: '',
-                    startTime: '',
-                    endTime: '',
+                    bookName: '',
+                    bookType: '',
                     startPrice: '',
                     endPrice: '',
+                    startTime: '',
+                    endTime: ''
                 },
-                isShow: false,
-                typeName: '',
-                otherInvoiceName: ''
+                bookTypeName: '',
+                isShow: false
             }
+        },
+        created() {
+            that = this;
+            this.queryList.flag = this.$toInt(this.$route.query.flag);
+            this.$store.commit('setFlag', this.$toInt(this.$route.query.flag));
+            this.initType();
+            this.initGrid();
         },
         computed: {
             power() {
@@ -113,35 +112,42 @@
                 return this.$store.getters.power_flag;
             }
         },
-        created() {
-            that = this;
-            this.initType();
-            this.initGrid();
-        },
         methods: {
+            search() {
+                this.load++;
+                this.isShow = false;//搜索下拉隐藏
+                this.initGrid();
+            },
+            searchClear() {
+                Object.keys(that.queryList).forEach((key) => {
+                    that.queryList[key] = '';
+                })
+                that.bookTypeName = ''
+            },
             initGrid() {
+                //console.log("this.grid",this.queryList)
                 this.grid = {
-                    img: 'electronicsPic',
+                    img: 'bookPic',
                     query: this.queryList,
                     view: this.view,
                     del: this.del,
                     edit: this.update,
                     columns: [
-                        {title: "名称", key: 'electronicsName'},
-                        {title: "型号", key: 'electronicsType'},
-                        {title: "价格", key: 'presentPrice', format: this.setPrice},
+                        {title: "名称", key: 'bookName'},
+                        {title: "出版社", key: 'bookPub'},
+                        {title: "价格", key: 'bookPrice', format: this.setPrice},
                     ],
                 };
             },
             setPrice(row) {
-                return "￥" + row.presentPrice;
+                return "￥" + row.bookPrice;
             },
             view(row) {
-                this.$router.push({path: '/electronicsView', query: {id: row.id}});
+                this.$router.push({path: '/bookView', query: {id: row.id}});
             },
             del(row, callback) {
                 let para = {id: row.id};
-                this.$post('/electronics/delete', para, (msg) => {
+                this.$post('/book/delete', para, (msg) => {
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',
@@ -154,25 +160,10 @@
                 });
             },
             update(row) {
-                this.$router.push({path: '/electronicsAdd', query: {id: row.id}})
+                this.$router.push({path: '/bookAdd', query: {id: row.id}})
             },
             initType() {
-                let list = [{
-                    'text': '有',
-                    value: 0
-                }, {
-                    'text': '没有',
-                    value: 1
-                }];
-                this.$picker.selectTypes(list, (val, index, text) => {
-                    that.queryList.hasInvoice = val['0'];
-                    that.otherInvoiceName = text['0'];
-                });
-                this.$picker.electronicType((val, index, text) => {
-                    that.queryList.electronicsType = val['0'];
-                    that.typeName = text['0'];
-                });
-                this.$picker.datePicker((val, index, text) => {
+                this.$picker.bookTypes((val, index, text) => {
                     that.queryList.bookType = val['0'];
                     that.bookTypeName = text['0'];
                 });
@@ -187,23 +178,14 @@
                     that.queryList.endPrice = index;
                 })
             },
-            searchSub() {
-                this.load++;
-                console.log(this.queryList);
-                this.isShow = false;//搜索下拉隐藏
-                //this.initGrid();
-            },
-            searchClear() {
-                Object.keys(that.queryList).forEach((key) => {
-                    that.queryList[key] = '';
-                });
-                this.typeName = ''
-                this.otherInvoiceName = ''
-            },
             intelSearch() {
                 this.isShow = !this.isShow
             }
         }
     }
 </script>
+
+<style>
+
+</style>
 

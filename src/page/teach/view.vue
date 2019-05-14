@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import orderTaking from '../common/orderTaking'
+    import orderTaking from '../../components/orderTaking'
     import $ from "jquery";
     import {parse} from 'path';
 

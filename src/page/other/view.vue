@@ -58,7 +58,7 @@
 </template>
 
 <script>
-    import reportButton from '../common/report'
+    import reportButton from '../../components/report'
     import $ from 'jquery';
 
     let _that;

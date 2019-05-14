@@ -56,7 +56,7 @@
 </template>
 
 <script>
-    import reportButton from '../common/report'
+    import reportButton from '../../components/report'
     import storage from '../../assets/storage/index'
     import $ from 'jquery';
 

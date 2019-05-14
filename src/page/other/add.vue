@@ -5,47 +5,42 @@
                 <div class="list">
                     <h1>填写清单</h1>
                     <label class="form-group item item-input ">
-                        <span>电子名称：</span>
-                        <input type="text" class="isnull" v-model="electronics.electronicsName" placeholder="点此填写">
+                        <span>物品名称：</span>
+                        <input type="text" class="isnull" v-model="other.otherName" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
-                        <span>电子类型：</span>
-                        <cube-select
-                                v-model="value"
-                                :options="options"
-                                @change="change">
-                        </cube-select>
-                    </label>
-                    <label class="form-group item item-input ">
-                        <span>官方价格：</span>
-                        <input placeholder="点此填写" type="text" class="isnull" v-model="electronics.originalPrice">
+                        <span>官方价格(元)：</span>
+                        <input type="text" v-model="other.originalPrice" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>出售价格(元)：</span>
-                        <input placeholder="点此填写" type="text" class="isnull" v-model="electronics.presentPrice">
+                        <input type="text" class="isnull" v-model="other.presentPrice" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>购买日期：</span>
                         <input type="text" readonly="readonly"
-                               v-model="electronics.buyDate"
+                               v-model="other.buyDate"
                                @click="$picker.showDate('type')"
                                placeholder="购买日期">
                     </label>
                     <label class="form-group item item-input ">
                         <span>是否有发票：</span>
-                        <cube-switch v-model="isInvoice" v-on:change="hasInvoice"></cube-switch>
+                        <!--<input type="text" v-model="other.hasInvoice">-->
+                        <cube-switch v-model="value" v-on:change="hasInvoice">
+                            <!--是否有发票-->
+                        </cube-switch>
                     </label>
                     <label class="form-group item item-input ">
-                        <span>联系电话：</span>
-                        <input placeholder="点此填写" type="text" class="isnull tel" v-model="electronics.phone">
+                        <span>联系方式：</span>
+                        <input type="text" class="isnull tel" v-model="other.phone" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>微信：</span>
-                        <input placeholder="点此填写" type="text" class="isnull" v-model="electronics.weiXin">
+                        <input type="text" class="isnull" v-model="other.weiXin" placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>描述：</span>
-                        <input placeholder="点此填写" type="text" v-model="electronics.des">
+                        <input type="text" v-model="other.des">
                     </label>
                     <file-com ref="refFiles" :urls="urls"></file-com>
                     <button id="submit" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
@@ -56,26 +51,22 @@
 </template>
 
 <script>
-    import FileCom from '../common/FileCom'
-    import storage from '../../assets/storage/index'
+    import FileCom from '../../components/FileCom'
     import $ from 'jquery'
 
     let _that;
     export default {
         name: "add",
-        data: function () {
+        data() {
             return {
-                isInvoice: true,
-                options: [],    //下拉选择框
-                value: '',
-                electronics: {
-                    electronicsName: '',
-                    electronicsType: '1',
+                value: true,
+                other: {
+                    otherName: '',
                     originalPrice: '20',
                     presentPrice: '15',
                     buyDate: '2013-12-12',
                     hasInvoice: '1',
-                    electronicsPic: '',
+                    otherPic: '',
                     phone: this.$store.getters.getUser.phone,
                     weiXin: this.$store.getters.getUser.weiXin,
                     des: '',
@@ -89,9 +80,8 @@
         created() {
             _that = this;
             this.initDateType();
-            this.initBookTypeSelect();
-            this.electronics.id = this.$route.query.id;
-            if ((this.electronics.id).length > 1)
+            this.other.id = this.$route.query.id;
+            if (parseInt(this.other.id) !== 0)
                 this.initData();
         },
         mounted() {
@@ -101,71 +91,59 @@
             //初始化出版日期选择
             initDateType() {
                 this.$picker.datePicker((val, index, text) => {
-                    _that.electronics.buyDate = index.join('-');
-                });
-            },
-            //初始化电子类型下拉框
-            initBookTypeSelect() {
-                let value = storage.getSession("electronicsType");
-                this.options = value.map((item) => {
-                    return item.text;
+                    _that.other.buyDate = index.join('-');
                 });
             },
             initData() {
-                this.$http.post('/electronics/getById/' + this.electronics.id).then((res) => {
-                    //_that.electronics=res.data.page.Info;
-                    for (let i in this.electronics) {
-                        _that.electronics[i] = res.data.page.info[i];
+                this.$http.post('/other/getById/' + this.other.id).then((res) => {
+                    //_that.other=res.data.page.info;
+                    for (let i in this.other) {
+                        _that.other[i] = res.data.page.info[i];
                     }
-                    _that.electronics.buyDate = _that.$toDate(_that.electronics.buyDate);
-                    _that.electronics.electronicsType = 1;//先不做处理后面要删除
-                    var arr = _that.electronics.electronicsPic.split(',');
+                    _that.other.buyDate = _that.$toDate(_that.other.buyDate);
+                    _that.other.otherType = 1;//先不做处理后面要删除
+                    var arr = _that.other.otherPic.split(',');
                     $.each(arr, (index, item) => {
                         _that.urls.push({url: _that.$file(item)});
                     })
-                });
+                })
             },
             saveData() {
-                let url = '/electronics/save';
-                if (this.electronics.id !== 0) {
-                    _that.electronics["electronicsPic"] = "";
-                    url = '/electronics/update';
+                let url = '/other/save';
+                if ((this.other.id).length > 1) {
+                    _that.other["otherPic"] = "";
+                    url = '/other/update';
                 }
-
-                this.$save(url, this.electronics, this.$refs.refFiles.files, (msg) => {
+                this.$save(url, this.other, this.$refs.refFiles.files, (msg) => {
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm: () => {
-                            this.$router.push({path: '/electronics', query: {flag: 1}})
+                            this.$router.push({path: '/other', query: {flag: 1}})
                         }
                     }).show()
                 })
             },
             hasInvoice() {
                 if (this.value) {
-                    this.electronics.hasInvoice = '1';
+                    this.other.hasInvoice = '1';
                 } else {
-                    this.electronics.hasInvoice = '0';
+                    this.other.hasInvoice = '0';
                 }
             },
-            //类型选择
-            change(value, index) {
-                this.electronics.electronicsType = index + 1;
-            }
         }
     }
 </script>
+
 <style scoped>
     .scroll-list-wrap {
         height: 94vh;
     }
 
-    .scroll-list-wrap #submit {
+    .scroll-list-wrap #submit{
         margin-bottom: 20px;
     }
-
     /*滚动的页面的高度 -by gpj*/
 </style>

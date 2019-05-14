@@ -14,12 +14,7 @@ import './webserver/serve/touch'
 import './frame/cube-ui'
 
 import weui from 'weui'
-
 Vue.prototype.$weui = weui
-
-import iView from 'iview'
-
-Vue.use(iView)
 
 Vue.config.productionTip = false
 new Vue({
