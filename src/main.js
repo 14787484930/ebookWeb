@@ -1,32 +1,26 @@
 import Vue from 'vue'
-import './frame/cube-ui'
-
-//import  $ from 'jquery'
 import App from './App.vue'
 import router from './webserver/router/router'
+import store from './store/store' //引入store
+
 import 'amfe-flexible'
 import './assets/ionic/css/ionic.min.css'
 import './assets/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
 import './webserver/serve/serve'
 import './webserver/serve/picker'
+import './webserver/serve/touch'
+
+import './frame/cube-ui'
+
 import weui from 'weui'
 
 Vue.prototype.$weui = weui
-import store from './store/store'//引入store
-import './webserver/serve/touch'
-//全局注册gridView
-import gridViewCom from './components/common/gridView'
 
-const gridView = {
-    install: function (myVue) {
-        myVue.component('grid-view', gridViewCom)
-    }
-}
-Vue.use(gridView)
-import iView from 'iview';
+import iView from 'iview'
 
-Vue.use(iView);
+Vue.use(iView)
+
 Vue.config.productionTip = false
 new Vue({
     router,

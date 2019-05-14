@@ -68,8 +68,12 @@
 
 <script>
     let that;
+    import gridView from '../common/gridView'
     export default {
         name: 'Other',
+        components: {
+            gridView,
+        },
         data() {
             return {
                 msg: '其他',

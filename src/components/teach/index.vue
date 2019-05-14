@@ -68,8 +68,12 @@
 
 <script>
     let that;
+    import gridView from '../common/gridView'
     export default {
         name: 'Teach',
+        components: {
+            gridView,
+        },
         data() {
             return {
                 queryList: {

@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <router-view></router-view>
         <h1>Shopping Cart Example</h1>
         <hr>
         <h2>Products</h2>
