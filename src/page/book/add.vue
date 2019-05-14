@@ -104,13 +104,7 @@
             if ((this.book.id).length > 1)
                 this.initData();
         },
-        mounted() {
-            /* $(".scroll-list-wrap").height(screen.availHeight - $(".tabs-icon-top", window.parent.parent.document).height()) + 180;
-             $(".ql-blank").attr("data-placeholder", "备注")*/
-        },
         methods: {
-            updateData() {
-            },
             //初始化出版日期选择
             initDateType(){
                 this.$picker.datePicker((val, index, text)=>{
@@ -127,7 +121,7 @@
             initData() {
                 this.$http.post('/book/getById/' + this.book.id).then((res) => {
                     _that.book = res.data.page.info;
-                    _that.book.bookType = 1;//先不做处理后面要删除
+                    _that.value = _that.options[_that.book.bookType - 1];
                     _that.book.pubDate = _that.$toDate(_that.book.pubDate);
                     let arr = _that.book.bookPic.split(',');
                     $.each(arr, (index, item) => {
@@ -166,6 +160,4 @@
     .scroll-list-wrap #submit {
         margin-bottom: 20px;
     }
-
-    /*滚动的页面的高度 -by gpj*/
 </style>

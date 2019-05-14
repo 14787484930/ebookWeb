@@ -1,41 +1,42 @@
 <template>
-<div class="file-img">
-    <input type="file" id="upload-file"  @change="showImg" multiple="multiple" style="display:none" accept="image/*" />
-    <div class="row-boder" style="text-align: center;margin:0 auto">
-            <img  class="img-responsive"  @click="bindEven"  src="common/css/img/upload.png"/>
-        <i @click="delAll()" v-if="showDel" class="icon ion-close-circled" style="color:lightcoral "></i>
-            <img  class="img-responsive"  v-if="curls.length===0"  src="common/css/img/noImg.png"/>
-        <template v-for="item in curls"  >
-            <img  v-press="fShowDel"  class="img-responsive"  @click="showImagePreview(item[ckey])"   :src="item[ckey]"/>
-            <i @click="delImg(item)" v-if="showDel"  class="icon ion-close-circled"></i>
-        </template>
+    <div class="file-img">
+        <input type="file" id="upload-file" @change="showImg" multiple="multiple" style="display:none"
+               accept="image/*"/>
+        <div class="row-boder" style="text-align: center;margin:0 auto">
+            <img class="img-responsive" @click="bindEven" src="./common/css/img/upload.png"/>
+            <i @click="delAll()" v-if="showDel" class="icon ion-close-circled" style="color:lightcoral "></i>
+            <img class="img-responsive" v-if="curls.length===0" src="./common/css/img/noImg.png"/>
+            <template v-for="item in curls">
+                <img v-press="fShowDel" class="img-responsive" @click="showImagePreview(item[ckey])" :src="item[ckey]"/>
+                <i @click="delImg(item)" v-if="showDel" class="icon ion-close-circled"></i>
+            </template>
+        </div>
+
+
     </div>
-
-
-
-</div>
 </template>
 <script>
-    import  axios from  'axios'
     import lrz from 'lrz'
-    var _that='';
+    import $ from 'jquery'
+
+    var _that = '';
     export default {
         name: "FileCom",
-        props: ['urls','urlkey'],
-        data(){
-            return{
-                showDel:false,
-                curls:[],
-                ckey:'url',
-                files:[],
+        props: ['urls', 'urlKey'],
+        data() {
+            return {
+                showDel: false,
+                curls: [],
+                ckey: 'url',
+                files: [],
             }
         },
-        created(){
-            _that=this;
+        created() {
+            _that = this;
             this.initParams();
         },
         watch: {
-            'urls': function(){
+            'urls': function () {
                 this.changeUrlToBlob(this.urls)
             },
 
@@ -43,13 +44,13 @@
         methods: {
             fShowDel(e) {
                 this.showDel = true;
-                console.log(e)
+                //console.log(e)
                 e.target.stopPropagation();
             },
             initParams() {
                 //this.curls = this.urls != undefined ? this.urls : [];
                 this.curls = [];
-                this.ckey = this.urlkey != undefined ? this.urlkey : 'url';
+                this.ckey = (this.urlKey !== undefined) ? this.urlKey : 'url';
             },
             showImg: function (e) {
                 $.each(e.target.files, (index, item) => {
@@ -73,7 +74,8 @@
                     data[_that.ckey] = rst.base64;
                     _that.curls.push(data);
                 }).catch(function (error) {
-                    var reader = new FileReader();
+                    alert(error)
+                    let reader = new FileReader();
                     reader.vue = this;
                     reader.readAsDataURL(file);
                     reader.onload = function () {
@@ -96,24 +98,33 @@
             bindEven() {
                 $("#upload-file").click();
             },
-            //将img中url改为blob格式
+            /**
+             * 将img中url改为blob格式
+             * @param url
+             * */
             changeUrlToBlob(url) {
-                for(let i=0; i<url.length; i++){
+                for (let i = 0; i < url.length; i++) {
                     this.loadImageToBlob(url[i].url, blobFile => {
-/*                        if (!blobFile) return false;
-                        let fileReader = new FileReader();
-                        fileReader.readAsDataURL(blobFile);
-                        fileReader.onload = function() {
-                            //这里输出的数据放到url里能生成图片
-                            console.log(this.result);
-                            //新建对象
-
-                            //console.log(obj);
-                        };*/
+                        if (!blobFile) return false;
+                        /*
+                          let fileReader = new FileReader();
+                          fileReader.readAsDataURL(blobFile);
+                          fileReader.onload = function() {
+                              //这里输出的数据放到url里能生成图片
+                              console.log(this.result);
+                              //新建对象
+                              //console.log(obj);
+                          };*/
                     });
                 }
 
             },
+            /**
+             * 想服务器请求图片数据
+             * @param url
+             * @param callback
+             * @returns {boolean}
+             */
             loadImageToBlob(url, callback) {
                 if (!url || !callback)
                     return false;
@@ -126,7 +137,7 @@
                     let contentType = this.response.type;
                     let file = new File([this.response], FileName, {type: contentType, lastModified: Date.now()});
                     _that.readFile(file);
-                    //callback(Number(this.status) === 200 ? this.response : false);
+                    callback(Number(this.status) === 200 ? this.response : false);
                 }
                 xhr.open('get', url, true);
                 xhr.send();
@@ -137,16 +148,18 @@
 </script>
 
 <style>
-    .file-img img{
+    .file-img img {
         margin: 4px 4px;
         float: left;
-        height :80px;
-        width :80px;
+        height: 80px;
+        width: 80px;
         object-fit: cover;
         border: 1px solid #c9e2b3;
     }
-    .file-img i{
-        float: left;color:#0a9dc7 ;
+
+    .file-img i {
+        float: left;
+        color: #0a9dc7;
         margin-left: -10px;
         margin-top: -8px;
     }

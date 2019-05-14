@@ -32,6 +32,10 @@
                             <span>出版社：</span>
                             <p>{{book.bookPub}}</p>
                         </li>
+                        <li class="item item-input">
+                            <span>类型：</span>
+                            <p>{{book.bookType}}</p>
+                        </li>
                         <li class="item item-input" v-if="power">
                             <span>联系电话：</span>
                             <p>{{book.phone}}</p>
@@ -57,6 +61,7 @@
 
 <script>
     import reportButton from '../../components/report'
+    import storage from '../../assets/storage/index'
     import slider from '../../components/slider'
     import $ from 'jquery';
 
@@ -72,7 +77,7 @@
                 book: {
                     id: 0,
                     bookName: '',
-                    bookType: '1',
+                    bookType: '',
                     author: '',
                     bookPrice: '20',
                     pubDate: '2013-12-12',
@@ -94,10 +99,6 @@
             else
                 console.log('[error]选择的物品id为0，请检查物品id是否正确!');
         },
-        mounted() {
-            // console.log(123);
-            // this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
-        },
         computed: {
             power() {
                 return this.$store.getters.power;
@@ -105,7 +106,7 @@
         },
         methods: {
             initData() {
-                var _that = this;
+                let _that = this;
                 const toast = this.$createToast({
                     time: 0,
                     txt: '加载中...'
@@ -114,13 +115,28 @@
                 this.$http.post('/book/getById/' + this.book.id).then((res) => {
                     toast.hide();
                     _that.book = res.data.page.info;
-                    _that.book.bookType = 1;//先不做处理后面要删除
-                    var arr = _that.book.bookPic.split(',');
+                    _that.book.bookType = _that.getBookTypeName(_that.book.bookType);
+                    let arr = _that.book.bookPic.split(',');
                     $.each(arr, (index, item) => {
                         _that.urls.push({image: _that.$file(item)});
                     })
                 });
             },
+            /**
+             * 将类型由数字改为字符串
+             * @param typeNum
+             * @returns {*}
+             */
+            getBookTypeName(typeNum) {
+                let key = "bookType";
+                let aValue = storage.getSession(key);
+                let value = aValue[typeNum - 1].text;
+                if (typeof value === undefined) {
+                    value = "未知";
+                    console.error('BookView getBookTypeName: value error')
+                }
+                return value;
+            }
         },
     }
 

@@ -44,7 +44,6 @@
     }
 
     .slider-imgs {
-        /* padding: 0 .05rem 0 .04rem;*/
         height: 5.34rem;
         max-width: 100%;
         vertical-align: middle;

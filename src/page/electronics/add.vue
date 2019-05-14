@@ -113,13 +113,13 @@
             },
             initData() {
                 this.$http.post('/electronics/getById/' + this.electronics.id).then((res) => {
-                    //_that.electronics=res.data.page.Info;
                     for (let i in this.electronics) {
                         _that.electronics[i] = res.data.page.info[i];
                     }
+                    //设置电子类型
+                    _that.value = _that.options[_that.electronics.electronicsType - 1];
                     _that.electronics.buyDate = _that.$toDate(_that.electronics.buyDate);
-                    _that.electronics.electronicsType = 1;//先不做处理后面要删除
-                    var arr = _that.electronics.electronicsPic.split(',');
+                    let arr = _that.electronics.electronicsPic.split(',');
                     $.each(arr, (index, item) => {
                         _that.urls.push({url: _that.$file(item)});
                     })
@@ -139,7 +139,7 @@
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm: () => {
-                            this.$router.push({path: '/electronics', query: {flag: 1}})
+                            this.$router.push({path: '/electronics'})
                         }
                     }).show()
                 })
@@ -154,7 +154,7 @@
             //类型选择
             change(value, index) {
                 this.electronics.electronicsType = index + 1;
-            }
+            },
         }
     }
 </script>

@@ -67,7 +67,6 @@
             </div>
         </div>
         <grid-view :grid="grid" url="/book/books" :load="load"></grid-view>
-
     </div>
 </template>
 

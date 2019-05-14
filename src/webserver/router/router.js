@@ -25,6 +25,29 @@ const version = r => require.ensure([], () => r(require('../../page/about/versio
 const verify = r => require.ensure([], () => r(require('../../components/verify')), 'verify')
 const shop = r => require.ensure([], () => r(require('../../page/shop/index')), 'shop')
 
+/*
+//打包app不能使用懒加载，后面找原因
+import home from '../../page/main/home'
+import main from '../../page/main/main'
+import book from '../../page/book/index'
+import electronics from '../../page/electronics/index'
+import electronicsAdd from '../../page/electronics/add'
+import electronicsView from '../../page/electronics/view'
+import teach from '../../page/teach/index'
+import teachAdd from '../../page/teach/add'
+import teachView from '../../page/teach/view'
+import other from '../../page/other/index'
+import otherAdd from '../../page/other/add'
+import otherView from '../../page/other/view'
+import bookAdd from '../../page/book/add'
+import bookView from '../../page/book/view'
+import center from '../../page/about/mycenter'
+import advice from '../../page/about/advice'
+import version from '../../page/about/version'
+//测试模块
+import shop from '../../page/shop/index'
+import verify from '../../components/verify'*/
+
 const routes = new VueRouter({
     mode: 'history',
     linkActiveClass: 'active',
@@ -34,7 +57,7 @@ const routes = new VueRouter({
         {
             path: '/', name: '首页', component: home,
             children: [
-                {path: '', name: '', component: main},
+                {path: '/', name: '', component: main},
                 {path: 'book', name: 'book', component: book},
                 {path: 'bookAdd', name: 'bookAdd', component: bookAdd},
                 {path: 'bookView', name: 'bookView', component: bookView},
@@ -52,7 +75,7 @@ const routes = new VueRouter({
                 {path: 'version', name: 'version', component: version},
                 {path: 'verify', name: 'verify', component: verify},
                 //404
-                {path: '*', name: '*', component: book},
+                {path: '*', name: '*', component: main},
             ],
         },
         // 动态路径参数 以冒号开头
