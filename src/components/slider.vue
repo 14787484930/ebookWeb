@@ -1,7 +1,7 @@
 <template>
     <cube-slide ref="slide" :data="urls">
-        <cube-slide-item v-for="(item, index) in urls" :key="index" class="slider-item">
-            <img :src="item.image" @click="showImagePreview(item.image)" class="slider-imgs">
+        <cube-slide-item v-for="(img, index) in urls" :key="index" class="slider-item">
+            <img :src="img.image" @click="handleImgsClick(index)" class="slider-imgs">
         </cube-slide-item>
     </cube-slide>
 </template>
@@ -19,6 +19,7 @@
         },
         data() {
             return {
+                initialIndex: 0,
                 urls: [],
             }
         },
@@ -27,14 +28,29 @@
             this.urls = this.picUrls;
         },
         methods: {
-            showImagePreview(src) {
-                this.$createImagePreview({
-                    imgs: [src],
-                }).show()
+            handleImgsClick(index) {
+                let imgArr = [];
+                for (let i in this.urls) {
+                    imgArr.push(this.urls[i].image)
+                }
+                this.initialIndex = index
+                const params = {
+                    $props: {
+                        imgs: imgArr,
+                        initialIndex: 'initialIndex', // 响应式数据的key名
+                        loop: false
+                    },
+                    $events: {
+                        change: (i) => {
+                            // 必须更新 initialIndex
+                            this.initialIndex = i
+                        }
+                    }
+                }
+                this.$createImagePreview({...params}).show()
             }
+
         }
-
-
     }
 </script>
 
