@@ -51,7 +51,7 @@
 
                         <file-com ref="refFiles" :urls="urls"></file-com>
 
-                        <button id='submit' style="width: 100%" class="button button-positive" @click="saveData">发布
+                        <button id='submit' :disabled="btnFlag" style="width: 100%" class="button button-positive" @click="saveData">发布
                         </button>
                     </div>
 
@@ -90,6 +90,7 @@
                     des: '',
                 },
                 urls: [],
+                btnFlag: false  //发布按钮是否能点击
             }
         },
         components: {
@@ -133,7 +134,10 @@
                 let url = '/book/save';
                 if (parseInt(this.book.id) !== 0)
                     url = '/book/update';
+
+                this.btnFlag = true;  //设置提交按钮为不能点击状态
                 this.$save(url, this.book, this.$refs.refFiles.files, (msg) => {
+                    _that.btnFlag = false; //设置提交按钮为可以点击状态
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',

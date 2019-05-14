@@ -90,7 +90,7 @@
                             <input type="text" v-model="teach.des" placeholder="点此填写">
                         </label>
 
-                        <button id="submit" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                        <button id="submit" :disabled="submitBtn" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
                     </div>
                 </div>
             </template>
@@ -120,7 +120,8 @@
                     phone: this.$store.getters.getUser.phone,
                     weiXin: this.$store.getters.getUser.weiXin,
                     des: "帅气男学渣求女学霸辅导，男女搭配学习不累"
-                }
+                },
+                submitBtn: false
             };
         },
         created() {
@@ -130,7 +131,6 @@
             if ((this.teach.id).length > 1) this.initData();
         },
         mounted() {
-            //this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
             this.changeTab(0);
         },
         methods: {
@@ -165,7 +165,9 @@
             saveData() {
                 let url = "/tutoring/save";
                 if (this.teach.id !== 0) url = "/tutoring/update";
+                this.submitBtn = true;
                 this.$save(url, this.teach,'' ,msg => {
+                    _that.submitBtn = false;
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',

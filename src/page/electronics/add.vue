@@ -48,7 +48,7 @@
                         <input placeholder="点此填写" type="text" v-model="electronics.des">
                     </label>
                     <file-com ref="refFiles" :urls="urls"></file-com>
-                    <button id="submit" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                    <button id="submit" :disabled="submitFlag" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
                 </div>
             </template>
         </cube-scroll>
@@ -81,6 +81,7 @@
                     des: '',
                 },
                 urls: [],
+                submitFlag: false   //是否可以提交
             }
         },
         components: {
@@ -93,9 +94,6 @@
             this.electronics.id = this.$route.query.id;
             if ((this.electronics.id).length > 1)
                 this.initData();
-        },
-        mounted() {
-            //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods: {
             //初始化出版日期选择
@@ -131,8 +129,9 @@
                     _that.electronics["electronicsPic"] = "";
                     url = '/electronics/update';
                 }
-
+                this.submitFlag = true;
                 this.$save(url, this.electronics, this.$refs.refFiles.files, (msg) => {
+                    _that.submitFlag = false;
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',

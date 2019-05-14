@@ -11,15 +11,13 @@
                 <i @click="delImg(item)" v-if="showDel" class="icon ion-close-circled"></i>
             </template>
         </div>
-
-
     </div>
 </template>
 <script>
     import lrz from 'lrz'
     import $ from 'jquery'
 
-    var _that = '';
+    let _that = '';
     export default {
         name: "FileCom",
         props: ['urls', 'urlKey'],

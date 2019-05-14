@@ -43,7 +43,9 @@
                         <input type="text" v-model="other.des">
                     </label>
                     <file-com ref="refFiles" :urls="urls"></file-com>
-                    <button id="submit" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                    <button id="submit" :disabled="submitBtn" style="width: 100%" class="button button-positive"
+                            @click="saveData">发布
+                    </button>
                 </div>
             </template>
         </cube-scroll>
@@ -72,6 +74,7 @@
                     des: '',
                 },
                 urls: [],
+                submitBtn: false
             }
         },
         components: {
@@ -83,9 +86,6 @@
             this.other.id = this.$route.query.id;
             if (parseInt(this.other.id) !== 0)
                 this.initData();
-        },
-        mounted() {
-            //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
         },
         methods: {
             //初始化出版日期选择
@@ -114,14 +114,16 @@
                     _that.other["otherPic"] = "";
                     url = '/other/update';
                 }
+                this.submitBtn = true;
                 this.$save(url, this.other, this.$refs.refFiles.files, (msg) => {
+                    _that.submitBtn = false;
                     this.$createDialog({
                         type: 'alert',
                         title: '信息',
                         content: '保存成功 ',
                         icon: 'cubeic-right',
                         onConfirm: () => {
-                            this.$router.push({path: '/other', query: {flag: 1}})
+                            this.$router.push({path: '/other'})
                         }
                     }).show()
                 })
@@ -142,8 +144,9 @@
         height: 94vh;
     }
 
-    .scroll-list-wrap #submit{
+    .scroll-list-wrap #submit {
         margin-bottom: 20px;
     }
+
     /*滚动的页面的高度 -by gpj*/
 </style>
