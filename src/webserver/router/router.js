@@ -2,26 +2,28 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-import home from '../../components/main/home'
-import main from '../../components/main/main'
-import book from '../../components/book/index'
-import electronics from '../../components/electronics/index'
-import electronicsAdd from '../../components/electronics/add'
-import electronicsView from '../../components/electronics/view'
-import teach from '../../components/teach/index'
-import teachAdd from '../../components/teach/add'
-import teachView from '../../components/teach/view'
-import other from '../../components/other/index'
-import otherAdd from '../../components/other/add'
-import otherView from '../../components/other/view'
-import bookAdd from '../../components/book/add'
-import bookView from '../../components/book/view'
-import center from '../../components/about/mycenter'
-import advice from '../../components/about/advice'
-import version from '../../components/about/version'
+
+//修改路由为懒加载 -by gpj
+const home = r => require.ensure([], () => r(require('../../components/main/home')), 'home')
+const main = r => require.ensure([], () => r(require('../../components/main/main')), 'home')
+const book = r => require.ensure([], () => r(require('../../components/book/index')), 'book')
+const bookAdd = r => require.ensure([], () => r(require('../../components/book/add')), 'book')
+const bookView = r => require.ensure([], () => r(require('../../components/book/view')), 'book')
+const electronics = r => require.ensure([], () => r(require('../../components/electronics/index')), 'electronics')
+const electronicsAdd = r => require.ensure([], () => r(require('../../components/electronics/add')), 'electronics')
+const electronicsView = r => require.ensure([], () => r(require('../../components/electronics/view')), 'electronics')
+const teach = r => require.ensure([], () => r(require('../../components/teach/index')), 'teach')
+const teachAdd = r => require.ensure([], () => r(require('../../components/teach/add')), 'teach')
+const teachView = r => require.ensure([], () => r(require('../../components/teach/view')), 'teach')
+const other = r => require.ensure([], () => r(require('../../components/other/index')), 'other')
+const otherAdd = r => require.ensure([], () => r(require('../../components/other/add')), 'other')
+const otherView = r => require.ensure([], () => r(require('../../components/other/view')), 'other')
+const center = r => require.ensure([], () => r(require('../../components/about/mycenter')), 'center')
+const advice = r => require.ensure([], () => r(require('../../components/about/advice')), 'center')
+const version = r => require.ensure([], () => r(require('../../components/about/version')), 'center')
 //测试模块
-import shop from '../../components/shop/index'
-import verify from '../../components/common/verify'
+const verify = r => require.ensure([], () => r(require('../../components/common/verify')), 'verify')
+const shop = r => require.ensure([], () => r(require('../../components/shop/index')), 'shop')
 
 const routes = new VueRouter({
     mode: 'history',
@@ -30,29 +32,36 @@ const routes = new VueRouter({
     routes: [
         // 动态路径参数 以冒号开头
         {
-            path: '/', component: home,
+            path: '/', name: '首页', component: home,
             children: [
-                {path: '/', component: main},
-                {path: '/book', component: book},
-                {path: '/bookAdd', component: bookAdd},
-                {path: '/bookView', component: bookView},
-                {path: '/electronics', component: electronics},
-                {path: '/electronicsAdd', component: electronicsAdd},
-                {path: '/electronicsView', component: electronicsView},
-                {path: '/teach', component: teach},
-                {path: '/teachAdd', component: teachAdd},
-                {path: '/teachView', component: teachView},
-                {path: '/other', component: other},
-                {path: '/otherAdd', component: otherAdd},
-                {path: '/otherView', component: otherView},
-                {path: '/about', component: center},
-                {path: '/advice', component: advice},
-                // {path: '/test', component: test},
-                {path: '/version', component: version},
-                {path: '/verify', component: verify},
-                {path: '/shop', component: shop}
+                {path: '', name: '', component: main},
+                {path: 'book', name: 'book', component: book},
+                {path: 'bookAdd', name: 'bookAdd', component: bookAdd},
+                {path: 'bookView', name: 'bookView', component: bookView},
+                {path: 'electronics', name: 'electronics', component: electronics},
+                {path: 'electronicsAdd', name: 'electronicsAdd', component: electronicsAdd},
+                {path: 'electronicsView', name: 'electronicsView', component: electronicsView},
+                {path: 'teach', name: 'teach', component: teach},
+                {path: 'teachAdd', name: 'teachAdd', component: teachAdd},
+                {path: 'teachView', name: 'teachView', component: teachView},
+                {path: 'other', name: 'other', component: other},
+                {path: 'otherAdd', name: 'otherAdd', component: otherAdd},
+                {path: 'otherView', name: 'otherView', component: otherView},
+                {path: 'about', name: 'about', component: center},
+                {path: 'advice', name: 'advice', component: advice},
+                {path: 'version', name: 'version', component: version},
+                {path: 'verify', name: 'verify', component: verify},
+                //404
+                {path: '*', name: '*', component: book},
             ],
-        }
+        },
+        // 动态路径参数 以冒号开头
+        {
+            path: '/shop', name: '首页', component: home,
+            children: [
+                {path: 'shop', name: 'shop', component: shop}
+            ],
+        },
     ]
 })
 export default routes;
