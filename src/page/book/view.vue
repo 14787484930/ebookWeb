@@ -50,7 +50,7 @@
                         <div>{{book.des}}</div>
                     </div>
                 </template>
-                <router-link style="float: right; font-size: 10px; margin-right: 10px"
+                <router-link class="report-style"
                              :to="{path:'/report', query:{productId: book.id ,
                               productName: book.bookName,productType: 1}}">举报
                 </router-link>
@@ -152,6 +152,13 @@
         white-space: normal;
         word-break: break-all;
         word-wrap: break-word;
+    }
+
+    .report-style {
+        float: right;
+        font-size: 13px;
+        margin-right: 20px;
+        margin-bottom: 40px;
     }
 
     ul li {
