@@ -1,24 +1,15 @@
 <!--弹框组件-->
 <template>
-    <div>
-        <button @click="show" class="report-btn reportBtn">举报</button>
-
-        <div v-if="panelShow" class="module-dialog" style="display: block">
-            <div class="dialog-panel">
-                <header class="dialog-tit">
-                    <h4>举报</h4>
-                    <span @click="close" class="cubeic-close"></span>
-                </header>
-
-                <article class="confirm-msg">
-                    <cube-radio-group v-model="selected" :options="options" position="left" :hollow-style="true"/>
-                    <cube-textarea v-model="value" v-if=selectOther></cube-textarea>
-                </article>
-
-                <footer class="dialog-btn-wrap">
-                    <button class="cancel" @click="close">取消</button>
-                    <button class="confirm" @click="reportMsg">确定</button>
-                </footer>
+    <div class="container">
+        <h5>选择举报原因举报</h5>
+        <ul>
+            <li v-for="(item, index) in options" :key="index" @click.stop="reportMsg(item.id)">{{item.name}}
+            </li>
+        </ul>
+        <div v-if="selectOther">
+            <cube-textarea v-model="value" @input="hasContent()"></cube-textarea>
+            <div class="btnWrap">
+                <cube-button :disabled="disabled" @click="reportOtherMsg()">提交</cube-button>
             </div>
         </div>
     </div>
@@ -36,64 +27,90 @@
         data() {
             return {
                 selectOther: false,  //是否选择其他按钮，选中显示输入框
-                panelShow: false, //是否显示弹框
                 selected: 0,       //举报类型
                 options: [],
                 value: "",       //其他类型描述
+                disabled: true,
             }
         },
-        computed: {},
+        created() {
+            //获取举报类型
+            this.getReportType();
+        },
         methods: {
-            showAlert(title, content) {
-                this.$createDialog({
-                    type: 'alert',
-                    title: title,
-                    content: content,
-                    icon: 'cubeic-alert'
-                }).show()
-            },
+            /**
+             * 获取举报类型
+             * @returns {null}
+             */
             getReportType() {
                 if (this.options.length !== 0)
                     return null;
 
                 this.$http.post('/reporttype/reporttypeinfo').then((res) => {
                     if (Number(res.data.code) === 100) {
-                        this.selected = res.data.page.pageinfo.length;
-                        for (let i = 0; i < res.data.page.pageinfo.length; i++) {
-                            this.options.push({
-                                label: res.data.page.pageinfo[i].name,
-                                value: Number(res.data.page.pageinfo[i].id),
-                                disabled: false
-                            });
-                        }
+                        this.options = res.data.page.pageinfo
                     } else {
                         //上传错误信息
                     }
-
                 });
             },
-            show() {
-                //获取举报类型
-                this.getReportType();
-                this.panelShow = true;
+            /**
+             *
+             * @param index
+             */
+            reportMsg(index) {
+                if (parseInt(index) === 1)
+                    this.selectOther = true
+                else {
+                    this.selectOther = false
+                    console.log(this.product)
+                    this.product['des'] = '';
+                    this.product['reportType'] = index;
+
+                    this.showAlert('确认举报吗？', '平台将根据《e书平台公约》进行相关处理');
+                }
             },
-            close() {
-                this.panelShow = false;
-            },
-            reportMsg(e) {
-                this.panelShow = false;
-                this.product['reportType'] = this.selected;
+            reportOtherMsg() {
+                this.selectOther = true
                 this.product['des'] = this.value;
-                this.$post('/reportproduct/save', this.product, (msg) => {
-                    if (Number(msg.data.code) === 200) {
-                        alert("失败")
-                    } else {
-                        this.showAlert('举报成功', '感谢您的举报，我们会尽快处理');
+                this.product['reportType'] = 1;  //类型为1表示其他类型
+                this.showAlert('确认举报吗？', '平台将根据《e书平台公约》进行相关处理');
+            },
+            showAlert(title, content) {
+                let _that = this
+                this.$createDialog({
+                    type: 'confirm',
+                    icon: 'cubeic-alert',
+                    title: title,
+                    content: content,
+                    confirmBtn: {
+                        text: '确定',
+                        active: true,
+                        disabled: false,
+                        href: 'javascript:;'
+                    },
+                    cancelBtn: {
+                        text: '取消',
+                        active: false,
+                        disabled: false,
+                        href: 'javascript:;'
+                    },
+                    onConfirm: () => {
+                        _that.$post('/reportproduct/save', this.product, (msg) => {
+                            //跳转回原页面
+                        });
+                    },
+                    onCancel: () => {
                     }
-                });
+                }).show()
+            },
+            /**
+             * 判断输入框是否为空
+             * */
+            hasContent() {
+                this.disabled = !(this.value.trim() && this.value);
+            },
 
-                e.preventDefault();
-            }
         },
         watch: {
             'selected': function () {
@@ -103,6 +120,20 @@
     }
 </script>
 
-<style>
-    .reportBtn{background-color:#d6d6d6!important;color: #0f0f0f!important;}
+<style scoped>
+    .container {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 17px;
+    }
+
+    li {
+        text-align: left;
+        border-bottom: #eeeeee solid 1px;
+        margin-top: 20px;
+    }
+
+    li:last-child {
+        border: 0;
+    }
 </style>
