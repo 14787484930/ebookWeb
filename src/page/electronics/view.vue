@@ -3,10 +3,6 @@
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <slider :pic-urls="urls"></slider>
-                <report-button :product="{productId: electronics.id ,
-                     productName: electronics.electronicsName,
-                     productType: electronics.electronicsType}">
-                </report-button>
                 <template>
                     <div class="listHead">
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{electronics.presentPrice}}</strong>
@@ -46,13 +42,16 @@
                         </li>
                     </ul>
                 </template>
+                <router-link style="float: right; font-size: 10px; margin-right: 10px"
+                             :to="{path:'/report', query:{productId: electronics.id ,
+                                productName: electronics.electronicsName,productType: 2}}">举报
+                </router-link>
             </cube-scroll>
         </div>
     </div>
 </template>
 
 <script>
-    import reportButton from '../../components/report'
     import storage from '../../assets/storage/index'
     import slider from '../../components/slider'
     import $ from 'jquery';
@@ -61,7 +60,6 @@
 
     export default {
         components: {
-            reportButton,
             slider
         },
         //name: "view",
@@ -119,7 +117,7 @@
                 let key = "electronicsType";
                 let aValue = storage.getSession(key);
                 let value = aValue[typeNum - 1].text;
-                if(typeof value === undefined){
+                if (typeof value === undefined) {
                     value = "未知";
                     console.error('ElectronicView getElectronicTypeName: value error')
                 }

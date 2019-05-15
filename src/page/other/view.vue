@@ -3,11 +3,6 @@
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <slider :pic-urls="urls"></slider>
-                <report-button
-                        :product="{productId: other.id ,
-                        productName: other.otherName,
-                        productType: other.otherType}">
-                </report-button>
                 <template>
                     <div class="listHead">
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{other.presentPrice}}</strong></div>
@@ -48,13 +43,16 @@
                         </li>
                     </ul>
                 </template>
+                <router-link style="float: right; font-size: 10px; margin-right: 10px;margin-bottom: 30px"
+                             :to="{path:'/report', query:{productId: other.id ,
+                               productName: other.otherName,productType: 3}}">举报
+                </router-link>
             </cube-scroll>
         </div>
     </div>
 </template>
 
 <script>
-    import reportButton from '../../components/report'
     import slider from '../../components/slider'
     import $ from 'jquery';
 
@@ -62,7 +60,6 @@
 
     export default {
         components: {
-            reportButton,
             slider
         },
         data() {
@@ -97,11 +94,6 @@
                 return this.$store.getters.power;
             }
         },
-
-        mounted() {
-            //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
-        },
-
         methods: {
             initData() {
                 this.$http.post('/other/getById/' + this.other.id).then((res) => {

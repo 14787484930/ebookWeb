@@ -24,6 +24,7 @@ const version = r => require.ensure([], () => r(require('../../page/about/versio
 //测试模块
 const verify = r => require.ensure([], () => r(require('../../components/verify')), 'verify')
 const shop = r => require.ensure([], () => r(require('../../page/shop/index')), 'shop')
+const report = r => require.ensure([], () => r(require('../../page/common/report')), 'shop')
 
 /*
 //打包app不能使用懒加载，后面找原因
@@ -75,7 +76,7 @@ const routes = new VueRouter({
                 {path: 'version', name: 'version', component: version},
                 {path: 'verify', name: 'verify', component: verify},
                 //404
-                {path: '*', name: '*', component: main},
+                //{path: '*', name: '*', component: main},
             ],
         },
         // 动态路径参数 以冒号开头
@@ -85,6 +86,11 @@ const routes = new VueRouter({
                 {path: 'shop', name: 'shop', component: shop}
             ],
         },
+        {
+            //举报页面
+            path: '/report',name:'report', component: report
+        },
+
     ]
 })
 export default routes;

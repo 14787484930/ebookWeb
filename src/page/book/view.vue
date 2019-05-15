@@ -3,10 +3,6 @@
         <div class="scroll-list-wrap">
             <cube-scroll ref="scroll">
                 <slider :pic-urls="urls"></slider>
-                <report-button :product="{productId: book.id ,
-                     productName: book.bookName,
-                     productType: book.bookType}">
-                </report-button>
                 <template>
                     <div class="listHead">
                         <div class="relPrice"><i class="priceTip">出售价</i><strong>￥{{book.bookPrice}}</strong></div>
@@ -54,13 +50,16 @@
                         <div>{{book.des}}</div>
                     </div>
                 </template>
+                <router-link style="float: right; font-size: 10px; margin-right: 10px"
+                             :to="{path:'/report', query:{productId: book.id ,
+                              productName: book.bookName,productType: 1}}">举报
+                </router-link>
             </cube-scroll>
         </div>
     </div>
 </template>
 
 <script>
-    import reportButton from '../../components/report'
     import storage from '../../assets/storage/index'
     import slider from '../../components/slider'
     import $ from 'jquery';
@@ -68,7 +67,6 @@
     export default {
         //name: "view",
         components: {
-            reportButton,
             slider
         },
         data() {
