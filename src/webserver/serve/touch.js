@@ -8,7 +8,7 @@ function vueTouch(el, type, binding) {
     this.type = type;
     this.binding = binding;
     //直接调用
-    var hammertime = new Hammer(this.el);
+    let hammertime = new Hammer(this.el);
     hammertime.on(this.type, this.binding.value);
 }
 

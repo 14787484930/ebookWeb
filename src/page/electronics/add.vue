@@ -6,7 +6,8 @@
                     <h1>填写清单</h1>
                     <label class="form-group item item-input ">
                         <span>电子名称：</span>
-                        <input type="text" class="isnull" v-model="electronics.electronicsName" placeholder="点此填写">
+                        <input type="text" class="isnull" v-model="electronics.electronicsName"
+                               placeholder="点此填写">
                     </label>
                     <label class="form-group item item-input ">
                         <span>电子类型：</span>
@@ -48,7 +49,9 @@
                         <input placeholder="点此填写" type="text" v-model="electronics.des">
                     </label>
                     <file-com ref="refFiles" :urls="urls"></file-com>
-                    <button id="submit" :disabled="submitFlag" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                    <button id="submit" :disabled="submitFlag" style="width: 100%" class="button button-positive"
+                            @click="saveData">发布
+                    </button>
                 </div>
             </template>
         </cube-scroll>

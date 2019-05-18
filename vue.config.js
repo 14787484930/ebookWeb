@@ -33,7 +33,7 @@ module.exports = {
     // eslint-loader 是否在保存的时候检查
     lintOnSave: true,
     // 是否使用包含运行时编译器的Vue核心的构建
-    runtimeCompiler: false,
+    runtimeCompiler: true,
     // 默认情况下 babel-loader 忽略其中的所有文件 node_modules
     transpileDependencies: [],
     // 生产环境 sourceMap

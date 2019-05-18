@@ -25,6 +25,7 @@ const version = r => require.ensure([], () => r(require('../../page/about/versio
 const verify = r => require.ensure([], () => r(require('../../components/verify')), 'verify')
 const shop = r => require.ensure([], () => r(require('../../page/shop/index')), 'shop')
 const report = r => require.ensure([], () => r(require('../../page/common/report')), 'shop')
+const editor = r => require.ensure([], () => r(require('../../page/common/editor')), 'editor')
 
 /*
 //打包app不能使用懒加载，后面找原因
@@ -90,6 +91,10 @@ const routes = new VueRouter({
             //举报页面
             path: '/report',name:'report', component: report
         },
+        {
+            //富文本编辑页
+            path:'/editor', name:'editor', component: editor
+        }
 
     ]
 })
