@@ -17,34 +17,34 @@
                     筛选
                 </button>
             </div>
-            <div title="搜索" v-show="isShow" class="weui-cells">
+            <div title="搜索" v-show="isShow" class="search-cells">
                 <ul>
                     <li class="cube-index-list-item">
-                        <div class="weui-cell weui-cell_access" @click="$picker.showDialog()">
-                            <div class="weui-cell__bd">
+                        <div class="search-cell search-cell_access" @click="$picker.showDialog()">
+                            <div class="search-cell__bd">
                                 <span>价格:</span>
                                 <span class="book-name">
                                     <span class="green">￥{{queryList.startPrice}}</span>&nbsp;&nbsp;至&nbsp;&nbsp;<span
                                         class="green">￥{{queryList.endPrice}}</span>
                                 </span>
                             </div>
-                            <div class="weui-cell__ft">
+                            <div class="search-cell__ft">
                             </div>
                         </div>
                     </li>
                     <li class="cube-index-list-item">
-                        <div class="weui-cell weui-cell_access" @click="$picker.show()">
-                            <div class="weui-cell__bd">
+                        <div class="search-cell search-cell_access" @click="$picker.show()">
+                            <div class="search-cell__bd">
                                 <span>图书类型:</span>
                                 <span class="book-name green">{{bookTypeName}}</span>
                             </div>
-                            <div class="weui-cell__ft">
+                            <div class="search-cell__ft">
                             </div>
                         </div>
                     </li>
                     <li class="cube-index-list-item">
-                        <div class="weui-cell weui-cell_access">
-                            <div class="weui-cell__bd">
+                        <div class="search-cell search-cell_access">
+                            <div class="search-cell__bd">
                                 <span>日期:</span>
                             </div>
                             <input type="text" readonly="readonly"
@@ -60,8 +60,8 @@
                     </li>
 
                     <li class="cube-index-list-item">
-                        <cube-button :light="true" @click="searchClear">重置</cube-button>
-                        <cube-button :light="true" @click="search">搜索</cube-button>
+                        <cube-button style="width: 50%" :light="true" @click="searchClear">重置</cube-button>
+                        <cube-button style="width: 50%; background-color:#379be9;" :light="true" @click="search">搜索</cube-button>
                     </li>
                 </ul>
             </div>

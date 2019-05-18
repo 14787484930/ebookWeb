@@ -12,9 +12,6 @@ import './webserver/serve/touch'
 
 import './frame/cube-ui'
 
-import weui from 'weui'
-Vue.prototype.$weui = weui
-
 Vue.config.productionTip = false
 new Vue({
     router,
