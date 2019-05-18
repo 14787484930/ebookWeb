@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </template>
-                <router-link class="report-style"
+                <router-link class="report-style" v-if="!power_flag"
                              :to="{path:'/report', query:{productId: electronics.id ,
                                 productName: electronics.electronicsName,productType: 2}}">举报
                 </router-link>
@@ -94,6 +94,9 @@
         computed: {
             power() {
                 return this.$store.getters.power;
+            },
+            power_flag() {
+                return this.$store.getters.power_flag;
             }
         },
         methods: {

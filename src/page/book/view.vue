@@ -50,7 +50,7 @@
                         <div>{{book.des}}</div>
                     </div>
                 </template>
-                <router-link class="report-style"
+                <router-link class="report-style" v-if="!power_flag"
                              :to="{path:'/report', query:{productId: book.id ,
                               productName: book.bookName,productType: 1}}">举报
                 </router-link>
@@ -67,7 +67,7 @@
     export default {
         //name: "view",
         components: {
-            slider
+            slider,
         },
         data() {
             return {
@@ -100,6 +100,9 @@
         computed: {
             power() {
                 return this.$store.getters.power;
+            },
+            power_flag() {
+                return this.$store.getters.power_flag;
             }
         },
         methods: {
