@@ -12,7 +12,7 @@
                     <i class="icon ion-plus"></i>
                 </router-link>
             </div>
-            <div style="text-align: center">
+            <div style="text-align: center;background-color: #fff;">
                 <button @click="intelSearch" class="button  button-light icon-right  ion-android-arrow-dropdown">
                     筛选
                 </button>

@@ -4,6 +4,7 @@
         <vue-html5-editor :content="content" :height="400"
                           @change="updateData">
         </vue-html5-editor>
+        <Button>完成</Button>
     </div>
 </template>
 
