@@ -5,7 +5,6 @@ import store from './store/store' //引入store
 
 import 'amfe-flexible'
 import './assets/ionic/css/ionic.min.css'
-import './assets/bootstrap/css/bootstrap.min.css'
 import './assets/css/style.css'
 import './webserver/serve/serve'
 import './webserver/serve/picker'
