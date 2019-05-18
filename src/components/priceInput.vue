@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import $format from '../../webserver/serve/format'
+    import $format from '../webserver/serve/format'
     export default {
         name: "priceInput",
         data () {

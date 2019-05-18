@@ -1,9 +1,9 @@
-import $http from "./http";
+import Vue from 'vue'
 import $ from 'jquery'
 import {Picker, DatePicker, Dialog} from 'cube-ui'
-import Vue from 'vue'
+import $http from "./http";
 //import $format from './format'
-import priceInput from '../../components/common/priceInput'
+import priceInput from '../../components/priceInput'
 //引入缓存
 import storage from '../../assets/storage/index'
 

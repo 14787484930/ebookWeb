@@ -1,5 +1,6 @@
 <template>
     <div class="content">
+        <h1>h1哈哈</h1>
         <b>哈哈</b>
         <vue-html5-editor :content="content" :height="400"
                           @change="updateData">

@@ -3,9 +3,9 @@
         <input type="file" id="upload-file" @change="showImg" multiple="multiple" style="display:none"
                accept="image/*"/>
         <div class="row-boder" style="text-align: center;margin:0 auto">
-            <img class="img-responsive" @click="bindEven" src="./common/css/img/upload.png"/>
+            <img class="img-responsive" @click="bindEven" src="../assets/images/upload.png"/>
             <i @click="delAll()" v-if="showDel" class="icon ion-close-circled" style="color:lightcoral "></i>
-            <img class="img-responsive" v-if="curls.length===0" src="./common/css/img/noImg.png"/>
+            <img class="img-responsive" v-if="curls.length===0" src="../assets/images/noImg.png"/>
             <div v-for="(item, index) in curls" :key="index">
                 <img v-press="fShowDel" class="img-responsive" @click="showImagePreview(item[ckey])" :src="item[ckey]"/>
                 <i @click="delImg(item)" v-if="showDel" class="icon ion-close-circled"></i>
