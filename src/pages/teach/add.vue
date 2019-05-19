@@ -91,8 +91,10 @@
                             <span>描述：</span>
                             <!--<input type="text" v-model="teach.des" placeholder="点此填写">-->
                         </label>
-                        <vue-html5-editor :content="teach.des" auto-height="false" @change="updateData">
-                        </vue-html5-editor>
+                        <div class="vue-html5-editor">
+                            <vue-html5-editor :content="teach.des" auto-height="false" @change="updateData">
+                            </vue-html5-editor>
+                        </div>
                         <button id="submit" :disabled="submitBtn" style="width: 100%" class="button button-positive"
                                 @click="saveData">发布
                         </button>
@@ -155,7 +157,6 @@
             },
             initData() {
                 this.$http.post("/tutoring/getById/" + this.teach.id).then(res => {
-                    //_that.teach = res.data.page.info;
                     for (let i in this.teach) {
                         _that.teach[i] = res.data.page.info[i];
                     }
@@ -176,7 +177,7 @@
                 this.submitBtn = true;
                 this.$save(url, this.teach, '', msg => {
                     _that.submitBtn = false;
-                    if (msg.status === 100) {
+                    if (msg.data.code === 100) {
                         this.$createDialog({
                             type: 'alert',
                             title: '消息',
@@ -191,11 +192,12 @@
                         let akey = Object.keys(msg.data.page.errors)[0]
 
                         this.$createDialog({
-                            type: 'alert',
+                            type: 'error',
                             title: msg.data.msgs.msg,
                             content: aMsg[akey],
                             icon: 'cubeic-right',
-
+                            onConfirm: () => {
+                            }
                         }).show()
                     }
                 });
@@ -242,5 +244,8 @@
 
     .active {
         color: #387ef5;
+    }
+    .vue-html5-editor{
+        font-size: 0.373333rem !important;
     }
 </style>

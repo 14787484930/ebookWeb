@@ -96,7 +96,6 @@
             },
             initData() {
                 this.$http.post('/other/getById/' + this.other.id).then((res) => {
-                    //_that.other=res.data.page.info;
                     for (let i in this.other) {
                         _that.other[i] = res.data.page.info[i];
                     }
