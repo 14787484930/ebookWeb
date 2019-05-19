@@ -198,7 +198,6 @@
             updateData(e = '') {
                 let c1 = e.replace(/<img width="100%"/g, '<img');
                 _that.teach.des = c1.replace(/<img/g, '<img width="100%"');
-                console.log(_that.teach.des)
             }
         }
     };
