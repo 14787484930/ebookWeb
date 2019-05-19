@@ -1,23 +1,24 @@
 <template>
     <div class="content">
-        <h1>富文本编辑器</h1>
-        <vue-html5-editor :content="content" :height="400"
+        <vue-html5-editor :content="content" :height="1000"
                           @change="updateData">
         </vue-html5-editor>
-        <Button>完成</Button>
     </div>
 </template>
 
 <script>
-    import initRichText  from '../../frame/initHTMLEditor'
+    import initRichText from '../../frame/initHTMLEditor'
     initRichText()
     export default {
         data() {
-            return {content: '请输入文章内容'}
+            return {content: '11'}
         },
         methods: {
             updateData(e = '') {
-                this.content = e;
+                let c1 = e.replace(/<img width="100%"/g, '<img');
+                let c2 = c1.replace(/<img/g, '<img width="100%"');
+                this.content = c2;
+
                 console.info(e);
             }
         }

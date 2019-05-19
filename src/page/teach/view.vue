@@ -52,9 +52,11 @@
                         </li>
                         <li class="item item-desc">
                             <span>描述：</span>
-                            <span>{{teach.des}}</span>
                         </li>
                     </ul>
+                    <div style="margin: 0 10px" >
+                        <article id="editorH5"></article>
+                    </div>
                 </template>
             </cube-scroll>
         </div>
@@ -63,8 +65,9 @@
 
 <script>
     import orderTaking from '../../components/orderTaking'
-    import $ from "jquery";
-    import {parse} from 'path';
+    /*    import $ from "jquery";
+        import {parse} from 'path';*/
+    import Vue from 'vue'
 
     let _that;
 
@@ -118,14 +121,14 @@
                     return false;
                 }
             },
-          /*  isOrderSelf: function () {  /!*添加人：zxl ，描述：判断是否显示接单人按钮*!/
+            /*  isOrderSelf: function () {  /!*添加人：zxl ，描述：判断是否显示接单人按钮*!/
 
-                if (this.$store.getters.power_flag && this.teach.orderUser != null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            },*/
+                  if (this.$store.getters.power_flag && this.teach.orderUser != null) {
+                      return true;
+                  } else {
+                      return false;
+                  }
+              },*/
             isRevoke: function () { /*添加人：zxl ，描述：判断是否显示撤销按钮*/
                 if (this.$store.getters.power && this.teach.orderUser != null && this.teach.isScore == 0) {
                     return true;
@@ -141,10 +144,6 @@
                 }
             }
         },
-        mounted() {
-            //this.$(".scroll-list-wrap").height = this.$(".scroll-list-wrap").height(screen.availHeight - this.$(".tabs-icon-top", window.parent.parent.document).height()) + 80;
-        },
-
         methods: {
             initData() {
                 this.$http.post("/tutoring/getById/" + this.teach.id).then(res => {
@@ -159,6 +158,8 @@
                         "yyyy-MM-dd HH:mm"
                     );
                     _that.isOrderSelf();
+                    //将富文本
+                    this.editorMounted(_that.teach.des);
                 });
             },
             isOrderSelf: function () {  /*添加人：zxl ，描述：判断是否显示接单人按钮*/
@@ -169,6 +170,14 @@
                     this.isOrderSelfFlag = false;
                 }
             },
+            //将富文本字符挂在到Dom文档中
+            editorMounted: function (des) {
+                let baseOptions = {
+                    template: "<div>"+des+"</div>",
+                }
+                let baseExtend = Vue.extend(baseOptions);
+                new baseExtend().$mount('#editorH5');
+            }
         }
     };
 </script>

@@ -43,9 +43,10 @@
                         </label>
                         <label class="form-group item item-input">
                             <span>描述：</span>
-                            <input type="text" v-model="teach.des" placeholder="点此填写">
+                            <!--<input type="text" v-model="teach.des" placeholder="点此填写">-->
                         </label>
-
+                        <vue-html5-editor :content="teach.des" :height="200" @change="updateData">
+                        </vue-html5-editor>
                         <button style="width: 100%" class="button button-positive" @click="saveData">发布</button>
                     </div>
                     <div class="list" v-else>
@@ -87,9 +88,10 @@
                         </label>
                         <label class="form-group item item-input">
                             <span>描述：</span>
-                            <input type="text" v-model="teach.des" placeholder="点此填写">
+                            <!--<input type="text" v-model="teach.des" placeholder="点此填写">-->
                         </label>
-
+                        <vue-html5-editor :content="teach.des" :height="200" @change="updateData">
+                        </vue-html5-editor>
                         <button id="submit" :disabled="submitBtn" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
                     </div>
                 </div>
@@ -100,6 +102,8 @@
 
 <script>
     let _that;
+    import initRichText from '../../frame/initHTMLEditor'
+    initRichText()
 
     export default {
         name: "addTeach",
@@ -189,6 +193,12 @@
                     this.current = index;
                     this.teach.type = index;
                 }
+            },
+            //富文本方法
+            updateData(e = '') {
+                let c1 = e.replace(/<img width="100%"/g, '<img');
+                _that.teach.des = c1.replace(/<img/g, '<img width="100%"');
+                console.log(_that.teach.des)
             }
         }
     };

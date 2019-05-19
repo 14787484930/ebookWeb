@@ -73,7 +73,6 @@
 <script>
     let that;
     import gridView from '../../components/gridView'
-
     export default {
         name: 'Book',
         components: {

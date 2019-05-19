@@ -32,8 +32,8 @@
                if(this.userAdvice.des.trim() && this.userAdvice.des){
                   this.disabled = false;
                }else{
-                  this.disabled = true; 
-               } 
+                  this.disabled = true;
+               }
             },
             subAdvice(){
 
@@ -74,7 +74,7 @@
 <style scoped>
    .adviceWrap{margin-bottom:30px;color:#333;}
    .adviceTips,.adviceTips>em{font-family: "宋体";}
-   .adviceTips{font-size:12px;}
+   .adviceTips{font-size:12px; line-height: 1.5}
    .adviceTips>em{font-weight: bold;}
    .adviceTitle{text-align: center;font-size:22px;margin-bottom:30px;}
    .cube-textarea-wrapper{border:1px solid #ccc;border-radius: 2px;}
