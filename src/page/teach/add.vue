@@ -9,7 +9,8 @@
                             v-for="(item, index) in options"
                             :key="item.index"
                             @click="changeTab(index)"
-                    >{{ item }}</li>
+                    >{{ item }}
+                    </li>
                 </label>
                 <div>
                     <div class="list" v-if="!flag">
@@ -23,7 +24,7 @@
                                    v-model="teach.startTime"
                                    @click="$picker.showTime('type')"
                                    placeholder="点此选择日期">
-                          <!--  <Date v-model="teach.startTime" type="time"></Date>-->
+                            <!--  <Date v-model="teach.startTime" type="time"></Date>-->
                         </label>
                         <label class="form-group item item-input">
                             <span>辅导地点：</span>
@@ -90,9 +91,11 @@
                             <span>描述：</span>
                             <!--<input type="text" v-model="teach.des" placeholder="点此填写">-->
                         </label>
-                        <vue-html5-editor :content="teach.des" :height="200" @change="updateData">
+                        <vue-html5-editor :content="teach.des" auto-height="false" @change="updateData">
                         </vue-html5-editor>
-                        <button id="submit" :disabled="submitBtn" style="width: 100%" class="button button-positive" @click="saveData">发布</button>
+                        <button id="submit" :disabled="submitBtn" style="width: 100%" class="button button-positive"
+                                @click="saveData">发布
+                        </button>
                     </div>
                 </div>
             </template>
@@ -103,6 +106,7 @@
 <script>
     let _that;
     import initRichText from '../../frame/initHTMLEditor'
+
     initRichText()
 
     export default {
@@ -170,17 +174,30 @@
                 let url = "/tutoring/save";
                 if (this.teach.id !== 0) url = "/tutoring/update";
                 this.submitBtn = true;
-                this.$save(url, this.teach,'' ,msg => {
+                this.$save(url, this.teach, '', msg => {
                     _that.submitBtn = false;
-                    this.$createDialog({
-                        type: 'alert',
-                        title: '信息',
-                        content: '保存成功 ',
-                        icon: 'cubeic-right',
-                        onConfirm:()=>{
-                            this.$router.push({path: '/teach'})
-                        }
-                    }).show()
+                    if (msg.status === 100) {
+                        this.$createDialog({
+                            type: 'alert',
+                            title: '消息',
+                            content: '上传成功',
+                            icon: 'cubeic-right',
+                            onConfirm: () => {
+                                this.$router.push({path: '/teach'})
+                            }
+                        }).show()
+                    } else {
+                        let aMsg = msg.data.page.errors;
+                        let akey = Object.keys(msg.data.page.errors)[0]
+
+                        this.$createDialog({
+                            type: 'alert',
+                            title: msg.data.msgs.msg,
+                            content: aMsg[akey],
+                            icon: 'cubeic-right',
+
+                        }).show()
+                    }
                 });
             },
             //类型选择
@@ -203,19 +220,26 @@
     };
 </script>
 <style scoped>
-    .scroll-list-wrap{height: 94vh;}/*滚动的页面的高度 -by gpj*/
-    .scroll-list-wrap #submit{
+    .scroll-list-wrap {
+        height: 94vh;
+    }
+
+    /*滚动的页面的高度 -by gpj*/
+    .scroll-list-wrap #submit {
         margin-bottom: 20px;
     }
+
     .teach-tabs.item-input {
         display: flex;
         height: 70px;
         padding: 0 2rem;
         justify-content: space-between;
     }
+
     .teach-tab {
         font-size: 19px;
     }
+
     .active {
         color: #387ef5;
     }
