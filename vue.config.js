@@ -14,7 +14,7 @@ module.exports = {
             // page 的入口
             entry: 'src/main.js',
             // 模板来源
-            template: 'src/main/main.vue',
+            template: 'public/index.html',
             // 在 dist/index.html 的输出
             filename: 'index.html',
             // 当使用 title 选项时，
