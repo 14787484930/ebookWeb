@@ -1,10 +1,9 @@
 <!--弹框组件-->
 <template>
     <div class="container">
-        <h5>选择举报原因举报</h5>
+        <header>选择举报原因举报</header>
         <ul>
-            <li v-for="(item, index) in options" :key="index" @click.stop="reportMsg(item.id)">{{item.name}}
-            </li>
+            <li v-for="(item, index) in options" :key="index" @click.stop="reportMsg(item.id)">{{item.name}}</li>
         </ul>
         <div v-if="selectOther">
             <cube-textarea v-model="value" @input="hasContent()"></cube-textarea>
@@ -126,20 +125,27 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .container {
+        margin: 20px;
+        font-size: 16px;
         text-align: center;
-        margin-top: 10px;
-        font-size: 17px;
-    }
-
-    li {
-        text-align: left;
-        border-bottom: #eeeeee solid 1px;
-        margin-top: 20px;
-    }
-
-    li:last-child {
-        border: 0;
+        header {
+            font-size: 18px;
+            color: #767676;
+        }
+        div > * {
+            margin-top: 10px;
+        }
+        ul {
+            li {
+                text-align: left;
+                border-bottom: #eeeeee solid 1px;
+                margin-top: 20px;
+                &:last-child {
+                    border: 0;
+                }
+            }
+        }
     }
 </style>
