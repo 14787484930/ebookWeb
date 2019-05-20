@@ -18,7 +18,7 @@ const teachView = r => require.ensure([], () => r(require('../../pages/teach/vie
 const other = r => require.ensure([], () => r(require('../../pages/other/index')), 'other')
 const otherAdd = r => require.ensure([], () => r(require('../../pages/other/add')), 'other')
 const otherView = r => require.ensure([], () => r(require('../../pages/other/view')), 'other')
-const center = r => require.ensure([], () => r(require('../../pages/about/mycenter')), 'center')
+const center = r => require.ensure([], () => r(require('../../pages/about/index')), 'center')
 const advice = r => require.ensure([], () => r(require('../../pages/about/advice')), 'center')
 const version = r => require.ensure([], () => r(require('../../pages/about/version')), 'center')
 //测试模块

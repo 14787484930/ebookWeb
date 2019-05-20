@@ -107,8 +107,9 @@
 
 <script>
     let _that;
+    //引入富文本依赖图标
+    import "font-awesome.css"
     import initRichText from '../../frame/initHTMLEditor'
-
     initRichText()
 
     export default {

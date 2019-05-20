@@ -63,7 +63,7 @@
 }
 
 .weui-mask_transparent {
-    background: rgb(15, 15, 18, .5);
+    background: rgba(15, 15, 18, .5);
 }
 
 /*toptip*/
@@ -132,106 +132,6 @@
     word-break: break-all;
     white-space: normal;
     overflow: scroll;
-}
-
-/*orderTaking与report共用样式*/
-.report-btn {
-    float: right;
-    background-color: #00bb15;
-    color: #fff;
-    font-size: 15px;
-    border-radius: 2px;
-    padding: 5px 10px;
-    margin: 15px;
-    border: 0;
-}
-
-.module-dialog {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1001;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.module-dialog:after {
-    content: '';
-    height: 100%;
-    margin-left: -.25em;
-    background-color: #2aabd2;
-}
-
-.module-dialog .dialog-panel,
-.module-dialog:after {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.module-dialog .dialog-panel {
-    position: relative;
-    width: 250px;
-    min-width: 100px;
-    background: #fff;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, .14);
-    box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.6);
-    text-align: left;
-}
-
-.module-dialog .dialog-tit {
-    height: 40px;
-    padding: 0 15px;
-    border-radius: 8px 8px 0 0;
-    border-bottom: 1px solid #d4d4d4;
-    box-shadow: rgba(0, 0, 0, .06) 0 1px 7px;
-    line-height: 40px;
-}
-
-.module-dialog .dialog-tit h4 {
-    float: left;
-    padding-left: 5px;
-    font-size: 18px;
-    color: #333;
-    line-height: 40px;
-}
-
-.module-dialog .dialog-tit span {
-    float: right;
-}
-
-.module-dialog .confirm-msg {
-    margin: 10px auto;
-    min-height: 150px;
-    max-height: 350px;
-    text-align: center;
-    font-size: 16px;
-    overflow-y: scroll;
-}
-
-.dialog-btn-wrap {
-    overflow: auto;
-    text-align: center;
-}
-
-.dialog-btn-wrap button {
-    color: #0f0f0f;
-    font-size: 15px;
-    padding: 5px 20px;
-    margin: 10px;
-    border-radius: 2px;
-    border: 0;
-}
-
-.dialog-btn-wrap .cancel {
-    background-color: #d6d6d6;
-}
-
-.dialog-btn-wrap .confirm {
-    background-color: #00bb15;
-    color: #fff;
 }
 
 /*筛选公用样式*/

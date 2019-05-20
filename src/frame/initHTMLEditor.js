@@ -120,12 +120,12 @@ export default function () {
             "font",
             "align",
           /*  "list",*/
-            "link",
+          /*  "link",*/
             /*"unlink",*/
             "tabulation",
             "image",
             "hr",
-            "eraser",
+           /* "eraser",*/
             "undo",
             /*"full-screen",*/
             /*"info",*/

@@ -77,6 +77,7 @@
 <script>
     import panel from '../../components/core/panel'
     import footor from '../../components/footer'
+
     export default {
         name: "mycenter",
         components: {
@@ -99,38 +100,47 @@
 <style lang="scss" scoped>
     @import "../../assets/scss/element";
 
-    .panel {
-        @include panel;
-        .content {
-            @include flex(row);
-            box-sizing: border-box;
-            .item {
-                width: 33.3333%;
-                border: 0;
-                text-align: center;
-                img {
-                    margin-top: 6px;
-                    width: 45px;
-                    height: 45px;
-                }
-                p {
-                    font-size: 13px;
-                    color: #666;
-                    text-overflow: ellipsis; /*禁止换行*/
-                    white-space: nowrap;
-                    overflow: hidden;
-                    margin-top: 6px;
-                    &:nth-child(2) {
-                        color: red;
+    .container {
+        background-color: #f5f5f5;
+        height: 100vh;
+        transform: rotate(0deg);
+        overflow: hidden;
+        .card {
+            -webkit-box-shadow: 0 0 0.08rem rgba(0, 0, 0, .3);
+            box-shadow: 0 0 0.08rem rgba(0, 0, 0, .3);
+
+            .panel {
+                @include panel;
+                .content {
+                    @include flex(row);
+                    box-sizing: border-box;
+                    .item {
+                        width: 33.3333%;
+                        border: 0;
+                        text-align: center;
+                        img {
+                            margin-top: 6px;
+                            width: 45px;
+                            height: 45px;
+                        }
+                        p {
+                            font-size: 13px;
+                            color: #666;
+                            text-overflow: ellipsis; /*禁止换行*/
+                            white-space: nowrap;
+                            overflow: hidden;
+                            margin-top: 6px;
+                            &:nth-child(2) {
+                                color: red;
+                            }
+                        }
                     }
                 }
             }
-        }
-    }
 
-    .container {
-        height: 100vh;
-        transform: rotate(0deg); // fix 子元素超出边框圆角部分不隐藏的问题
-        overflow: hidden;
+            &:last-child {
+                margin-bottom: 100px;
+            }
+        }
     }
 </style>

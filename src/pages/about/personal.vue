@@ -1,15 +1,17 @@
 <template>
     <section class="container">
-        <div class="title">基本信息</div>
-        <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
-            <cube-form-group>
-                <cube-form-item :field="fields[0]"></cube-form-item>
-                <cube-form-item :field="fields[1]"></cube-form-item>
-                <cube-form-item :field="fields[2]"></cube-form-item>
-                <cube-form-item :field="fields[3]"></cube-form-item>
-            </cube-form-group>
-        </cube-form>
-        <cube-button class="stud-submit">验证</cube-button>
+        <div class="content">
+            <div class="title">基本信息</div>
+            <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
+                <cube-form-group>
+                    <cube-form-item :field="fields[0]"></cube-form-item>
+                    <cube-form-item :field="fields[1]"></cube-form-item>
+                    <cube-form-item :field="fields[2]"></cube-form-item>
+                    <cube-form-item :field="fields[3]"></cube-form-item>
+                </cube-form-group>
+            </cube-form>
+            <cube-button class="stud-submit">验证</cube-button>
+        </div>
     </section>
 </template>
 
@@ -90,17 +92,22 @@
 
 <style lang="scss" scoped>
     .container {
+        background-color: #f5f5f5;
         height: 100vh;
-        margin: 20px;
+        transform: rotate(0deg);
         overflow: hidden;
-        .title {
-            font-size: 18px;
-            margin: 15px 0;
-            text-align: center;
-            color: #767676;
-        }
-        .stud-submit {
-            margin-top: 20px;
+        .content {
+            margin: 20px;
+            overflow: hidden;
+            .title {
+                font-size: 18px;
+                margin: 15px 0;
+                text-align: center;
+                color: #767676;
+            }
+            .stud-submit {
+                margin-top: 20px;
+            }
         }
     }
 </style>

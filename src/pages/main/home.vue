@@ -10,9 +10,7 @@
             </router-link>
         </div>
         <keep-alive>
-            <transition name="router-slid" mode="out-in">
-                <router-view name="default"></router-view>
-            </transition>
+            <router-view name="default"></router-view>
         </keep-alive>
     </div>
 </template>
@@ -70,7 +68,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .fixed-bottom {
         position: fixed;
         bottom: 0;
