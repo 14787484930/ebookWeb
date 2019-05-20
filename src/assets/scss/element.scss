@@ -1,0 +1,36 @@
+@import "layout";
+
+@mixin btn($size:7px, $color:#fff, $bgcolor:#555, $padding: 3px, $radius: 3px){
+  padding: $padding;
+  background-color: $bgcolor;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+  border: 1px solid $bgcolor;
+  font-size: $size;
+  color: $color;
+  text-align: center;
+  line-height: 1;
+  display: inline-block;
+}
+
+@mixin list($direction: column){
+  @include flex($direction)
+}
+
+@mixin panel($bgcolor:#fff, $padding:0, $margin:10px 0, $height:56px, $txtpadding:2px 16px, $color:#111,$fontSize: 16px){
+  background-color: $bgcolor;
+  padding: $padding;
+  margin: $margin;
+  >h4{
+    height: $height;
+    line-height: $height;
+    padding: $txtpadding;
+    text-overflow: ellipsis;/*内容过程设置'...'*/
+    white-space: nowrap;    /*禁止换行*/
+    overflow: hidden;       /*超出隐藏*/
+    text-align: center;
+    color: $color;
+    font-size: $fontSize;
+  }
+}

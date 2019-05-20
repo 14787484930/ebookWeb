@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+@mixin flex($direction:column,$inline:block){
+  display: if($inline==block,flex,inline-flex);
+  flex-direction: $direction;/*决定主轴的方向*/
+  flex-wrap: wrap;/*flex-wrap属性定义，如果一条轴线排不下，换行*/
+}

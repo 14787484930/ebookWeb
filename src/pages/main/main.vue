@@ -3,6 +3,8 @@
         <h1>请选择</h1>
         <router-link class="btn" :to="{path:'/book',query: {flag: 0}}">我要购买</router-link>
         <router-link class="btn" :to="{path:'/book',query: {flag: 1}}">我要发布</router-link>
+        <router-link class="btn" :to="{path:'/version'}">关于我们</router-link>
+        <router-link class="btn" :to="{path:'/advice'}">提供建议</router-link>
     </section>
 </template>
 
@@ -23,11 +25,9 @@
     }
 
     .btn {
-        height: 10vh;
-        width: 50%;
-        font-size: 5vh;
-        margin: 3vw;
+        padding: 10px;
+        margin: 10px;
         background-color: lightblue;
-        border-radius: 10px;
+        border-radius: 5px;
     }
 </style>

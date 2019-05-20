@@ -26,7 +26,7 @@ const verify = r => require.ensure([], () => r(require('../../components/verify'
 const shop = r => require.ensure([], () => r(require('../../pages/shop/index')), 'shop')
 const report = r => require.ensure([], () => r(require('../../pages/common/report')), 'shop')
 const editor = r => require.ensure([], () => r(require('../../pages/common/editor')), 'editor')
-
+const personal = r => require.ensure([], () => r(require('../../pages/about/personal')), 'personal')
 /*
 //打包app不能使用懒加载，后面找原因
 import home from '../../pages/main/home'
@@ -76,6 +76,7 @@ const routes = new VueRouter({
                 {path: 'advice', name: 'advice', component: advice},
                 {path: 'version', name: 'version', component: version},
                 {path: 'verify', name: 'verify', component: verify},
+                {path: 'personal', name: 'personal', component: personal},
                 //404
                 //{path: '*', name: '*', component: main},
             ],
@@ -89,12 +90,12 @@ const routes = new VueRouter({
         },
         {
             //举报页面
-            path: '/report',name:'report', component: report
+            path: '/report', name: 'report', component: report
         },
         {
             //富文本编辑页
-            path:'/editor', name:'editor', component: editor
-        }
+            path: '/editor', name: 'editor', component: editor
+        },
 
     ]
 })

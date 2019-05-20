@@ -10,7 +10,9 @@
             </router-link>
         </div>
         <keep-alive>
-            <router-view name="default"></router-view>
+            <transition name="router-slid" mode="out-in">
+                <router-view name="default"></router-view>
+            </transition>
         </keep-alive>
     </div>
 </template>

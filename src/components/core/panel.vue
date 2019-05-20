@@ -1,6 +1,6 @@
 <template>
     <section :class="[panelClass, cname]">
-        <h4>{{title}}</h4>
+        <h4 v-if="title">{{title}}</h4>
         <slot></slot>
     </section>
 </template>
@@ -15,7 +15,7 @@ export default {
         title: {
             type: String,
             default: "",
-        }
+        },
     },
     data(){
         return {
