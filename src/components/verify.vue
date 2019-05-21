@@ -1,3 +1,4 @@
+<!--学生身份校验模块-->
 <template>
     <div class="container">
         <div class="back_bg_self">

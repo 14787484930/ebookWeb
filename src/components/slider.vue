@@ -1,3 +1,4 @@
+<!--轮播图模块-->
 <template>
     <cube-slide ref="slide" :data="urls">
         <cube-slide-item v-for="(img, index) in urls" :key="index" class="slider-item">

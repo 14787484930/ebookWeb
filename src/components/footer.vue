@@ -1,3 +1,4 @@
+<!--页脚组件-->
 <template lang="html">
     <panel title="" :class="$style.panel">
         <ul :class="$style.content">

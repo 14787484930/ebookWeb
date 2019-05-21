@@ -1,4 +1,4 @@
-<!--接单相关-->
+<!--接单相关模块-->
 <template>
     <div>
         <section v-if="btnNumber===1">
@@ -251,9 +251,3 @@
         }
     }
 </script>
-
-<style>
-
-.cube-input-field{padding:0 0.266667rem;border:1px solid #ccc!important;margin: 15px;}
-    
-</style>
