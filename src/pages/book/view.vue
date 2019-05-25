@@ -145,14 +145,14 @@
 <style lang="scss" scoped>
     .scroll-list-wrap{
         position: absolute;
-        top: 0;
+        top: -73px;
         left: 0;
         right: 0;
         bottom: 0;
         background-color: #f2f2f2;
         z-index: 2020;
         padding-top: 1.95rem;
-        height: 100vh;
+        height: 111vh;
     }
 
     .cube-slide-item {

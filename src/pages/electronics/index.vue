@@ -142,7 +142,7 @@
                 return "￥" + row.presentPrice;
             },
             view(row) {
-                this.$router.push({name: 'bookView', query: {id: row.id}});
+                this.$router.push({name: 'electronicsView', query: {id: row.id}});
             },
             del(row, callback) {
                 let para = {id: row.id};
@@ -178,8 +178,8 @@
                     that.typeName = text['0'];
                 });
                 this.$picker.datePicker((val, index, text) => {
-                    that.queryList.bookType = val['0'];
-                    that.bookTypeName = text['0'];
+                    that.queryList.electronicsType = val['0'];
+                    that.electronicsTypeName = text['0'];
                 });
                 this.$picker.datePicker((val, index, text) => {
                     that.queryList.startTime = index.join('-');
