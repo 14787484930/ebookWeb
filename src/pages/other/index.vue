@@ -63,16 +63,19 @@
             </div>
         </div>
         <grid-view :grid="grid" url="/other/others" :load="load"></grid-view>
+        <nav-bar></nav-bar>
     </div>
 </template>
 
 <script>
     let that;
     import gridView from '../../components/gridView'
+    import navBar from '../../components/navbar'
     export default {
         name: 'Other',
         components: {
             gridView,
+            navBar
         },
         data() {
             return {

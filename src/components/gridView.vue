@@ -7,8 +7,7 @@
                     <div class="list">
                         <transition-group name="swipe" tag="ul">
                             <div v-for="(item,index) in tables" :key="item.id">
-                                <cube-swipe-item v-if="power_flag" ref="reftables" v-bind:btns="btns" :index="index"
-                                                 @btn-click="updateOrDeleteItem">
+                                <cube-swipe-item v-if="power_flag" ref="reftables" :btns="editorBtns" :index="index" @btn-click="updateOrDeleteItem">
                                     <div @click="config.view(item)">
                                         <div class="item item-thumbnail-left" href="#">
                                             <img v-if="showImg" :src="$file(item[config.img])" @load="onImgLoad">
@@ -35,13 +34,13 @@
 
 <script>
     import storage from '../assets/storage/index'
-
+    import $ from 'jquery'
     export default {
         name: "gridView",
         props: ["url", "rows", "grid", "load"],
         filters: {
             filter(sourc, item, row) {
-                if (row.format != undefined) {
+                if (row.format !== undefined) {
                     return row.format(item);
                 } else {
                     const key = row.key;
@@ -61,22 +60,15 @@
                 this.initTables();
             }
         },
-        mounted() {
-            /*$(".scroll-list-wrap").height(
-                screen.availHeight -
-                $("#head").height() -
-                $(".tabs-icon-top", window.parent.parent.document).height()
-            );*/
-        },
         data() {
             return {
                 tables: [],
                 isLastPage: false,
-                btns: [
+                editorBtns: [
                     {
                         action: "edit",
                         text: "编辑",
-                        color: "cornflowerblue"
+                        color: "#6495ed"
                     },
                     {
                         action: "del",
@@ -109,13 +101,15 @@
                 this.initTables();
             },
             initParam() {
-                if (this.grid == undefined) {
-                    return;
+                if (typeof(this.grid) === "undefined") {
                     console.error("配置错误，请检查");
+                    return;
                 }
+                //将地址转化为String类型，如果不存在返回空字符串
                 this.url = this.$toStr(this.url);
+                //初始化配置
                 this.initConfig();
-                if (this.rows == undefined) {
+                if (typeof(this.rows) === "undefined") {
                     this.initTables();
                 } else {
                     this.tables = this.rows;
@@ -127,36 +121,38 @@
                     this.options.pullUpLoad = false;
                     return;
                 }
+                //请求数据
                 this.$table(this.url, this.config.query, function (data) {
-                    //将类型由数字改为字符串
+                    //将data.list中的类型由数字改为字符串
                     that.productTypeNumToString(that.url, data.list);
-
+                    //从服务器返回判断是否还有数据
                     that.isLastPage = data.isLastPage;
                     $.each(data.list, function (i, val) {
                         const arr = that.tables.filter(function (cval, ci) {
-                            return cval.id == val.id;
+                           // console.log(ci)
+                            return parseInt(cval.id) === parseInt(val.id);
                         });
                         if (arr.length === 0) {
                             that.tables.push(val);
                         }
                     });
-                    that.$nextTick(function () {
+                    /*that.$nextTick(function () {
                         that.$refs.scroll.refresh();
                         that.$refs.scroll.forceUpdate();
                     });
                     setTimeout(function () {
                         that.$refs.scroll.refresh();
                         that.$refs.scroll.forceUpdate();
-                    });
+                    });*/
                 });
             },
             initConfig() {
                 this.config = this.grid;
-                if (this.grid.btns == undefined) {
-                    this.grid.btns = this.btns;
+                if (typeof(this.grid.editorBtns) === "undefined") {
+                    this.grid.editorBtns = this.editorBtns;
                 }
                 this.config.query = this.$toArray(this.grid.query);
-                if (this.config.img == undefined) {
+                if (typeof(this.config.img) === "undefined") {
                     this.showImg = false;
                 }
             },

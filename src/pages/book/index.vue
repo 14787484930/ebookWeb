@@ -7,7 +7,7 @@
                            @change="search">
                     <i class="search-btn icon ion-ios-search placeholder-icon" @click="search"></i>
                 </label>
-                <router-link v-if="power_flag" :to="{path:'/bookAdd',query:{id:0}}"
+                <router-link v-if="power_flag" :to="{name:'bookAdd',query:{id:0}}"
                              class="button button-small button-positive">
                     <i class="icon ion-plus"></i>
                 </router-link>
@@ -61,22 +61,30 @@
 
                     <li class="cube-index-list-item">
                         <cube-button style="width: 50%" :light="true" @click="searchClear">重置</cube-button>
-                        <cube-button style="width: 50%; background-color:#379be9;" :light="true" @click="search">搜索</cube-button>
+                        <cube-button style="width: 50%; background-color:#379be9;" :light="true" @click="search">搜索
+                        </cube-button>
                     </li>
                 </ul>
             </div>
         </div>
         <grid-view :grid="grid" url="/book/books" :load="load"></grid-view>
+        <nav-bar></nav-bar>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
 <script>
     let that;
     import gridView from '../../components/gridView'
+    import navBar from '../../components/navbar'
+
     export default {
         name: 'Book',
         components: {
             gridView,
+            navBar,
         },
         data() {
             return {
@@ -141,7 +149,7 @@
                 return "￥" + row.bookPrice;
             },
             view(row) {
-                this.$router.push({path: '/bookView', query: {id: row.id}});
+                this.$router.push({name: 'bookView', query: {id: row.id}});
             },
             del(row, callback) {
                 let para = {id: row.id};

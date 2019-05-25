@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 //修改路由为懒加载 -by gpj
-const home = r => require.ensure([], () => r(require('../../pages/main/home')), 'home')
 const main = r => require.ensure([], () => r(require('../../pages/main/main')), 'home')
 const book = r => require.ensure([], () => r(require('../../pages/book/index')), 'book')
 const bookAdd = r => require.ensure([], () => r(require('../../pages/book/add')), 'book')
@@ -55,35 +54,58 @@ const routes = new VueRouter({
     linkActiveClass: 'active',
     base: '/',
     routes: [
-        // 动态路径参数 以冒号开头
         {
-            path: '/', name: '首页', component: home,
-            children: [
-                {path: '/', name: '', component: main},
-                {path: 'book', name: 'book', component: book},
+            path: '',
+            redirect: '/book'
+        },
+        //图书
+        {
+            path: '/book',
+            component: book,
+            children:[
                 {path: 'bookAdd', name: 'bookAdd', component: bookAdd},
                 {path: 'bookView', name: 'bookView', component: bookView},
-                {path: 'electronics', name: 'electronics', component: electronics},
-                {path: 'electronicsAdd', name: 'electronicsAdd', component: electronicsAdd},
-                {path: 'electronicsView', name: 'electronicsView', component: electronicsView},
-                {path: 'teach', name: 'teach', component: teach},
-                {path: 'teachAdd', name: 'teachAdd', component: teachAdd},
-                {path: 'teachView', name: 'teachView', component: teachView},
-                {path: 'other', name: 'other', component: other},
-                {path: 'otherAdd', name: 'otherAdd', component: otherAdd},
-                {path: 'otherView', name: 'otherView', component: otherView},
-                {path: 'about', name: 'about', component: center},
-                {path: 'advice', name: 'advice', component: advice},
-                {path: 'version', name: 'version', component: version},
-                {path: 'verify', name: 'verify', component: verify},
-                {path: 'personal', name: 'personal', component: personal},
-                //404
-                //{path: '*', name: '*', component: main},
             ],
         },
-        // 动态路径参数 以冒号开头
+        //电子
         {
-            path: '/shop', name: '首页', component: home,
+            path: '/electronics',
+            component: electronics,
+            children:[
+                {path: 'electronicsAdd', name: 'electronicsAdd', component: electronicsAdd},
+                {path: 'electronicsView', name: 'electronicsView', component: electronicsView},
+            ],
+        },
+        //其他
+        {
+            path: '/other',
+            component: other,
+            children:[
+                {path: 'otherAdd', name: 'otherAdd', component: otherAdd},
+                {path: 'otherView', name: 'otherView', component: otherView},
+            ],
+        },
+        //辅导
+        {
+            path: '/teach',
+            component: teach,
+            children:[
+                {path: 'teachAdd', name: 'teachAdd', component: teachAdd},
+                {path: 'teachView', name: 'teachView', component: teachView},
+            ],
+        },
+        //个人中心
+        {
+            path: '/center',
+            component: center,
+            children:[
+                {path: 'advice', name: 'advice', component: advice},
+                {path: 'version', name: 'version', component: version},
+            ],
+        },
+        //商城
+        {
+            path: '/shop', name: '首页', component: shop,
             children: [
                 {path: 'shop', name: 'shop', component: shop}
             ],
@@ -96,7 +118,9 @@ const routes = new VueRouter({
             //富文本编辑页
             path: '/editor', name: 'editor', component: editor
         },
-
+        //当前选择学校页
+        {path: '/verify', name: 'verify', component: verify},
+        {path: 'personal', name: 'personal', component: personal},
     ]
 })
 export default routes;

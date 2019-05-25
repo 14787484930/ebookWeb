@@ -72,18 +72,20 @@
                 </ul>
             </div>
         </div>
-
         <grid-view :grid="grid" url="/electronics/electronics" :load="load"></grid-view>
+        <nav-bar></nav-bar>
     </div>
 </template>
 
 <script>
     let that;
     import gridView from '../../components/gridView'
+    import navBar from '../../components/navbar'
     export default {
         name: 'Electronics',
         components: {
             gridView,
+            navBar
         },
         data() {
             return {
