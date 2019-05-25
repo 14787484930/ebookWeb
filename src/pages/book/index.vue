@@ -166,7 +166,7 @@
                 });
             },
             update(row) {
-                this.$router.push({path: '/bookAdd', query: {id: row.id}})
+                this.$router.push({name: 'bookAdd', query: {id: row.id}})
             },
             initType() {
                 this.$picker.bookTypes((val, index, text) => {

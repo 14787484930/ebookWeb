@@ -152,7 +152,7 @@
         background-color: #f2f2f2;
         z-index: 2020;
         padding-top: 1.95rem;
-        height: 94vh;
+        height: 100vh;
     }
 
     .cube-slide-item {

@@ -64,6 +64,9 @@
         </div>
         <grid-view :grid="grid" url="/other/others" :load="load"></grid-view>
         <nav-bar></nav-bar>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -113,8 +116,8 @@
                     img: 'otherPic',
                     del: this.del,
                     query: this.queryList,
-                    view: (row) => that.$router.push({path: '/otherView', query: {id: row.id}}),
-                    edit: (row) => that.$router.push({path: '/otherAdd', query: {id: row.id}}),
+                    view: (row) => that.$router.push({name: 'otherView', query: {id: row.id}}),
+                    edit: (row) => that.$router.push({name: 'otherAdd', query: {id: row.id}}),
                     columns: [
                         {title: "名称", key: 'otherName'},
                         {title: "价格", key: 'presentPrice', format: (row) => "￥" + row.presentPrice},

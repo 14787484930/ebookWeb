@@ -64,6 +64,9 @@
         </div>
         <grid-view :grid="grid" url="/tutoring/tutorings" :load="load"></grid-view>
         <nav-bar></nav-bar>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -112,12 +115,12 @@
                 this.grid = {
                     query: this.queryList,
                     del: this.del,
-                    view: (row) => that.$router.push({path: '/teachView', query: {id: row.id}}),
-                    edit: (row) => that.$router.push({path: '/teachAdd', query: {id: row.id}}),
+                    view: (row) => that.$router.push({name: 'teachView', query: {id: row.id}}),
+                    edit: (row) => that.$router.push({name: 'teachAdd', query: {id: row.id}}),
                     columns: [
                         {title: "名称", key: 'name'},
                         {title: "报酬", key: 'price', format: (row) => "￥" + row.price},
-                        {title: "类型", key: 'type', format: (row) => row.type == 0 ? '辅导' : '讲座'},
+                        {title: "类型", key: 'type', format: (row) => row.type === 0 ? '辅导' : '讲座'},
                         {title: "日期", key: 'Time', format: (row) => that.$toDate(row.startTime)},
                     ],
                 };

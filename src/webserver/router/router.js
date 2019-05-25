@@ -110,12 +110,12 @@ const routes = new VueRouter({
                 {path: 'shop', name: 'shop', component: shop}
             ],
         },
+        //举报页面
         {
-            //举报页面
             path: '/report', name: 'report', component: report
         },
+        //富文本编辑页
         {
-            //富文本编辑页
             path: '/editor', name: 'editor', component: editor
         },
         //当前选择学校页

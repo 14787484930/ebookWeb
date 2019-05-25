@@ -74,6 +74,9 @@
         </div>
         <grid-view :grid="grid" url="/electronics/electronics" :load="load"></grid-view>
         <nav-bar></nav-bar>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -139,7 +142,7 @@
                 return "￥" + row.presentPrice;
             },
             view(row) {
-                this.$router.push({path: '/electronicsView', query: {id: row.id}});
+                this.$router.push({name: 'bookView', query: {id: row.id}});
             },
             del(row, callback) {
                 let para = {id: row.id};
@@ -156,7 +159,7 @@
                 });
             },
             update(row) {
-                this.$router.push({path: '/electronicsAdd', query: {id: row.id}})
+                this.$router.push({name: 'electronicsAdd', query: {id: row.id}})
             },
             initType() {
                 let list = [{
