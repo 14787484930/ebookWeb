@@ -29,37 +29,37 @@
                     <ul class="search-cells">
                         <li class="search-cell search-cell_access">
                             <div class="search-cell__bd">
-                                <router-link :to="{path:'/advice' }">我买到的图书</router-link>
+                                <router-link :to="{name:'advice' }">我买到的图书</router-link>
                             </div>
                             <div class="search-cell__ft"></div>
                         </li>
                         <li class="search-cell search-cell_access">
                             <div class="search-cell__bd">
-                                <router-link :to="{path:'/version'}">我买到的电子</router-link>
+                                <router-link :to="{name:'version'}">我买到的电子</router-link>
                             </div>
                             <div class="search-cell__ft"></div>
                         </li>
                         <li class="search-cell search-cell_access">
                             <div class="search-cell__bd">
-                                <router-link :to="{path:'/version'}">与我相关的辅导/讲座</router-link>
+                                <router-link :to="{name:'version'}">与我相关的辅导/讲座</router-link>
                             </div>
                             <div class="search-cell__ft"></div>
                         </li>
                         <li class="search-cell search-cell_access">
                             <div class="search-cell__bd">
-                                <router-link :to="{path:'/version'}">我买到的其他物品</router-link>
+                                <router-link :to="{name:'version'}">我买到的其他物品</router-link>
                             </div>
                             <div class="search-cell__ft"></div>
                         </li>
                         <li class="search-cell search-cell_access">
                             <div class="search-cell__bd">
-                                <router-link :to="{path:'/version'}">我的购物车</router-link>
+                                <router-link :to="{name:'version'}">我的购物车</router-link>
                             </div>
                             <div class="search-cell__ft"></div>
                         </li>
                         <li class="search-cell search-cell_access">
                             <div class="search-cell__bd">
-                                <router-link :to="{path:'/personal'}">编辑资料</router-link>
+                                <router-link :to="{name:'personal'}">编辑资料</router-link>
                             </div>
                             <div class="search-cell__ft"></div>
                         </li>
@@ -70,6 +70,10 @@
                 <footor></footor>
             </div>
         </section>
+        <nav-bar></nav-bar>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 
 </template>
@@ -77,12 +81,14 @@
 <script>
     import panel from '../../components/core/panel'
     import footor from '../../components/footer'
+    import navBar from '../../components/navbar'
 
     export default {
         name: "mycenter",
         components: {
             panel,
             footor,
+            navBar,
         },
         data() {
             return {
