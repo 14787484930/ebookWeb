@@ -27,7 +27,7 @@ const report = r => require.ensure([], () => r(require('../../pages/common/repor
 const editor = r => require.ensure([], () => r(require('../../pages/common/editor')), 'editor')
 const personal = r => require.ensure([], () => r(require('../../pages/about/personal')), 'personal')*/
 //打包app不能使用懒加载，后面找原因
-import home from '../../pages/main/navbar'
+import home from '../../pages/main/home'
 import main from '../../pages/main/main'
 import book from '../../pages/book/index'
 import electronics from '../../pages/electronics/index'

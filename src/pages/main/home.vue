@@ -8,6 +8,7 @@
                 {{item.text}}
             </router-link>
         </div>
+        <router-view></router-view>
     </section>
 </template>
 
