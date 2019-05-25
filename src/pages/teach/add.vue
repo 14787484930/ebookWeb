@@ -224,7 +224,15 @@
 </script>
 <style scoped>
     .scroll-list-wrap {
-        height: 94vh;
+        position: absolute;
+        top: -73px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #f2f2f2;
+        z-index: 2020;
+        padding-top: 1.95rem;
+        height: 111vh;
     }
 
     /*滚动的页面的高度 -by gpj*/
