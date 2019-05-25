@@ -122,7 +122,7 @@
         right: 0;
         bottom: 0;
         background-color: #f2f2f2;
-        z-index: 2020;
+        z-index: 10;
         padding-top: 1.95rem;
         height: 111vh;
     }
