@@ -51,7 +51,7 @@
                     </div>
                 </template>
                 <router-link class="report-style" v-if="!power_flag"
-                             :to="{path:'/report', query:{productId: book.id ,
+                             :to="{name: 'report', params:{productId: book.id ,
                               productName: book.bookName,productType: 1}}">举报
                 </router-link>
             </cube-scroll>

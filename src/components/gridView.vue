@@ -136,7 +136,7 @@
                             that.tables.push(val);
                         }
                     });
-                    /*that.$nextTick(function () {
+                  /*  that.$nextTick(function () {
                         that.$refs.scroll.refresh();
                         that.$refs.scroll.forceUpdate();
                     });

@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 //修改路由为懒加载 -by gpj
-const main = r => require.ensure([], () => r(require('../../pages/main/main')), 'home')
+/*const main = r => require.ensure([], () => r(require('../../pages/main/main')), 'home')
 const book = r => require.ensure([], () => r(require('../../pages/book/index')), 'book')
 const bookAdd = r => require.ensure([], () => r(require('../../pages/book/add')), 'book')
 const bookView = r => require.ensure([], () => r(require('../../pages/book/view')), 'book')
@@ -25,10 +25,8 @@ const verify = r => require.ensure([], () => r(require('../../components/verify'
 const shop = r => require.ensure([], () => r(require('../../pages/shop/index')), 'shop')
 const report = r => require.ensure([], () => r(require('../../pages/common/report')), 'shop')
 const editor = r => require.ensure([], () => r(require('../../pages/common/editor')), 'editor')
-const personal = r => require.ensure([], () => r(require('../../pages/about/personal')), 'personal')
-/*
+const personal = r => require.ensure([], () => r(require('../../pages/about/personal')), 'personal')*/
 //打包app不能使用懒加载，后面找原因
-import home from '../../pages/main/home'
 import main from '../../pages/main/main'
 import book from '../../pages/book/index'
 import electronics from '../../pages/electronics/index'
@@ -42,12 +40,16 @@ import otherAdd from '../../pages/other/add'
 import otherView from '../../pages/other/view'
 import bookAdd from '../../pages/book/add'
 import bookView from '../../pages/book/view'
-import center from '../../pages/about/mycenter'
+import personal from '../../pages/about/personal'
+import center from '../../pages/about/index'
 import advice from '../../pages/about/advice'
 import version from '../../pages/about/version'
+import report from '../../pages/common/report'
+import editor from '../../pages/common/editor'
+
 //测试模块
 import shop from '../../pages/shop/index'
-import verify from '../../components/verify'*/
+import verify from '../../components/verify'
 
 const routes = new VueRouter({
     mode: 'history',
@@ -56,7 +58,11 @@ const routes = new VueRouter({
     routes: [
         {
             path: '',
-            redirect: '/book'
+            redirect: '/main'
+        },
+        {
+            path: '/main',
+            component: main,
         },
         //图书
         {
