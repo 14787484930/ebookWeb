@@ -68,7 +68,6 @@
             </div>
         </div>
         <grid-view :grid="grid" url="/book/books" :load="load"></grid-view>
-        <nav-bar></nav-bar>
         <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>
@@ -78,13 +77,11 @@
 <script>
     let that;
     import gridView from '../../components/gridView'
-    import navBar from '../../components/navbar'
 
     export default {
         name: 'Book',
         components: {
             gridView,
-            navBar,
         },
         data() {
             return {

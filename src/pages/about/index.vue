@@ -70,10 +70,6 @@
                 <footor></footor>
             </div>
         </section>
-        <nav-bar></nav-bar>
-        <transition name="router-slid" mode="out-in">
-            <router-view></router-view>
-        </transition>
     </div>
 
 </template>
@@ -81,14 +77,12 @@
 <script>
     import panel from '../../components/core/panel'
     import footor from '../../components/footer'
-    import navBar from '../../components/navbar'
 
     export default {
         name: "mycenter",
         components: {
             panel,
             footor,
-            navBar,
         },
         data() {
             return {
