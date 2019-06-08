@@ -43,7 +43,7 @@
             </li>
           </ul>
         </template>
-        <router-link class="report-style" v-if="!power_flag"
+        <router-link class="report-style" v-if="!powerFlag"
                      :to="{path:'/report', query:{productId: other.id ,
                                productName: other.otherName,productType: 3}}">举报
         </router-link>
@@ -54,9 +54,9 @@
 
 <script>
   import slider from '../../components/slider'
-  import $ from 'jquery';
+  import $ from 'jquery'
 
-  let _that;
+  let _that
 
   export default {
     components: {
@@ -64,7 +64,7 @@
     },
     data() {
       return {
-        //获取详细信息
+        // 获取详细信息
         other: {
           otherName: '',
           originalPrice: '20',
@@ -74,11 +74,11 @@
           otherPic: '',
           weiXin: '',
           phone: '',
-          des: '',
+          des: ''
         },
 
-        //图片地址轮播
-        urls: [],
+        // 图片地址轮播
+        urls: []
       }
     },
     created() {
@@ -86,15 +86,15 @@
       this.other.id = this.$route.query.id;
       if ((this.other.id).length > 0)
         this.initData();
-      //else
+      // else
       // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
     },
     computed: {
       power() {
-        return this.$store.getters.power;
+        return this.$store.getters.power
       },
-      power_flag() {
-        return this.$store.getters.power_flag;
+      powerFlag() {
+        return this.$store.getters.powerFlag
       }
     },
     methods: {
@@ -102,14 +102,14 @@
         this.$http.post('/other/getById/' + this.other.id).then((res) => {
           _that.other = res.data.page.info;
           _that.other.buyDate = _that.$toDate(_that.other.buyDate);
-          _that.other.otherType = 1;//先不做处理后面要删除
+          _that.other.otherType = 1; // 先不做处理后面要删除
           var arr = _that.other.otherPic.split(',');
           $.each(arr, (index, item) => {
             _that.urls.push({ image: _that.$file(item) });
           })
         });
       }
-    },
+    }
   }
 
 </script>
