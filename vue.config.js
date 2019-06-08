@@ -1,4 +1,7 @@
 const webpack = require('webpack')
+//测试数据
+const DataAPI = require('./src/api/local/index')
+
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
     outputDir: 'dist',
@@ -97,6 +100,11 @@ module.exports = {
             postCompile: true,
             theme: true
         },
-    }
+    },
+    devServer: {
+        before(app) {
+            DataAPI.before(app);
+        }
+    },
 };
 
