@@ -54,6 +54,7 @@ import shopTest from '../../pages/shop/index'
 import shopList from '../../pages/shop/shopList'
 import shopCart from '../../pages/shop/shopCart'
 import shopCenter from '../../pages/shop/shopCenter'
+import productList from '../../pages/shop/goodsList'
 
 import verify from '../../components/verify'
 
@@ -128,6 +129,8 @@ const routes = new VueRouter({
                 {path: '/shopTest', name: 'shopTest', component: shopTest},
                 //小卖部列表
                 {path: '/shopList', name: 'shopList', component: shopList},
+                //商品列表
+                {path: '/productList', name: 'productList', component: productList},
                 //我的购物车
                 {path: '/shopCart', name: 'shopCart', component: shopCart},
                 //个人中心

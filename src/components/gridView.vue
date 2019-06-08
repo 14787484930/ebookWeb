@@ -195,6 +195,8 @@
                     case "/book/books": {
                         key = "bookType";
                         let aValue = storage.getSession(key);
+                        if (aValue === null)
+                            return
                         for (item of list) {
                             let num = item.bookType;
                             item.bookType = aValue[num - 1].text;
@@ -204,6 +206,7 @@
                     case "/electronics/electronics": {
                         key = "electronicsType";
                         let aValue = storage.getSession(key);
+                        if (aValue === null)
                         for (item of list) {
                             let num = item.electronicsType;
                             item.electronicsType = aValue[num - 1].text;

@@ -9,6 +9,7 @@ import './assets/css/style.css'
 import './webserver/serve/serve'
 import './webserver/serve/picker'
 import './webserver/serve/touch'
+import './register'
 
 Vue.config.productionTip = false
 new Vue({

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import ProductList from './ProductList.vue'
+    import ProductList from './productList.vue'
     import ShoppingCart from './ShoppingCart.vue'
     export default {
         components: { ProductList, ShoppingCart }
