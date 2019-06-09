@@ -56,7 +56,7 @@
         return '￥' + row.bookPrice;
       },
       view(row) {
-        this.$router.push({ name: 'productList', query: { id: row.id }});
+        this.$router.push({ name: 'goodsList', query: { id: row.id }});
       },
       del(row, callback) {
         const para = { id: row.id };
@@ -87,7 +87,3 @@
     }
   }
 </script>
-
-<style>
-
-</style>

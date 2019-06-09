@@ -49,12 +49,11 @@ import report from '../../pages/common/report'
 import editor from '../../pages/common/editor'
 
 // 测试模块
-import shop from '../../pages/shop/shopHome'
-import shopTest from '../../pages/shop/index'
+import shop from '../../pages/shop/index'
 import shopList from '../../pages/shop/shopList'
 import shopCart from '../../pages/shop/shopCart'
 import shopCenter from '../../pages/shop/shopCenter'
-import productList from '../../pages/shop/goodsList'
+import goodsList from '../../pages/shop/goodsList'
 
 import verify from '../../components/verify'
 
@@ -123,20 +122,18 @@ const routes = new VueRouter({
     { path: '/version', name: 'version', component: version },
     // 商城
     {
-      path: '/shop', name: 'shop', component: shop,
+      path: '/shop', name: 'shop', component: shop, redirect: '/shopList',
       children: [
-        // 测试
-        { path: '/shopTest', name: 'shopTest', component: shopTest },
         // 小卖部列表
         { path: '/shopList', name: 'shopList', component: shopList },
-        // 商品列表
-        { path: '/productList', name: 'productList', component: productList },
         // 我的购物车
         { path: '/shopCart', name: 'shopCart', component: shopCart },
         // 个人中心
         { path: '/shopCenter', name: 'shopCenter', component: shopCenter }
       ]
     },
+    // 商品列表
+    { path: '/goodsList', name: 'goodsList', component: goodsList },
     // 举报页面
     { path: '/report', name: 'report', component: report },
     // 富文本编辑页
