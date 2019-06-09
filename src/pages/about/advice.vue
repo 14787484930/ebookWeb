@@ -23,7 +23,7 @@
     data() {
       return {
         userAdvice: {
-          des:''
+          des: ''
         },
         wordNum: 150,
         disabled: true

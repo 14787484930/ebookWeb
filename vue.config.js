@@ -66,7 +66,7 @@ module.exports = {
     config.module
       .rule('eslint')
       .exclude
-      .add('./src/api')
+      .add('/Users/maybexia/Downloads/FE/community_built-in/src/lib')
       .end()
   },
   // 配置高于chainWebpack中关于 css loader 的配置

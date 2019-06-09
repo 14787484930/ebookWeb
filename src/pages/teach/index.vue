@@ -137,17 +137,16 @@
         });
       },
       search() {
-        this.load++;
-        // console.log(this.load);
-        const query = this.queryList;
-        // console.log(query);
+        this.load++
+        // console.log(this.load)
+        // const query = this.queryList
         this.isShow = false;// 搜索下拉隐藏
-        this.initGrid();
+        this.initGrid()
       },
       searchClear() {
         Object.keys(that.queryList).forEach((key) => {
-          that.queryList[key] = '';
-        });
+          that.queryList[key] = ''
+        })
         that.teachShowName = ''
       },
       initType() {

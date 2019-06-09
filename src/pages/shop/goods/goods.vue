@@ -2,24 +2,24 @@
   <div class="goods">
     <div class="scroll-nav-wrapper">
       <cube-scroll-nav
-        :side=true
-        :data="goods"
-        :options="scrollOptions"
-        v-if="goods.length"
+          :side=true
+          :data="goods"
+          :options="scrollOptions"
+          v-if="goods.length"
       >
         <template slot="bar" slot-scope="props">
           <cube-scroll-nav-bar
-            direction="vertical"
-            :labels="props.labels"
-            :txts="barTxts"
-            :current="props.current"
+              direction="vertical"
+              :labels="props.labels"
+              :txts="barTxts"
+              :current="props.current"
           >
             <template slot-scope="props">
               <div class="text">
                 <support-ico
-                  v-if="props.txt.type>=1"
-                  :size=3
-                  :type="props.txt.type"
+                    v-if="props.txt.type>=1"
+                    :size=3
+                    :type="props.txt.type"
                 ></support-ico>
                 <span>{{props.txt.name}}</span>
                 <span class="num" v-if="props.txt.count">
@@ -30,17 +30,17 @@
           </cube-scroll-nav-bar>
         </template>
         <cube-scroll-nav-panel
-          v-for="good in goods"
-          :key="good.name"
-          :label="good.name"
-          :title="good.name"
+            v-for="good in goods"
+            :key="good.name"
+            :label="good.name"
+            :title="good.name"
         >
           <ul>
             <li
-              @click="selectFood(food)"
-              v-for="food in good.foods"
-              :key="food.name"
-              class="food-item"
+                @click="selectFood(food)"
+                v-for="food in good.foods"
+                :key="food.name"
+                class="food-item"
             >
               <div class="icon">
                 <img width="57" height="57" :src="food.icon">
@@ -66,10 +66,10 @@
     </div>
     <div class="shop-cart-wrapper">
       <shop-cart
-        ref="shopCart"
-        :select-foods="selectFoods"
-        :delivery-price="seller.deliveryPrice"
-        :min-price="seller.minPrice"></shop-cart>
+          ref="shopCart"
+          :select-foods="selectFoods"
+          :delivery-price="seller.deliveryPrice"
+          :min-price="seller.minPrice"></shop-cart>
     </div>
   </div>
 </template>
@@ -107,7 +107,7 @@
         return this.data.seller
       },
       selectFoods() {
-        let foods = []
+        const foods = []
         this.goods.forEach((good) => {
           good.foods.forEach((food) => {
             if (food.count) {
@@ -118,9 +118,9 @@
         return foods
       },
       barTxts() {
-        let ret = []
+        const ret = []
         this.goods.forEach((good) => {
-          const {type, name, foods} = good
+          const { type, name, foods } = good
           let count = 0
           foods.forEach((food) => {
             count += food.count || 0

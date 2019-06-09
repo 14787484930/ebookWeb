@@ -48,16 +48,12 @@
               <span>备注：</span>
               <input type="text" v-model="book.des" placeholder="点此填写">
             </label>
-
             <file-com ref="refFiles" :urls="urls"></file-com>
-
             <button id='submit' :disabled="btnFlag" style="width: 100%" class="button button-positive"
                     @click="saveData">发布
             </button>
           </div>
-
         </template>
-
       </cube-scroll>
     </div>
   </div>
@@ -109,8 +105,8 @@
       // 初始化出版日期选择
       initDateType() {
         this.$picker.datePicker((val, index, text) => {
-          _that.book.pubDate = index.join('-');
-        });
+          _that.book.pubDate = index.join('-')
+        })
       },
       // 初始化图书类型下拉框
       initBookTypeSelect() {
@@ -132,9 +128,9 @@
       },
       saveData() {
         let url = '/book/save'
-        if (parseInt(this.book.id) !== 0)
+        if (parseInt(this.book.id) !== 0) {
           url = '/book/update'
-
+        }
         this.btnFlag = true;  // 设置提交按钮为不能点击状态
         this.$save(url, this.book, this.$refs.refFiles.files, (msg) => {
           _that.btnFlag = false; // 设置提交按钮为可以点击状态
@@ -151,7 +147,7 @@
       },
       // 类型选择
       change(value, index) {
-        this.book.bookType = index + 1;
+        this.book.bookType = index + 1
       }
     }
   }

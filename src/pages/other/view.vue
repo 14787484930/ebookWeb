@@ -84,8 +84,9 @@
     created() {
       _that = this;
       this.other.id = this.$route.query.id;
-      if ((this.other.id).length > 0)
+      if ((this.other.id).length > 0) {
         this.initData();
+      }
       // else
       // console.log('[error]选择的物品id为0，请检查物品id是否正确!');
     },

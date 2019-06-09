@@ -31,7 +31,7 @@ const $format = {
   toBool(val) {
     return !(val == null || val === undefined || parseInt(val) === 0 || val.toString().toLowerCase() === 'false');
   },
-  /**
+  /*
    * 时间戳、字符串转成时间格式
    * @param {[string]} value        [时间戳]
    * @param {[string]} formatString [转换格式 默认'YYYY-MM-dd HH:mm']
@@ -41,11 +41,9 @@ const $format = {
     if (value === undefined || value == null || value.length === 0) {
       return value;
     }
-
     if (typeof (value) === 'object') {
       value = value.toString();
     }
-
     if (formatString === undefined || formatString == null || formatString.length === 0) {
       formatString = 'yyyy-MM-dd';
     }
@@ -57,13 +55,12 @@ const $format = {
     } else { // 普通字符串格式
       d = new Date(value);
     }
-
-    var second = '' + d.getSeconds(),
+    let second = '' + d.getSeconds(),
       minutes = '' + d.getMinutes(),
       hours = '' + d.getHours(),
       month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+      day = '' + d.getDate()
+    const year = d.getFullYear()
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     if (hours.length < 2) hours = '0' + hours;
@@ -86,10 +83,10 @@ const $format = {
     } else {
       ret = [year, month, day].join('-');
     }
-
     return ret;
   }
 }
+
 vue.prototype.$toInt = $format.toInt;
 vue.prototype.$toBool = $format.toBool;
 vue.prototype.$toDate = $format.toDate;

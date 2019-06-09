@@ -56,9 +56,8 @@ export default function () {
         if (!json.ok) {
           alert(json.msg)
           return null
-        } else {
-          return json.data
         }
+        return json.data
       }
     },
     // 语言，内建的有英文（en-us）和中文（zh-cn）

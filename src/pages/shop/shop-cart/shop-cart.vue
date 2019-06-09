@@ -23,9 +23,9 @@
       <div class="ball-container">
         <div v-for="(ball,index) in balls" :key="index">
           <transition
-            @before-enter="beforeDrop"
-            @enter="dropping"
-            @after-enter="afterDrop">
+              @before-enter="beforeDrop"
+              @enter="dropping"
+              @after-enter="afterDrop">
             <div class="ball" v-show="ball.show">
               <div class="inner inner-hook"></div>
             </div>
@@ -43,9 +43,9 @@
   const innerClsHook = 'inner-hook'
 
   function createBalls() {
-    let balls = []
+    const balls = []
     for (let i = 0; i < BALL_LEN; i++) {
-      balls.push({show: false})
+      balls.push({ show: false })
     }
     return balls
   }
@@ -104,18 +104,16 @@
         if (this.totalPrice === 0) {
           return `￥${this.minPrice}元起送`
         } else if (this.totalPrice < this.minPrice) {
-          let diff = this.minPrice - this.totalPrice
+          const diff = this.minPrice - this.totalPrice
           return `还差￥${diff}元起送`
-        } else {
-          return '去结算'
         }
+        return '去结算'
       },
       payClass() {
         if (!this.totalCount || this.totalPrice < this.minPrice) {
           return 'not-enough'
-        } else {
-          return 'enough'
         }
+        return 'enough'
       }
     },
     methods: {

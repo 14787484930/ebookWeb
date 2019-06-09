@@ -108,7 +108,7 @@
       changeUrlToBlob(url) {
         for (let i = 0; i < url.length; i++) {
           this.loadImageToBlob(url[i].url, blobFile => {
-            if (!blobFile) return false;
+            return blobFile;
             /*
               let fileReader = new FileReader();
               fileReader.readAsDataURL(blobFile);
@@ -122,14 +122,15 @@
         }
       },
       /*
-       * 想服务器请求图片数据
+       * 向服务器请求图片数据
        * @param url
        * @param callback
        * @returns {boolean}
        */
       loadImageToBlob(url, callback) {
-        if (!url || !callback)
+        if (!url || !callback) {
           return false;
+        }
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'blob';
         xhr.onload = function () {

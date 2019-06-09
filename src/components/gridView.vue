@@ -44,10 +44,9 @@
       filter(sourc, item, row) {
         if (row.format !== undefined) {
           return row.format(item)
-        } else {
-          const key = row.key
-          return item[key]
         }
+        const key = row.key
+        return item[key]
       }
     },
     computed: {
@@ -97,8 +96,9 @@
       onScrollHandle(pos) {
       },
       refresh(e) {
-        if (this.$toInt(this.config.query.pageNumber) < 1)
+        if (this.$toInt(this.config.query.pageNumber) < 1) {
           this.config.query.pageNumber = 1;
+        }
         this.config.query.pageNumber++;
         this.initTables();
       },
