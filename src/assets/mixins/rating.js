@@ -9,7 +9,7 @@ export default {
   },
   computed: {
     computedRatings() {
-      let ret = []
+      const ret = []
       this.ratings.forEach((rating) => {
         if (this.onlyContent && !rating.text) {
           return
