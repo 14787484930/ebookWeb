@@ -126,7 +126,9 @@
         // 请求数据
         this.$table(this.url, this.config.query, function (data) {
           // 将data.list中的类型由数字改为字符串
-          that.productTypeNumToString(that.url, data.list);
+          if ('list' in data) {
+            that.productTypeNumToString(that.url, data.list);
+          }
           // 从服务器返回判断是否还有数据
           that.isLastPage = data.isLastPage;
           $.each(data.list, function (i, val) {

@@ -9,18 +9,19 @@
 
 <script>
   import qs from 'query-string'
-  import { getSeller } from '../../api'
+  import { getSellerTest } from '../../api'
   import VHeader from './v-header/v-header'
   import Goods from './goods/goods'
-  import Ratings from './ratings/ratings'
-  import Seller from './seller/seller'
+  // import Ratings from './ratings/ratings'
+  // import Seller from './seller/seller'
   import Tab from './tab/tab'
 
   export default {
     data() {
       return {
         seller: {
-          id: qs.parse(location.search).id
+          id: qs.parse(location.search).id,
+          name: qs.parse(location.search).name
         }
       }
     },
@@ -33,21 +34,21 @@
             data: {
               seller: this.seller
             }
-          },
-          {
-            label: '评论',
-            component: Ratings,
-            data: {
-              seller: this.seller
-            }
-          },
-          {
-            label: '商家',
-            component: Seller,
-            data: {
-              seller: this.seller
-            }
           }
+          // {
+          //   label: '评论',
+          //   component: Ratings,
+          //   data: {
+          //     seller: this.seller
+          //   }
+          // },
+          // {
+          //   label: '商家',
+          //   component: Seller,
+          //   data: {
+          //     seller: this.seller
+          //   }
+          // }
         ]
       }
     },
@@ -56,9 +57,14 @@
     },
     methods: {
       _getSeller() {
-        getSeller({
+        // 获取卖家信息
+        getSellerTest({
           id: this.seller.id
         }).then((seller) => {
+          // this.seller = Object.assign({}, this.seller, seller)
+          seller = {
+            avatar: 'http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg'
+          }
           this.seller = Object.assign({}, this.seller, seller)
         })
       }

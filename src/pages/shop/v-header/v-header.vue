@@ -1,5 +1,6 @@
 <template>
-  <div class="header" @click="showDetail">
+  <!--<div class="header" @click="showDetail">-->
+  <div class="header">
     <div class="content-wrapper">
       <div class="avatar">
         <img width="64" height="64" :src="seller.avatar">
@@ -33,7 +34,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import SupportIco from '../support-ico/support-ico'
+  // import SupportIco from '../support-ico/support-ico'
 
   export default {
     name: 'v-header',
@@ -46,17 +47,17 @@
       }
     },
     methods: {
-      showDetail() {
-        this.headerDetailComp = this.headerDetailComp || this.$createHeaderDetail({
-          $props: {
-            seller: 'seller'
-          }
-        })
-        this.headerDetailComp.show()
-      }
+      // showDetail() {
+      //   this.headerDetailComp = this.headerDetailComp || this.$createHeaderDetail({
+      //     $props: {
+      //       seller: 'seller'
+      //     }
+      //   })
+      //   this.headerDetailComp.show()
+      // }
     },
     components: {
-      SupportIco
+     // SupportIco
     }
   }
 </script>
