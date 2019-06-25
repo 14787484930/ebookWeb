@@ -1,6 +1,12 @@
 <template>
   <section class="container">
     <h1>请选择</h1>
+    <input
+        min="0"
+        type="Number"
+        v-model="test.a"
+        onkeyup="value=value.replace(/[^[1-9]\d*$]/)"
+    >
     <router-link class="btn" :to="{path:'/book',query: {flag: 0}}">我要购买</router-link>
     <router-link class="btn" :to="{path:'/book',query: {flag: 1}}">我要发布</router-link>
     <router-link class="btn" :to="{path:'/version'}">关于我们</router-link>
@@ -13,7 +19,15 @@
 
 <script>
   export default {
-    name: 'linkhome'
+    name: 'linkhome',
+    data() {
+      return {
+        test: {
+          a: null,
+          b: 1
+        }
+      }
+    }
   }
 </script>
 

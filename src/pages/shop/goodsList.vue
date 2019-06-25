@@ -9,7 +9,7 @@
 
 <script>
   import qs from 'query-string'
-  import { getSellerTest } from '../../api'
+  // import { getSellerTest } from '../../api'
   import VHeader from './v-header/v-header'
   import Goods from './goods/goods'
   // import Ratings from './ratings/ratings'
@@ -21,12 +21,14 @@
       return {
         seller: {
           id: qs.parse(location.search).id,
-          name: qs.parse(location.search).name
+          name: qs.parse(location.search).name,
+          deliveryPrice: 0,
+          minPrice: 0
         }
       }
     },
     computed: {
-      tabs() {
+      tabs: function () {
         return [
           {
             label: '商品',
@@ -57,16 +59,11 @@
     },
     methods: {
       _getSeller() {
-        // 获取卖家信息
-        getSellerTest({
-          id: this.seller.id
-        }).then((seller) => {
-          // this.seller = Object.assign({}, this.seller, seller)
-          seller = {
-            avatar: 'http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg'
-          }
-          this.seller = Object.assign({}, this.seller, seller)
-        })
+        const seller = {
+          avatar: 'http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg'
+        }
+        // Object.assign 可以把 n 个源对象拷贝到目标对象中去
+        this.seller = Object.assign({}, this.seller, seller)
       }
     },
     components: {

@@ -5,7 +5,7 @@
         <div class="content-left">
           <div class="logo-wrapper">
             <div class="logo" :class="{'highlight':totalCount>0}">
-              <i class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></i>
+              <i class="icon-shopping_cart ion-ios-cart" :class="{'highlight':totalCount>0}"></i>
             </div>
             <div class="num" v-show="totalCount>0">
               <bubble :num="totalCount"></bubble>
@@ -53,16 +53,19 @@
   export default {
     name: 'shop-cart',
     props: {
+      // 已选商品
       selectFoods: {
         type: Array,
         default() {
           return []
         }
       },
+      // 配送费用
       deliveryPrice: {
         type: Number,
         default: 0
       },
+      // 最小起送费用
       minPrice: {
         type: Number,
         default: 0
@@ -86,13 +89,15 @@
       this.dropBalls = []
     },
     computed: {
+      // 总价格
       totalPrice() {
         let total = 0
         this.selectFoods.forEach((food) => {
-          total += food.price * food.count
+          total += food.goodPrice * food.count
         })
         return total
       },
+      // 总数量
       totalCount() {
         let count = 0
         this.selectFoods.forEach((food) => {
@@ -100,6 +105,7 @@
         })
         return count
       },
+      // 起送费
       payDesc() {
         if (this.totalPrice === 0) {
           return `￥${this.minPrice}元起送`
@@ -109,6 +115,7 @@
         }
         return '去结算'
       },
+      // 点亮结算样式
       payClass() {
         if (!this.totalCount || this.totalPrice < this.minPrice) {
           return 'not-enough'

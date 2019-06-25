@@ -49,6 +49,7 @@ module.exports = {
     'eqeqeq': 0, // 必须使用全等
     'one-var': 0, // 连续声明
     'no-undef': 0, // 可以 有未定义的变量
+    'object-curly-spacing': 0,
 
     // 警告
     'no-extra-boolean-cast': 1, // 不必要的bool转换

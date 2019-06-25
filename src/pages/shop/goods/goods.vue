@@ -2,11 +2,8 @@
   <div class="goods">
     <div class="scroll-nav-wrapper">
       <cube-scroll-nav
-          :side=true
-          :data="goods"
-          :options="scrollOptions"
-          v-if="goods.length"
-      >
+          :side=true :data="goods"
+          :options="scrollOptions" v-if="goods.length">
         <template slot="bar" slot-scope="props">
           <cube-scroll-nav-bar
               direction="vertical"
@@ -16,11 +13,9 @@
           >
             <template slot-scope="props">
               <div class="text">
-                <support-ico
-                    v-if="props.txt.type>=1"
-                    :size=3
-                    :type="props.txt.type"
-                ></support-ico>
+                <support-ico v-if="props.txt.type>=1"
+                             :size=3
+                             :type="props.txt.type"></support-ico>
                 <span>{{props.txt.name}}</span>
                 <span class="num" v-if="props.txt.count">
                   <bubble :num="props.txt.count"></bubble>
@@ -29,31 +24,22 @@
             </template>
           </cube-scroll-nav-bar>
         </template>
-        <cube-scroll-nav-panel
-            v-for="good in goods"
-            :key="good.name"
-            :label="good.name"
-            :title="good.name"
-        >
+
+        <cube-scroll-nav-panel key="热销榜" label="热销榜" title="热销榜">
           <ul>
-            <li
-                @click="selectFood(food)"
-                v-for="food in good.foods"
-                :key="food.name"
-                class="food-item"
-            >
+            <li @click="selectFood(food)"
+                v-for="food in goods"
+                :key="food.goodName"
+                class="food-item">
               <div class="icon">
-                <img width="57" height="57" :src="food.icon">
+                <img width="57" height="57" :src="food.goodPic">
               </div>
               <div class="content">
-                <h2 class="name">{{food.name}}</h2>
-                <p class="desc">{{food.description}}</p>
-                <div class="extra">
-                  <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
-                </div>
+                <h2 class="name">{{food.goodName}}</h2>
+                <p class="desc">{{food.des}}</p>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span>
-                  <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="now">￥{{food.goodPrice}}</span>
+                  <span class="old" v-show="food.goodPrice">￥{{food.goodPrice}}</span>
                 </div>
                 <div class="cart-control-wrapper">
                   <cart-control @add="onAdd" :food="food"></cart-control>
@@ -64,6 +50,8 @@
         </cube-scroll-nav-panel>
       </cube-scroll-nav>
     </div>
+
+    <!--购物车-->
     <div class="shop-cart-wrapper">
       <shop-cart
           ref="shopCart"
@@ -75,7 +63,7 @@
 </template>
 
 <script>
-  import { getGoods } from '../../../api'
+  import { getGoodsTest } from '../../../api'
   import CartControl from '../cart-control/cart-control'
   import ShopCart from '../shop-cart/shop-cart'
   import Food from '../food/food'
@@ -106,30 +94,35 @@
       seller() {
         return this.data.seller
       },
+      // 已选物品
       selectFoods() {
         const foods = []
-        this.goods.forEach((good) => {
-          good.foods.forEach((food) => {
-            if (food.count) {
-              foods.push(food)
-            }
-          })
+        this.goods.forEach((food) => {
+          if (food.count) {
+            foods.push(food)
+          }
         })
         return foods
       },
+      // 侧边栏显示信息
       barTxts() {
         const ret = []
-        this.goods.forEach((good) => {
-          const { type, name, foods } = good
-          let count = 0
-          foods.forEach((food) => {
-            count += food.count || 0
-          })
-          ret.push({
-            type,
-            name,
-            count
-          })
+        // this.goods.forEach((good) => {
+        //   const {type, name, foods} = good
+        //   let count = 0
+        //   foods.forEach((food) => {
+        //     count += food.count || 0
+        //   })
+        //   ret.push({
+        //     type,
+        //     name,
+        //     count
+        //   })
+        // })
+        ret.push({
+          'type': -1,
+          'name': '热销榜',
+          'count': 0
         })
         return ret
       }
@@ -138,10 +131,14 @@
       fetch() {
         if (!this.fetched) {
           this.fetched = true
-          getGoods({
-            id: this.seller.id
+          console.log(this.seller.id)
+          getGoodsTest({
+            supperId: this.seller.id,
+            pageNumber: 1,
+            pageSize: 200
           }).then((goods) => {
             this.goods = goods
+            console.log(this.goods)
           })
         }
       },
@@ -149,6 +146,7 @@
         this.selectedFood = food
         this._showFood()
         this._showShopCartSticky()
+        console.log(food);
       },
       onAdd(target) {
         this.$refs.shopCart.drop(target)

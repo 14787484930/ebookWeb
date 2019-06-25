@@ -14,7 +14,7 @@
       >
         <div v-show="visible">
           <div class="list-header">
-            <h1 class="title">购物车</h1>
+            <span class="title">购物车</span>
             <span class="empty" @click="empty">清空</span>
           </div>
           <cube-scroll class="list-content" ref="listContent">
@@ -24,9 +24,9 @@
                 v-for="(food,index) in selectFoods"
                 :key="index"
               >
-                <span class="name">{{food.name}}</span>
+                <span class="name">{{food.goodName}}</span>
                 <div class="price">
-                  <span>￥{{food.price*food.count}}</span>
+                  <span>￥{{food.goodPrice*food.count}}</span>
                 </div>
                 <div class="cart-control-wrapper">
                   <cart-control @add="onAdd" :food="food"></cart-control>

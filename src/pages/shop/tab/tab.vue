@@ -79,6 +79,7 @@
         this.index = current
         const instance = this.$refs.component[current]
         if (instance && instance.fetch) {
+          console.log('current:', current)
           instance.fetch()
         }
       }
@@ -88,7 +89,9 @@
 
 <style lang="stylus" scoped>
   @import "../../../assets/stylus/variable"
-
+  .cube-slide {
+    background-color: #fff;
+  }
   .tab
     display: flex
     flex-direction: column
