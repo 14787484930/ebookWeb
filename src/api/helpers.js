@@ -1,10 +1,9 @@
 import axios from 'axios'
+import url from '../webserver/serve/config.js'
 
 const urlMap = {
-  // development: 'http://192.168.0.104:8080/',
-  development: 'http://ebook.zhangxinhua.xin:8080/',
-  production: 'http://ebook.zhangxinhua.xin/sell/',
-  test: 'http://192.168.0.104:8080/'
+  development: url.baseUrl,
+  production: 'http://ebook.zhangxinhua.xin:8080/'
 }
 const baseUrl = urlMap[process.env.NODE_ENV]
 const ERR_OK = 100
@@ -16,7 +15,25 @@ export function get(url) {
     }).then((res) => {
       const { code, page } = res.data
       if (code === ERR_OK) {
-        return page.pageInfo.list
+        return page
+      }
+      return null
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+}
+
+export function post(url) {
+  return function (data) {
+    return axios.post(baseUrl + url, data, {
+      dataType: 'json',
+      'Content-Type': 'application/json; charset=UTF-8'
+    }).then((res) => {
+      console.log(res)
+      const {code, msgs} = res.data
+      if (code === ERR_OK) {
+        return msgs
       }
       return null
     }).catch((e) => {

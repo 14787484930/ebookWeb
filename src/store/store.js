@@ -32,6 +32,10 @@ const store = new Vuex.Store({
 
     getUser(state) {
       return state.user;
+    },
+
+    getUserId(state) {
+      return state.user.id
     }
 
   },

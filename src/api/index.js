@@ -1,17 +1,18 @@
-import {get} from './helpers'
+import { get, post } from './helpers'
 
 // const getSeller = get('user/getById')
 // const getGoods = get('api/goods')
 // const getRatings = get('api/ratings')
 
 // 测试
-const getSellerTest = get('api/seller')
-const getGoodsTest = get('good/goods')
-const getRatingsTest = get('api/ratings')
+const getGoodsTest = get('/good/goods')
+const getGoodsListTest = get('/order/orders')
+const getOrderListTest = get('/order/getDetailed')
+const PostGoodsTest = post('order/save')
 
 export {
-  getSellerTest,
-  getGoodsTest
-  // getGoods,
-  // getRatings
+  getGoodsTest,
+  getGoodsListTest,
+  getOrderListTest,
+  PostGoodsTest
 }

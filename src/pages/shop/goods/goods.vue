@@ -27,8 +27,8 @@
 
         <cube-scroll-nav-panel key="热销榜" label="热销榜" title="热销榜">
           <ul>
-            <li @click="selectFood(food)"
-                v-for="food in goods"
+            <!--<li @click="selectFood(food)"-->
+            <li v-for="food in goods"
                 :key="food.goodName"
                 class="food-item">
               <div class="icon">
@@ -131,14 +131,13 @@
       fetch() {
         if (!this.fetched) {
           this.fetched = true
-          console.log(this.seller.id)
           getGoodsTest({
             supperId: this.seller.id,
             pageNumber: 1,
             pageSize: 200
           }).then((goods) => {
-            this.goods = goods
-            console.log(this.goods)
+            console.log(goods)
+            this.goods = goods.pageInfo.list
           })
         }
       },
