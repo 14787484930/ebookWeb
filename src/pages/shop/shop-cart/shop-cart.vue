@@ -39,6 +39,7 @@
 <script>
   import Bubble from '../bubble/bubble'
   import { PostGoodsTest } from '../../../api'
+
   const BALL_LEN = 10
   const innerClsHook = 'inner-hook'
 
@@ -151,12 +152,13 @@
           goods.buyNumber = item.count
           goodsList.push(goods)
         })
-        const fd = new FormData()
-        fd.append('phone', this.phone)
-        fd.append('address', this.address)
-        fd.append('totalNum', count)
-        fd.append('totalCost', cost)
-        fd.append('goods', goodsList)
+        const fd = {
+          'phone': this.phone,
+          'address': this.building,
+          'totalNum': count,
+          'totalCost': cost,
+          'goods': goodsList
+        }
         PostGoodsTest(JSON.stringify(fd))
       },
       pay(e) {

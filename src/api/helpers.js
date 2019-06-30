@@ -27,8 +27,9 @@ export function get(url) {
 export function post(url) {
   return function (data) {
     return axios.post(baseUrl + url, data, {
-      dataType: 'json',
-      'Content-Type': 'application/json; charset=UTF-8'
+      headers:{
+        'Content-Type': 'application/json'
+      }
     }).then((res) => {
       console.log(res)
       const {code, msgs} = res.data
