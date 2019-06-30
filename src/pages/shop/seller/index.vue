@@ -35,11 +35,6 @@
           }
         ]
       }
-    },
-    computed: {
-      flag() {
-        return this.$store.getters.getFlag;
-      }
     }
   }
 </script>

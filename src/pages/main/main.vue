@@ -6,7 +6,7 @@
     <router-link class="btn" :to="{path:'/version'}">关于我们</router-link>
     <router-link class="btn" :to="{path:'/advice'}">提供建议</router-link>
     <router-link class="btn" :to="{path:'/verify'}">学生身份校验</router-link>
-    <router-link class="btn" :to="{path:'/shop',query: {flag: 0}}">商城测试</router-link>
+    <router-link class="btn" :to="{path:'/shop'}">商城测试</router-link>
     <router-link class="btn" :to="{path:'/shopSeller'}">商城测试(商家)</router-link>
   </section>
 </template>

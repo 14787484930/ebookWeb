@@ -72,7 +72,7 @@
       },
       saveData() {
         let url = '/good/save'
-        if (parseInt(this.goods.id) !== 0) {
+        if (this.goods.id) {
           url = '/good/update'
         }
         this.btnFlag = true;  // 设置提交按钮为不能点击状态
