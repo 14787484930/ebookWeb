@@ -2,11 +2,11 @@
 <template>
   <section>
     <div class='tabs tabs-icon-top fixed-bottom'>
-        <router-link class='tab-item' v-for='(item) in config' :key='item.url' tag='li' :to='{path:item.url}'>
-          <i v-if='item.list.indexOf($route.path)!==-1' :class="['icon',item.iClass]" style='color:#379be9'></i>
-          <i v-else :class="['icon',item.iOutClass]"></i>
-          {{item.text}}
-        </router-link>
+      <router-link class='tab-item' v-for='(item) in config' :key='item.url' tag='li' :to='{path:item.url}'>
+        <i v-if='item.list.indexOf($route.path)!==-1' :class="['icon',item.iClass]" style='color:#379be9'></i>
+        <i v-else :class="['icon',item.iOutClass]"></i>
+        {{item.text}}
+      </router-link>
     </div>
     <router-view></router-view>
   </section>
@@ -24,14 +24,14 @@
             text: '我的商品',
             iClass: 'ion-ios-bookmarks',
             iOutClass: 'ion-ios-bookmarks-outline',
-            list: ['/about', '/aboutView', '/aboutAdd']
+            list: ['/itemList', '/dealGoods']
           },
           {
             url: '/dealGoods',
             text: '新增商品',
             iClass: 'ion-ios-gear',
             iOutClass: 'ion-ios-gear-outline',
-            list: ['/about', '/aboutView', '/aboutAdd']
+            list: ['/dealGoods', '/itemList']
           }
         ]
       }
@@ -49,5 +49,6 @@
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 100;
   }
 </style>

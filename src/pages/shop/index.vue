@@ -24,21 +24,21 @@
             text: '商店',
             iClass: 'ion-ios-bookmarks',
             iOutClass: 'ion-ios-bookmarks-outline',
-            list: ['/book', '/bookView', '/bookAdd']
+            list: ['/shopList', '/shopCenter']
           },
-          {
-            url: '/shopCart',
-            text: '购物车',
-            iClass: 'ion-ios-gear',
-            iOutClass: 'ion-ios-gear-outline',
-            list: ['/other', '/otherView', '/otherAdd']
-          },
+          // {
+          //   url: '/shopCart',
+          //   text: '购物车',
+          //   iClass: 'ion-ios-gear',
+          //   iOutClass: 'ion-ios-gear-outline',
+          //   list: ['/shopList', '/shopCenter']
+          // },
           {
             url: '/shopCenter',
             text: '我的',
             iClass: 'ion-ios-person',
             iOutClass: 'ion-ios-person',
-            list: ['/about', '/aboutView', '/aboutAdd']
+            list: ['/shopList', '/shopCenter']
           }
         ]
       }

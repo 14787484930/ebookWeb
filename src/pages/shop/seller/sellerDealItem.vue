@@ -60,7 +60,10 @@
     methods: {
       initData() {
         this.$http.post('/good/getById/' + this.goods.id).then((res) => {
-          _that.goods = res.data.page.info
+          _that.goods.id = res.data.page.info.id
+          _that.goods.goodName = res.data.page.info.goodName
+          _that.goods.goodPrice = res.data.page.info.goodPrice
+          _that.goods.des = res.data.page.info.des
           const arr = _that.goods.goodPic.split(',')
           $.each(arr, (index, item) => {
             _that.urls.push({ url: _that.$file(item) })
