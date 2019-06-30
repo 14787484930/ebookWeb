@@ -17,27 +17,20 @@
     name: 'home',
     data() {
       return {
-        seleted: 'ShowList',
+        seleted: 'itemList',
         config: [
           {
-            url: '/shopList',
-            text: '商店',
+            url: '/itemList',
+            text: '我的商品',
             iClass: 'ion-ios-bookmarks',
             iOutClass: 'ion-ios-bookmarks-outline',
-            list: ['/book', '/bookView', '/bookAdd']
+            list: ['/about', '/aboutView', '/aboutAdd']
           },
           {
-            url: '/shopCart',
-            text: '购物车',
+            url: '/dealGoods',
+            text: '新增商品',
             iClass: 'ion-ios-gear',
             iOutClass: 'ion-ios-gear-outline',
-            list: ['/other', '/otherView', '/otherAdd']
-          },
-          {
-            url: '/shopCenter',
-            text: '我的',
-            iClass: 'ion-ios-person',
-            iOutClass: 'ion-ios-person',
             list: ['/about', '/aboutView', '/aboutAdd']
           }
         ]

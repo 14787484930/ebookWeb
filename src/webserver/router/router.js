@@ -54,6 +54,9 @@ import shopList from '../../pages/shop/shopList'
 import shopCart from '../../pages/shop/shopCart'
 import shopCenter from '../../pages/shop/shopCenter'
 import goodsList from '../../pages/shop/goodsList'
+import shopSeller from '../../pages/shop/seller/index'
+import itemList from '../../pages/shop/seller/sellerGoodsItem'
+import dealGoods from '../../pages/shop/seller/sellerDealItem'
 
 import verify from '../../components/verify'
 
@@ -79,8 +82,8 @@ const routes = new VueRouter({
           path: '/book',
           component: book,
           children: [
-            { path: 'bookAdd', name: 'bookAdd', component: bookAdd },
-            { path: 'bookView', name: 'bookView', component: bookView }
+            {path: 'bookAdd', name: 'bookAdd', component: bookAdd},
+            {path: 'bookView', name: 'bookView', component: bookView}
           ]
         },
         // 电子
@@ -88,8 +91,8 @@ const routes = new VueRouter({
           path: '/electronics',
           component: electronics,
           children: [
-            { path: 'electronicsAdd', name: 'electronicsAdd', component: electronicsAdd },
-            { path: 'electronicsView', name: 'electronicsView', component: electronicsView }
+            {path: 'electronicsAdd', name: 'electronicsAdd', component: electronicsAdd},
+            {path: 'electronicsView', name: 'electronicsView', component: electronicsView}
           ]
         },
         // 其他
@@ -97,8 +100,8 @@ const routes = new VueRouter({
           path: '/other',
           component: other,
           children: [
-            { path: 'otherAdd', name: 'otherAdd', component: otherAdd },
-            { path: 'otherView', name: 'otherView', component: otherView }
+            {path: 'otherAdd', name: 'otherAdd', component: otherAdd},
+            {path: 'otherView', name: 'otherView', component: otherView}
           ]
         },
         // 辅导
@@ -106,8 +109,8 @@ const routes = new VueRouter({
           path: '/teach',
           component: teach,
           children: [
-            { path: 'teachAdd', name: 'teachAdd', component: teachAdd },
-            { path: 'teachView', name: 'teachView', component: teachView }
+            {path: 'teachAdd', name: 'teachAdd', component: teachAdd},
+            {path: 'teachView', name: 'teachView', component: teachView}
           ]
         },
         // 个人中心
@@ -117,30 +120,40 @@ const routes = new VueRouter({
       ]
     },
     // 提供建议
-    { path: '/advice', name: 'advice', component: advice },
+    {path: '/advice', name: 'advice', component: advice},
     // 关于我们
-    { path: '/version', name: 'version', component: version },
+    {path: '/version', name: 'version', component: version},
     // 商城
     {
       path: '/shop', name: 'shop', component: shop, redirect: '/shopList',
       children: [
         // 小卖部列表
-        { path: '/shopList', name: 'shopList', component: shopList },
+        {path: '/shopList', name: 'shopList', component: shopList},
         // 我的购物车
-        { path: '/shopCart', name: 'shopCart', component: shopCart },
+        {path: '/shopCart', name: 'shopCart', component: shopCart},
         // 个人中心
-        { path: '/shopCenter', name: 'shopCenter', component: shopCenter }
+        {path: '/shopCenter', name: 'shopCenter', component: shopCenter}
+      ]
+    },
+    // 卖家
+    {
+      path: '/shopSeller', name: 'shopSeller', component: shopSeller, redirect: '/itemList',
+      children: [
+        // 商品列表(卖家)
+        {path: '/itemList', name: 'itemList', component: itemList},
+        // 发布修改商品(卖家)
+        {path: '/dealGoods', name: 'dealGoods', component: dealGoods}
       ]
     },
     // 商品列表
-    { path: '/goodsList', name: 'goodsList', component: goodsList },
+    {path: '/goodsList', name: 'goodsList', component: goodsList},
     // 举报页面
-    { path: '/report', name: 'report', component: report },
+    {path: '/report', name: 'report', component: report},
     // 富文本编辑页
-    { path: '/editor', name: 'editor', component: editor },
+    {path: '/editor', name: 'editor', component: editor},
     // 当前选择学校页
-    { path: '/verify', name: 'verify', component: verify },
-    { path: '/personal', name: 'personal', component: personal }
+    {path: '/verify', name: 'verify', component: verify},
+    {path: '/personal', name: 'personal', component: personal}
   ]
 })
 export default routes;

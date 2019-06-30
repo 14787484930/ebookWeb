@@ -156,8 +156,8 @@
         fd.append('address', this.address)
         fd.append('totalNum', count)
         fd.append('totalCost', cost)
-        fd.append('goods', JSON.stringify(goodsList))
-        PostGoodsTest(fd)
+        fd.append('goods', goodsList)
+        PostGoodsTest(JSON.stringify(fd))
       },
       pay(e) {
         if (this.totalPrice < this.minPrice) {

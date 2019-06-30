@@ -8,7 +8,7 @@ import { get, post } from './helpers'
 const getGoodsTest = get('/good/goods')
 const getGoodsListTest = get('/order/orders')
 const getOrderListTest = get('/order/getDetailed')
-const PostGoodsTest = post('order/save')
+const PostGoodsTest = post('/order/save')
 
 export {
   getGoodsTest,
