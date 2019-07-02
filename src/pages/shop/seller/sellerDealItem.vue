@@ -64,7 +64,7 @@
           _that.goods.goodName = res.data.page.info.goodName
           _that.goods.goodPrice = res.data.page.info.goodPrice
           _that.goods.des = res.data.page.info.des
-          const arr = _that.goods.goodPic.split(',')
+          const arr = res.data.page.info.goodPic.split(',')
           $.each(arr, (index, item) => {
             _that.urls.push({ url: _that.$file(item) })
           })
@@ -84,7 +84,7 @@
             content: '保存成功 ',
             icon: 'cubeic-right',
             onConfirm: () => {
-              this.$router.push({ path: '/goods'})
+              this.$router.push({ path: '/itemList'})
             }
           }).show()
         })

@@ -13,7 +13,7 @@
             <span>订单号：{{item.id}}</span>
             <div v-if="isOpend == item.id">
               <div style="margin: 15px 20px" v-for="(food,index) in orderFood" :key="index">
-                <img :src="food.goodPic" style="width: 50px; height: 50px"/>
+                <img :src="$file(food.goodPic)" style="width: 50px; height: 50px"/>
                 <span style="float: right;vertical-align: middle">￥{{food.goodPrice}}*{{food.buyNumber}}</span>
                 <span style="float: right;margin: 0 50px; vertical-align: middle">{{food.goodName}}</span>
               </div>

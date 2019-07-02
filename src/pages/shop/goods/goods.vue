@@ -32,7 +32,7 @@
                 :key="food.goodName"
                 class="food-item">
               <div class="icon">
-                <img width="57" height="57" :src="food.goodPic">
+                <img width="57" height="57" :src="$file(food.goodPic)">
               </div>
               <div class="content">
                 <h2 class="name">{{food.goodName}}</h2>
@@ -69,6 +69,7 @@
   import Food from '../food/food'
   import SupportIco from '../support-ico/support-ico'
   import Bubble from '../bubble/bubble'
+  import '../../../webserver/serve/config.js'
 
   export default {
     name: 'goods',
@@ -136,7 +137,6 @@
             pageNumber: 1,
             pageSize: 200
           }).then((goods) => {
-            console.log(goods)
             this.goods = goods.pageInfo.list
           })
         }
