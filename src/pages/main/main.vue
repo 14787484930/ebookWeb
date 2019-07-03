@@ -8,6 +8,8 @@
     <router-link class="btn" :to="{path:'/verify'}">学生身份校验</router-link>
     <router-link class="btn" :to="{path:'/shop'}">商城测试</router-link>
     <router-link class="btn" :to="{path:'/shopSeller'}">商城测试(商家)</router-link>
+    <router-link class="btn" :to="{path:'/registerShop'}">商家注册</router-link>
+    <router-link class="btn" :to="{path:'/selectBuilding'}">选择楼栋</router-link>
   </section>
 </template>
 

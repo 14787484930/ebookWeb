@@ -57,7 +57,8 @@ import goodsList from '../../pages/shop/goodsList'
 import shopSeller from '../../pages/shop/seller/index'
 import itemList from '../../pages/shop/seller/sellerGoodsItem'
 import dealGoods from '../../pages/shop/seller/sellerDealItem'
-
+import registerShop from '../../pages/shop/seller/registerShop'
+import selectBuilding from '../../pages/shop/seller/building'
 import verify from '../../components/verify'
 
 const routes = new VueRouter({
@@ -145,6 +146,8 @@ const routes = new VueRouter({
         {path: '/dealGoods', name: 'dealGoods', component: dealGoods}
       ]
     },
+    {path: '/registerShop', name: 'registerShop', component: registerShop},
+    {path: '/selectBuilding', name: 'selectBuilding', component: selectBuilding},
     // 商品列表
     {path: '/goodsList', name: 'goodsList', component: goodsList},
     // 举报页面
