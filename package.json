@@ -23,7 +23,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-service": "^5.0.8",
     "font-awesome.css": "^4.7.2",
     "jquery": "^3.1.1",
     "node-sass": "^4.12.0",
